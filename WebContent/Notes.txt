@@ -1,0 +1,7 @@
+Date:13/06/2017
+Issue: Ask for details about Dates column in Conf.Proceedings and Conf.Presentations Sheet.
+Date: 17/06
+Note: Status:
+ 0-> Pending
+ 1-> App by deptt -1->Rej by deptt
+ 2-> App by RDIL  -2->Rej by RDIL
