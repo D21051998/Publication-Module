@@ -1,178 +1,23 @@
-<%@page import="java.util.Calendar"%>
-<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Journal</title>
-<link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
-
-<script>
-	function disable_unpaid() {
-		var form = document.getElementById("paid_unpaid");
-		var val = form.options[form.selectedIndex].value;
-		if (val == "Unpaid") {
-			document.getElementById("payment_flag").disabled = true;
-		} else if (val == "Paid") {
-			document.getElementById("payment_flag").disabled = false;
-		}
-	}
-</script>
+<title>Insert title here</title>
 </head>
-<input type="hidden" id="refreshed" value="no">
-<script type="text/javascript">
-onload=function(){
-var e=document.getElementById("refreshed");
-if(e.value=="no")e.value="yes";
-else{e.value="no";location.reload();}
-}
-</script>
 <body>
-
-	<h2>Journal Add Form</h2>
-	<form method="GET">
-		<table class="form-group">
-			<tr>
-				<td>Name of authors</td>
-				<td><input type="text" class="form-control" name="nameOauthors"
-					placeholder="Name of Authors.."></td>
-			</tr>
-			<tr>
-				<td>Deptt.</td>
-				<td><select class="form-control" name="deptt">
-						<option value="cse">CSE</option>
-						<option value="ece">ECE</option>
-						<option value="me">ME</option>
-						<option value="cvu">CVU</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Title Of Paper</td>
-				<td><input type="text" class="form-control" name="title"
-					placeholder="Title goes here.."></td>
-			</tr>
-			<tr>
-				<td>Journal</td>
-				<td><input type="text" class="form-control" name="journal"
-					placeholder="Journal.."></td>
-			</tr>
-			<tr>
-				<td>Year</td>
-				<td><select class="form-control" name="year">
-						<%
-							for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Month in which published</td>
-				<td><select class="form-control" name="month_published">
-						<%
-							String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
-									"September", "October", "November", "December" };
-							for (int i = 0; i < months.length; i++) {
-						%>
-						<option value="<%=months[i]%>"><%=months[i]%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Volume</td>
-				<td><input type="text" class="form-control" name="volume"
-					placeholder="Volume.."></td>
-			</tr>
-			<tr>
-				<td>Number/Issue</td>
-				<td><input type="text" class="form-control" name="issue"
-					placeholder="Which volume.."></td>
-			</tr>
-			<tr>
-				<td>Page No.</td>
-				<td><input type="text" class="form-control" name="page_no"
-					placeholder="Page No.."></td>
-			</tr>
-			<tr>
-				<td>DOI No.</td>
-				<td><input type="text" class="form-control" name="doi_no"
-					required="on" placeholder="DOI No.."></td>
-			</tr>
-			<tr>
-				<td>Impact Factor</td>
-				<td><input type="text" class="form-control" name="imp_factor"
-					placeholder="Impact Factor"></td>
-			</tr>
-			<tr>
-				<td>Specify which impact factor</td>
-				<td><input type="text" class="form-control"
-					name="what_imp_factor" placeholder="Which"></td>
-			</tr>
-			<tr>
-				<td>Link for Impact factor</td>
-				<td><input type="text" class="form-control"
-					name="link_imp_factor" placeholder="Link goes here.."></td>
-			</tr>
-			<tr>
-				<td>Paid/Unpaid</td>
-				<td><select class="form-control" id="paid_unpaid"
-					onclick="disable_unpaid()" name="paid_unpaid">
-						<option value="Paid" selected="selected">Paid</option>
-						<option value="Unpaid">Unpaid</option>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Payment done or not</td>
-				<td><select class="form-control" id="payment_flag"
-					name="payment_flag">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>PW: Publication reported in Web of Science</td>
-				<td><select class="form-control" name="pw_flag">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>PS: Publication reported in Scopus</td>
-				<td><select class="form-control" name="ps_flag">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>PG: Publication reported in Google Scholar</td>
-				<td><select class="form-control" name="pg_flag">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>PI: Publication reported in Indian Citation Index</td>
-				<td><select class="form-control" name="pi_flag">
-						<option value="Yes">Yes</option>
-						<option value="No">No</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>
-					<button class="form-control" type="reset">Reset</button>
-				</td>
-				<td>
-					<button class="form-control" type="submit" name="submit">Submit</button>
-				</td>
-			</tr>
-		</table>
-	</form>
+ 
+ <jsp:useBean id="journal" class="com.publication.model.Journal" scope="request"/>
+ <jsp:setProperty property="*" name="journal"/>
+ <jsp:useBean id="journalIMPL" class="com.publication.impl.JournalIMPL" scope="request"/>
+ <% 
+    journal.setStatus(0);
+    if(journalIMPL.saveJournal(journal)){
+    	response.sendRedirect("../faculty/view/view_journal.jsp");
+    }else{
+    	response.sendRedirect("../faculty/view/view_journal.jsp");
+    }
+ %>
 </body>
 </html>

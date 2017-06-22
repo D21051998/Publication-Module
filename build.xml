@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Publication Portal">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/annotations-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-ant.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-ha.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-storeconfig.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-tribes.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-dbutils-1.6.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-javadoc.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-test-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-tests.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-io-2.4-javadoc.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-io-2.4-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-io-2.4-test-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-io-2.4-tests.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-io-2.4.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ecj-4.6.3.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/el-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itext-xtra-5.2.0-javadoc.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itext-xtra-5.2.0-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itext-xtra-5.2.0.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itextpdf-5.2.0-javadoc.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itextpdf-5.2.0-sources.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/itextpdf-5.2.0.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jasper-el.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jasper.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jaspic-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jsoup-1.8.3.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jsp-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jstl-1.2.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/jxl.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/mysql-connector-java-5.0.8-bin.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc5.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc5dms.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc5dms_g.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc5_g.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc6.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc6_g.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/quartz-2.2.1.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-coyote.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-dbcp.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-jdbc.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-jni.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-juli-7.0.27.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-util-scan.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-util.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-websocket.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/websocket-api.jar"/>
+    </path>
+    <path id="Publication Portal.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/mysql-connector-java-5.0.8-bin.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/commons-dbutils-1.6.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/jstl-1.2.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Publication Portal.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="BookChapterIMPL">
+        <java classname="com.publication.impl.BookChapterIMPL" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="DataSourceFactory">
+        <java classname="com.publication.database.DataSourceFactory" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="GeneratePassword">
+        <java classname="com.publication.test.GeneratePassword" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="GeneratePCN">
+        <java classname="com.publication.constants.GeneratePCN" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="Initiate">
+        <java classname="com.publication.database.Initiate" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="StringTest (1)">
+        <java classname="com.publication.test.StringTest" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+</project>

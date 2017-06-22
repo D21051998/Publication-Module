@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 
     private static ConnectionFactory instance = new ConnectionFactory();
-    private final static String URL = "jdbc:mysql://localhost/transx";
+    private final static String URL = "jdbc:mysql://localhost/publication_module";
     private final static String USER = "root";
     private final static String PASSWORD = "root";
     private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";

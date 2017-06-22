@@ -13,5 +13,15 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-dbutils-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/jstl-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-ooxml-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-ooxml-schemas-3.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-io-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-collections4-4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/xmlbeans-2.5.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
