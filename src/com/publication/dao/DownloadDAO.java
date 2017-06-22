@@ -1,10 +1,11 @@
 package com.publication.dao;
 
-import java.sql.Date;
+import javax.servlet.ServletOutputStream;
 
 public interface DownloadDAO {
 	
 	
-	void downloadRequest(String[] what, String[] branch, Date from, Date to);
+	void downloadRequest(ServletOutputStream servletOutputStream, String[] what, String[] branch, String from,String to);
 
+	
 }
