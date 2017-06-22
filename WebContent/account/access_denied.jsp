@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-Not eligible to access the page.
+
+You are not eligible to access the page.
 </body>
 </html>
