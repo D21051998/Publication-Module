@@ -67,21 +67,18 @@ ul {
 		}
 		request.setAttribute("eList", list);
 	%>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+<br><br><br>
+	<div class="container-fluid">
 
-
-	<div class="container">
 		<div class="row">
 
-			<div class="col-md-2" id="sidebarStyle">
-				<ul class="list-group">
-					<li><a href="#" class="list-group-item active">View Book
-							Chapter</a></li>
-				</ul>
+			<div class="col-md-2" >
+				<jsp:include page="../../sidebars/rdil_view_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10">
-
-				<table class="table table-condensed">
+<h3>View Journal</h3>
+				<table class="table table-bordered">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>

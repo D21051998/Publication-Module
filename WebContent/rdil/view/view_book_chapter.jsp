@@ -12,7 +12,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Book Chapter</title>
-<link rel="stylesheet" href="../../resources/styles/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <style>
 .container {
 	width: 100%;
@@ -64,18 +72,18 @@ ul {
 		}
 		request.setAttribute("eList", list);
 	%>
-	<div class="container">
+	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+	
+	<br><br><br>
+	<div class="container-fluid">
 		<div class="row">
 
-			<div class="col-md-2" id="sidebarStyle">
-				<ul class="list-group">
-					<li><a href="#" class="list-group-item active">View Book
-							Chapter</a></li>
-				</ul>
+			<div class="col-md-2" >
+				<jsp:include page="../../sidebars/rdil_view_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10">
-
-				<table class="table table-condensed">
+<h3>View Book Chapter</h3>
+				<table class="table table-bordered">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>

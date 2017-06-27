@@ -19,6 +19,8 @@
 .container {
 	width: 100%;
 }
+
+
 .borderless {
 	border-bottom: 0 none;
 	border-top: none;
@@ -54,6 +56,7 @@ ul {
 </script>
 <body>
 <jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 <%
 String sid  = (String) request.getSession(false).getAttribute("sid");
 System.out.println("AT FACULTY"+sid);
@@ -66,56 +69,11 @@ if(!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")){
 	return;
 }
 System.out.println(sid);
-%>
-<jsp:include page="../common/header.jsp"></jsp:include>
-	<div class="container">
+%>	
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2" id="sidebarStyle">
-				 	<ul class="list-group">
-				 	<li ><a class="list-group-item list-group-item-action borderless" href="../account/logout.jsp">Logout</a></li>
-				 	<li class="list-group-item borderless">Add New Data
-						<ul class="list-group">
-							<li><a href="../new/new_book_chapter.jsp" class="list-group-item list-group-item-action borderless">New Book
-									Chapter</a></li>
-							<li><a href="../new/new_conf_presentation.jsp"
-								class="list-group-item list-group-item-action borderless">New
-									Conference Presentation</a></li>
-							<li><a href="../new/new_conference_proceeding.jsp"
-								class="list-group-item list-group-item-action borderless">New
-									Conference Proceeding</a></li>
-							<li><a href="../new/new_journal.jsp"
-								class="list-group-item list-group-item-action borderless">New Journal</a></li>
-							<li><a href="../new/new_patents.jsp"
-								class="list-group-item list-group-item-action borderless">New Patents</a></li>
-							<li><a href="../new/new_tech_rep.jsp"
-								class="list-group-item list-group-item-action borderless">New Technical
-									Reports</a></li>
-							<li><a href="../new/new_book.jsp"
-								class="list-group-item list-group-item-action borderless">New Books</a></li>
-						</ul>
-						</li>
-						<li class="list-group-item borderless">View
-						 <ul class="list-group">
-							<li><a href="view/view_book_chapter.jsp" class="list-group-item list-group-item-action  borderless">View Book
-									Chapter</a></li>
-							<li><a href="view/view_conf_presentation.jsp"
-								class="list-group-item list-group-item-action borderless">View
-									Conference Presentation</a></li>
-							<li><a href="view/view_conference_proceeding.jsp"
-								class="list-group-item list-group-item-action borderless">View
-									Conference Proceeding</a></li>
-							<li><a href="view/view_journal.jsp"
-								class="list-group-item list-group-item-action borderless">View Journal</a></li>
-							<li><a href="view/view_patents.jsp"
-								class="list-group-item list-group-item-action borderless">View Patents</a></li>
-							<li><a href="view/view_tech_rep.jsp"
-								class="list-group-item list-group-item-action borderless">View Technical
-									Reports</a></li>
-							<li><a href="view/view_book.jsp"
-								class="list-group-item list-group-item-action borderless">View Books</a></li>
-						</ul>
-						</li>
-						</ul>
+			<div class="col-md-2" >
+			<jsp:include page="../sidebars/faculty_home_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10"></div>
 			<h2>Faculty Home</h2>

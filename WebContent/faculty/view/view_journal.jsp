@@ -18,8 +18,6 @@
 	rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	
 <style>
 .container {
 	width: 100%;
@@ -68,20 +66,18 @@ ul {
 		request.setAttribute("eList", list);
 	%>
 
-<jsp:include page="../../common/header_view_faculty.jsp"></jsp:include>
+	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
-	<div class="container">
+	<div class="container-fluid">
+<br><br><br>
 		<div class="row">
 
-			<div class="col-md-2" id="sidebarStyle">
-				<ul class="list-group">
-					<li><a href="#" class="list-group-item active">View Book
-							Chapter</a></li>
-				</ul>
+			<div class="col-md-2">
+				<jsp:include page="../../sidebars/view_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10">
-
-				<table class="table table-condensed">
+			<h3>View Journals</h3>
+				<table class="table table-bordered">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>
@@ -111,7 +107,12 @@ ul {
 					<c:forEach items="${eList}" var="journal">
 						<c:if test="${principal == journal.writtenBy}">
 							<tr>
-								<td><c:out value="${journal.pcn}" /></td>
+								<td><c:if test="${empty journal.pcn}">
+										<c:out value="Not Generated" />
+									</c:if> 
+									<c:if test="${not empty journal.pcn}">
+										<c:out value="${journal.pcn}" />
+									</c:if></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
 								<td><c:out value="${journal.title}" /></td>
@@ -176,7 +177,8 @@ ul {
 
 		</div>
 	</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

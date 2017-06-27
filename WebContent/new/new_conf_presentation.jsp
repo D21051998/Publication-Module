@@ -25,23 +25,13 @@ ul{
 
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
-<div class="container">
+<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+<div class="container-fluid">
  <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2" id="sidebarStyle">
-  <ul class="list-group">
-   <li><a href="new_book_chapter.jsp" class="list-group-item">New Book Chapter</a></li>
-   <li><a href="new_conf_presentation.jsp" class="list-group-item list-group-item-action active">New Conference Presentation</a></li>
-   <li><a href="new_conference_proceeding.jsp" class="list-group-item list-group-item-action">New Conference Proceeding</a></li>
-   <li><a href="new_journal.jsp" class="list-group-item list-group-item-action">New Journal</a></li>
-   <li><a href="new_patents.jsp" class="list-group-item list-group-item-action">New Patents</a></li>
-   <li><a href="new_tech_rep.jsp" class="list-group-item list-group-item-action">New Technical Reports</a></li>
-   <li><a href="new_book.jsp" class="list-group-item list-group-item-action">New Books</a></li>
-   
-  </ul>
+  <div class="col-md-2" >
+ <jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-10">
 
 	<form>
 		<table>
@@ -120,7 +110,6 @@ ul{
 
 	</form>
  </div>
-  <div class="col-md-1"></div>
   
  </div>
 </div>

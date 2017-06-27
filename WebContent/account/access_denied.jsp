@@ -7,11 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
 
 You are not eligible to access the page.
 =======
 Not eligible to access the page.
->>>>>>> branch 'master' of https://github.com/ilikeitmyway/Publication-Module.git
+
 </body>
 </html>

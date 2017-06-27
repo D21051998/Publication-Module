@@ -16,11 +16,29 @@
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+
 }
+
+body{
+	background-color: #ffa830;
+	background-image: url("resources/images/DSCN7348.jpg");
+	}
 </style>
 
 </head>
 
+<input type="hidden" id="refreshed" value="no">
+<script type="text/javascript">
+	onload = function() {
+		var e = document.getElementById("refreshed");
+		if (e.value == "no")
+			e.value = "yes";
+		else {
+			e.value = "no";
+			location.reload();
+		}
+	}
+</script>
 <body>
 <jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
@@ -42,13 +60,13 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<h3>The NorthCap University,</h3>
+			<div class="col-md-6" align="center">
+				<h3><strong>The NorthCap University</strong></h3>
 				<p>Sector-23A, Gurugram</p>
-				<h4>Publication Module</h4>
+				<h4><strong>Publication Module</strong></h4>
 			</div>
-			<div class="col-md-6 form-group">
-				<h4>Login</h4>
+			<div class="col-md-6 form-group" align="center">
+				
 				<form method="POST" action="LoginService">
 					<table>
 						<tr>

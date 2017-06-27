@@ -11,7 +11,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Book Chapter</title>
-<link rel="stylesheet" href="../../resources/styles/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 .container {
 	width: 100%;
@@ -60,19 +67,17 @@ ul {
 		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
 	%>
-	<jsp:include page="../../common/header_view_faculty.jsp"></jsp:include>
-	<div class="container">
+	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+	<div class="container-fluid">
+	<br><br><br>
 		<div class="row">
 
-			<div class="col-md-2" id="sidebarStyle">
-				<ul class="list-group">
-					<li><a href="#" class="list-group-item active">View Book
-							Chapter</a></li>
-				</ul>
+			<div class="col-md-2">
+				<jsp:include page="../../sidebars/view_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10">
-
-				<table class="table table-condensed">
+<h3>View Book Chapter</h3>
+				<table class="table table-bordered">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>
@@ -96,7 +101,14 @@ ul {
 					<c:forEach items="${eList}" var="bookChapter">
 						<c:if test="${principal == bookChapter.writtenBy}">
 							<tr>
-								<td><c:out value="${bookChapter.pcn}" /></td>
+								<td><c:choose>
+										<c:when test="${empty bookChapter.pcn}">
+											<c:out value="Not Generated" />
+										</c:when>
+										<c:otherwise>
+											<c:out value="${bookChapter.pcn}" />
+										</c:otherwise>
+									</c:choose></td>
 								<td><c:out value="${bookChapter.nameOauthors}" /></td>
 								<td><c:out value="${bookChapter.deptt}" /></td>
 								<td><c:out value="${bookChapter.chapterNo}" /></td>

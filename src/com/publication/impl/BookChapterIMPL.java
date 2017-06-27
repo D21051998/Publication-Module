@@ -18,7 +18,6 @@ public class BookChapterIMPL implements BookChapterDAO {
 
 	@Override
 	public boolean saveBookChapter(BookChapter bookChapter) {
-		// TODO Auto-generated method stub
 		if (bookChapter == null) {
 			return false;
 		}

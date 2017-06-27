@@ -35,28 +35,16 @@ ul{
 </script>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
-<div class="container">
+<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+<div class="container-fluid">
  <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2" id="sidebarStyle">
-  <ul class="list-group">
-   <li><a href="new_book_chapter.jsp" class="list-group-item ">New Book Chapter</a></li>
-   <li><a href="new_conf_presentation.jsp" class="list-group-item list-group-item-action">New Conference Presentation</a></li>
-   <li><a href="new_conference_proceeding.jsp" class="list-group-item list-group-item-action">New Conference Proceeding</a></li>
-   <li><a href="new_journal.jsp" class="list-group-item list-group-item-action">New Journal</a></li>
-   <li><a href="new_patents.jsp" class="list-group-item list-group-item-action active">New Patents</a></li>
-   <li><a href="new_tech_rep.jsp" class="list-group-item list-group-item-action">New Technical Reports</a></li>
-   <li><a href="new_book.jsp" class="list-group-item list-group-item-action">New Books</a></li>
-   
-  </ul>
-  </div>
-  <div class="col-md-7">
-
+  <div class="col-md-2">
+  <jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
+    </div>
+  <div class="col-md-10">
+  <h3>Add New Patents</h3>
 	<form method="get">
-
 		<table class="form-group">
-
 			<tr>
 				<td>Faculty</td>
 				<td><input type="text" class="form-control" required="on"
@@ -153,24 +141,17 @@ ul{
 						%>
 				</select></td>
 			</tr>
-
 			<tr>
 				<td>Patent No.</td>
 				<td><input type='text' name="patent_no"></td>
 			</tr>
-
-	
 			<tr>
 				<td><button type="reset" class="form-control">Reset</button></td>
 				<td><button type="submit" class="form-control">Submit</button></td>
 			</tr>
-
-
 		</table>
-
-	</form> </div>
-  <div class="col-md-1"></div>
-  
+	</form> 
+	</div>
  </div>
 </div>
 	

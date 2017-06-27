@@ -59,8 +59,15 @@ ul {
 			return;
 		}
 	%>
-	<jsp:include page="../common/header.jsp"></jsp:include>
-	<a href="view/view_book_chapter.jsp">Click here</a>
-	<a href="../account/logout.jsp">Logout</a>
+	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2" >
+			<jsp:include page="../sidebars/rdil_home_sidebar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10"></div>
+			<h2>Department Home</h2>
+		</div>
+	</div>
 </body>
 </html>
