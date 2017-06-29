@@ -13,11 +13,13 @@
  <jsp:useBean id="journalIMPL" class="com.publication.impl.JournalIMPL" scope="request"/>
  <% 
     journal.setStatus(0);
-    if(journalIMPL.saveJournal(journal)){
-    	response.sendRedirect("../faculty/view/view_journal.jsp");
-    }else{
-    	response.sendRedirect("../faculty/view/view_journal.jsp");
-    }
+ request.setAttribute("journal", journal);
+    //if(journalIMPL.saveJournal(journal)){
+    //	response.sendRedirect("../faculty/view/view_journal.jsp");
+    //}else{
+   // 	response.sendRedirect("../faculty/view/view_journal.jsp");
+    //}
  %>
+ <jsp:forward page="../AddJournal"></jsp:forward>
 </body>
 </html>

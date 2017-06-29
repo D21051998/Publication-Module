@@ -54,7 +54,7 @@ public class Initiate {
 	    			+ "nationality varchar(200),"
 	    			+ "year int,"
 	    			+ "monthPublished varchar(200),"
-	    			+ "monthAssigned varchar(200),"
+	    			+ "monthAssigned date,"
 	    			+ "volume int,"
 	    			+ "issue int,"
 	    			+ "pageNo int,"

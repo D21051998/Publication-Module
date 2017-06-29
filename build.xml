@@ -18,6 +18,7 @@
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-storeconfig.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-tribes.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-collections4-4.1.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-dbutils-1.6.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-javadoc.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/commons-fileupload-1.3-sources.jar"/>
@@ -51,6 +52,11 @@
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc5_g.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc6.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/ojdbc6_g.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/poi-3.16.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/poi-excelant-3.16.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/poi-ooxml-3.16.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/poi-ooxml-schemas-3.16.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/poi-scratchpad-3.16.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/quartz-2.2.1.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-api.jar"/>
@@ -66,6 +72,8 @@
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-util.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-websocket.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/websocket-api.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/xmlbeans-2.5.0.jar"/>
+        <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/xmlbeans-xmlpublic-2.4.0.jar"/>
     </path>
     <path id="Publication Portal.classpath">
         <pathelement location="build/classes"/>
@@ -76,6 +84,12 @@
         <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/commons-dbutils-1.6.jar"/>
         <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/jstl-1.2.jar"/>
         <pathelement location="C:/Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-3.16.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-ooxml-3.16.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/POI APIS/poi-ooxml-schemas-3.16.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/commons-io-2.5.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/commons-collections4-4.1.jar"/>
+        <pathelement location="C:/Users/Deepanshu Jain/Documents/APIs/xmlbeans-2.5.0.jar"/>
     </path>
     <target name="init">
         <mkdir dir="build/classes"/>
@@ -122,6 +136,26 @@
             <classpath refid="Publication Portal.classpath"/>
         </java>
     </target>
+    <target name="DateTest">
+        <java classname="com.publication.test.DateTest" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="DowloadIMPL">
+        <java classname="com.publication.impl.DowloadIMPL" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="DownloadIMPL">
+        <java classname="com.publication.impl.DownloadIMPL" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="FetchDepptCode">
+        <java classname="com.publication.constants.FetchDepptCode" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
     <target name="GeneratePassword">
         <java classname="com.publication.test.GeneratePassword" failonerror="true" fork="yes">
             <classpath refid="Publication Portal.classpath"/>
@@ -134,6 +168,11 @@
     </target>
     <target name="Initiate">
         <java classname="com.publication.database.Initiate" failonerror="true" fork="yes">
+            <classpath refid="Publication Portal.classpath"/>
+        </java>
+    </target>
+    <target name="LoginIMPL">
+        <java classname="com.publication.impl.LoginIMPL" failonerror="true" fork="yes">
             <classpath refid="Publication Portal.classpath"/>
         </java>
     </target>

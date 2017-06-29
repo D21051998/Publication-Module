@@ -66,7 +66,7 @@ ul {
 			return;
 		}
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
-		System.out.println(pageContext.getAttribute("principal"));
+		System.out.println("PC"+pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
@@ -80,7 +80,7 @@ ul {
 			</div>
 			<div class="col-md-10">
 
-				<table class="table table-condensed">
+				<table class="table table-condensed table-bordered">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>

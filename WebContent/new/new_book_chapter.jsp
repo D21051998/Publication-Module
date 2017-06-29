@@ -68,7 +68,8 @@ ul {
 			</div>
 			<div class="col-md-10">
 				<h3>Add New Book Chapter</h3>
-				<form action="../add/add_book_chapter.jsp" method="POST">
+				../add/add_book_chapter.jsp
+				<form action="" method="get">
 					<table>
 
 						<tr>

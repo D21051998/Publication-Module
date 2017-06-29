@@ -130,11 +130,11 @@ public class BookChapterIMPL implements BookChapterDAO {
 		ArrayList<Integer> list = new ArrayList<>(); 
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("select pcn from book_chapter where pcn like \"%B___\"");
+			ps1 = connection.prepareStatement("select pcn from book_chapter where pcn like \""+deptt.toUpperCase()+"____%BC___\"");
 			ResultSet rs = ps1.executeQuery();
 			String pcn;
 			if(!rs.next()){
-				pcn = GeneratePCN.generatePCN(deptt, "B", 1);
+				pcn = GeneratePCN.generatePCN(deptt, "BC", 1);
 			}else{
 				rs.beforeFirst();
 				while(rs.next()){
@@ -143,7 +143,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				}
 				int[] array = list.stream().mapToInt(i->i).toArray();
 				int sno = getMissing(array, array.length);
-				pcn = GeneratePCN.generatePCN(deptt, "B", sno);
+				pcn = GeneratePCN.generatePCN(deptt, "BC", sno);
 			}
 			ps2 = connection.prepareStatement("update book_chapter set pcn=?, monthAssigned=?, status=? where deptt=? and bookTitle=? and chapterTitle=? and chapterNo=? and isbn =?");
 			if(status == -1){

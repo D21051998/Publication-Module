@@ -7,6 +7,10 @@ public class Login {
 	private String role;
 	private String status;
 	private String salt;
+	private String name;
+	private String email;
+	private String contact;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -40,17 +44,52 @@ public class Login {
 	@Override
 	public String toString() {
 		return "Login [username=" + username + ", password=" + password + ", role=" + role + ", status=" + status
-				+ ", salt=" + salt + "]";
+				+ ", salt=" + salt + ", name=" + name + ", email=" + email + ", contact=" + contact + "]";
 	}
 	
-	public Login(Login login){
+	
+	
+	
+	
+	/**
+	 * @param username
+	 * @param password
+	 * @param role
+	 * @param status
+	 * @param salt
+	 * @param name
+	 * @param email
+	 * @param contact
+	 */
+	public Login(Login login) {
+		super();
 		this.username = login.username;
 		this.password = login.password;
-		this.salt = login.salt;
-		this.status = login.status;
 		this.role = login.role;
+		this.status = login.status;
+		this.salt = login.salt;
+		this.name = login.name;
+		this.email = login.email;
+		this.contact = login.contact;
 	}
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 	public Login(){
 		
 	}

@@ -1,6 +1,7 @@
 package com.publication.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -134,7 +135,7 @@ public class JournalIMPL implements JournalDAO {
 		ArrayList<Integer> list = new ArrayList<>(); 
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("select pcn from book_chapter where pcn like \"%J___\"");
+			ps1 = connection.prepareStatement("select pcn from journal where pcn like \""+deptt.toUpperCase()+"____%J___\"");
 			ResultSet rs = ps1.executeQuery();
 			String pcn;
 			if(!rs.next()){
@@ -149,8 +150,6 @@ public class JournalIMPL implements JournalDAO {
 				int sno = getMissing(array, array.length);
 				pcn = GeneratePCN.generatePCN(deptt, "J", sno);
 			}
-			Calendar cal = Calendar.getInstance();
-			String month = new SimpleDateFormat("MMM").format(cal.getTime());
 			ps2 = connection.prepareStatement("update journal set pcn=?, status=?, monthAssigned=? where deptt=? and title=? and volume=? and issue=? and pageNo=?");
 			if(status == -1){
 				ps2.setNull(1, Types.VARCHAR);
@@ -160,7 +159,7 @@ public class JournalIMPL implements JournalDAO {
 				ps2.setString(1, pcn.toUpperCase());
 			}
 			ps2.setInt(2, status);
-			ps2.setString(3, month);
+			ps2.setDate(3, new Date(System.currentTimeMillis()));
 			ps2.setString(4, deptt);
 			ps2.setString(5, title);
 			ps2.setInt(6, volume);

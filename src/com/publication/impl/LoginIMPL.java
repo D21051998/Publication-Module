@@ -58,6 +58,9 @@ public class LoginIMPL  implements LoginDAO{
 				login.setStatus(set.getString("status"));
 				login.setRole(set.getString("role"));
 				login.setSalt(set.getString("salt"));
+				login.setName(set.getString("name"));
+				login.setEmail(set.getString("email"));
+				login.setContact(set.getString("contact"));
 				return login;
 			}
 		}catch(Exception e){
