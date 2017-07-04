@@ -23,6 +23,14 @@ public class Initiate {
 	    			+ ");";
 	    	stmt.executeUpdate(q1);
 	    	
+	    	String f1 = "create table if not exists  forgotreq"
+	    			+ "(token varchar(200) primary key,"
+	    			+ "username varchar(200),"
+	    			+ "time varchar(200),"
+	    			+ " FOREIGN KEY (username) REFERENCES login(username)"
+	    			+ ");";
+	    	stmt.executeUpdate(f1);
+	    	
 	    	String q2 = "create table if not exists book_chapter("
 	    			+ "pcn varchar(200) unique,"
 	    			+ "nameOauthors varchar(200),"
@@ -46,6 +54,7 @@ public class Initiate {
 	    	stmt.executeUpdate(q2);
 	    	
 	    	String q3 = "create table if not exists journal("
+	    			+ "id varchar(200) primary key,"
 	    			+ "pcn varchar(200) unique,"
 	    			+ "nameOauthors varchar(200),"
 	    			+ "deptt varchar(200),"
@@ -69,8 +78,10 @@ public class Initiate {
 	    			+ "pgFlag varchar(200),"
 	    			+ "piFlag varchar(200),"
 	    			+ "status int,"
-	    			+ "writtenBy varchar(200),"
-	    			+ "primary key(deptt, title, volume, issue, pageNo));";
+	    			+ "publicationfilename varchar(500),"
+	    			+ "plagreportfilename varchar(500),"
+	    			+ "plagcopyfilename varchar(500),"
+	    			+ "writtenBy varchar(200));";
 	    	stmt.executeUpdate(q3);
 	    }catch(Exception e){
 	    	e.printStackTrace();

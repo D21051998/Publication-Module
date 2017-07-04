@@ -66,12 +66,17 @@ ul {
 			return;
 		}
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
-		System.out.println("PC"+pageContext.getAttribute("principal"));
+		System.out.println("PC" + pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
+		String divTag = "div";
+		String buttonTag = "reject";
+		int index = 1;
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
-<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid">
 		<div class="row">
 
@@ -104,13 +109,16 @@ ul {
 						<th>PS: Publication reported in Scopus</th>
 						<th>PG: Publication reported in Google Scholar</th>
 						<th>PI: Publication reported in Indian Citation Index</th>
+						<th>Resource</th>
+						<th>Plag. Report</th>
+						<th>Plag. Copy</th>
 						<th>Status</th>
-						<th>Delete</th>
 					</thead>
 					<c:forEach items="${eList}" var="journal">
 						<c:if test="${sorter == journal.deptt}">
 
 							<tr>
+
 								<td><c:out value="${journal.pcn}" /></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
@@ -133,22 +141,37 @@ ul {
 								<td><c:out value="${journal.psFlag}" /></td>
 								<td><c:out value="${journal.pgFlag}" /></td>
 								<td><c:out value="${journal.piFlag}" /></td>
-								
-								<c:url value="../../action/action_journal.jsp" var="approve" >
-
-									<c:param name="deptt" value="${journal.deptt}"></c:param>
+								<c:url value="../../DownloadResource" var="download">
+								<c:param name="deptt" value="${journal.deptt}"></c:param>
 									<c:param name="title" value="${journal.title}"></c:param>
 									<c:param name="volume" value="${journal.volume}"></c:param>
 									<c:param name="issue" value="${journal.issue}"></c:param>
 									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
+								
+								</c:url>
+								
+								<td><a href="${download}&index=0">Download</a></td>
+								<td><a href="${download}&index=1">Download</a></td>
+								<td><a href="${download}&index=2">Download</a></td>
+
+								<c:url value="../../action/action_journal.jsp" var="action">
+									<c:param name="id" value="${journal.id}" />
 									<c:param name="level" value="1"></c:param>
-									
+								</c:url>
+								<c:url value="../../action/reject_journal.jsp" var="reject">
 								</c:url>
 								<c:choose>
 									<c:when test="${journal.status==0}">
-										<td>Pending<br>
-										<a href="${approve}&status=1">Approve</a><br>
-										<a href="${approve}&status=-1">Reject</a></td>
+										<td width="20%" align="center">Pending<br> <a
+											href="${action}&status=1" class="btn btn-info"
+											onclick="return confirm('Are you sure to proceed?')">Approve</a><br>
+
+											<button type="button" 	data-name="${journal.id}" class="btn btn-danger"
+												id="<%out.print(buttonTag + index);%>" value="form"
+												onclick="a(this);">Reject</button>
+
+											<div id="<%out.print(divTag + index);
+							index++;%>"></div>
 									</c:when>
 									<c:when test="${journal.status==1}">
 										<td><a>Approved by Deptt. Coordinator</td>
@@ -166,11 +189,6 @@ ul {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-
-								<c:url value="../delete/delete.jsp" var="delete">
-
-								</c:url>
-								<td><a href='<c:out value="${delete}" />'>Delete</a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -179,6 +197,28 @@ ul {
 
 		</div>
 	</div>
-
+	<script>
+		function a(button) {
+			var id = button.getAttribute("data-name");
+			console.log(id);
+			var b = '<form action=${reject}><input type=text name=reason class=form-control placeholder=Specify><input type=hidden name=id value=';
+			var c = id;
+			var d = '><input type=hidden name=level value=';
+			var e = 1;
+			var f = '><input type=hidden name=status value=';
+			var g = -1;
+			var h = '><button type=submit class=btn>Submit</button></form>';
+			var url = b + c + d + e + f + g + h;
+			var buttonName = button.id;
+			var matches = buttonName.match(/\d+/g);
+			console.log("Showing");
+			console.log(buttonName);
+			console.log(matches);
+			console.log('div' + matches);
+			var divName = 'div' + matches;
+			document.getElementById(divName).innerHTML = url;
+			button.style.display = 'none';
+		}
+	</script>
 </body>
 </html>

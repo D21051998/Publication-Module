@@ -7,5 +7,5 @@ public interface DownloadDAO {
 	
 	void downloadRequest(ServletOutputStream servletOutputStream, String[] what, String[] branch, String from,String to);
 
-	
+	String[] downloadJournalFilesByID(String deptt, String title,int volume,int issue,int pageNo);
 }

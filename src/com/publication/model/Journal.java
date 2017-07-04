@@ -2,6 +2,7 @@ package com.publication.model;
 
 public class Journal {
 	
+	private String id;
 	private String pcn;
 	private	String nameOauthors;
 	private	String deptt;
@@ -24,10 +25,21 @@ public class Journal {
 	private	String psFlag;
 	private	String pgFlag;
 	private	String piFlag;
+	private String publicationFileName;
+	private String plagReportFileName;
+	private String plagCopyFileName;
 	private	int status;
 	private	String writtenBy;
 	
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getPcn() {
 		return pcn;
 	}
@@ -174,13 +186,33 @@ public class Journal {
 	}
 	@Override
 	public String toString() {
-		return "Journal [pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt + ", title=" + title
-				+ ", journal=" + journal + ", nationality=" + nationality + ", year=" + year + ", monthPublished="
-				+ monthPublished + ", monthAssigned=" + monthAssigned + ", volume=" + volume + ", issue=" + issue
-				+ ", pageNo=" + pageNo + ", doiNo=" + doiNo + ", impactFactor=" + impactFactor + ", whatImpactFactor="
-				+ whatImpactFactor + ", linkImpFactor=" + linkImpFactor + ", paidOrUnpaid=" + paidOrUnpaid
-				+ ", paymentFlag=" + paymentFlag + ", pwFlag=" + pwFlag + ", psFlag=" + psFlag + ", pgFlag=" + pgFlag
-				+ ", piFlag=" + piFlag + ", status=" + status + ", writtenBy=" + writtenBy + "]";
+		return "Journal [id=" + id + ", pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt + ", title="
+				+ title + ", journal=" + journal + ", nationality=" + nationality + ", year=" + year
+				+ ", monthPublished=" + monthPublished + ", monthAssigned=" + monthAssigned + ", volume=" + volume
+				+ ", issue=" + issue + ", pageNo=" + pageNo + ", doiNo=" + doiNo + ", impactFactor=" + impactFactor
+				+ ", whatImpactFactor=" + whatImpactFactor + ", linkImpFactor=" + linkImpFactor + ", paidOrUnpaid="
+				+ paidOrUnpaid + ", paymentFlag=" + paymentFlag + ", pwFlag=" + pwFlag + ", psFlag=" + psFlag
+				+ ", pgFlag=" + pgFlag + ", piFlag=" + piFlag + ", publicationFileName=" + publicationFileName
+				+ ", plagReportFileName=" + plagReportFileName + ", plagCopyFileName=" + plagCopyFileName + ", status="
+				+ status + ", writtenBy=" + writtenBy + "]";
+	}
+	public String getPublicationFileName() {
+		return publicationFileName;
+	}
+	public void setPublicationFileName(String publicationFileName) {
+		this.publicationFileName = publicationFileName;
+	}
+	public String getPlagReportFileName() {
+		return plagReportFileName;
+	}
+	public void setPlagReportFileName(String plagReportFileName) {
+		this.plagReportFileName = plagReportFileName;
+	}
+	public String getPlagCopyFileName() {
+		return plagCopyFileName;
+	}
+	public void setPlagCopyFileName(String plagCopyFileName) {
+		this.plagCopyFileName = plagCopyFileName;
 	}
 	
 	

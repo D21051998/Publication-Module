@@ -1,8 +1,8 @@
-<%@page import="com.publication.constants.Redirect"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page import="com.publication.constants.Redirect"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -17,13 +17,13 @@ String sid = request.getSession(false).getAttribute("sid").toString();
 String role = lao.getRoleBySessionID(sid);
 
 if(request.getParameter("level").equals("1")){
-	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
-		 response.sendRedirect("../"+Redirect.redirect(role, true));
+	if(dao.reject(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
+		 response.sendRedirect("../department_coord/view/view_journal.jsp");
 	 }else{
-		 response.sendRedirect("../"+Redirect.redirect(role, true));
+		 response.sendRedirect("../department_coord/view/view_journal.jsp");
 	 }
 }else if(request.getParameter("level").equals("2")){
-	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
+	if(dao.reject(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 		response.sendRedirect("../"+Redirect.redirect(role, true));
 	 }else{
 		 response.sendRedirect("../"+Redirect.redirect(role, true));
@@ -32,6 +32,9 @@ if(request.getParameter("level").equals("1")){
  
 %>
 
+
+</body>
+</html>
 
 </body>
 </html>

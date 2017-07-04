@@ -10,28 +10,17 @@
 <body>
 <jsp:useBean id="dao" class="com.publication.impl.JournalIMPL"></jsp:useBean>
 <jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
-
 <%
-
 String sid = request.getSession(false).getAttribute("sid").toString();
 String role = lao.getRoleBySessionID(sid);
-
-if(request.getParameter("level").equals("1")){
-	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
-		 response.sendRedirect("../"+Redirect.redirect(role, true));
-	 }else{
-		 response.sendRedirect("../"+Redirect.redirect(role, true));
-	 }
-}else if(request.getParameter("level").equals("2")){
-	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
-		response.sendRedirect("../"+Redirect.redirect(role, true));
-	 }else{
-		 response.sendRedirect("../"+Redirect.redirect(role, true));
-	 }	
+if(dao.delete(request.getParameter("id"))){
+	response.sendRedirect("../"+Redirect.redirect(role, true));
+}else{
+	response.sendRedirect("../"+Redirect.redirect(role, true));
 }
- 
-%>
 
+
+%>
 
 </body>
 </html>
