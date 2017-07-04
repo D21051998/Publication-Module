@@ -27,7 +27,10 @@ li.borderless {
 	border-bottom: 0 none;
 	border-top: none;
 }
-
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
 ul {
 	list-style: none;
 }
@@ -101,7 +104,11 @@ ul {
 						<th>PS: Publication reported in Scopus</th>
 						<th>PG: Publication reported in Google Scholar</th>
 						<th>PI: Publication reported in Indian Citation Index</th>
+						<th>Resource</th>
+						<th>Plag. Report</th>
+						<th>Plag. Copy</th>
 						<th>Status</th>
+						<th>Edit</th>
 						<th>Delete</th>
 					</thead>
 					<c:forEach items="${eList}" var="journal">
@@ -134,6 +141,20 @@ ul {
 								<td><c:out value="${journal.psFlag}" /></td>
 								<td><c:out value="${journal.pgFlag}" /></td>
 								<td><c:out value="${journal.piFlag}" /></td>
+								
+								<c:url value="../../DownloadResource" var="download">
+								<c:param name="deptt" value="${journal.deptt}"></c:param>
+									<c:param name="title" value="${journal.title}"></c:param>
+									<c:param name="volume" value="${journal.volume}"></c:param>
+									<c:param name="issue" value="${journal.issue}"></c:param>
+									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
+								
+								</c:url>
+								
+								<td><a href="${download}&index=0">Download</a></td>
+								<td><a href="${download}&index=1">Download</a></td>
+								<td><a href="${download}&index=2">Download</a></td>
+								
 								<c:url value="../action/action_journal.jsp" var="approve">
 
 									<c:param name="deptt" value="${journal.deptt}"></c:param>
@@ -164,11 +185,23 @@ ul {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-
-								<c:url value="../delete/delete.jsp" var="delete">
-
+								
+								<c:url value="../edit/edit_journal.jsp" var="edit">
+								<c:param name="id" value="${journal.id}"></c:param>
 								</c:url>
-								<td><a href='<c:out value="${delete}" />'>Delete</a></td>
+								<c:url value="../../action/delete_journal.jsp" var="delete">
+								 <c:param name="id" value="${journal.id}"></c:param>
+								</c:url>
+								
+								<c:if test="${journal.status <= 0 }">
+								<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
+								<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
+								</c:if>
+								<c:if test="${ journal.status > 0}">
+								<td>Cannot be edited</td>
+								<td>Cannot be deleted</td>
+								</c:if>
+								
 							</tr>
 						</c:if>
 					</c:forEach>

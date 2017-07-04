@@ -23,6 +23,9 @@ body{
 	background-color: #ffa830;
 	background-image: url("resources/images/DSCN7348.jpg");
 	}
+	a {
+    color: #000000;
+}
 </style>
 
 </head>
@@ -106,6 +109,7 @@ body{
 					</table>
 
 				</form>
+				<h5><strong><a href="account/forgot_password_request.jsp">Forgot Password(Click Here..)</a></strong></h5>
 			</div>
 		</div>
 	</div>

@@ -13,32 +13,33 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	
+
 <title>Faculty Home</title>
 <style>
 .container {
 	width: 100%;
 }
 
-
 .borderless {
 	border-bottom: 0 none;
 	border-top: none;
-	border-left:0;
-	border-right:0;
+	border-left: 0;
+	border-right: 0;
 	background: #f28430;
-	font-size:medium;
+	font-size: medium;
 	font-weight: bold;
+}
 
+.li {
+	color: black;
 }
-.li{
-	color: black;	
-}
+
 ul {
 	list-style: none;
 }
-#sidebarStyle{
- background: #f28430;
+
+#sidebarStyle {
+	background: #f28430;
 }
 </style>
 </head>
@@ -55,28 +56,46 @@ ul {
 	}
 </script>
 <body>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
-<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-<%
-String sid  = (String) request.getSession(false).getAttribute("sid");
-System.out.println("AT FACULTY"+sid);
-if(null==sid){
-	response.sendRedirect("../account/access_denied.jsp");
-	return;
-}
-if(!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")){
-	response.sendRedirect("../account/access_denied.jsp");
-	return;
-}
-System.out.println(sid);
-%>	
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="dao" class="com.publication.impl.JournalIMPL" />
+	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+	<%
+		String sid = (String) request.getSession(false).getAttribute("sid");
+		System.out.println("AT FACULTY" + sid);
+		if (null == sid) {
+			response.sendRedirect("../account/access_denied.jsp");
+			return;
+		}
+		if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+			response.sendRedirect("../account/access_denied.jsp");
+			return;
+		}
+		System.out.println(sid);
+	%>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-2" >
-			<jsp:include page="../sidebars/faculty_home_sidebar.jsp"></jsp:include>
+			<div class="col-md-2">
+				<jsp:include page="../sidebars/faculty_home_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10"></div>
 			<h2>Faculty Home</h2>
+
+			<%
+				if (dao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) >  0) {
+					%>
+					
+					<table>
+					<caption><h4><strong>Notifications</strong></h4></caption>
+					<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Journals Rejected:</td>
+					<td>&nbsp;<%=dao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></td>
+					</tr>
+					</table>
+					<%
+				}
+			%>
+
 		</div>
 	</div>
 </body>

@@ -165,4 +165,30 @@ public class DownloadIMPL implements DownloadDAO {
 		return sheet;
 	}
 
+	@Override
+	public String[] downloadJournalFilesByID(String deptt,String title,int volume,int issue,int pageNo) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from journal where deptt = ? and title=? and volume = ? and issue= ? and pageno=?");
+			ps.setString(1, deptt);
+			ps.setString(2, title);
+			ps.setInt(3, volume);
+			ps.setInt(4, issue);
+			ps.setInt(5, pageNo);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
 }

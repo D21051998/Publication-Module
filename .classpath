@@ -23,5 +23,8 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-io-2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-collections4-4.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/xmlbeans-2.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/commons-fileupload-1.3.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/javax.mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Deepanshu Jain/Documents/APIs/apache-commons-net.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
