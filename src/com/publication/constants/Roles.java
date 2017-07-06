@@ -15,4 +15,8 @@ public enum Roles {
 		return text;
 	}
 
+	public static void main(String[] args) {
+		System.out.println(Roles.ROLE_ADMIN);
+	}
+	
 }

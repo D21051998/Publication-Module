@@ -6,17 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.JournalDAO;
 import com.publication.database.ConnectionFactory;
 import com.publication.model.Journal;
-
-import oracle.net.aso.r;
 
 public class JournalIMPL implements JournalDAO {
 
@@ -305,18 +301,14 @@ public class JournalIMPL implements JournalDAO {
 		return false;
 	}
 
-<<<<<<< HEAD
 	public boolean reject(String id, int status, String message) {
-=======
-	public boolean reject(String id, int status) {
->>>>>>> 188eba97c9db97f3dd4ce0f6df30d316b1989bbf
 		Journal journal = getJournalByID(id);
 		if (null == journal) {
 			return false;
 		}
 		Connection connection;
 		PreparedStatement ps1;
-<<<<<<< HEAD
+
 		PreparedStatement ps;
 		try {
 			connection = ConnectionFactory.getConnection();
@@ -353,24 +345,19 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(26, journal.getId());
 			ps.setString(27, message);
 
-=======
-		try {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection.prepareStatement("update journal set status=?, pcn=?, monthAssigned=? where id=?");
->>>>>>> 188eba97c9db97f3dd4ce0f6df30d316b1989bbf
+
 			ps1.setInt(1, status);
 			ps1.setNull(2, Types.VARCHAR);
 			ps1.setNull(3, Types.DATE);
 			ps1.setString(4, id);
 
-<<<<<<< HEAD
 			if (ps1.executeUpdate() > 0 && ps.executeUpdate()>0) {
-=======
-			if (ps1.executeUpdate() > 0) {
->>>>>>> 188eba97c9db97f3dd4ce0f6df30d316b1989bbf
 				return true;
 			}
-		} catch (Exception e) {
+		}
+		 catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -385,8 +372,6 @@ public class JournalIMPL implements JournalDAO {
 			total -= a[i - 1];
 		return total;
 	}
-<<<<<<< HEAD
-	
 	public int notificationRejectedJournal(String id){
 		Connection connection = null;
 		PreparedStatement statement;
@@ -405,8 +390,6 @@ public class JournalIMPL implements JournalDAO {
 		}
 		return 0;
 	}
-	
-=======
 
->>>>>>> 188eba97c9db97f3dd4ce0f6df30d316b1989bbf
+	
 }

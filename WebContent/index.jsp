@@ -16,16 +16,128 @@
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
-
 }
 
+td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 25px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+h4 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 25px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+p {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+table {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+}
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+.container {
+	width: 100%;
+}
+
+li.borderless {
+	border-bottom: 0 none;
+	border-top: none;
+}
+
+ul {
+	list-style: none;
+}
+
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none;
+}
+
+.content:before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+}
+
+.content {
+	overflow: visible;
+	position: relative;
+}
+
+div.transbox {
+	margin: 30px;
+	background-color: #ffffff;
+	border: 1px solid;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+	width: auto;
+	border-radius: 5px;
+	/* For IE8 and earlier */
+}
+
+a {
+	color: #000000;
+}
 body{
-	background-color: #ffa830;
-	background-image: url("resources/images/DSCN7348.jpg");
-	}
-	a {
-    color: #000000;
-}
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;}
 </style>
 
 </head>
@@ -42,15 +154,15 @@ body{
 		}
 	}
 </script>
-<body>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+<body class="content">
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 		HttpSession sess = request.getSession(false);
-	System.out.println(sess);
-	System.out.println(request.getSession(false).getAttribute("sid"));
+		System.out.println(sess);
+		System.out.println(request.getSession(false).getAttribute("sid"));
 
 		if (sess != null) {
-			String sid =(String) request.getSession(false).getAttribute("sid");
+			String sid = (String) request.getSession(false).getAttribute("sid");
 			if (sid != null) {
 				System.out.println(lao.getUsernameBySessionID(sid));
 				response.sendRedirect(Redirect.redirect(lao.getRoleBySessionID(sid), true));
@@ -62,16 +174,24 @@ body{
 
 
 	<div class="container">
-		<div class="row">
+		<div class="row transbox">
 			<div class="col-md-6" align="center">
-				<h3><strong>The NorthCap University</strong></h3>
-				<p>Sector-23A, Gurugram</p>
-				<h4><strong>Publication Module</strong></h4>
+				<br>
+				<!-- <h3><strong>The NorthCap University</strong></h3>
+				 
+				 
+				<p>Sector-23A, Gurugram</p><br>
+				-->
+				<br> <img src="resources/images/ncu logo.png"
+					class="img-responsive" width="300" height="200"> <br>
+				<h4>
+					<strong>Publication Module</strong>
+				</h4>
 			</div>
 			<div class="col-md-6 form-group" align="center">
-				
+
 				<form method="POST" action="LoginService">
-					<table>
+					<table class="table table-borderless">
 						<tr>
 							<td><label for="role">Role</label></td>
 							<td>&nbsp;</td>
@@ -109,7 +229,10 @@ body{
 					</table>
 
 				</form>
-				<h5><strong><a href="account/forgot_password_request.jsp">Forgot Password(Click Here..)</a></strong></h5>
+				<h5>
+					<strong><a href="account/forgot_password_request.jsp">Forgot
+							Password(Click Here..)</a></strong>
+				</h5>
 			</div>
 		</div>
 	</div>
