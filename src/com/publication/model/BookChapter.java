@@ -2,6 +2,7 @@ package com.publication.model;
 
 public class BookChapter {
 
+	private String id;
 	private String pcn;
 	private String nameOauthors;
 	private String deptt;
@@ -18,7 +19,42 @@ public class BookChapter {
 	private String hyperLink;
 	private String indexFlag;
 	private String indexLink;
+	private String publicationFileName;
+	private String plagReportFileName;
+	private String plagCopyFileName;
 	private int status;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPublicationFileName() {
+		return publicationFileName;
+	}
+
+	public void setPublicationFileName(String publicationFileName) {
+		this.publicationFileName = publicationFileName;
+	}
+
+	public String getPlagReportFileName() {
+		return plagReportFileName;
+	}
+
+	public void setPlagReportFileName(String plagReportFileName) {
+		this.plagReportFileName = plagReportFileName;
+	}
+
+	public String getPlagCopyFileName() {
+		return plagCopyFileName;
+	}
+
+	public void setPlagCopyFileName(String plagCopyFileName) {
+		this.plagCopyFileName = plagCopyFileName;
+	}
+
 	private String writtenBy;
 
 	public String getWrittenBy() {
@@ -170,12 +206,13 @@ public class BookChapter {
 
 	@Override
 	public String toString() {
-		return "BookChapter [pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt + ", chapterNo="
-				+ chapterNo + ", chapterTitle=" + chapterTitle + ", bookTitle=" + bookTitle + ", publisher=" + publisher
-				+ ", nationality=" + nationality + ", year=" + year + ", monthPublished=" + monthPublished
-				+ ", monthOfPCN=" + monthOfPCN + ", pageNo=" + pageNo + ", isbn=" + isbn + ", hyperLink=" + hyperLink
-				+ ", indexFlag=" + indexFlag + ", indexLink=" + indexLink + ", status=" + status + ", writtenBy="
-				+ writtenBy + "]";
+		return "BookChapter [id=" + id + ", pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt
+				+ ", chapterNo=" + chapterNo + ", chapterTitle=" + chapterTitle + ", bookTitle=" + bookTitle
+				+ ", publisher=" + publisher + ", nationality=" + nationality + ", year=" + year + ", monthPublished="
+				+ monthPublished + ", monthOfPCN=" + monthOfPCN + ", pageNo=" + pageNo + ", isbn=" + isbn
+				+ ", hyperLink=" + hyperLink + ", indexFlag=" + indexFlag + ", indexLink=" + indexLink
+				+ ", publicationFileName=" + publicationFileName + ", plagReportFileName=" + plagReportFileName
+				+ ", plagCopyFileName=" + plagCopyFileName + ", status=" + status + ", writtenBy=" + writtenBy + "]";
 	}
 
 	public BookChapter(BookChapter bookChapter) {

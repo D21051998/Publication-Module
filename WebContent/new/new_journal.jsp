@@ -147,12 +147,29 @@ div.transbox {
 		}
 		System.out.println(sid);
 	%>
+
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
 				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include></div>
 			<div class="col-md-10 transbox">
+<style>
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}</style>
 				<h3>New Journal Form</h3>
+<style>
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none !important;
+}
+</style>
 				<form method="POST" action="../AddJournal"
 					enctype="multipart/form-data">
 					<table class="table table-borderless">

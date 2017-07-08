@@ -215,7 +215,4 @@ public class Journal {
 		this.plagCopyFileName = plagCopyFileName;
 	}
 	
-	
-	
-
 }

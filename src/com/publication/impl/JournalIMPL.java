@@ -317,6 +317,8 @@ public class JournalIMPL implements JournalDAO {
 					"insert into rej_journal (nameOauthors, deptt, title, journal, nationality, year, monthPublished, volume, issue, pageNo,"
 							+ " doiNo, impactFactor, whatImpactFactor, linkImpFactor, paidOrUnpaid, paymentFlag, pwflag, psflag, pgflag, piflag,"
 							+ " publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			
+
 			ps.setString(1, journal.getNameOauthors());
 			ps.setString(2, journal.getDeptt().toUpperCase());
 			ps.setString(3, journal.getTitle());
@@ -344,15 +346,12 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(25, journal.getWrittenBy());
 			ps.setString(26, journal.getId());
 			ps.setString(27, message);
-
-			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("update journal set status=?, pcn=?, monthAssigned=? where id=?");
-
 			ps1.setInt(1, status);
 			ps1.setNull(2, Types.VARCHAR);
 			ps1.setNull(3, Types.DATE);
 			ps1.setString(4, id);
 
+			
 			if (ps1.executeUpdate() > 0 && ps.executeUpdate()>0) {
 				return true;
 			}

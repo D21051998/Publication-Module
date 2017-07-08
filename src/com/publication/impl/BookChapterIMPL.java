@@ -26,7 +26,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, written_by) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, written_by,id, publicationfilename,plagreportfilename, plagcopyfilename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
@@ -43,6 +43,27 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(14, bookChapter.getIndexLink());
 			ps.setInt(15, bookChapter.getStatus());
 			ps.setString(16, bookChapter.getWrittenBy());
+			String id;
+			PreparedStatement ps1 = connection.prepareStatement("select id from book_chapter");
+			ResultSet rs = ps1.executeQuery();
+			ArrayList<Integer> list = new ArrayList<>();
+
+			if (!rs.next()) {
+				id = "BC0001";
+			} else {
+				rs.beforeFirst();
+				while (rs.next()) {
+					String result = rs.getString("id");
+					list.add(Integer.parseInt(result.substring(1)));
+				}
+				int[] array = list.stream().mapToInt(i -> i).toArray();
+				int sno = getMissing(array, array.length);
+				id = String.format("BC%04d", sno);
+			}
+			ps.setString(17, id);
+			ps.setString(18, bookChapter.getPublicationFileName());
+			ps.setString(19, bookChapter.getPlagReportFileName());
+			ps.setString(20, bookChapter.getPlagCopyFileName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -99,70 +120,81 @@ public class BookChapterIMPL implements BookChapterDAO {
 		return list;
 	}
 
+
 	@Override
-	public BookChapter getBookChapterByPCN() {
+	public boolean delete(String id) {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("delete from book_chapter where id=?");
+			ps.setString(1, id);
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
+	}
+
+	
+	public int getMissing(int a[], int n) {
+		int i;
+		int total;
+		total = (n + 1) * (n + 2) / 2;
+		for (i = 1; i <=n; i++)
+			total -= a[i-1];
+		return total;
+	}
+
+	@Override
+	public BookChapter getBookChapterByID(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(String pcn) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static void main(String[] args) {
-		BookChapterDAO dao = new BookChapterIMPL();
-		try {
-			System.out.println(dao.getAllBookChapters());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public boolean action(String id, int status) {
+		BookChapter chapter = getBookChapterByID(id);
+		if (null == chapter) {
+			return false;
 		}
-	}
-
-	@Override
-	public boolean action(String deptt, String bookTitle, String chapterTitle, String chapterNo, String publisher,
-			String isbn, int status) {
 		Connection connection;
 		PreparedStatement ps1;
 		PreparedStatement ps2;
-		ArrayList<Integer> list = new ArrayList<>(); 
+		ArrayList<Integer> list = new ArrayList<>();
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("select pcn from book_chapter where pcn like \""+deptt.toUpperCase()+"____%BC___\"");
+			ps1 = connection.prepareStatement(
+					"select pcn from book_chapter where pcn like \"" + chapter.getDeptt().toUpperCase() + "____%BC___\"");
 			ResultSet rs = ps1.executeQuery();
 			String pcn;
-			if(!rs.next()){
-				pcn = GeneratePCN.generatePCN(deptt, "BC", 1);
-			}else{
+			if (!rs.next()) {
+				pcn = GeneratePCN.generatePCN(chapter.getDeptt().toUpperCase(), "BC", 1);
+			} else {
 				rs.beforeFirst();
-				while(rs.next()){
+				while (rs.next()) {
 					String result = rs.getString("pcn");
-					list.add(Integer.parseInt(result.substring(8)));
+					list.add(Integer.parseInt(result.substring(9)));
 				}
-				int[] array = list.stream().mapToInt(i->i).toArray();
+				int[] array = list.stream().mapToInt(i -> i).toArray();
 				int sno = getMissing(array, array.length);
-				pcn = GeneratePCN.generatePCN(deptt, "BC", sno);
+				pcn = GeneratePCN.generatePCN(chapter.getDeptt().toUpperCase(), "BC", sno);
 			}
-			ps2 = connection.prepareStatement("update book_chapter set pcn=?, monthAssigned=?, status=? where deptt=? and bookTitle=? and chapterTitle=? and chapterNo=? and isbn =?");
-			if(status == -1){
-				ps2.setNull(1, Types.VARCHAR);
-			}else if(status == 1){
+			ps2 = connection.prepareStatement("update book_chapter set pcn=?, status=?, monthAssigned=? where id=?");
+			if (status == 1) {
 				ps2.setString(1, pcn.toUpperCase());
-			}else if(status == 2 || status==-2){
+			} else if (status == 2) {
 				ps2.setString(1, pcn.toUpperCase());
 			}
-			long millis=System.currentTimeMillis();  
-			Date date = new Date(millis);
-			ps2.setDate(2, date);
-			ps2.setInt(3, status);
-			ps2.setString(4, deptt);
-			ps2.setString(5, bookTitle);
-			ps2.setString(6, chapterTitle);
-			ps2.setString(7, chapterNo);
-			ps2.setString(8, isbn);
-			if(ps2.executeUpdate()>0){
+			ps2.setInt(2, status);
+			ps2.setDate(3, new Date(System.currentTimeMillis()));
+			ps2.setString(4, id);
+			if (ps2.executeUpdate() > 0) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -172,13 +204,30 @@ public class BookChapterIMPL implements BookChapterDAO {
 		return false;
 	}
 
-	public int getMissing(int a[], int n) {
-		int i;
-		int total;
-		total = (n + 1) * (n + 2) / 2;
-		for (i = 1; i <=n; i++)
-			total -= a[i-1];
-		return total;
+	@Override
+	public boolean reject(String id, int status, String message) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int notificationRejectedBookChapters(String id) {
+		Connection connection = null;
+		PreparedStatement statement;
+		try{
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement("select distinct count(*) as number from book_chapter where status>0 and writtenby=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if(rs.next()){
+				return rs.getInt("number");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.close(connection);
+		}
+		return 0;
 	}
 
 }
