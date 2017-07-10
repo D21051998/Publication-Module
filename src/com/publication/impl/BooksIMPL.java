@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class BooksIMPL implements BookDAO {
 
 	@Override
 	public boolean saveBook(Books book) {
-		
+
 		if (book == null) {
 			return false;
 		}
@@ -27,8 +28,8 @@ public class BooksIMPL implements BookDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
 					"insert into book (nameOauthors, deptt, title, publisher, nationality, year, monthPublished,pageNo"
-					+ ",isbn, hyperlink, index, link"
-					+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							+ ",isbn, hyperlink, index, link"
+							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());
 			ps.setString(3, book.getTitle());
@@ -73,25 +74,134 @@ public class BooksIMPL implements BookDAO {
 			ConnectionFactory.close(connection);
 		}
 		return false;
-		
+
 	}
 
 	@Override
 	public boolean updateBook(Books book) {
-		// TODO Auto-generated method stub
+
+		if (book == null) {
+			return false;
+		}
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement(
+					"update book set nameOauthors=?, deptt=?, title=?, publisher=?, nationality=?, year=?, monthPublished=?,pageNo=?"
+							+ ",isbn=?, hyperlink=?, index=?, link=?"
+							+ ", publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where id=?");
+			ps.setString(1, book.getNameOauthors());
+			ps.setString(2, book.getDeptt().toUpperCase());
+			ps.setString(3, book.getTitle());
+			ps.setString(4, book.getPublisher());
+			ps.setString(5, book.getNationality());
+			ps.setInt(6, book.getYear());
+			ps.setString(7, book.getMonthPublished());
+			ps.setInt(8, book.getPageNo());
+			ps.setString(9, book.getIsbn());
+			ps.setString(10, book.getHyperlink());
+			ps.setString(11, book.getIndex());
+			ps.setString(12, book.getLink());
+			ps.setString(13, book.getPublicationFileName());
+			ps.setString(14, book.getPlagReportFileName());
+			ps.setString(15, book.getPlagCopyFileName());
+			ps.setInt(16, book.getStatus());
+			ps.setString(17, book.getWrittenBy());
+			ps.setString(18, book.getId());
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
+
 	}
 
 	@Override
 	public List<Books> getAllBooks() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		List<Books> list = new ArrayList<>();
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from book");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Books books = new Books();
+				books.setId(rs.getString("id"));
+				books.setPcn(rs.getString("pcn"));
+				books.setNameOauthors(rs.getString("nameOauthors"));
+				books.setDeptt(rs.getString("deptt"));
+				books.setTitle(rs.getString("title"));
+				books.setPublisher(rs.getString("publisher"));
+				books.setNationality(rs.getString("nationality"));
+				books.setYear(rs.getInt("year"));
+				books.setMonthPublished(rs.getString("monthPublished"));
+				books.setMonthAssigned(rs.getString("monthAssigned"));
+				books.setPageNo(rs.getInt("pageNo"));
+				books.setIsbn(rs.getString("isbn"));
+				books.setHyperlink(rs.getString("hyperlink"));
+				books.setIndex(rs.getString("index"));
+				books.setLink(rs.getString("link"));
+				books.setPublicationFileName(rs.getString("publicationFileName"));
+				books.setPlagReportFileName(rs.getString("plagReportFileName"));
+				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				books.setStatus(rs.getInt("status"));
+				books.setWrittenBy(rs.getString("writtenBy"));
+				list.add(books);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return list;
 	}
 
 	@Override
 	public Books getBookByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Books books = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from book where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				books = new Books();
+				books.setId(rs.getString("id"));
+				books.setPcn(rs.getString("pcn"));
+				books.setNameOauthors(rs.getString("nameOauthors"));
+				books.setDeptt(rs.getString("deptt"));
+				books.setTitle(rs.getString("title"));
+				books.setPublisher(rs.getString("publisher"));
+				books.setNationality(rs.getString("nationality"));
+				books.setYear(rs.getInt("year"));
+				books.setMonthPublished(rs.getString("monthPublished"));
+				books.setMonthAssigned(rs.getString("monthAssigned"));
+				books.setPageNo(rs.getInt("pageNo"));
+				books.setIsbn(rs.getString("isbn"));
+				books.setHyperlink(rs.getString("hyperlink"));
+				books.setIndex(rs.getString("index"));
+				books.setLink(rs.getString("link"));
+				books.setPublicationFileName(rs.getString("publicationFileName"));
+				books.setPlagReportFileName(rs.getString("plagReportFileName"));
+				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				books.setStatus(rs.getInt("status"));
+				books.setWrittenBy(rs.getString("writtenBy"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return books;
+
 	}
 
 	@Override
@@ -103,7 +213,7 @@ public class BooksIMPL implements BookDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement("delete from book where id=?");
 			ps.setString(1, id);
-			if(ps.executeUpdate()>0){
+			if (ps.executeUpdate() > 0) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -163,7 +273,51 @@ public class BooksIMPL implements BookDAO {
 
 	@Override
 	public boolean reject(String id, int status, String message) {
-		// TODO Auto-generated method stub
+		Books book = getBookByID(id);
+		if (null == book) {
+			return false;
+		}
+		Connection connection = null;
+		PreparedStatement ps1;
+		PreparedStatement ps;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps1 = connection.prepareStatement("update book set status=?, pcn=?, monthAssigned=? where id=?");
+			ps = connection.prepareStatement(
+					"insert into rej_book (nameOauthors, deptt, title, publisher, nationality, year, monthPublished,pageNo"
+							+ ",isbn, hyperlink, index, link"
+							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, book.getNameOauthors());
+			ps.setString(2, book.getDeptt().toUpperCase());
+			ps.setString(3, book.getTitle());
+			ps.setString(4, book.getPublisher());
+			ps.setString(5, book.getNationality());
+			ps.setInt(6, book.getYear());
+			ps.setString(7, book.getMonthPublished());
+			ps.setInt(8, book.getPageNo());
+			ps.setString(9, book.getIsbn());
+			ps.setString(10, book.getHyperlink());
+			ps.setString(11, book.getIndex());
+			ps.setString(12, book.getLink());
+			ps.setString(13, book.getPublicationFileName());
+			ps.setString(14, book.getPlagReportFileName());
+			ps.setString(15, book.getPlagCopyFileName());
+			ps.setInt(16, book.getStatus());
+			ps.setString(17, book.getWrittenBy());
+			ps.setString(18, id);
+			ps.setString(19, message);
+			ps1.setInt(1, status);
+			ps1.setNull(2, Types.VARCHAR);
+			ps1.setNull(3, Types.DATE);
+			ps1.setString(4, id);
+			if (ps1.executeUpdate() > 0 && ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
 	}
 
@@ -172,8 +326,8 @@ public class BooksIMPL implements BookDAO {
 		int i;
 		int total;
 		total = (n + 1) * (n + 2) / 2;
-		for (i = 1; i <=n; i++)
-			total -= a[i-1];
+		for (i = 1; i <= n; i++)
+			total -= a[i - 1];
 		return total;
 	}
 
@@ -181,17 +335,18 @@ public class BooksIMPL implements BookDAO {
 	public int notificationRejectedBooks(String id) {
 		Connection connection = null;
 		PreparedStatement statement;
-		try{
+		try {
 			connection = ConnectionFactory.getConnection();
-			statement = connection.prepareStatement("select distinct count(*) as number from book where status>0 and writtenby=?");
+			statement = connection
+					.prepareStatement("select distinct count(*) as number from book where status>0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return rs.getInt("number");
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			ConnectionFactory.close(connection);
 		}
 		return 0;

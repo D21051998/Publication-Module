@@ -5,13 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.TechnicalReportDAO;
 import com.publication.database.ConnectionFactory;
-import com.publication.model.Journal;
 import com.publication.model.TechnicalReport;
 
 public class TechnialReportIMPL implements TechnicalReportDAO {
@@ -26,7 +26,7 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into journal (faculty, deptt, title, year, date, remarks, monthPublished, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into tech_rep (faculty, deptt, title, year, date, remarks, monthPublished, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, technicalReport.getFaculty());
 			ps.setString(2, technicalReport.getDeptt().toUpperCase());
 			ps.setString(3, technicalReport.getTitle());
@@ -70,21 +70,111 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 	}
 
 	@Override
-	public boolean updateTechnicalReport(TechnicalReport TechnicalReport) {
-		
+	public boolean updateTechnicalReport(TechnicalReport technicalReport) {
+		if (technicalReport == null) {
+			return false;
+		}
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement(
+					"update tech_rep set faculty=?, deptt=?, title=?, year=?, date=?, remarks=?, monthPublished=?, publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where  id=?");
+			ps.setString(1, technicalReport.getFaculty());
+			ps.setString(2, technicalReport.getDeptt().toUpperCase());
+			ps.setString(3, technicalReport.getTitle());
+			ps.setInt(4, technicalReport.getYear());
+			ps.setString(5, technicalReport.getDate());
+			ps.setString(6, technicalReport.getRemarks());
+			ps.setString(7, technicalReport.getMonthPublished());
+			ps.setString(8, technicalReport.getPublicationFileName());
+			ps.setString(9, technicalReport.getPlagReportFileName());
+			ps.setString(10, technicalReport.getPlagCopyFileName());
+			ps.setInt(11, technicalReport.getStatus());
+			ps.setString(12, technicalReport.getWrittenBy());
+			ps.setString(13, technicalReport.getId());
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
+
 	}
 
 	@Override
 	public List<TechnicalReport> getAllTechnicalReports() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<TechnicalReport> list = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from tech_rep");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TechnicalReport tc = new TechnicalReport();
+				tc.setId(rs.getString("id"));
+				tc.setPcn(rs.getString("pcn"));
+				tc.setFaculty(rs.getString("faculty"));
+				tc.setDeptt(rs.getString("deptt"));
+				tc.setTitle(rs.getString("title"));
+				tc.setYear(rs.getInt("year"));
+				tc.setDate(rs.getString("date"));
+				tc.setRemarks(rs.getString("remarks"));
+				tc.setMonthPublished(rs.getString("monthPublished"));
+				tc.setMonthAssigned(rs.getString("monthAssigned"));
+				tc.setPublicationFileName(rs.getString("publicationFileName"));
+				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setStatus(rs.getInt("status"));
+				tc.setWrittenBy(rs.getString("writtenBy"));
+				list.add(tc);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.close(connection);
+		}
+		return list;
 	}
 
 	@Override
 	public TechnicalReport getTechnicalReportByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		TechnicalReport tc = null;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from tech_rep where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				tc = new TechnicalReport();
+				tc.setId(rs.getString("id"));
+				tc.setPcn(rs.getString("pcn"));
+				tc.setFaculty(rs.getString("faculty"));
+				tc.setDeptt(rs.getString("deptt"));
+				tc.setTitle(rs.getString("title"));
+				tc.setYear(rs.getInt("year"));
+				tc.setDate(rs.getString("date"));
+				tc.setRemarks(rs.getString("remarks"));
+				tc.setMonthPublished(rs.getString("monthPublished"));
+				tc.setMonthAssigned(rs.getString("monthAssigned"));
+				tc.setPublicationFileName(rs.getString("publicationFileName"));
+				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setStatus(rs.getInt("status"));
+				tc.setWrittenBy(rs.getString("writtenBy"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.close(connection);
+		}
+		return tc;
 	}
 
 	@Override
@@ -96,7 +186,7 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement("delete from tech_rep where id=?");
 			ps.setString(1, id);
-			if(ps.executeUpdate()>0){
+			if (ps.executeUpdate() > 0) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -157,7 +247,41 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 
 	@Override
 	public boolean reject(String id, int status, String message) {
-		// TODO Auto-generated method stub
+		TechnicalReport technicalReport = getTechnicalReportByID(id);
+		Connection connection = null;
+		PreparedStatement ps1;
+		PreparedStatement ps;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps1 = connection.prepareStatement("update tech_rep set status=?, pcn=?, monthAssigned=? where id=?");
+			ps = connection.prepareStatement(
+					"insert into rej_tech_rep (faculty, deptt, title, year, date, remarks, monthPublished, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, technicalReport.getFaculty());
+			ps.setString(2, technicalReport.getDeptt().toUpperCase());
+			ps.setString(3, technicalReport.getTitle());
+			ps.setInt(4, technicalReport.getYear());
+			ps.setString(5, technicalReport.getDate());
+			ps.setString(6, technicalReport.getRemarks());
+			ps.setString(7, technicalReport.getMonthPublished());
+			ps.setString(8, technicalReport.getPublicationFileName());
+			ps.setString(9, technicalReport.getPlagReportFileName());
+			ps.setString(10, technicalReport.getPlagCopyFileName());
+			ps.setInt(11, technicalReport.getStatus());
+			ps.setString(12, technicalReport.getWrittenBy());
+			ps.setString(13, id);
+			ps.setString(14, message);
+			ps1.setInt(1, status);
+			ps1.setNull(2, Types.VARCHAR);
+			ps1.setNull(3, Types.DATE);
+			ps1.setString(4, id);
+			if (ps1.executeUpdate() > 0 && ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
 	}
 
@@ -166,8 +290,8 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 		int i;
 		int total;
 		total = (n + 1) * (n + 2) / 2;
-		for (i = 1; i <=n; i++)
-			total -= a[i-1];
+		for (i = 1; i <= n; i++)
+			total -= a[i - 1];
 		return total;
 	}
 
@@ -175,17 +299,18 @@ public class TechnialReportIMPL implements TechnicalReportDAO {
 	public int notificationRejectedTechnicalReports(String id) {
 		Connection connection = null;
 		PreparedStatement statement;
-		try{
+		try {
 			connection = ConnectionFactory.getConnection();
-			statement = connection.prepareStatement("select distinct count(*) as number from tech_rep where status>0 and writtenby=?");
+			statement = connection.prepareStatement(
+					"select distinct count(*) as number from tech_rep where status>0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return rs.getInt("number");
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			ConnectionFactory.close(connection);
 		}
 		return 0;

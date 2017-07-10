@@ -180,7 +180,6 @@ public class JournalIMPL implements JournalDAO {
 			ConnectionFactory.close(connection);
 		}
 		return list;
-
 	}
 
 	@Override
@@ -306,9 +305,8 @@ public class JournalIMPL implements JournalDAO {
 		if (null == journal) {
 			return false;
 		}
-		Connection connection;
+		Connection connection =null;
 		PreparedStatement ps1;
-
 		PreparedStatement ps;
 		try {
 			connection = ConnectionFactory.getConnection();
@@ -317,9 +315,7 @@ public class JournalIMPL implements JournalDAO {
 					"insert into rej_journal (nameOauthors, deptt, title, journal, nationality, year, monthPublished, volume, issue, pageNo,"
 							+ " doiNo, impactFactor, whatImpactFactor, linkImpFactor, paidOrUnpaid, paymentFlag, pwflag, psflag, pgflag, piflag,"
 							+ " publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			
-
-			ps.setString(1, journal.getNameOauthors());
+        	ps.setString(1, journal.getNameOauthors());
 			ps.setString(2, journal.getDeptt().toUpperCase());
 			ps.setString(3, journal.getTitle());
 			ps.setString(4, journal.getJournal());
@@ -358,6 +354,8 @@ public class JournalIMPL implements JournalDAO {
 		}
 		 catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
 		}
 		return false;
 	}
@@ -389,6 +387,8 @@ public class JournalIMPL implements JournalDAO {
 		}
 		return 0;
 	}
+	
+
 
 	
 }

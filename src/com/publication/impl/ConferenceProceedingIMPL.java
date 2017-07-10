@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,6 @@ import com.publication.constants.GeneratePCN;
 import com.publication.dao.ConferenceProceedingDAO;
 import com.publication.database.ConnectionFactory;
 import com.publication.model.ConferenceProceedings;
-import com.publication.model.Journal;
 
 public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 
@@ -27,8 +27,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
 					"insert into conferenceProceedings (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
-					+ "monthPublished, publisher, pageNo, hyperLink, index, link, publicationfilename, plagreportfilename,"
-					+ " plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							+ "monthPublished, publisher, pageNo, hyperLink, index, link, publicationfilename, plagreportfilename,"
+							+ " plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
 			ps.setString(3, conferenceProceedings.getTitle());
@@ -74,44 +74,159 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ConnectionFactory.close(connection);
 		}
 		return false;
-		
+
 	}
 
 	@Override
-	public boolean updateConferenceProceedings(ConferenceProceedings ConferenceProceedings) {
-		// TODO Auto-generated method stub
+	public boolean updateConferenceProceedings(ConferenceProceedings conferenceProceedings) {
+		if (conferenceProceedings == null) {
+			return false;
+		}
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement(
+					"update conferenceProceedings set nameOauthors=?, deptt=?, title=?,proceedingsOf=?, nationality=?,venue=?,  year=?, "
+							+ "monthPublished=?, publisher=?, pageNo=?, hyperLink=?, index=?, link=?, publicationfilename=?, plagreportfilename=?,"
+							+ " plagcopyfilename=?, status=?, writtenBy=? where id=?");
+			ps.setString(1, conferenceProceedings.getNameOauthors());
+			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
+			ps.setString(3, conferenceProceedings.getTitle());
+			ps.setString(4, conferenceProceedings.getProceedingsOf());
+			ps.setString(5, conferenceProceedings.getNationality());
+			ps.setString(6, conferenceProceedings.getVenue());
+			ps.setInt(7, conferenceProceedings.getYear());
+			ps.setString(8, conferenceProceedings.getMonthPublished());
+			ps.setString(9, conferenceProceedings.getPublisher());
+			ps.setInt(10, conferenceProceedings.getPageNo());
+			ps.setString(11, conferenceProceedings.getHyperlink());
+			ps.setString(12, conferenceProceedings.getIndex());
+			ps.setString(13, conferenceProceedings.getLink());
+			ps.setString(14, conferenceProceedings.getPublicationFileName());
+			ps.setString(15, conferenceProceedings.getPlagReportFileName());
+			ps.setString(16, conferenceProceedings.getPlagCopyFileName());
+			ps.setInt(17, conferenceProceedings.getStatus());
+			ps.setString(18, conferenceProceedings.getWrittenBy());
+			ps.setString(19, conferenceProceedings.getId());
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
+
+
 	}
 
 	@Override
 	public List<ConferenceProceedings> getAllConferenceProceedingss() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ConferenceProceedings> list = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from conf_proc");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ConferenceProceedings cp = new ConferenceProceedings();
+				cp.setId(rs.getString("id"));
+				cp.setPcn(rs.getString("pcn"));
+				cp.setNameOauthors(rs.getString("nameOauthors"));
+				cp.setDeptt(rs.getString("deptt"));
+				cp.setTitle(rs.getString("title"));
+				cp.setProceedingsOf(rs.getString("proceedingsOf"));
+				cp.setNationality(rs.getString("nationality"));
+				cp.setVenue(rs.getString("venue"));
+				cp.setYear(rs.getInt("year"));
+				cp.setMonthAssigned(rs.getString("monthAssigned"));
+				cp.setMonthPublished(rs.getString("monthPublished"));
+				cp.setPublisher(rs.getString("publisher"));
+				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setHyperlink(rs.getString("hyperlink"));
+				cp.setIndex(rs.getString("index"));
+				cp.setLink(rs.getString("link"));
+				cp.setPublicationFileName(rs.getString("publicationFileName"));
+				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
+				cp.setStatus(rs.getInt("status"));
+				cp.setWrittenBy(rs.getString("writtenBy"));
+				list.add(cp);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		
+		return list;
 	}
 
 	@Override
 	public ConferenceProceedings getConferenceProceedingsByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		ConferenceProceedings cp = null;
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from conf_proc where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				cp = new ConferenceProceedings();
+				cp.setId(rs.getString("id"));
+				cp.setPcn(rs.getString("pcn"));
+				cp.setNameOauthors(rs.getString("nameOauthors"));
+				cp.setDeptt(rs.getString("deptt"));
+				cp.setTitle(rs.getString("title"));
+				cp.setProceedingsOf(rs.getString("proceedingsOf"));
+				cp.setNationality(rs.getString("nationality"));
+				cp.setVenue(rs.getString("venue"));
+				cp.setYear(rs.getInt("year"));
+				cp.setMonthAssigned(rs.getString("monthAssigned"));
+				cp.setMonthPublished(rs.getString("monthPublished"));
+				cp.setPublisher(rs.getString("publisher"));
+				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setHyperlink(rs.getString("hyperlink"));
+				cp.setIndex(rs.getString("index"));
+				cp.setLink(rs.getString("link"));
+				cp.setPublicationFileName(rs.getString("publicationFileName"));
+				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
+				cp.setStatus(rs.getInt("status"));
+				cp.setWrittenBy(rs.getString("writtenBy"));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		
+		return cp;
 	}
 
 	@Override
 	public boolean delete(String id) {
 		Connection connection = null;
-	PreparedStatement ps = null;
-	try {
-		connection = ConnectionFactory.getConnection();
-		ps = connection.prepareStatement("delete from conf_proc where id=?");
-		ps.setString(1, id);
-		if(ps.executeUpdate()>0){
-			return true;
+		PreparedStatement ps = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("delete from conf_proc where id=?");
+			ps.setString(1, id);
+			if (ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		ConnectionFactory.close(connection);
-	}
-	return false;
+		return false;
 	}
 
 	@Override
@@ -126,8 +241,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 		ArrayList<Integer> list = new ArrayList<>();
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement(
-					"select pcn from conf_proc where pcn like \"" + proceedings.getDeptt().toUpperCase() + "____%P___\"");
+			ps1 = connection.prepareStatement("select pcn from conf_proc where pcn like \""
+					+ proceedings.getDeptt().toUpperCase() + "____%P___\"");
 			ResultSet rs = ps1.executeQuery();
 			String pcn;
 			if (!rs.next()) {
@@ -163,7 +278,53 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 
 	@Override
 	public boolean reject(String id, int status, String message) {
-		// TODO Auto-generated method stub
+		ConferenceProceedings conferenceProceedings = getConferenceProceedingsByID(id);
+		if (null == conferenceProceedings) {
+			return false;
+		}
+		Connection connection = null;
+		PreparedStatement ps1;
+		PreparedStatement ps;
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps1 = connection.prepareStatement("update conferenceProceedings set status=?, pcn=?, monthAssigned=? where id=?");
+			ps = connection.prepareStatement(
+					"insert into rej_conferenceProceedings (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
+							+ "monthPublished, publisher, pageNo, hyperLink, index, link, publicationfilename, plagreportfilename,"
+							+ " plagcopyfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps.setString(1, conferenceProceedings.getNameOauthors());
+			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
+			ps.setString(3, conferenceProceedings.getTitle());
+			ps.setString(4, conferenceProceedings.getProceedingsOf());
+			ps.setString(5, conferenceProceedings.getNationality());
+			ps.setString(6, conferenceProceedings.getVenue());
+			ps.setInt(7, conferenceProceedings.getYear());
+			ps.setString(8, conferenceProceedings.getMonthPublished());
+			ps.setString(9, conferenceProceedings.getPublisher());
+			ps.setInt(10, conferenceProceedings.getPageNo());
+			ps.setString(11, conferenceProceedings.getHyperlink());
+			ps.setString(12, conferenceProceedings.getIndex());
+			ps.setString(13, conferenceProceedings.getLink());
+			ps.setString(14, conferenceProceedings.getPublicationFileName());
+			ps.setString(15, conferenceProceedings.getPlagReportFileName());
+			ps.setString(16, conferenceProceedings.getPlagCopyFileName());
+			ps.setInt(17, conferenceProceedings.getStatus());
+			ps.setString(18, conferenceProceedings.getWrittenBy());
+			ps.setString(19, id);
+			ps.setString(20, message);
+			ps1.setInt(1, status);
+			ps1.setNull(2, Types.VARCHAR);
+			ps1.setNull(3, Types.DATE);
+			ps1.setString(4, id);
+
+			if (ps1.executeUpdate() > 0 && ps.executeUpdate() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
 		return false;
 	}
 
@@ -172,8 +333,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 		int i;
 		int total;
 		total = (n + 1) * (n + 2) / 2;
-		for (i = 1; i <=n; i++)
-			total -= a[i-1];
+		for (i = 1; i <= n; i++)
+			total -= a[i - 1];
 		return total;
 	}
 
@@ -181,17 +342,18 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 	public int notificationRejectedConferenceProceedingss(String id) {
 		Connection connection = null;
 		PreparedStatement statement;
-		try{
+		try {
 			connection = ConnectionFactory.getConnection();
-			statement = connection.prepareStatement("select distinct count(*) as number from conf_proc where status>0 and writtenby=?");
+			statement = connection.prepareStatement(
+					"select distinct count(*) as number from conf_proc where status>0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return rs.getInt("number");
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			ConnectionFactory.close(connection);
 		}
 		return 0;
