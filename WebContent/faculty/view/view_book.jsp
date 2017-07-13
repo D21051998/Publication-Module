@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Books"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -143,13 +144,13 @@ div.transbox {
 
 <body>
 
-	<jsp:useBean id="dao" class="com.publication.impl.BookChapterIMPL"
+	<jsp:useBean id="dao" class="com.publication.impl.BooksIMPL"
 		scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
-		List<BookChapter> list = dao.getAllBookChapters();
-		for (BookChapter b : list) {
+		List<Books> list = dao.getAllBooks();
+		for (Books b : list) {
 			System.out.println(b);
 		}
 
@@ -173,8 +174,6 @@ div.transbox {
 						<th>PCN & Date Assigned</th>
 						<th>Name Of Authors</th>
 						<th>Department</th>
-						<th>Chapter No</th>
-						<th>Chapter Title</th>
 						<th>Book Title</th>
 						<th>Publisher</th>
 						<th>Nationality</th>
@@ -183,7 +182,7 @@ div.transbox {
 						<th>Page No</th>
 						<th>ISBN</th>
 						<th>HyperLink</th>
-						<th>Index Flag</th>
+						<th>Indices</th>
 						<th>Index Link</th>
 						<th>Resource</th>
 						<th>Plag. Report</th>
@@ -192,31 +191,29 @@ div.transbox {
 						<th>Edit</th>
 						<th>Delete</th>
 					</thead>
-					<c:forEach items="${eList}" var="bookChapter">
-						<c:if test="${principal == bookChapter.writtenBy}">
+					<c:forEach items="${eList}" var="book">
+						<c:if test="${principal == book.writtenBy}">
 							<tr>
-								<td><c:if test="${empty bookChapter.pcn}">
+								<td><c:if test="${empty book.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> <c:if test="${not empty bookChapter.pcn}">
-										<c:out value="${bookChapter.pcn}" />
+									</c:if> <c:if test="${not empty book.pcn}">
+										<c:out value="${book.pcn}" />
 										<br>
 										<br>
-										<c:out value="${bookChapter.monthAssigned}" />
+										<c:out value="${book.monthAssigned}" />
 									</c:if></td>
-								<td><c:out value="${bookChapter.nameOauthors}" /></td>
-								<td><c:out value="${bookChapter.deptt}" /></td>
-								<td><c:out value="${bookChapter.chapterNo}" /></td>
-								<td><c:out value="${bookChapter.chapterTitle}" /></td>
-								<td><c:out value="${bookChapter.bookTitle}" /></td>
-								<td><c:out value="${bookChapter.publisher}" /></td>
-								<td><c:out value="${bookChapter.nationality}" /></td>
-								<td><c:out value="${bookChapter.year}" /></td>
-								<td><c:out value="${bookChapter.monthPublished}" /></td>
-								<td><c:out value="${bookChapter.pageNo}" /></td>
-								<td><c:out value="${bookChapter.isbn}" /></td>
-								<td><c:out value="${bookChapter.hyperLink}" /></td>
-								<td><c:out value="${bookChapter.indexFlag}" /></td>
-								<td><c:out value="${bookChapter.indexLink}" /></td>
+								<td><c:out value="${book.nameOauthors}" /></td>
+								<td><c:out value="${book.deptt}" /></td>
+								<td><c:out value="${book.title}" /></td>
+								<td><c:out value="${book.publisher}" /></td>
+								<td><c:out value="${book.nationality}" /></td>
+								<td><c:out value="${book.year}" /></td>
+								<td><c:out value="${book.monthPublished}" /></td>
+								<td><c:out value="${book.pageNo}" /></td>
+								<td><c:out value="${book.isbn}" /></td>
+								<td><c:out value="${book.hyperlink}" /></td>
+								<td><c:out value="${book.index}" /></td>
+								<td><c:out value="${book.link}" /></td>
 								<td><a href="${download}&index=0" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
@@ -227,37 +224,37 @@ div.transbox {
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
 								<c:choose>
-									<c:when test="${bookChapter.status==0}">
+									<c:when test="${book.status==0}">
 										<td>Pending</td>
 									</c:when>
-									<c:when test="${bookChapter.status==1}">
+									<c:when test="${book.status==1}">
 										<td><a>Approved by Deptt. Coordinator</td>
 									</c:when>
-									<c:when test="${bookChapter.status==-1}">
+									<c:when test="${book.status==-1}">
 										<td><a>Rejected</a></td>
 									</c:when>
-									<c:when test="${bookChapter.status==2}">
+									<c:when test="${book.status==2}">
 										<td><a>Approved By RDIL</a></td>
 									</c:when>
-									<c:when test="${bookChapter.status==-2}">
+									<c:when test="${book.status==-2}">
 										<td><a>Rejected By RDIL</a></td>
 									</c:when>
 									<c:otherwise>
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-								<c:url value="../edit/edit_bookChapter.jsp" var="edit">
-									<c:param name="id" value="${bookChapter.id}"></c:param>
+								<c:url value="../edit/edit_book.jsp" var="edit">
+									<c:param name="id" value="${book.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_bookChapter.jsp" var="delete">
-									<c:param name="id" value="${bookChapter.id}"></c:param>
+								<c:url value="../../action/delete_book.jsp" var="delete">
+									<c:param name="id" value="${book.id}"></c:param>
 								</c:url>
 
-								<c:if test="${bookChapter.status <= 0 }">
+								<c:if test="${book.status <= 0 }">
 									<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
 									<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
 								</c:if>
-								<c:if test="${ bookChapter.status > 0}">
+								<c:if test="${ book.status > 0}">
 									<td>Cannot be edited</td>
 									<td>Cannot be deleted</td>
 								</c:if>

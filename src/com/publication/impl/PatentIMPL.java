@@ -26,7 +26,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into patent (faculy, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into patent (faculty, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id, patentNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -60,6 +60,8 @@ public class PatentIMPL implements PatentDAO {
 				id = String.format("T%04d", sno);
 			}
 			ps.setString(15, id);
+			ps.setInt(16, patent.getPatentNo());
+			
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -81,7 +83,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update patent set faculy=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=? where id=?");
+					"update patent set faculy=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=?,patentNo=? where id=?");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -94,10 +96,10 @@ public class PatentIMPL implements PatentDAO {
 			ps.setString(10, patent.getAwardDate());
 			ps.setString(11, patent.getPublicationFileName());
 			ps.setString(12, patent.getPlagReportFileName());
-
 			ps.setInt(13, patent.getStatus());
 			ps.setString(14, patent.getWrittenBy());
-			ps.setString(15, patent.getId());
+			ps.setInt(15, patent.getPatentNo());
+			ps.setString(16, patent.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -137,6 +139,7 @@ public class PatentIMPL implements PatentDAO {
 				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
 				patent.setStatus(rs.getInt("status"));
 				patent.setWrittenBy(rs.getString("writtenBy"));
+				patent.setPatentNo(rs.getInt("patentNo"));
 				list.add(patent);
 			}
 		}catch(Exception e){
@@ -176,6 +179,7 @@ public class PatentIMPL implements PatentDAO {
 				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
 				patent.setStatus(rs.getInt("status"));
 				patent.setWrittenBy(rs.getString("writtenBy"));
+				patent.setPatentNo(rs.getInt("patentNo"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -265,7 +269,7 @@ public class PatentIMPL implements PatentDAO {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection.prepareStatement("update patent set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement(
-					"insert into rej_patent (faculy, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into rej_patent (faculy, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id,message, patentNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -281,6 +285,7 @@ public class PatentIMPL implements PatentDAO {
 			ps.setInt(13, patent.getStatus());
 			ps.setString(14, patent.getWrittenBy());
 			ps.setString(15, message);
+			ps.setInt(16, patent.getPatentNo());
 			ps1.setInt(1, status);
 			ps1.setNull(2, Types.VARCHAR);
 			ps1.setNull(3, Types.DATE);

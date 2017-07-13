@@ -26,7 +26,7 @@ public class ConferencePresentationIMPL implements ConferencePresentationDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into conferencePresentation (faculty, deptt, title, conferencePresentation, nationality,organisedby, venue,  year,dates,hyperlink, monthPublished, publicationfilename, plagreportfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into conf_pres (faculty, deptt, title, conferencePresentation, nationality,organisedby, venue,  year,dates,hyperlink, monthPublished, publicationfilename, plagreportfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferencePresentation.getFaculty());
 			ps.setString(2, conferencePresentation.getDeptt().toUpperCase());
 			ps.setString(3, conferencePresentation.getTitle());
@@ -82,7 +82,7 @@ public class ConferencePresentationIMPL implements ConferencePresentationDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update conferencePresentation set faculty=?, deptt=?, title=?, conferencePresentation=?, nationality=?,organisedby=?, venue=?,  year=?,dates=?,hyperlink=?, monthPublished=?, publicationfilename=?, plagreportfilename=?, status=?, writtenBy=? where id=?");
+					"update conf_pres set faculty=?, deptt=?, title=?, conferencePresentation=?, nationality=?,organisedby=?, venue=?,  year=?,dates=?,hyperlink=?, monthPublished=?, publicationfilename=?, plagreportfilename=?, status=?, writtenBy=? where id=?");
 			ps.setString(1, conferencePresentation.getFaculty());
 			ps.setString(2, conferencePresentation.getDeptt().toUpperCase());
 			ps.setString(3, conferencePresentation.getTitle());
@@ -270,9 +270,9 @@ public class ConferencePresentationIMPL implements ConferencePresentationDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection
-					.prepareStatement("update conferencePresentation set status=?, pcn=?, monthAssigned=? where id=?");
+					.prepareStatement("update conf_pres set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement(
-					"insert into rej_conferencePresentation (faculty, deptt, title, conferencePresentation, nationality,organisedby, venue,  year,dates,hyperlink, monthPublished, publicationfilename, plagreportfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into rej_conf_pres (faculty, deptt, title, conferencePresentation, nationality,organisedby, venue,  year,dates,hyperlink, monthPublished, publicationfilename, plagreportfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferencePresentation.getFaculty());
 			ps.setString(2, conferencePresentation.getDeptt().toUpperCase());
 			ps.setString(3, conferencePresentation.getTitle());

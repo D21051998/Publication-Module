@@ -170,7 +170,7 @@ h3 {
 	border: none !important;
 }
 </style>
-				<form method="POST" action="../AddJournal"
+				<form method="POST" action="../AddPublicationService"
 					enctype="multipart/form-data">
 					<table class="table table-borderless">
 						<tr>
@@ -327,6 +327,8 @@ h3 {
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />
 							<input type="hidden" name="status" value="0">
+							<input type="hidden" name="publicationType" value="J">
+							
 							<td>
 								<button class="form-control" type="reset">Reset</button>
 							</td>

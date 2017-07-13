@@ -374,7 +374,7 @@ public class JournalIMPL implements JournalDAO {
 		PreparedStatement statement;
 		try{
 			connection = ConnectionFactory.getConnection();
-			statement = connection.prepareStatement("select distinct count(*) as number from journal where status>0 and writtenby=?");
+			statement = connection.prepareStatement("select distinct count(*) as number from journal where status<0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
 			if(rs.next()){

@@ -7,112 +7,264 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
 <title>Add Conf. Presentations</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
- .container{
-  width:100%;
- }
+body {
+	background-color: #fcfcfc;
+}
+
+td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+th {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+table {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+}
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+.container {
+	width: 100%;
+}
 
 li.borderless {
-  border-bottom: 0 none;
-  border-top: none; 
+	border-bottom: 0 none;
+	border-top: none;
 }
 
-ul{
- list-style:none;
+ul {
+	list-style: none;
 }
- 
+
+.content:before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+}
+
+.content {
+	overflow: visible;
+	position: relative;
+}
+
+div.transbox {
+	margin: 30px;
+	background-color: #ffffff;
+	border: 1px solid;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+	width: auto;
+	/* For IE8 and earlier */
+}
+
+.content p {
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
+}
 </style>
 
 </head>
+<input type="hidden" id="refreshed" value="no">
+<script type="text/javascript">
+	onload = function() {
+		var e = document.getElementById("refreshed");
+		if (e.value == "no")
+			e.value = "yes";
+		else {
+			e.value = "no";
+			location.reload();
+		}
+	}
+</script>
+
 <body>
-<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-<div class="container-fluid">
- <div class="row">
-  <div class="col-md-2" >
- <jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
-  </div>
-  <div class="col-md-10">
+	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+	<%
+		String sid = (String) request.getSession(false).getAttribute("sid");
+		if (null == sid) {
+			response.sendRedirect("../account/access_denied.jsp");
+		}
+		System.out.println(sid);
+	%>
 
-	<form>
-		<table>
-			<tr>
-				<td>Faculty</td>
-				<td><input type="text" name="nameOauthors"></td>
-			</tr>
-			<tr>
-				<td>Deptt.</td>
-				<td><select class="form-control" name="deptt">
-						<option value="cse">CSE</option>
-						<option value="ece">ECE</option>
-						<option value="me">ME</option>
-						<option value="cvu">CVU</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Title of Paper</td>
-				<td><input type="text" name="title"></td>
-			</tr>
-			<tr>
-				<td>Conference Presentation</td>
-				<td><input type="text" name="presentation"></td>
-			</tr>
-			<tr>
-				<td>International/National</td>
-				<td><select name="nationality" id="nationality"
-					class="form-control">
-						<option value="International">International</option>
-						<option value="National">National</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Organised by</td>
-				<td><input type="text" name="organised_by"></td>
-			</tr>
-			<tr>
-				<td>Venue Details for Conference</td>
-				<td><input type="text" name="venue_details"></td>
-			</tr>
-			<tr>
-				<td>Year</td>
-				<td><select class="form-control" name="year">
-						<%
-							for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Month in which published</td>
-				<td><select class="form-control" name="month">
-						<%
-							String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
-									"September", "October", "November", "December" };
-							for (int i = 0; i < months.length; i++) {
-						%>
-						<option value="<%=months[i]%>"><%=months[i]%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Hyper Link</td>
-				<td><input type="text" name="link"></td>
-			</tr>
-			<tr>
-				<td><button type="reset">Reset</button></td>
-				<td><button type="submit">Submit</button></td>
-			</tr>
-		</table>
+	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+	<div class="container-fluid content">
+		<div class="row">
+			<div class="col-md-2 transbox">
+				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10 transbox">
+				<h3>Add Conference Presentations</h3>
+				<style>
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none !important;
+}
+</style>
+				<form method="post" action="../AddPublicationService"
+					enctype="multipart/form-data">
+					<table class="table table-borderless">
+						<tr>
+							<td>Faculty</td>
+							<td><input type="text" name="faculty" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Deptt.</td>
+							<td><select class="form-control" name="deptt">
+									<option value="cse">CSE</option>
+									<option value="ece">ECE</option>
+									<option value="me">ME</option>
+									<option value="cvu">CVU</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Title of Paper</td>
+							<td><input type="text" name="title" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Conference Presentation</td>
+							<td><input type="text" name="conferencePresentation"
+								class="form-control"></td>
+						</tr>
+						<tr>
+							<td>International/National</td>
+							<td><select name="nationality" id="nationality"
+								class="form-control">
+									<option value="International">International</option>
+									<option value="National">National</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Organised by</td>
+							<td><input type="text" name="organisedBy"
+								class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Venue Details for Conference</td>
+							<td><input type="text" name="venue" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Year</td>
+							<td><select class="form-control" name="year">
+									<%
+										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
+									%>
+									<option value="<%=i%>"><%=i%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Dates (add comma to separate dates..)</td>
+							<td><input type="text" name="dates" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Month in which published</td>
+							<td><select class="form-control" name="monthPublished">
+									<%
+										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
+												"September", "October", "November", "December" };
+										for (int i = 0; i < months.length; i++) {
+									%>
+									<option value="<%=months[i]%>"><%=months[i]%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Hyper Link</td>
+							<td><input type="text" name="hyperlink" class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Publication</td>
+							<td><input type=file name=publication /></td>
+						</tr>
+						<tr>
+							<td>Plag. Report</td>
+							<td><input type=file name=plagReport /></td>
+						</tr>
+						<tr>
+							<input type="hidden" name="writtenBy"
+								value="<%=lao.getUsernameBySessionID(sid)%>" />
+							<input type="hidden" name="status" value="0" />
+							<input type="hidden" name="publicationType" value="C" />
+						<tr>
+							<td><button type="reset" class="form-control">Reset</button></td>
+							<td><button type="submit" class="form-control">Submit</button></td>
+						</tr>
+					</table>
 
-	</form>
- </div>
-  
- </div>
-</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
 
 </body>
 </html>

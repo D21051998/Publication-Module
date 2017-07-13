@@ -26,8 +26,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into conferenceProceedings (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
-							+ "monthPublished, publisher, pageNo, hyperLink, index, link, publicationfilename, plagreportfilename,"
+					"insert into conf_proc (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
+							+ "monthPublished, publisher, pageNo, hyperLink, indices, link, publicationfilename, plagreportfilename,"
 							+ " plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
@@ -87,8 +87,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update conferenceProceedings set nameOauthors=?, deptt=?, title=?,proceedingsOf=?, nationality=?,venue=?,  year=?, "
-							+ "monthPublished=?, publisher=?, pageNo=?, hyperLink=?, index=?, link=?, publicationfilename=?, plagreportfilename=?,"
+					"update conf_proc set nameOauthors=?, deptt=?, title=?,proceedingsOf=?, nationality=?,venue=?,  year=?, "
+							+ "monthPublished=?, publisher=?, pageNo=?, hyperLink=?, indices=?, link=?, publicationfilename=?, plagreportfilename=?,"
 							+ " plagcopyfilename=?, status=?, writtenBy=? where id=?");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
@@ -147,7 +147,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				cp.setPublisher(rs.getString("publisher"));
 				cp.setPageNo(rs.getInt("pageNo"));
 				cp.setHyperlink(rs.getString("hyperlink"));
-				cp.setIndex(rs.getString("index"));
+				cp.setIndex(rs.getString("indices"));
 				cp.setLink(rs.getString("link"));
 				cp.setPublicationFileName(rs.getString("publicationFileName"));
 				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
@@ -192,7 +192,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				cp.setPublisher(rs.getString("publisher"));
 				cp.setPageNo(rs.getInt("pageNo"));
 				cp.setHyperlink(rs.getString("hyperlink"));
-				cp.setIndex(rs.getString("index"));
+				cp.setIndex(rs.getString("indices"));
 				cp.setLink(rs.getString("link"));
 				cp.setPublicationFileName(rs.getString("publicationFileName"));
 				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
@@ -287,10 +287,10 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 		PreparedStatement ps;
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("update conferenceProceedings set status=?, pcn=?, monthAssigned=? where id=?");
+			ps1 = connection.prepareStatement("update conf_proc set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement(
-					"insert into rej_conferenceProceedings (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
-							+ "monthPublished, publisher, pageNo, hyperLink, index, link, publicationfilename, plagreportfilename,"
+					"insert into rej_conf_proc (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
+							+ "monthPublished, publisher, pageNo, hyperLink, indices, link, publicationfilename, plagreportfilename,"
 							+ " plagcopyfilename, status, writtenBy, id,message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());

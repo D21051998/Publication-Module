@@ -1,4 +1,4 @@
-<%@page import="com.publication.constants.FetchDepptCode"%>
+ <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="com.publication.model.Journal"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -118,7 +118,8 @@ ul {
 										<c:out value="Not Generated" />
 									</c:if> 
 									<c:if test="${not empty journal.pcn}">
-										<c:out value="${journal.pcn}" />
+										<c:out value="${journal.pcn}" /><br> <br> <c:out
+										value="${journal.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
@@ -155,16 +156,7 @@ ul {
 								<td><a href="${download}&index=1">Download</a></td>
 								<td><a href="${download}&index=2">Download</a></td>
 								
-								<c:url value="../action/action_journal.jsp" var="approve">
-
-									<c:param name="deptt" value="${journal.deptt}"></c:param>
-									<c:param name="title" value="${journal.title}"></c:param>
-									<c:param name="volume" value="${journal.volume}"></c:param>
-									<c:param name="issue" value="${journal.issue}"></c:param>
-									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
-									<c:param name="level" value="1"></c:param>
-
-								</c:url>
+								
 								<c:choose>
 									<c:when test="${journal.status==0}">
 										<td>Pending</td>

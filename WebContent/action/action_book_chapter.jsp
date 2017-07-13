@@ -10,13 +10,13 @@
 <jsp:useBean id="dao" class="com.publication.impl.BookChapterIMPL"></jsp:useBean>
 <%
 if(request.getParameter("level").equals("1")){
-	if(dao.action(request.getParameter("deptt"), request.getParameter("bookTitle"), request.getParameter("chapterTitle"), request.getParameter("chapterNo"), request.getParameter("publisher"), request.getParameter("isbn"), Integer.parseInt(request.getParameter("status")))){
+	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 		 out.print("done");
 	 }else{
 		 out.print("fail");
 	 }
 }else if(request.getParameter("level").equals("2")){
-	if(dao.action(request.getParameter("deptt"), request.getParameter("bookTitle"), request.getParameter("chapterTitle"), request.getParameter("chapterNo"), request.getParameter("publisher"), request.getParameter("isbn"), Integer.parseInt(request.getParameter("status")))){
+	if(dao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 		 out.print("done");
 	 }else{
 		 out.print("fail");

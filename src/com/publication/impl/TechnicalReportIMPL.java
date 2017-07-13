@@ -14,7 +14,7 @@ import com.publication.dao.TechnicalReportDAO;
 import com.publication.database.ConnectionFactory;
 import com.publication.model.TechnicalReport;
 
-public class TechnialReportIMPL implements TechnicalReportDAO {
+public class TechnicalReportIMPL implements TechnicalReportDAO {
 
 	@Override
 	public boolean saveTechnicalReport(TechnicalReport technicalReport) {

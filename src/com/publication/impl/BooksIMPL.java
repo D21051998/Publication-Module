@@ -28,7 +28,7 @@ public class BooksIMPL implements BookDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
 					"insert into book (nameOauthors, deptt, title, publisher, nationality, year, monthPublished,pageNo"
-							+ ",isbn, hyperlink, index, link"
+							+ ",isbn, hyperlink, indices, link"
 							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());
@@ -89,7 +89,7 @@ public class BooksIMPL implements BookDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
 					"update book set nameOauthors=?, deptt=?, title=?, publisher=?, nationality=?, year=?, monthPublished=?,pageNo=?"
-							+ ",isbn=?, hyperlink=?, index=?, link=?"
+							+ ",isbn=?, hyperlink=?, indices=?, link=?"
 							+ ", publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where id=?");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());
@@ -145,7 +145,7 @@ public class BooksIMPL implements BookDAO {
 				books.setPageNo(rs.getInt("pageNo"));
 				books.setIsbn(rs.getString("isbn"));
 				books.setHyperlink(rs.getString("hyperlink"));
-				books.setIndex(rs.getString("index"));
+				books.setIndex(rs.getString("indices"));
 				books.setLink(rs.getString("link"));
 				books.setPublicationFileName(rs.getString("publicationFileName"));
 				books.setPlagReportFileName(rs.getString("plagReportFileName"));
@@ -187,7 +187,7 @@ public class BooksIMPL implements BookDAO {
 				books.setPageNo(rs.getInt("pageNo"));
 				books.setIsbn(rs.getString("isbn"));
 				books.setHyperlink(rs.getString("hyperlink"));
-				books.setIndex(rs.getString("index"));
+				books.setIndex(rs.getString("indices"));
 				books.setLink(rs.getString("link"));
 				books.setPublicationFileName(rs.getString("publicationFileName"));
 				books.setPlagReportFileName(rs.getString("plagReportFileName"));
@@ -285,7 +285,7 @@ public class BooksIMPL implements BookDAO {
 			ps1 = connection.prepareStatement("update book set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement(
 					"insert into rej_book (nameOauthors, deptt, title, publisher, nationality, year, monthPublished,pageNo"
-							+ ",isbn, hyperlink, index, link"
+							+ ",isbn, hyperlink, indices, link"
 							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());

@@ -13,12 +13,20 @@ public class Patent {
 	private int applicationYear;
 	private String applicationDate;
 	private int patentYear;
+	private int patentNo;
 	private String awardDate;
 	private String monthAssigned;
 	private String publicationFileName;
 	private String plagReportFileName;
 	private int status;
 	private String writtenBy;
+	
+	public int getPatentNo() {
+		return patentNo;
+	}
+	public void setPatentNo(int patentNo) {
+		this.patentNo = patentNo;
+	}
 	public String getId() {
 		return id;
 	}
@@ -126,9 +134,9 @@ public class Patent {
 		return "Patent [id=" + id + ", pcn=" + pcn + ", faculty=" + faculty + ", deptt=" + deptt + ", title=" + title
 				+ ", nationality=" + nationality + ", country=" + country + ", applicationNo=" + applicationNo
 				+ ", applicationYear=" + applicationYear + ", applicationDate=" + applicationDate + ", patentYear="
-				+ patentYear + ", awardDate=" + awardDate + ", monthAssigned=" + monthAssigned
-				+ ", publicationFileName=" + publicationFileName + ", plagReportFileName=" + plagReportFileName
-				+ ", status=" + status + ", writtenBy=" + writtenBy + "]";
+				+ patentYear + ", patentNo=" + patentNo + ", awardDate=" + awardDate + ", monthAssigned="
+				+ monthAssigned + ", publicationFileName=" + publicationFileName + ", plagReportFileName="
+				+ plagReportFileName + ", status=" + status + ", writtenBy=" + writtenBy + "]";
 	}
 		
 	

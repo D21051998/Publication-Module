@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Book Chapter</title>
+<title>Add Book</title>
 <link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
 <style>
 .container {
@@ -182,7 +182,7 @@ ul {
 				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10 transbox">
-				<h3>Add New Book Chapter</h3>
+				<h3>Add New Book</h3>
 				<form method="post" action="../AddPublicationService"
 					enctype="multipart/form-data">
 					<style>
@@ -196,8 +196,8 @@ ul {
 					<table class="table table-borderless">
 
 						<tr>
-							<td>Name of Authors in the seq. as mentioned in the Book
-								Chapter</td>
+							<td>Name of Authors<br>(in seq. as mentioned in the Book
+								Chapter)</td>
 							<td><input type="text" class="form-control" name="nameOauthors"
 								placeholder="Seperate all names with commas"></td>
 						</tr>
@@ -211,16 +211,8 @@ ul {
 							</select></td>
 						</tr>
 						<tr>
-							<td>Chapter No.</td>
-							<td><input class="form-control" type="text" name="chapterNo"></td>
-						</tr>
-						<tr>
-							<td>Chapter Title</td>
-							<td><input class="form-control" type="text" name="chapterTitle"></td>
-						</tr>
-						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control" type="text" name="bookTitle"></td>
+							<td><input class="form-control" type="text" name="title"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
@@ -306,9 +298,9 @@ ul {
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />
 								<input type="hidden" name="status" value="0" />
-							<input type="hidden" name="publicationType" value="BC" />
-							<td><button class="btn btn-danger" class="form-control" type="reset">Reset</button></td>
-							<td><button class="btn btn-success" class="form-control" type="submit">Submit</button></td>
+							<input type="hidden" name="publicationType" value="B" />
+							<td><button class="btn" class="form-control" type="reset">Reset</button></td>
+							<td><button class="btn" class="form-control" type="submit">Submit</button></td>
 						</tr>
 
 					</table>

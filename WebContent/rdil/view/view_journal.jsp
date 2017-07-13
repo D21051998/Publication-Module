@@ -176,8 +176,9 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Journals</h3>
-				${message}
-				<table class="table table-bordered">
+				${message}<br>
+				<input type="text" class="form-control" id="search" placeholder="Type to search">
+				<table class="table table-bordered" id="table">
 
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -207,16 +208,13 @@ div.transbox {
 						<th>Plag. Copy</th>
 						<th>Status</th>
 					</thead>
+					
 					<c:forEach items="${eList}" var="journal">
 						<c:if test="${journal.status>0}">
 							<tr>
-
 								<td><c:out value="${journal.pcn}" /><br>
 								<br>
 								<c:out value="${journal.monthAssigned}" /></td>
-
-
-
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
 								<td><c:out value="${journal.title}" /></td>
@@ -288,6 +286,17 @@ div.transbox {
 
 		</div>
 	</div>
+	<script type="text/javascript">
+	var $rows = $('#table tr');
+	$('#search').keyup(function() {
+	    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+	    $rows.show().filter(function() {
+	        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	        return !~text.indexOf(val);
+	    }).hide();
+	});
+	</script>
 	<script>
 		function a(button) {
 			var id = button.getAttribute("data-name");

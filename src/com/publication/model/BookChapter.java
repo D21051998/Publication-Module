@@ -13,7 +13,7 @@ public class BookChapter {
 	private String nationality;
 	private int year;
 	private String monthPublished;
-	private String monthOfPCN;
+	private String monthAssigned;
 	private int pageNo;
 	private String isbn;
 	private String hyperLink;
@@ -149,11 +149,11 @@ public class BookChapter {
 	}
 
 	public String getMonthOfPCN() {
-		return monthOfPCN;
+		return monthAssigned;
 	}
 
 	public void setMonthOfPCN(String monthOfPCN) {
-		this.monthOfPCN = monthOfPCN;
+		this.monthAssigned = monthOfPCN;
 	}
 
 	public int getPageNo() {
@@ -209,7 +209,7 @@ public class BookChapter {
 		return "BookChapter [id=" + id + ", pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt
 				+ ", chapterNo=" + chapterNo + ", chapterTitle=" + chapterTitle + ", bookTitle=" + bookTitle
 				+ ", publisher=" + publisher + ", nationality=" + nationality + ", year=" + year + ", monthPublished="
-				+ monthPublished + ", monthOfPCN=" + monthOfPCN + ", pageNo=" + pageNo + ", isbn=" + isbn
+				+ monthPublished + ", monthOfPCN=" + monthAssigned + ", pageNo=" + pageNo + ", isbn=" + isbn
 				+ ", hyperLink=" + hyperLink + ", indexFlag=" + indexFlag + ", indexLink=" + indexLink
 				+ ", publicationFileName=" + publicationFileName + ", plagReportFileName=" + plagReportFileName
 				+ ", plagCopyFileName=" + plagCopyFileName + ", status=" + status + ", writtenBy=" + writtenBy + "]";
@@ -226,7 +226,7 @@ public class BookChapter {
 		this.nationality = bookChapter.nationality;
 		this.year = bookChapter.year;
 		this.monthPublished = bookChapter.monthPublished;
-		this.monthOfPCN = bookChapter.monthOfPCN;
+		this.monthAssigned = bookChapter.monthAssigned;
 		this.pageNo = bookChapter.pageNo;
 		this.isbn = bookChapter.isbn;
 		this.hyperLink = bookChapter.hyperLink;

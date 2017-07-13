@@ -26,7 +26,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, written_by,id, publicationfilename,plagreportfilename, plagcopyfilename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
@@ -85,7 +85,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update book_chapter set nameOauthors=?, deptt=?, chapterNo=?, chapterTitle=?, bookTitle=?, publisher=?, nationality=?, year=?, monthPublished=?, pageNo=?, isbn=?, hyperLink=?, indexFlag=?, indexLink=?, status=?, written_by=?, publicationfilename=?,plagreportfilename=?, plagcopyfilename=? where id=?");
+					"update book_chapter set nameOauthors=?, deptt=?, chapterNo=?, chapterTitle=?, bookTitle=?, publisher=?, nationality=?, year=?, monthPublished=?, pageNo=?, isbn=?, hyperLink=?, indexFlag=?, indexLink=?, status=?, writtenby=?, publicationfilename=?,plagreportfilename=?, plagcopyfilename=? where id=?");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
@@ -147,7 +147,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setIndexFlag(rs.getString("indexFlag"));
 				bc.setIndexLink(rs.getString("indexLink"));
 				bc.setStatus(rs.getInt("status"));
-				bc.setWrittenBy(rs.getString("written_by"));
+				bc.setWrittenBy(rs.getString("writtenby"));
 				list.add(bc);
 			}
 		} catch (Exception e) {
@@ -217,7 +217,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setIndexFlag(rs.getString("indexFlag"));
 				bc.setIndexLink(rs.getString("indexLink"));
 				bc.setStatus(rs.getInt("status"));
-				bc.setWrittenBy(rs.getString("written_by"));
+				bc.setWrittenBy(rs.getString("writtenby"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -287,7 +287,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection.prepareStatement("update rej_book_chapter set status=?, pcn=?, monthAssigned=? where id=?");
-			ps = connection.prepareStatement("insert into rej_book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, written_by,id, publicationfilename,plagreportfilename, plagcopyfilename, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps = connection.prepareStatement("insert into rej_book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());

@@ -9,152 +9,291 @@
 
 <link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
 <style>
- .container{
-  width:100%;
- }
+.container {
+	width: 100%;
+}
 
 li.borderless {
-  border-bottom: 0 none;
-  border-top: none; 
+	border-bottom: 0 none;
+	border-top: none;
 }
 
-ul{
- list-style:none;
+ul {
+	list-style: none;
 }
- 
+
+td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+th {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+table {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+}
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+.container {
+	width: 100%;
+}
+
+li.borderless {
+	border-bottom: 0 none;
+	border-top: none;
+}
+
+ul {
+	list-style: none;
+}
+
+.content:before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+}
+
+.content {
+	overflow: visible;
+	position: relative;
+}
+
+div.transbox {
+	margin: 30px;
+	background-color: #ffffff;
+	border: 1px solid;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+	width: auto;
+	border-radius: 5px;
+	/* For IE8 and earlier */
+}
+
+.content p {
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
+}
+
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none;
+}
 </style>
 
+
+</head>
+<body>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+	<%
+		String sid = (String) request.getSession(false).getAttribute("sid");
+		if (null == sid) {
+			response.sendRedirect("../account/access_denied.jsp");
+		}
+		System.out.println(sid);
+	%>
+
+	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
+	<div class="container-fluid content">
+		<div class="row">
+			<div class="col-md-2 transbox">
+				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
+			</div>
+			<div class="col-md-10 transbox">
+				<h3>Add New Patents</h3>
+				<style>
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none !important;
+}
+</style>
+				<form method="post" action="../AddPublicationService"
+					enctype="multipart/form-data">
+					<table class="table table-borderless">
+						<tr>
+							<td>Faculty</td>
+							<td><input type="text" class="form-control" required="on"
+								name="faculty"></td>
+						</tr>
+						<tr>
+							<td>Deptt.</td>
+							<td><select class="form-control" name="deptt">
+									<option value="cse">CSE</option>	
+									<option value="ece">ECE</option>
+									<option value="me">ME</option>
+									<option value="cvu">CVU</option>
+							</select></td>
+						</tr>
+
+						<tr>
+							<td>Title of Patent</td>
+							<td><input type="text" class="form-control" required="on"
+								name="title"></td>
+						</tr>
+
+						<tr>
+							<td>International/National</td>
+							<td><select name="nationality" onclick="getNation()"
+								id="nationality" class="form-control">
+									<option value="International">International</option>
+									<option value="National">National</option>
+							</select></td>
+						</tr>
+
+						<tr>
+							<td>Country</td>
+							<td><input type="text" class="form-control" id="country"
+								name="country"></td>
+						</tr>
+
+						<tr>
+							<td>Patent Application Number</td>
+							<td><input type="text" name="applicationNo"
+								class="form-control"></td>
+						</tr>
+						<tr>
+							<td>Patent Application Year</td>
+							<td><select class="form-control" name="applicationYear">
+									<%
+										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
+									%>
+									<option value="<%=i%>"><%=i%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+
+						<tr>
+							<td>Patent Application Date</td>
+							<td><select class="form-control" name="applicationDate">
+									<%
+										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
+												"September", "October", "November", "December" };
+										for (int i = 1; i <= 31; i++) {
+									%>
+									<option value="<%=i%>"><%=i%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Patent Award Year</td>
+							<td><select class="form-control" name="patentYear">
+									<%
+										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
+									%>
+									<option value="<%=i%>"><%=i%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+
+						<tr>
+							<td>Patent Award Date</td>
+							<td><select class="form-control" name="awardDate">
+									<%
+										months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
+												"September", "October", "November", "December" };
+										for (int i = 0; i < months.length; i++) {
+									%>
+									<option value="<%=months[i]%>"><%=months[i]%></option>
+									<%
+										}
+									%>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Patent No.</td>
+							<td><input type='text' class="form-control" name="patentNo"></td>
+						</tr>
+						<tr>
+							<td>Publication</td>
+							<td><input type=file name=publication /></td>
+						</tr>
+						<tr>
+							<td>Plag. Report</td>
+							<td><input type=file name=plagReport /></td>
+						</tr>
+						<tr>
+							<input type="hidden" name="writtenBy"
+								value="<%=lao.getUsernameBySessionID(sid)%>" />
+							<input type="hidden" name="status" value="0" />
+							<input type="hidden" name="publicationType" value="T" />
+
+							<td><button type="reset" class="form-control">Reset</button></td>
+							<td><button type="submit" class="form-control">Submit</button></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
 <script>
- function getNation(){
-	 var form = document.getElementById("nationality");
-	 var val = form.options[form.selectedIndex].value;
+	function getNation() {
+		var form = document.getElementById("nationality");
+		var val = form.options[form.selectedIndex].value;
 		if (val == "National") {
 			document.getElementById("country").value = "India";
 		}
- }
+	}
 </script>
-</head>
-<body>
-<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-<div class="container-fluid">
- <div class="row">
-  <div class="col-md-2">
-  <jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
-    </div>
-  <div class="col-md-10">
-  <h3>Add New Patents</h3>
-	<form method="get">
-		<table class="form-group">
-			<tr>
-				<td>Faculty</td>
-				<td><input type="text" class="form-control" required="on"
-					name="faculty"></td>
-			</tr>
-			<tr>
-				<td>Deptt.</td>
-				<td><select class="form-control" name="deptt">
-						<option value="cse">CSE</option>
-						<option value="ece">ECE</option>
-						<option value="me">ME</option>
-						<option value="cvu">CVU</option>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Title of Patent</td>
-				<td><input type="text" class="form-control" required="on"
-					name="title"></td>
-			</tr>
-
-			<tr>
-				<td>International/National</td>
-				<td><select name="nationality" onclick="getNation()" id="nationality" class="form-control">
-						<option value="International">International</option>
-						<option value="National">National</option>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Country</td>
-				<td><input type="text" class="form-control" id="country" name="country"></td>
-			</tr>
-			
-			<tr>
-			 <td>
-			  Patent Application Number
-			 </td>
-			 <td>
-			  <input type="text" name="patent_application" class="form-control">
-			 </td>
-			</tr>
-			<tr>
-				<td>Patent Application Year</td>
-				<td><select class="form-control" name="application_year">
-						<%
-							for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Patent Application Date</td>
-				<td><select class="form-control" name="appilcation_month">
-						<%
-							String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
-									"September", "October", "November", "December" };
-							for (int i = 0; i < months.length; i++) {
-						%>
-						<option value="<%=months[i]%>"><%=months[i]%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-<tr>
-				<td>Patent Award Year</td>
-				<td><select class="form-control" name="award_year">
-						<%
-							for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-
-			<tr>
-				<td>Patent Award Date</td>
-				<td><select class="form-control" name="awrad_month">
-						<%
-							months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
-									"September", "October", "November", "December" };
-							for (int i = 0; i < months.length; i++) {
-						%>
-						<option value="<%=months[i]%>"><%=months[i]%></option>
-						<%
-							}
-						%>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Patent No.</td>
-				<td><input type='text' name="patent_no"></td>
-			</tr>
-			<tr>
-				<td><button type="reset" class="form-control">Reset</button></td>
-				<td><button type="submit" class="form-control">Submit</button></td>
-			</tr>
-		</table>
-	</form> 
-	</div>
- </div>
-</div>
-	
 
 </body>
 </html>
