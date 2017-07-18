@@ -14,8 +14,8 @@
 .container {
 	max-width: 700px;
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 50px;
+
 }
 
 td {
@@ -110,6 +110,7 @@ ul {
 	-o-filter: blur(5px);
 	-ms-filter: blur(5px);
 	filter: blur(5px);
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
 }
 
 .content {
@@ -172,7 +173,11 @@ user-select: none;}
 		}
 	%>
 
-
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <filter id="blur">
+       <feGaussianBlur stdDeviation="3" />
+   </filter>
+</svg>
 	<div class="container">
 		<div class="row transbox">
 			<div class="col-md-6" align="center">

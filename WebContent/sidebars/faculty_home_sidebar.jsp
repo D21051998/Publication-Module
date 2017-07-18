@@ -50,7 +50,7 @@
 			aria-expanded="false">New Conf. Presentation<span class="caret"></span></a>
 			<ul id="dd-menu3" class="collapse">
 				<li><a href="../new/new_conf_presentation.jsp">Add</a></li>
-				<li><a href="view/view_conf_presentation.jsp">View</a></li>
+				<li><a href="view/view_conference_presentation.jsp">View</a></li>
 			</ul>
 		</li>
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu4"
@@ -66,7 +66,7 @@
 			aria-expanded="false">Patents<span class="caret"></span></a>
 			<ul id="dd-menu5" class="collapse">
 				<li><a href="../new/new_patents.jsp">Add</a></li>
-				<li><a href="view/view_patents.jsp">View</a></li>
+				<li><a href="view/view_patent.jsp">View</a></li>
 				
 			</ul>
 		</li>

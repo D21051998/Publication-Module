@@ -148,12 +148,12 @@ public class BookChapter {
 		this.monthPublished = monthPublished;
 	}
 
-	public String getMonthOfPCN() {
+	public String getMonthAssigned() {
 		return monthAssigned;
 	}
 
-	public void setMonthOfPCN(String monthOfPCN) {
-		this.monthAssigned = monthOfPCN;
+	public void setMonthAssigned(String monthAssigned) {
+		this.monthAssigned = monthAssigned;
 	}
 
 	public int getPageNo() {

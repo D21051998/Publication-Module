@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+ <%@page import="com.publication.model.ConferenceProceedings"%>
+<%@page import="com.publication.constants.FetchDepptCode"%>
+<%@page import="com.publication.model.Journal"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<%@page import="com.publication.model.BookChapter"%>
-<%@page import="com.publication.constants.FetchDepptCode"%>
-<%@page import="java.util.List"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Book Chapter</title>
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -127,6 +127,7 @@ div.transbox {
 	box-shadow: 0 0 5px gray;
 }
 </style>
+
 </head>
 <input type="hidden" id="refreshed" value="no">
 <script type="text/javascript">
@@ -140,114 +141,102 @@ div.transbox {
 		}
 	}
 </script>
-
 <body>
-
-	<jsp:useBean id="dao" class="com.publication.impl.BookChapterIMPL"
+	<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"
 		scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
-		List<BookChapter> list = dao.getAllBookChapters();
-		for (BookChapter b : list) {
-			System.out.println(b);
+		List<ConferenceProceedings> list = dao.getAllConferenceProceedingss();
+		for (ConferenceProceedings j : list) {
+			System.out.println(j);
 		}
 
 		String sid = (String) request.getSession(false).getAttribute("sid");
-		System.out.println(sid);
 		if (null == sid) {
-			response.sendRedirect("../");
+			response.sendRedirect("../account/access_denied.jsp");
 			return;
 		}
-		if (!lao.getRoleBySessionID(sid).contains("RDIL")) {
-			response.sendRedirect("../../account/access_denied.jsp");
-			return;
-		}
+		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
+		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
-		
 	%>
+
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+
 	<div class="container-fluid content">
-	<br><br><br>
+<br><br><br>
 		<div class="row">
+
 			<div class="col-md-12 transbox">
-<h3>View Book Chapter</h3>
+			<h3>View Conference Proceedings</h3>
 				<table class="table table-bordered">
 					<thead>
-						<th>PCN & Date Assigned</th>
+						<th>PCN</th>
 						<th>Name Of Authors</th>
 						<th>Department</th>
-						<th>Chapter No</th>
-						<th>Chapter Title</th>
-						<th>Book Title</th>
-						<th>Publisher</th>
+						<th>Title Of Paper</th>
+						<th>Proceedings Of</th>
 						<th>Nationality</th>
-						<th>Year</th>
+						<th>Venue</th>
 						<th>Month Published</th>
+						<th>Year</th>
+						<th>Publisher</th>
 						<th>Page No</th>
-						<th>ISBN</th>
-						<th>HyperLink</th>
-						<th>Index Flag</th>
-						<th>Index Link</th>
+						<th>Hyperlink</th>
+						<th>Indices</th>
+						<th>Link</th>
 						<th>Resource</th>
 						<th>Plag. Report</th>
 						<th>Plag. Copy</th>
 						<th>Status</th>
 					</thead>
-					<c:forEach items="${eList}" var="bookChapter">
-						<c:if test="${bookChapter.status>0}">
+					<c:forEach items="${eList}" var="cp">
+						<c:if test="${cp.status>0}">
 							<tr>
-								<td><c:if test="${empty bookChapter.pcn}">
+								<td><c:if test="${empty cp.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> <c:if test="${not empty bookChapter.pcn}">
-										<c:out value="${bookChapter.pcn}" />
-										<br>
-										<br>
-										<c:out value="${bookChapter.monthAssigned}" />
+									</c:if> 
+									<c:if test="${not empty cp.pcn}">
+										<c:out value="${cp.pcn}" /><br> <br> <c:out
+										value="${cp.monthAssigned}" />
 									</c:if></td>
-								<td><c:out value="${bookChapter.nameOauthors}" /></td>
-								<td><c:out value="${bookChapter.deptt}" /></td>
-								<td><c:out value="${bookChapter.chapterNo}" /></td>
-								<td><c:out value="${bookChapter.chapterTitle}" /></td>
-								<td><c:out value="${bookChapter.bookTitle}" /></td>
-								<td><c:out value="${bookChapter.publisher}" /></td>
-								<td><c:out value="${bookChapter.nationality}" /></td>
-								<td><c:out value="${bookChapter.year}" /></td>
-								<td><c:out value="${bookChapter.monthPublished}" /></td>
-								<td><c:out value="${bookChapter.pageNo}" /></td>
-								<td><c:out value="${bookChapter.isbn}" /></td>
-								<td><c:out value="${bookChapter.hyperLink}" /></td>
-								<td><c:out value="${bookChapter.indexFlag}" /></td>
-								<td><c:out value="${bookChapter.indexLink}" /></td>
+								<td><c:out value="${cp.nameOauthors}" /></td>
+								<td><c:out value="${cp.deptt}" /></td>
+								<td><c:out value="${cp.title}" /></td>
+								<td><c:out value="${cp.proceedingsOf}" /></td>
+								<td><c:out value="${cp.nationality}" /></td>
+								<td><c:out value="${cp.venue}" /></td>
+								<td><c:out value="${cp.monthPublished}" /></td>
+								<td><c:out value="${cp.year}" /></td>
+								<td><c:out value="${cp.publisher}" /></td>
+								<td><c:out value="${cp.pageNo}" /></td>
+								<td><c:out value="${cp.hyperlink}" /></td>
+								<td><c:out value="${cp.index}" /></td>
+								<td><c:out value="${cp.link}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									<c:param name="id" value="${bookChapter.id}"></c:param>
-									<c:param name="type" value="BC"></c:param>
+									<c:param name="id" value="${cp.id}"></c:param>
+									<c:param name="type" value="P"></c:param>
 								</c:url>
 								
-								<td><a href="${download}&index=0" class="btn btn-info">
-										<span class="glyphicon glyphicon-download"></span>
-								</a></td>
-								<td><a href="${download}&index=1" class="btn btn-info">
-										<span class="glyphicon glyphicon-download"></span>
-								</a></td>
-								<td><a href="${download}&index=2" class="btn btn-info">
-										<span class="glyphicon glyphicon-download"></span>
-								</a></td>
+								<td><a href="${download}&index=0">Download</a></td>
+								<td><a href="${download}&index=1">Download</a></td>
+								<td><a href="${download}&index=2">Download</a></td>
 								
 								<c:url value="../../action/approve.jsp" var="action">
-									<c:param name="id" value="${bookChapter.id}" />
+									<c:param name="id" value="${cp.id}" />
 									<c:param name="level" value="2"></c:param>
-									<c:param name="type" value="BC"></c:param>
+									<c:param name="type" value="P"></c:param>
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
 								<c:choose>
 
-									<c:when test="${bookChapter.status==1}">
+									<c:when test="${cp.status==1}">
 										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a><br> <a
 											href="${action}&status=2" class="btn btn-success">Approve</a>
 											<button type="button" class="btn btn-danger" style="width:90px;"
-												data-name="${bookChapter.id}" data-toggle="modal"
+												data-name="${cp.id}" data-toggle="modal"
 												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
@@ -270,7 +259,7 @@ div.transbox {
 																<input type="hidden" class="form-control" name="status"
 																	value="-2">	
 																<input type="hidden" class="form-control" name="type"
-																	value="BC">	
+																	value="P">	
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>
@@ -285,7 +274,7 @@ div.transbox {
 												</div>
 											</div></td>
 									</c:when>
-									<c:when test="${bookChapter.status==2}">
+									<c:when test="${cp.status==2}">
 										<td><a class="btn btn-info">Approved By RDIL</a></td>
 									</c:when>
 
@@ -294,7 +283,6 @@ div.transbox {
 									</c:otherwise>
 								</c:choose>
 
-								
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -303,6 +291,7 @@ div.transbox {
 
 		</div>
 	</div>
+		<script>
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
@@ -320,5 +309,9 @@ div.transbox {
 			document.getElementById('reject_id').value = att;
 		}
 	</script>
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -12,7 +12,8 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="../resources/styles_header/ie10-viewport-bug-workaround.css"
 	rel="stylesheet">
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- Custom styles for this template -->
 <link href="../resources/styles_header/custom.css" rel="stylesheet">
 
@@ -141,13 +142,13 @@ div.transbox {
 <body>
 	<jsp:useBean id="dao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-	String sid = (String) request.getSession(false).getAttribute("sid");
-	System.out.println(sid);
-	if (null == sid) {
-		response.sendRedirect("../");
-		return;
-	}
-	String role = dao.getRoleBySessionID(sid);
+		String sid = (String) request.getSession(false).getAttribute("sid");
+		System.out.println(sid);
+		if (null == sid) {
+			response.sendRedirect("../");
+			return;
+		}
+		String role = dao.getRoleBySessionID(sid);
 	%>
 	<div class="container">
 		<div class="row content">
@@ -183,42 +184,42 @@ div.transbox {
 							<td>
 								<%
 									switch (role) {
-									case "ROLE_FACULTY":
-										break;
-									case "ROLE_RDIL":
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"APS\">APS<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"CSE\">CSE<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"CEE\">CEE<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"ECE\">ECE<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"MED\">MED<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"SOM\">SOM<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"SOL\">SOL<br>");
-										out.print("<input type=\"checkbox\" name=\"branch\" value=\"CLL\">CLL");
-										break;
-									case "ROLE_DC_APS":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected value=\"APS\">APS");
-										break;
-									case "ROLE_DC_CSE":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CSE\">CSE");
-										break;
-									case "ROLE_DC_CEE":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CEE\">CEE");
-										break;
-									case "ROLE_DC_ECE":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"ECE\">ECE");
-										break;
-									case "ROLE_DC_MED":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"MED\">MED");
-										break;
-									case "ROLE_DC_SOM":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOM\">SOM");
-										break;
-									case "ROLE_DC_SOL":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOL\">SOL");
-										break;
-									case "ROLE_DC_CLL":
-										out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CLL\">CLL");
-										break;
+										case "ROLE_FACULTY" :
+											break;
+										case "ROLE_RDIL" :
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"APS\">APS<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CSE\">CSE<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CEE\">CEE<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"ECE\">ECE<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"MED\">MED<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"SOM\">SOM<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"SOL\">SOL<br>");
+											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CLL\">CLL");
+											break;
+										case "ROLE_DC_APS" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected value=\"APS\">APS");
+											break;
+										case "ROLE_DC_CSE" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CSE\">CSE");
+											break;
+										case "ROLE_DC_CEE" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CEE\">CEE");
+											break;
+										case "ROLE_DC_ECE" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"ECE\">ECE");
+											break;
+										case "ROLE_DC_MED" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"MED\">MED");
+											break;
+										case "ROLE_DC_SOM" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOM\">SOM");
+											break;
+										case "ROLE_DC_SOL" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOL\">SOL");
+											break;
+										case "ROLE_DC_CLL" :
+											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CLL\">CLL");
+											break;
 									}
 								%> <!-- <input type="checkbox" name="branch" value="APS">APS<br>
 								<input type="checkbox" name="branch" value="CEE">CEE<br>
@@ -245,5 +246,15 @@ div.transbox {
 		</div>
 
 	</div>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			// Find any date inputs and override their functionality
+			$('input[type="date"]').datepicker({
+				dateFormat : 'yy-mm-dd'
+			}).datepicker("setDate", new Date());
+		});
+	</script>
 </body>
 </html>

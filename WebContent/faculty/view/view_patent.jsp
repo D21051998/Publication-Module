@@ -214,7 +214,8 @@ div.transbox {
 								<td><c:out value="${patent.awardDate}" /></td>
 								<td><c:out value="${patent.patentNo}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									
+									<c:param name="id" value="${patent.id}"></c:param>
+									<c:param name="type" value="T"></c:param>
 								</c:url>
 
 								<td><a href="${download}&index=0" class="btn btn-info">

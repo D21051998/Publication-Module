@@ -214,6 +214,10 @@ div.transbox {
 								<td><c:out value="${book.hyperlink}" /></td>
 								<td><c:out value="${book.index}" /></td>
 								<td><c:out value="${book.link}" /></td>
+								<c:url value="../../DownloadResource" var="download">
+									<c:param name="id" value="${book.id}"></c:param>
+									<c:param name="type" value="B"></c:param>
+								</c:url>
 								<td><a href="${download}&index=0" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>

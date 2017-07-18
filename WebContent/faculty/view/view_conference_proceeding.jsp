@@ -216,10 +216,10 @@ div.transbox {
 								<td><c:out value="${cp.hyperlink}" /></td>
 								<td><c:out value="${cp.index}" /></td>
 								<td><c:out value="${cp.link}" /></td>
-								<c:url value="../../DownloadResource" var="download">
-								
+							<c:url value="../../DownloadResource" var="download">
+									<c:param name="id" value="${cp.id}"></c:param>
+									<c:param name="type" value="P"></c:param>
 								</c:url>
-								
 								<td><a href="${download}&index=0">Download</a></td>
 								<td><a href="${download}&index=1">Download</a></td>
 								<td><a href="${download}&index=2">Download</a></td>

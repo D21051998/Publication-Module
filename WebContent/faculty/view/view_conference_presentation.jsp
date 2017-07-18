@@ -216,7 +216,8 @@ div.transbox {
 								
 								<td><c:out value="${cpo.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									
+									<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="type" value="C"></c:param>
 								</c:url>
 
 								<td><a href="${download}&index=0" class="btn btn-info">

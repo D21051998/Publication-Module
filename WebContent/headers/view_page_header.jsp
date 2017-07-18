@@ -57,12 +57,12 @@
               <ul class="dropdown-menu">
                 <li><a href="../rdil_home.jsp">Home</a></li>
 		<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-		<li><a href="view_conf_presentation.jsp">View Conference
+		<li><a href="view_conference_presentation.jsp">View Conference
 				Presentation</a></li>
 		<li><a href="view_conference_proceeding.jsp">View
 				Conference Proceeding</a></li>
 		<li><a href="view_journal.jsp">View Journal</a></li>
-		<li><a href="view_patents.jsp">View Patents</a></li>
+		<li><a href="view_patent.jsp">View Patents</a></li>
 		<li><a href="view_tech_rep.jsp">View Technical Reports</a></li>
 		<li><a href="view_book.jsp">View Books</a></li>
               </ul>

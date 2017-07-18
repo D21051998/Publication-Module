@@ -166,17 +166,145 @@ public class DownloadIMPL implements DownloadDAO {
 	}
 
 	@Override
-	public String[] downloadJournalFilesByID(String deptt,String title,int volume,int issue,int pageNo) {
+	public String[] downloadJournalFilesByID(String id) {
 		Connection connection =  null;
 		PreparedStatement ps  = null;
 		try{
 			connection = ConnectionFactory.getConnection();
-			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from journal where deptt = ? and title=? and volume = ? and issue= ? and pageno=?");
-			ps.setString(1, deptt);
-			ps.setString(2, title);
-			ps.setInt(3, volume);
-			ps.setInt(4, issue);
-			ps.setInt(5, pageNo);
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from journal where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadBookChapterFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from book_chapter where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadBookFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from book where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadConferencePresentationFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename conf_pres book where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadConferenceProceedingFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from conf_proc where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadPatentFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename from patent where id=?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename")};
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] downloadTechnicalReportFilesByID(String id) {
+		Connection connection =  null;
+		PreparedStatement ps  = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename, plagcopyfilename from tech_rep where id=?");
+			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				return new String[]{rs.getString("publicationfilename"),rs.getString("plagreportfilename"),rs.getString("plagcopyfilename")};

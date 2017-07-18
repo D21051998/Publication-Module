@@ -140,7 +140,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setNationality(rs.getString("nationality"));
 				bc.setYear(rs.getInt("year"));
 				bc.setMonthPublished(rs.getString("monthPublished"));
-				bc.setMonthOfPCN(rs.getString("monthAssigned"));
+				bc.setMonthAssigned(rs.getString("monthAssigned"));
 				bc.setPageNo(rs.getInt("pageNo"));
 				bc.setIsbn(rs.getString("isbn"));
 				bc.setHyperLink(rs.getString("hyperLink"));
@@ -210,7 +210,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setNationality(rs.getString("nationality"));
 				bc.setYear(rs.getInt("year"));
 				bc.setMonthPublished(rs.getString("monthPublished"));
-				bc.setMonthOfPCN(rs.getString("monthAssigned"));
+				bc.setMonthAssigned(rs.getString("monthAssigned"));
 				bc.setPageNo(rs.getInt("pageNo"));
 				bc.setIsbn(rs.getString("isbn"));
 				bc.setHyperLink(rs.getString("hyperLink"));
@@ -287,7 +287,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection.prepareStatement("update rej_book_chapter set status=?, pcn=?, monthAssigned=? where id=?");
-			ps = connection.prepareStatement("insert into rej_book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			ps = connection.prepareStatement("insert into rej_book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());

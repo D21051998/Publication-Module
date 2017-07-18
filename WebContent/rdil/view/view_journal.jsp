@@ -19,8 +19,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
-body{
-background-color: #fcfcfc;}
+body {
+	background-color: #fcfcfc;
+}
+
 td {
 	text-align: center;
 	vertical-align: middle;
@@ -30,6 +32,7 @@ td {
 	font-variant: normal;
 	font-weight: bold;
 	line-height: 23px;
+	color: #000;
 }
 
 th {
@@ -41,6 +44,7 @@ th {
 	font-variant: normal;
 	font-weight: bold;
 	line-height: 23px;
+	color: #000;
 }
 
 h3 {
@@ -57,8 +61,9 @@ table {
 	text-overflow: ellipsis;
 	word-wrap: break-word;
 }
-a{
-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-size: 17px;
 	font-style: normal;
 	font-variant: normal;
@@ -79,52 +84,68 @@ ul {
 	list-style: none;
 }
 
-
 .content:before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  
-  display: block;
-  background-image: url('../../resources/images/DSCN7348.jpg');
-  
-   -webkit-filter: brightness(0.8);
-    filter: brightness(0.8);
-  background-size:cover;
-  width: 100%;
-  height: 100%;
-  
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
+	content: "";
+	position: fixed;
+	padding: 10px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	filter: blur(05px);
 }
 
 .content {
-  overflow:visible;
-  position: relative;
-}
-div.transbox {
-  margin: 30px;
-  background-color: #ffffff;
-  border: 1px solid;
-  opacity: 0.6;
-  filter: alpha(opacity=60); 
-  width: auto;
-  /* For IE8 and earlier */
+	overflow: visible;
+	position: relative;
 }
 
+div.transbox {
+	margin: 30px;
+	background-color: rgba(255, 255, 255, 0.6);
+	border: 0px solid;
+	/*opacity: 0.6;*/
+	padding: 20px;
+	/*filter: alpha(opacity = 60);*/
+	border-radius: 5px;
+	width: auto;
+
+	/* For IE8 and earlier */
+}
 
 .content p {
-  margin: 15px;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 5px;
-  box-shadow: 0 0 5px gray;
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
 }
 </style>
 </head>
@@ -141,7 +162,7 @@ div.transbox {
 	}
 </script>
 <body>
-<div ></div>
+	<div></div>
 	<jsp:useBean id="dao" class="com.publication.impl.JournalIMPL"
 		scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
@@ -154,7 +175,7 @@ div.transbox {
 		String sid = (String) request.getSession(false).getAttribute("sid");
 		System.out.println(sid);
 		if (null == sid) {
-			response.sendRedirect("../");
+			response.sendRedirect("../../");
 			return;
 		}
 		if (!lao.getRoleBySessionID(sid).contains("RDIL")) {
@@ -162,9 +183,7 @@ div.transbox {
 			return;
 		}
 		request.setAttribute("eList", list);
-		String divTag = "div";
-		String buttonTag = "reject";
-		int index = 1;
+		
 	%>
 	<jsp:include page="../../headers/view_page_header.jsp"></jsp:include>
 	<br>
@@ -177,8 +196,11 @@ div.transbox {
 			<div class="col-md-12 transbox">
 				<h3>View Journals</h3>
 				${message}<br>
-				<input type="text" class="form-control" id="search" placeholder="Type to search">
-				<table class="table table-bordered" id="table">
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
+				<table class="table table-borderless" id="table">
 
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -208,13 +230,13 @@ div.transbox {
 						<th>Plag. Copy</th>
 						<th>Status</th>
 					</thead>
-					
+
+
 					<c:forEach items="${eList}" var="journal">
 						<c:if test="${journal.status>0}">
 							<tr>
-								<td><c:out value="${journal.pcn}" /><br>
-								<br>
-								<c:out value="${journal.monthAssigned}" /></td>
+								<td><c:out value="${journal.pcn}" /><br> <br> <c:out
+										value="${journal.monthAssigned}" /></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
 								<td><c:out value="${journal.title}" /></td>
@@ -228,7 +250,8 @@ div.transbox {
 								<td><c:out value="${journal.doiNo}" /></td>
 								<td><c:out value="${journal.impactFactor}" /></td>
 								<td><c:out value="${journal.whatImpactFactor}" /></td>
-								<td><a class="btn btn-info" href='<c:out value="${journal.linkImpFactor}"/>'>Click</a></td>
+								<td><a class="btn btn-info"
+									href='<c:out value="${journal.linkImpFactor}"/>'>Click</a></td>
 								<td><c:out value="${journal.paidOrUnpaid}" /></td>
 								<td><c:out value="${journal.paymentFlag}" /></td>
 								<td><c:out value="${journal.pwFlag}" /></td>
@@ -236,39 +259,76 @@ div.transbox {
 								<td><c:out value="${journal.pgFlag}" /></td>
 								<td><c:out value="${journal.piFlag}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									<c:param name="deptt" value="${journal.deptt}"></c:param>
-									<c:param name="title" value="${journal.title}"></c:param>
-									<c:param name="volume" value="${journal.volume}"></c:param>
-									<c:param name="issue" value="${journal.issue}"></c:param>
-									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
-
+									<c:param name="id" value="${journal.id}"></c:param>
+									<c:param name="type" value="J"></c:param>
 								</c:url>
 
-								<td><a href="${download}&index=0" class="btn btn-info"> <span
-										class="glyphicon glyphicon-download"></span></a></td>
-								<td><a href="${download}&index=1" class="btn btn-info"> <span
-										class="glyphicon glyphicon-download"></span></a></td>
-								<td><a href="${download}&index=2" class="btn btn-info"> <span
-										class="glyphicon glyphicon-download"></span></a></td>
+								<td><a href="${download}&index=0" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+								<td><a href="${download}&index=1" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+								<td><a href="${download}&index=2" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
 
-								<c:url value="../../action/action_journal.jsp" var="action">
+								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${journal.id}" />
 									<c:param name="level" value="2"></c:param>
+									<input type="hidden" class="form-control" name="type"
+																	value="J">	
 								</c:url>
-								<c:url value="../../action/reject_journal.jsp" var="reject">
+								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
 								<c:choose>
 
 									<c:when test="${journal.status==1}">
-										<td><a>Approved by Deptt. Coordinator</a><br> <a
-											href="${action}&status=2">Approve</a><br>
-											<button type="button" data-name="${journal.id}"
-												class="btn btn-danger"
-												id="<%out.print(buttonTag + index);%>" value="form"
-												onclick="a(this);">Reject</button>
-											<div id="<%out.print(divTag + index);
-							index++;%>"></div>
-										</td>
+										<td>
+										<a class="btn btn-info disabled">Approved by Deptt. Coordinator</a>
+										<br>
+										 <a
+											href="${action}&status=2" class="btn btn-success">Approve</a>
+											<!-- Reject Button -->
+											<button type="button" class="btn btn-danger" style="width:90px;"
+												data-name="${journal.id}" data-toggle="modal"
+												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
+												<!-- Reject Modal -->
+											<div class="modal fade" id="myModal" role="dialog">
+												<div class="modal-dialog">
+
+													<!-- Modal content-->
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">
+																Reason to Reject
+															</h4>
+														</div>
+														<div class="modal-body">
+															<form action="${reject}" method="get">
+																<input type="text" class="form-control" name="reason">
+																<input type="hidden" class="form-control" name="id"
+																	id="reject_id">
+																<input type="hidden" class="form-control" name="level"
+																	value="2">
+																<input type="hidden" class="form-control" name="status"
+																	value="-2">	
+																<input type="hidden" class="form-control" name="type"
+																	value="J">	
+																<button type="submit" class="btn btn-default"
+																	name="Submit">Submit</button>
+															</form>
+
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+														</div>
+													</div>
+
+												</div>
+											</div></td>
 									</c:when>
 									<c:when test="${journal.status==2}">
 										<td><a class="btn btn-info">Approved By RDIL</a></td>
@@ -278,6 +338,8 @@ div.transbox {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
+
+
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -287,38 +349,22 @@ div.transbox {
 		</div>
 	</div>
 	<script type="text/javascript">
-	var $rows = $('#table tr');
-	$('#search').keyup(function() {
-	    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+		var $rows = $('#table tr');
+		$('#search').keyup(function() {
+			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-	    $rows.show().filter(function() {
-	        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-	        return !~text.indexOf(val);
-	    }).hide();
-	});
+			$rows.show().filter(function() {
+				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+				return !~text.indexOf(val);
+			}).hide();
+		});
 	</script>
-	<script>
-		function a(button) {
-			var id = button.getAttribute("data-name");
-			console.log(id);
-			var b = '<form action=${reject}><input type=text name=reason class=form-control placeholder=Specify><input type=hidden name=id value=';
-			var c = id;
-			var d = '><input type=hidden name=level value=';
-			var e = 2;
-			var f = '><input type=hidden name=status value=';
-			var g = -2;
-			var h = '><button type=submit class=btn>Submit</button></form>';
-			var url = b + c + d + e + f + g + h;
-			var buttonName = button.id;
-			var matches = buttonName.match(/\d+/g);
-			console.log("Showing");
-			console.log(buttonName);
-			console.log(matches);
-			console.log('div' + matches);
-			var divName = 'div' + matches;
-			document.getElementById(divName).innerHTML = url;
-			button.style.display = 'none';
+	<script type="text/javascript">
+		function setModalValue(button) {
+			var att = button.getAttribute("data-name");
+			document.getElementById('reject_id').value = att;
 		}
 	</script>
+
 </body>
 </html>

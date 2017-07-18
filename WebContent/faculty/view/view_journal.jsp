@@ -181,8 +181,9 @@ ul {
 								<c:url value="../edit/edit_journal.jsp" var="edit">
 								<c:param name="id" value="${journal.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_journal.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
 								 <c:param name="id" value="${journal.id}"></c:param>
+								 <c:param name="type" value="J"></c:param>
 								</c:url>
 								
 								<c:if test="${journal.status <= 0 }">

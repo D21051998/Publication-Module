@@ -60,23 +60,22 @@ ul {
 		}
 		pageContext.setAttribute("journal", journal);
 	%>
-	<c:out value="${journal.id}" />
-	<c:out value="${journal.title}" />
+	
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
 	<div class="container-fluid">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="row">
 
 			<div class="col-md-2">
 				<jsp:include page="../../sidebars/view_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10">
-<h3>Edit Journal</h3>
-				<form method="POST" action="../../EditJournal"
+				<h3>Edit Journal</h3>
+				<form method="POST" action="../../EditPublicationService"
 					enctype="multipart/form-data">
+					
+					<input type="hidden" name="publicationType" value="J">
 					<input type="hidden" name="id" value="${journal.id}">
 					<table class="form-group">
 						<tr>
@@ -132,8 +131,8 @@ ul {
 							<td><select class="form-control" name="monthPublished">
 									<option value="${journal.monthPublished}">${journal.monthPublished}</option>
 									<%
-										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
-												"September", "October", "November", "December" };
+										String[] months = new String[]{"January", "Feburary", "March", "April", "May", "June", "July", "August",
+												"September", "October", "November", "December"};
 										for (int i = 0; i < months.length; i++) {
 									%>
 									<option value="<%=months[i]%>"><%=months[i]%></option>
@@ -230,18 +229,18 @@ ul {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${journal.publicationFileName}<br>
-							<input type="file" name="publication" /></td>
+							<td>${journal.publicationFileName}<br> <input
+								type="file" name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Report</td>
-							<td>${journal.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
+							<td>${journal.plagReportFileName}<br> <input
+								type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Copy</td>
-							<td>${journal.plagCopyFileName}<br>
-							<input type="file" name="plagCopy" /></td>
+							<td>${journal.plagCopyFileName}<br> <input type="file"
+								name="plagCopy" /></td>
 						</tr>
 						<tr>
 
@@ -258,18 +257,15 @@ ul {
 
 		</div>
 	</div>
-<script>
-	function disable_unpaid() {
-		var form = document.getElementById("paidOrUnpaid");
-		var val = form.options[form.selectedIndex].value;
-		if (val == "Unpaid") {
-			document.getElementById("paymentFlag").value = 'No';
-			document.getElementById("paymentFlag").disabled = true;
-		} else if (val == "Paid") {
-			document.getElementById("paymentFlag").disabled = false;
+	<script>
+		function disable_unpaid() {
+			var form = document.getElementById("paidOrUnpaid");
+			var val = form.options[form.selectedIndex].value;
+			if (val == "Unpaid") {
+				document.getElementById("paymentFlag").value = 'No';
+			}
 		}
-	}
-</script>
+	</script>
 
 </body>
 </html>

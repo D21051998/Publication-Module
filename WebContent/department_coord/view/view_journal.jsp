@@ -18,8 +18,59 @@
 	rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <style>
+body {
+	background-color: #fcfcfc;
+}
+
+td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+	color: #000;
+}
+
+th {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+	color: #000;
+}
+
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+table {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+}
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
 .container {
 	width: 100%;
 }
@@ -32,7 +83,70 @@ li.borderless {
 ul {
 	list-style: none;
 }
+
+.content:before {
+	content: "";
+	position: fixed;
+	padding: 10px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	filter: blur(05px);
+}
+
+.content {
+	overflow: visible;
+	position: relative;
+}
+
+div.transbox {
+	margin: 30px;
+	background-color: rgba(255, 255, 255, 0.6);
+	border: 0px solid;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+
+	/* For IE8 and earlier */
+}
+
+.content p {
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
+}
 </style>
+
 </head>
 <input type="hidden" id="refreshed" value="no">
 <script type="text/javascript">
@@ -66,24 +180,19 @@ ul {
 			return;
 		}
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
-		System.out.println("PC" + pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
-		String divTag = "div";
-		String buttonTag = "reject";
-		int index = 1;
+
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
 	<br>
 	<br>
 	<br>
-	<div class="container-fluid">
+	<div class="container-fluid content">
 		<div class="row">
 
-			<div class="col-md-2">
-				<jsp:include page="../../sidebars/rdil_view_sidebar.jsp"></jsp:include>
-			</div>
-			<div class="col-md-10">
+			
+			<div class="col-md-12 transbox">
 
 				<table class="table table-condensed table-bordered">
 					<thead>
@@ -95,7 +204,6 @@ ul {
 						<th>Nationality</th>
 						<th>Year</th>
 						<th>Month Published</th>
-						<th>Month PCN Generated</th>
 						<th>Volume</th>
 						<th>Number/Issue</th>
 						<th>Page No</th>
@@ -119,7 +227,14 @@ ul {
 
 							<tr>
 
-								<td><c:out value="${journal.pcn}" /></td>
+								<td><c:if test="${empty journal.pcn}">
+										<c:out value="Not Generated" />
+									</c:if> <c:if test="${not empty journal.pcn}">
+										<c:out value="${journal.pcn}" />
+										<br>
+										<br>
+										<c:out value="${journal.monthAssigned}" />
+									</c:if></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
 								<td><c:out value="${journal.title}" /></td>
@@ -127,7 +242,6 @@ ul {
 								<td><c:out value="${journal.nationality}" /></td>
 								<td><c:out value="${journal.year}" /></td>
 								<td><c:out value="${journal.monthPublished}" /></td>
-								<td><c:out value="${journal.monthAssigned}" /></td>
 								<td><c:out value="${journal.volume}" /></td>
 								<td><c:out value="${journal.issue}" /></td>
 								<td><c:out value="${journal.pageNo}" /></td>
@@ -142,48 +256,82 @@ ul {
 								<td><c:out value="${journal.pgFlag}" /></td>
 								<td><c:out value="${journal.piFlag}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-								<c:param name="deptt" value="${journal.deptt}"></c:param>
-									<c:param name="title" value="${journal.title}"></c:param>
-									<c:param name="volume" value="${journal.volume}"></c:param>
-									<c:param name="issue" value="${journal.issue}"></c:param>
-									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
-								
+									<c:param name="id" value="${cp.id}"></c:param>
+									<c:param name="type" value="J"></c:param>
 								</c:url>
-								
-								<td><a href="${download}&index=0">Download</a></td>
-								<td><a href="${download}&index=1">Download</a></td>
-								<td><a href="${download}&index=2">Download</a></td>
 
-								<c:url value="../../action/action_journal.jsp" var="action">
+								<td><a href="${download}&index=0" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+								<td><a href="${download}&index=1" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+								<td><a href="${download}&index=2" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+
+								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${journal.id}" />
 									<c:param name="level" value="1"></c:param>
+									<c:param name="type" value="J"></c:param>
 								</c:url>
-								<c:url value="../../action/reject_journal.jsp" var="reject">
+								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
+
 								<c:choose>
 									<c:when test="${journal.status==0}">
-										<td width="20%" align="center">Pending<br> <a
-											href="${action}&status=1" class="btn btn-info"
-											onclick="return confirm('Are you sure to proceed?')">Approve</a><br>
+										<td><a class="btn btn-info disabled">Pending</a> <br>
+											<a href="${action}&status=1" class="btn btn-success">Approve</a>
+											<!-- Reject Button -->
+											<button type="button" class="btn btn-danger"
+												style="width: 90px;" data-name="${journal.id}"
+												data-toggle="modal" data-target="#myModal"
+												onclick="setModalValue(this)">Reject</button> <!-- Reject Modal -->
+											<div class="modal fade" id="myModal" role="dialog">
+												<div class="modal-dialog">
 
-											<button type="button" 	data-name="${journal.id}" class="btn btn-danger"
-												id="<%out.print(buttonTag + index);%>" value="form"
-												onclick="a(this);">Reject</button>
+													<!-- Modal content-->
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">Reason to Reject</h4>
+														</div>
+														<div class="modal-body">
+															<form action="${reject}" method="get">
+																<input type="text" class="form-control" name="reason">
+																<input type="hidden" class="form-control" name="id"
+																	id="reject_id"> <input type="hidden"
+																	class="form-control" name="level" value="1"> <input
+																	type="hidden" class="form-control" name="status"
+																	value="-1"> <input type="hidden"
+																	class="form-control" name="type" value="J">
+																<button type="submit" class="btn btn-default"
+																	name="Submit">Submit</button>
+															</form>
 
-											<div id="<%out.print(divTag + index);
-							index++;%>"></div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+														</div>
+													</div>
+
+												</div>
+											</div></td>
+
 									</c:when>
 									<c:when test="${journal.status==1}">
-										<td><a>Approved by Deptt. Coordinator</td>
+										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</td>
 									</c:when>
 									<c:when test="${journal.status==-1}">
-										<td><a>Rejected</a></td>
+										<td><a class="btn btn-info disabled">Rejected</a></td>
 									</c:when>
 									<c:when test="${journal.status==2}">
-										<td><a>Approved By RDIL</a></td>
+										<td><a class="btn btn-info disabled"> Approved By RDIL</a></td>
 									</c:when>
 									<c:when test="${journal.status==-2}">
-										<td><a>Rejected By RDIL</a></td>
+										<td><a class="btn btn-info disabled">Rejected By RDIL</a></td>
 									</c:when>
 									<c:otherwise>
 										<td>Invalid</td>
@@ -198,27 +346,23 @@ ul {
 		</div>
 	</div>
 	<script>
-		function a(button) {
-			var id = button.getAttribute("data-name");
-			console.log(id);
-			var b = '<form action=${reject}><input type=text name=reason class=form-control placeholder=Specify><input type=hidden name=id value=';
-			var c = id;
-			var d = '><input type=hidden name=level value=';
-			var e = 1;
-			var f = '><input type=hidden name=status value=';
-			var g = -1;
-			var h = '><button type=submit class=btn>Submit</button></form>';
-			var url = b + c + d + e + f + g + h;
-			var buttonName = button.id;
-			var matches = buttonName.match(/\d+/g);
-			console.log("Showing");
-			console.log(buttonName);
-			console.log(matches);
-			console.log('div' + matches);
-			var divName = 'div' + matches;
-			document.getElementById(divName).innerHTML = url;
-			button.style.display = 'none';
+		<script type="text/javascript">
+		var $rows = $('#table tr');
+		$('#search').keyup(function() {
+			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+			$rows.show().filter(function() {
+				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+				return !~text.indexOf(val);
+			}).hide();
+		});
+	</script>
+	<script type="text/javascript">
+		function setModalValue(button) {
+			var att = button.getAttribute("data-name");
+			document.getElementById('reject_id').value = att;
 		}
 	</script>
+
 </body>
 </html>

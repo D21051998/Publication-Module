@@ -208,9 +208,9 @@ div.transbox {
 								<td><c:out value="${report.remarks}" /></td>
 								<td><c:out value="${report.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-
+									<c:param name="id" value="${report.id}"></c:param>
+									<c:param name="type" value="R"></c:param>
 								</c:url>
-
 								<td><a href="${download}&index=0" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>

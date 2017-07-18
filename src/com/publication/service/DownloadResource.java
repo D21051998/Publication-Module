@@ -39,14 +39,30 @@ public class DownloadResource extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		DownloadDAO dao = new DownloadIMPL();
-		String deptt = request.getParameter("deptt");
-		String title = request.getParameter("title");
-		int volume = Integer.parseInt(request.getParameter("volume"));
-		int issue = Integer.parseInt(request.getParameter("issue"));
-		int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+		String type = request.getParameter("type");
+		String id = request.getParameter("id");
 		int index = Integer.parseInt(request.getParameter("index"));
 		String filePath = null;
-		String[] filenames = dao.downloadJournalFilesByID(deptt, title, volume, issue, pageNo);
+		String[] filenames = null ;
+		
+		switch(type){
+		case "J":filenames=dao.downloadJournalFilesByID(id);
+		break;
+		case "BC":filenames=dao.downloadBookChapterFilesByID(id);
+		break;
+		case "B":filenames=dao.downloadBookFilesByID(id);
+		break;
+		case "C":filenames=dao.downloadConferencePresentationFilesByID(id);
+		break;
+		case "R":filenames=dao.downloadTechnicalReportFilesByID(id);
+		break;
+		case "T":filenames=dao.downloadPatentFilesByID(id);
+		break;
+		case "P":filenames=dao.downloadConferenceProceedingFilesByID(id);
+		break;
+		
+		}
+		
 		for (String s : filenames) {
 			System.out.println(s);
 		}
