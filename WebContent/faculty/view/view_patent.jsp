@@ -147,6 +147,7 @@ div.transbox {
 		scope="page"></jsp:useBean>
 	<%
 		List<Patent> list = dao.getAllPatents();
+	System.out.println(list.size());
 		for (Patent j : list) {
 			System.out.println(j);
 		}
@@ -254,8 +255,9 @@ div.transbox {
 								<c:url value="../edit/edit_patent.jsp" var="edit">
 								<c:param name="id" value="${patent.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_patent.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
 								 <c:param name="id" value="${patent.id}"></c:param>
+								 <c:param name="type" value="T"></c:param>
 								</c:url>
 								
 								<c:if test="${patent.status <= 0 }">

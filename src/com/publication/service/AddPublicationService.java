@@ -116,9 +116,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + journal);
 						if (dao.saveJournal(journal)) {
-							response.sendRedirect("faculty/view/view_journal.jsp");
+							response.sendRedirect("faculty/view/view_journal.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_journal.jsp");
+							response.sendRedirect("faculty/view/view_journal.jsp?add=failed");
 						}
 						System.out.println(journal);
 					} catch (Exception e) {
@@ -145,9 +145,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + chapter);
 						if (dao.saveBookChapter(chapter)) {
-							response.sendRedirect("faculty/view/view_book_chapter.jsp");
+							response.sendRedirect("faculty/view/view_book_chapter.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_book_chapter.jsp");
+							response.sendRedirect("faculty/view/view_book_chapter.jsp?add=failed");
 						}
 						System.out.println(chapter);
 					} catch (Exception e) {
@@ -173,9 +173,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + book);
 						if (dao.saveBook(book)) {
-							response.sendRedirect("faculty/view/view_book.jsp");
+							response.sendRedirect("faculty/view/view_book.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_book.jsp");
+							response.sendRedirect("faculty/view/view_book.jsp?add=failed");
 						}
 						System.out.println(book);
 					} catch (Exception e) {
@@ -201,9 +201,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + conferencePresentation);
 						if (dao.saveConferencePresentation(conferencePresentation)) {
-							response.sendRedirect("faculty/view/view_conference_presentation.jsp");
+							response.sendRedirect("faculty/view/view_conference_presentation.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_conference_presentation.jsp");
+							response.sendRedirect("faculty/view/view_conference_presentation.jsp?add=failed");
 						}
 						System.out.println(conferencePresentation);
 					} catch (Exception e) {
@@ -229,9 +229,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + conferenceProceedings);
 						if (dao.saveConferenceProceedings(conferenceProceedings)) {
-							response.sendRedirect("faculty/view/view_conference_proceeding.jsp");
+							response.sendRedirect("faculty/view/view_conference_proceeding.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_conference_proceeding.jsp");
+							response.sendRedirect("faculty/view/view_conference_proceeding.jsp?add=failed");
 						}
 						System.out.println(conferenceProceedings);
 					} catch (Exception e) {
@@ -257,9 +257,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + report);
 						if (dao.saveTechnicalReport(report)) {
-							response.sendRedirect("faculty/view/view_tech_rep.jsp");
+							response.sendRedirect("faculty/view/view_tech_rep.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_tech_rep.jsp");
+							response.sendRedirect("faculty/view/view_tech_rep.jsp?add=failed");
 						}
 						System.out.println(report);
 					} catch (Exception e) {
@@ -285,9 +285,9 @@ public class AddPublicationService extends HttpServlet {
 						}
 						System.out.println("Final" + patent);
 						if (dao.savePatent(patent)) {
-							response.sendRedirect("faculty/view/view_patent.jsp");
+							response.sendRedirect("faculty/view/view_patent.jsp?add=success");
 						} else {
-							response.sendRedirect("faculty/view/view_patent.jsp");
+							response.sendRedirect("faculty/view/view_patent.jsp?add=failed");
 						}
 						System.out.println(patent);
 					} catch (Exception e) {

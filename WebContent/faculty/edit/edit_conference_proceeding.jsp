@@ -8,11 +8,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Conference Proceedings</title>
-<link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
-</head>
-<input type="hidden" id="refreshed" value="no">
-<link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
+<title>Edit Conference Proceedings</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 td {
 	text-align: center;
@@ -82,7 +86,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('../resources/images/DSCN7348.jpg');
+	background-image: url('../../resources/images/DSCN7348.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -102,10 +106,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color: rgba(255,255,255,0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	border-radius: 5px;
 	/* For IE8 and earlier */
@@ -148,6 +150,7 @@ div.transbox {
 	}
 	pageContext.setAttribute("cp", cp);
 	%>
+	<br><br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -203,7 +206,7 @@ h3 {
 						</tr>
 						<tr>
 							<td>Proceedings of</td>
-							<td><input type="text" name="proceedingsOf" class="form-control" value="${cp.conferencePresentation}"></td>
+							<td><input type="text" name="proceedingsOf" class="form-control" value="${cp.proceedingsOf}"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -240,8 +243,8 @@ h3 {
 						</tr>
 						<tr>
 							<td>Month in which published</td>
-							<option value="${cp.monthPublished}">${cp.monthPublished}</option>
 							<td><select class="form-control" name="monthPublished">
+							<option value="${cp.monthPublished}">${cp.monthPublished}</option>
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };

@@ -168,6 +168,18 @@ div.transbox {
 		<div class="row">
 			<div class="col-md-12 transbox">
 <h3>View Book Chapter</h3>
+<div>
+<c:if test="${not empty param.add}">
+<p>
+<c:if test="${param.add == 'success'}"><c:out value="Adding Record Successful"></c:out></c:if>
+<c:if test="${param.add == 'failed'}"><c:out value="Adding Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+<c:if test="${not empty param.update}">
+<p>
+<c:if test="${param.update == 'success'}"><c:out value="Updating Record Successful"></c:out></c:if>
+<c:if test="${param.update == 'failed'}"><c:out value="Updating Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -251,10 +263,11 @@ div.transbox {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-								<c:url value="../edit/edit_bookChapter.jsp" var="edit">
+								<c:url value="../edit/edit_book_chapter.jsp" var="edit">
 									<c:param name="id" value="${bookChapter.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_bookChapter.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
+									<c:param name="type" value="BC"></c:param>
 									<c:param name="id" value="${bookChapter.id}"></c:param>
 								</c:url>
 

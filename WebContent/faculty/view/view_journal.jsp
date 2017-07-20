@@ -19,6 +19,58 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
+body {
+	background-color: #fcfcfc;
+}
+
+td {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 15px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+	color: #000;
+}
+
+th {
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: italic;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+	color: #000;
+}
+
+h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bolder;
+	line-height: 23px;
+}
+
+table {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+}
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 23px;
+}
+
 .container {
 	width: 100%;
 }
@@ -27,14 +79,74 @@ li.borderless {
 	border-bottom: 0 none;
 	border-top: none;
 }
-.not-active {
-   pointer-events: none;
-   cursor: default;
-}
+
 ul {
 	list-style: none;
 }
+
+.content:before {
+	content: "";
+	position: fixed;
+	padding: 10px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(05px);
+	-moz-filter: blur(05px);
+	-o-filter: blur(05px);
+	-ms-filter: blur(05px);
+	filter: blur(05px);
+}
+
+.content {
+	overflow: visible;
+	position: relative;
+}
+
+div.transbox {
+	margin: 30px;
+	background-color: rgba(255, 255, 255, 0.6);
+	border: 0px solid;
+	padding: 20px;
+	border-radius: 5px;
+	width: auto;
+
+	/* For IE8 and earlier */
+}
+
+.content p {
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
+}
 </style>
+
 </head>
 <input type="hidden" id="refreshed" value="no">
 <script type="text/javascript">
@@ -71,14 +183,14 @@ ul {
 
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
-	<div class="container-fluid">
+	<div class="container-fluid content">
 <br><br><br>
 		<div class="row">
 
-			<div class="col-md-2">
+			<div class="col-md-2 transbox">
 				<jsp:include page="../../sidebars/view_pages_sidebar.jsp"></jsp:include>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-10 transbox">
 			<h3>View Journals</h3>
 				<table class="table table-bordered">
 					<thead>
@@ -90,7 +202,6 @@ ul {
 						<th>Nationality</th>
 						<th>Year</th>
 						<th>Month Published</th>
-						<th>Month PCN Generated</th>
 						<th>Volume</th>
 						<th>Number/Issue</th>
 						<th>Page No</th>
@@ -128,7 +239,6 @@ ul {
 								<td><c:out value="${journal.nationality}" /></td>
 								<td><c:out value="${journal.year}" /></td>
 								<td><c:out value="${journal.monthPublished}" /></td>
-								<td><c:out value="${journal.monthAssigned}" /></td>
 								<td><c:out value="${journal.volume}" /></td>
 								<td><c:out value="${journal.issue}" /></td>
 								<td><c:out value="${journal.pageNo}" /></td>
@@ -144,11 +254,8 @@ ul {
 								<td><c:out value="${journal.piFlag}" /></td>
 								
 								<c:url value="../../DownloadResource" var="download">
-								<c:param name="deptt" value="${journal.deptt}"></c:param>
-									<c:param name="title" value="${journal.title}"></c:param>
-									<c:param name="volume" value="${journal.volume}"></c:param>
-									<c:param name="issue" value="${journal.issue}"></c:param>
-									<c:param name="pageNo" value="${journal.pageNo}"></c:param>
+								<c:param name="id" value="${journal.id}"></c:param>
+									<c:param name="type" value="J"></c:param>
 								
 								</c:url>
 								

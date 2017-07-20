@@ -237,7 +237,7 @@ public class DownloadIMPL implements DownloadDAO {
 		PreparedStatement ps  = null;
 		try{
 			connection = ConnectionFactory.getConnection();
-			ps = connection.prepareStatement("select publicationfilename,plagreportfilename conf_pres book where id=?");
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename from conf_pres  where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){

@@ -1,4 +1,5 @@
- <%@page import="com.publication.model.ConferenceProceedings"%>
+
+<%@page import="com.publication.model.ConferenceProceedings"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="com.publication.model.Journal"%>
 <%@page import="java.util.List"%>
@@ -112,10 +113,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -142,8 +141,8 @@ div.transbox {
 	}
 </script>
 <body>
-	<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"
-		scope="page"></jsp:useBean>
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferenceProceedingIMPL" scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
@@ -165,12 +164,42 @@ div.transbox {
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
 	<div class="container-fluid content">
-<br><br><br>
+		<br>
+		<br>
+		<br>
 		<div class="row">
 
 			<div class="col-md-12 transbox">
-			<h3>View Conference Proceedings</h3>
-				<table class="table table-bordered">
+				<h3>View Conference Proceedings</h3>
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
+			
+				<table class="table table-bordered" id="table">
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>
@@ -196,10 +225,11 @@ div.transbox {
 							<tr>
 								<td><c:if test="${empty cp.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty cp.pcn}">
-										<c:out value="${cp.pcn}" /><br> <br> <c:out
-										value="${cp.monthAssigned}" />
+									</c:if> <c:if test="${not empty cp.pcn}">
+										<c:out value="${cp.pcn}" />
+										<br>
+										<br>
+										<c:out value="${cp.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${cp.nameOauthors}" /></td>
 								<td><c:out value="${cp.deptt}" /></td>
@@ -218,11 +248,11 @@ div.transbox {
 									<c:param name="id" value="${cp.id}"></c:param>
 									<c:param name="type" value="P"></c:param>
 								</c:url>
-								
+
 								<td><a href="${download}&index=0">Download</a></td>
 								<td><a href="${download}&index=1">Download</a></td>
 								<td><a href="${download}&index=2">Download</a></td>
-								
+
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${cp.id}" />
 									<c:param name="level" value="2"></c:param>
@@ -233,11 +263,13 @@ div.transbox {
 								<c:choose>
 
 									<c:when test="${cp.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a><br> <a
-											href="${action}&status=2" class="btn btn-success">Approve</a>
-											<button type="button" class="btn btn-danger" style="width:90px;"
-												data-name="${cp.id}" data-toggle="modal"
-												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a><br> <a href="${action}&status=2"
+											class="btn btn-success">Approve</a>
+											<button type="button" class="btn btn-danger"
+												style="width: 90px;" data-name="${cp.id}"
+												data-toggle="modal" data-target="#myModal"
+												onclick="setModalValue(this)">Reject</button>
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
 
@@ -245,21 +277,17 @@ div.transbox {
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">
-																Reason to Reject
-															</h4>
+															<h4 class="modal-title">Reason to Reject</h4>
 														</div>
 														<div class="modal-body">
 															<form action="${reject}" method="get">
 																<input type="text" class="form-control" name="reason">
 																<input type="hidden" class="form-control" name="id"
-																	id="reject_id">
-																<input type="hidden" class="form-control" name="level"
-																	value="2">
-																<input type="hidden" class="form-control" name="status"
-																	value="-2">	
-																<input type="hidden" class="form-control" name="type"
-																	value="P">	
+																	id="reject_id"> <input type="hidden"
+																	class="form-control" name="level" value="2"> <input
+																	type="hidden" class="form-control" name="status"
+																	value="-2"> <input type="hidden"
+																	class="form-control" name="type" value="P">
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>
@@ -291,8 +319,8 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
 			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -309,7 +337,7 @@ div.transbox {
 			document.getElementById('reject_id').value = att;
 		}
 	</script>
-	
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>

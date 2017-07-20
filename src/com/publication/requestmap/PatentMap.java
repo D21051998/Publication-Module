@@ -43,6 +43,8 @@ public class PatentMap {
 			case "awardDate":
 				patent.setAwardDate(item.getString());
 				break;
+			case  "patentNo":patent.setPatentNo(Integer.parseInt(item.getString()));
+				break;
 			case "publication":
 				patent.setPublicationFileName(FilenameUtils.getName(item.getName()));
 				break;

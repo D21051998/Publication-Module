@@ -83,7 +83,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update patent set faculy=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=?,patentNo=? where id=?");
+					"update patent set faculty=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=?,patentNo=? where id=?");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -120,7 +120,7 @@ public class PatentIMPL implements PatentDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement("select * from patent");
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				Patent patent = new Patent();
 				patent.setId(rs.getString("id"));
 				patent.setPcn(rs.getString("pcn"));
@@ -269,7 +269,7 @@ public class PatentIMPL implements PatentDAO {
 			connection = ConnectionFactory.getConnection();
 			ps1 = connection.prepareStatement("update patent set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement(
-					"insert into rej_patent (faculy, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id,message, patentNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into rej_patent (faculty, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id,message, patentNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -284,13 +284,13 @@ public class PatentIMPL implements PatentDAO {
 			ps.setString(12, patent.getPlagReportFileName());
 			ps.setInt(13, patent.getStatus());
 			ps.setString(14, patent.getWrittenBy());
-			ps.setString(15, message);
-			ps.setInt(16, patent.getPatentNo());
+			ps.setString(15, id);
+			ps.setString(16, message);
+			ps.setInt(17, patent.getPatentNo());
 			ps1.setInt(1, status);
 			ps1.setNull(2, Types.VARCHAR);
 			ps1.setNull(3, Types.DATE);
 			ps1.setString(4, id);
-
 			if (ps1.executeUpdate() > 0 && ps.executeUpdate() > 0) {
 				return true;
 			}

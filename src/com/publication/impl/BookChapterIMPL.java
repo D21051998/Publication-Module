@@ -54,7 +54,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				rs.beforeFirst();
 				while (rs.next()) {
 					String result = rs.getString("id");
-					list.add(Integer.parseInt(result.substring(1)));
+					list.add(Integer.parseInt(result.substring(2)));
 				}
 				int[] array = list.stream().mapToInt(i -> i).toArray();
 				int sno = getMissing(array, array.length);
@@ -148,6 +148,9 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setIndexLink(rs.getString("indexLink"));
 				bc.setStatus(rs.getInt("status"));
 				bc.setWrittenBy(rs.getString("writtenby"));
+				bc.setPublicationFileName(rs.getString("publicationFileName"));
+				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 				list.add(bc);
 			}
 		} catch (Exception e) {
@@ -218,6 +221,9 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setIndexLink(rs.getString("indexLink"));
 				bc.setStatus(rs.getInt("status"));
 				bc.setWrittenBy(rs.getString("writtenby"));
+				bc.setPublicationFileName(rs.getString("publicationFileName"));
+				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -286,14 +292,14 @@ public class BookChapterIMPL implements BookChapterDAO {
 		PreparedStatement ps;
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps1 = connection.prepareStatement("update rej_book_chapter set status=?, pcn=?, monthAssigned=? where id=?");
+			ps1 = connection.prepareStatement("update book_chapter set status=?, pcn=?, monthAssigned=? where id=?");
 			ps = connection.prepareStatement("insert into rej_book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename, message) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
 			ps.setString(4, bookChapter.getChapterTitle());
 			ps.setString(5, bookChapter.getBookTitle());
-			ps.setString(6, bookChapter.getPublisher());
+			ps.setString(6, bookChapter.getPublisher());	
 			ps.setString(7, bookChapter.getNationality());
 			ps.setInt(8, bookChapter.getYear());
 			ps.setString(9, bookChapter.getMonthPublished());

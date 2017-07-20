@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Book Chapter</title>
+<title>View Book</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -170,7 +170,19 @@ div.transbox {
 		<br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-				<h3>View Book Chapter</h3>
+				<h3>View Book </h3>
+				<div>
+<c:if test="${not empty param.approve}">
+<p>
+<c:if test="${param.approve == 'success'}"><c:out value="Approving Record Successful"></c:out></c:if>
+<c:if test="${param.approve == 'failed'}"><c:out value="Approving Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+<c:if test="${not empty param.reject}">
+<p>
+<c:if test="${param.reject == 'success'}"><c:out value="Rejecting Record Successful"></c:out></c:if>
+<c:if test="${param.reject == 'failed'}"><c:out value="Rejecting Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>

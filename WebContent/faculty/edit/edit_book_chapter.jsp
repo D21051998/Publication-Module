@@ -235,7 +235,7 @@ ul {
 						</tr>
 						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control" type="text" name="bookTitle"> value="${bookChapter.bookTitle}"</td>
+							<td><input class="form-control" type="text" name="bookTitle" value="${bookChapter.bookTitle}"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
@@ -318,18 +318,18 @@ ul {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${journal.publicationFileName}<br>
+							<td>${bookChapter.publicationFileName}<br>
 							<input type="file" name="publication"/></td>
 							
 						</tr>
 						<tr>
 							<td>Plag. Report</td>
-							<td>${journal.plagReportFileName}<br>
+							<td>${bookChapter.plagReportFileName}<br>
 							<input type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Copy</td>
-							<td>${journal.plagCopyFileName}<br>
+							<td>${bookChapter.plagCopyFileName}<br>
 							<input type="file" name="plagCopy" /></td>
 						</tr>
 

@@ -3,7 +3,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<%@page import="com.publication.model.BookChapter"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="java.util.List"%>
 
@@ -11,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Book Chapter</title>
+<title>View Book</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -113,10 +112,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color: rgba(255,255,255,0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -168,7 +165,19 @@ div.transbox {
 	<br><br><br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-<h3>View Book Chapter</h3>
+<h3>View Book</h3>
+<div>
+<c:if test="${not empty param.add}">
+<p>
+<c:if test="${param.add == 'success'}"><c:out value="Adding Record Successful"></c:out></c:if>
+<c:if test="${param.add == 'failed'}"><c:out value="Adding Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+<c:if test="${not empty param.update}">
+<p>
+<c:if test="${param.update == 'success'}"><c:out value="Updating Record Successful"></c:out></c:if>
+<c:if test="${param.update == 'failed'}"><c:out value="Updating Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -250,8 +259,10 @@ div.transbox {
 								<c:url value="../edit/edit_book.jsp" var="edit">
 									<c:param name="id" value="${book.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_book.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
 									<c:param name="id" value="${book.id}"></c:param>
+									<c:param name="type" value="B"></c:param>
+									
 								</c:url>
 
 								<c:if test="${book.status <= 0 }">

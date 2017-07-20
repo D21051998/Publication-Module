@@ -42,11 +42,11 @@ public class BookMap {
 			break;
 			case "indexLink":book.setLink(item.getString());
 				break;
-			case "publicationFileName":book.setPublicationFileName(FilenameUtils.getName(item.getName()));
+			case "publication":book.setPublicationFileName(FilenameUtils.getName(item.getName()));
 				break;
-			case "plagReportFileName":book.setPlagReportFileName(FilenameUtils.getName(item.getName()));
+			case "plagReport":book.setPlagReportFileName(FilenameUtils.getName(item.getName()));
 				break;
-			case "plagCopyFileName":book.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
+			case "plagCopy":book.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
 				break;
 			case "status":book.setStatus(Integer.parseInt(item.getString()));
 				break;
@@ -55,6 +55,7 @@ public class BookMap {
 			}
 		}
 		book.setIndex(indices);
+		indices="";
 		return book;
 	}
 

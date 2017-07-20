@@ -53,7 +53,7 @@ public class ConferencePresentationMap {
 				break;
 			case "status":
 				cp.setStatus(Integer.parseInt(item.getString()));
-
+				break;
 			case "publication":
 				cp.setPublicationFileName(FilenameUtils.getName(item.getName()));
 				break;

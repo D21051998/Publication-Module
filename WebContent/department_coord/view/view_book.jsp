@@ -3,7 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<%@page import="com.publication.model.BookChapter"%>
+<%@page import="com.publication.model.Books"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="java.util.List"%>
 
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Book Chapter</title>
+<title>View Book</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -166,12 +166,32 @@ div.transbox {
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 	<div class="container-fluid content">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-				<h3>View Book Chapter</h3>
+				<h3>View Book</h3>
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -227,7 +247,7 @@ div.transbox {
 								</a></td>
 								<td><a href="${download}&index=2" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
-								</a></td> 
+								</a></td>
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${book.id}" />
 									<c:param name="level" value="1"></c:param>
@@ -278,13 +298,15 @@ div.transbox {
 
 									</c:when>
 									<c:when test="${book.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a></td>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a></td>
 									</c:when>
 									<c:when test="${book.status==-1}">
 										<td><a class="btn btn-info disabled">Rejected</a></td>
 									</c:when>
 									<c:when test="${book.status==2}">
-										<td><a class="btn btn-info disabled"> Approved By RDIL</a></td>
+										<td><a class="btn btn-info disabled"> Approved By
+												RDIL</a></td>
 									</c:when>
 									<c:when test="${book.status==-2}">
 										<td><a class="btn btn-info disabled">Rejected By RDIL</a></td>
@@ -301,7 +323,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
+	<script>
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {

@@ -100,7 +100,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('../resources/images/DSCN7348.jpg');
+	background-image: url('../../resources/images/DSCN7348.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -185,6 +185,7 @@ ul {
 		pageContext.setAttribute("book", book);
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+	<br><br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -288,11 +289,11 @@ ul {
 						<tr>
 							<td>Hyper Link</td>
 							<td><input class="form-control" type="text" name="hyperLink"
-								value="${book.hyperLink}"></td>
+								value="${book.hyperlink}"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
-							<td>Current Indices:${bookChapter.indexFlag} <br>
+							<td>Current Indices:${book.index} <br>
 								<div align="left">
 									<input type="checkbox" name="indexFlag" value="WOS">WOS<br>
 									<input type="checkbox" name="indexFlag" value="Scopus">Scopus<br>
@@ -308,21 +309,21 @@ ul {
 						<tr>
 							<td>Link for Indexing</td>
 							<td><input type="text" class="form-control" name="indexLink"
-								value="${book.indexLink}"></td>
+								value="${book.link}"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${journal.publicationFileName}<br>
+							<td>${book.publicationFileName}<br>
 							<input type="file" name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Report</td>
-							<td>${journal.plagReportFileName}<br>
+							<td>${book.plagReportFileName}<br>
 							<input type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Copy</td>
-							<td>${journal.plagCopyFileName}<br>
+							<td>${book.plagCopyFileName}<br>
 							<input type="file" name="plagCopy" /></td>
 						</tr>
 						<input type="hidden" name="publicationType" value="B">

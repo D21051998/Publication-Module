@@ -36,38 +36,41 @@ if(request.getParameter("type").equals("J")){
 			Journal j = jao.getJournalByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your journal Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../department_coord/view/view_journal.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../department_coord/view/view_journal.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
 		if(jao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			Journal j = jao.getJournalByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your journal Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_journal.jsp?approve=success");
 		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_journal.jsp?approve=failed");
 		 }	
 	}
 }else if(request.getParameter("type").equals("B")){
+	System.out.println("Inside B");
 	if(request.getParameter("level").equals("1")){
-		if(jao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
+		System.out.println("level 1");
+		if(bao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			Books j = bao.getBookByID(request.getParameter("id"));
+			System.out.println("Approving"+j);
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your book Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../department_coord/view/view_book.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../department_coord/view/view_book.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
-		if(jao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
-			Journal j = jao.getJournalByID(request.getParameter("id"));
+		if(bao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
+			Books j =bao.getBookByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your book Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_book.jsp?approve=success");
 		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_book.jsp?approve=failed");
 		 }	
 	}
 }else if(request.getParameter("type").equals("BC")){
@@ -76,18 +79,18 @@ if(request.getParameter("type").equals("J")){
 			BookChapter j = bcao.getBookChapterByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your book chapter Titled \""+j.getChapterTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../department_coord/view/view_book_chapter.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../department_coord/view/view_book_chapter.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
 		if(bcao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			BookChapter j = bcao.getBookChapterByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your book chapter Titled \""+j.getChapterTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_book_chapter.jsp?approve=success");
 		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_book_chapter.jsp?approve=failed");
 		 }	
 	}
 }else if(request.getParameter("type").equals("T")){
@@ -97,18 +100,18 @@ if(request.getParameter("type").equals("J")){
 			Patent j = pao.getPatentByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your patent Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../department_coord/view/view_patent.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../department_coord/view/view_patent.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
 		if(pao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			Patent j = pao.getPatentByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your patent Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_patent.jsp?approve=success");
 		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_patent.jsp?approve=failed");
 		 }	
 	}
 }
@@ -118,18 +121,18 @@ else if(request.getParameter("type").equals("R")){
 			TechnicalReport j = trao.getTechnicalReportByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your technical report Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_tech_rep.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_tech_rep.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
 		if(trao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			TechnicalReport j = trao.getTechnicalReportByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your technical report Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
-		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_tech_rep.jsp?approve=success");
+			}else{
+			 response.sendRedirect("../rdil/view/view_tech_rep.jsp?approve=failed");
 		 }	
 	}	
 }
@@ -140,18 +143,18 @@ else if(request.getParameter("type").equals("P")){
 				ConferenceProceedings j = cproao.getConferenceProceedingsByID(request.getParameter("id"));
 				String email = lao.getEmailByUsername(j.getWrittenBy());
 				EmailService.sendEmail("NCU: Publication Approved", "Your conference Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-				response.sendRedirect("../"+Redirect.redirect(role, true));
+				response.sendRedirect("../department_coord/view/view_conference_proceeding.jsp?approve=success");
 			}else{
-				 response.sendRedirect("../"+Redirect.redirect(role, true));
+				 response.sendRedirect("../department_coord/view/view_conference_proceeding.jsp?approve=failed");
 			 }
 		}else if(request.getParameter("level").equals("2")){
 			if(cproao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 				ConferenceProceedings j = cproao.getConferenceProceedingsByID(request.getParameter("id"));
 				String email = lao.getEmailByUsername(j.getWrittenBy());
 				EmailService.sendEmail("NCU: Publication Approved", "Your conference Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-				response.sendRedirect("../"+Redirect.redirect(role, true));
+				response.sendRedirect("../rdil/view/view_conference_proceeding.jsp?approve=success");
 			 }else{
-				 response.sendRedirect("../"+Redirect.redirect(role, true));
+				 response.sendRedirect("../rdil/view/view_conference_proceeding.jsp?approve=failed");
 			 }	
 		}
 }
@@ -162,18 +165,18 @@ else if(request.getParameter("type").equals("C")){
 			 ConferencePresentation j= cpreao.getConferencePresentationByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your presentation Titled \""+j.getTitle()+"\" , has been approved by Department Coordinator.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../department_coord/view/view_conference_presentation.jsp?approve=success");
 		}else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../department_coord/view/view_conference_presentation.jsp?approve=failed");
 		 }
 	}else if(request.getParameter("level").equals("2")){
 		if(cpreao.action(request.getParameter("id"), Integer.parseInt(request.getParameter("status")))){
 			ConferencePresentation j = cpreao.getConferencePresentationByID(request.getParameter("id"));
 			String email = lao.getEmailByUsername(j.getWrittenBy());
 			EmailService.sendEmail("NCU: Publication Approved", "Your presentation Titled \""+j.getTitle()+"\" , has been approved by RDIL.\n To login click here: http://localhost:8080/Publication_Portal" , email);
-			response.sendRedirect("../"+Redirect.redirect(role, true));
+			response.sendRedirect("../rdil/view/view_conference_presentation.jsp?approve=success");
 		 }else{
-			 response.sendRedirect("../"+Redirect.redirect(role, true));
+			 response.sendRedirect("../rdil/view/view_conference_presentation.jsp?approve=failed");
 		 }	
 	}
 }

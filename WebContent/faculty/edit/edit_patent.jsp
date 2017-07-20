@@ -9,8 +9,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Patent</title>
-
-<link rel="stylesheet" href="../resources/styles/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 .container {
 	width: 100%;
@@ -93,7 +99,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('../resources/images/DSCN7348.jpg');
+	background-image: url('../../resources/images/DSCN7348.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -114,7 +120,6 @@ ul {
 div.transbox {
 	margin: 30px;
 	background-color: rgba(255,255,255,0.6);
-
 	border: 0px solid;
 	width: auto;
 	border-radius: 5px;
@@ -148,6 +153,7 @@ div.transbox {
 	%>
 
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+	<br><br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">

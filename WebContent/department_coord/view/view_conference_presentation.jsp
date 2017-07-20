@@ -116,6 +116,7 @@ div.transbox {
 	border: 1px solid;
 	background-color:rgba(255,255,255,0.6);
 	width: auto;
+	border-radius: 5px;
 	/* For IE8 and earlier */
 }
 
@@ -172,7 +173,28 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Presentations</h3>
-				${message}
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 
 					<thead>
@@ -230,7 +252,6 @@ div.transbox {
 									<c:param name="id" value="${cpo.id}" />
 									<c:param name="level" value="1"></c:param>
 									<c:param name="type" value="C"></c:param>
-									
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>

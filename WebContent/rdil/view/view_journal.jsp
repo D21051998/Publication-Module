@@ -183,7 +183,6 @@ div.transbox {
 			return;
 		}
 		request.setAttribute("eList", list);
-		
 	%>
 	<jsp:include page="../../headers/view_page_header.jsp"></jsp:include>
 	<br>
@@ -195,7 +194,29 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Journals</h3>
-				${message}<br>
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
 				<div style="width: 400px;">
 					<input type="text" class="form-control" id="search"
 						placeholder="Type to search">
@@ -276,24 +297,21 @@ div.transbox {
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${journal.id}" />
 									<c:param name="level" value="2"></c:param>
-									<input type="hidden" class="form-control" name="type"
-																	value="J">	
+									<c:param name="type" value="J"></c:param>
+
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
 								<c:choose>
 
 									<c:when test="${journal.status==1}">
-										<td>
-										<a class="btn btn-info disabled">Approved by Deptt. Coordinator</a>
-										<br>
-										 <a
-											href="${action}&status=2" class="btn btn-success">Approve</a>
-											<!-- Reject Button -->
-											<button type="button" class="btn btn-danger" style="width:90px;"
-												data-name="${journal.id}" data-toggle="modal"
-												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
-												<!-- Reject Modal -->
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a> <br> <a href="${action}&status=2"
+											class="btn btn-success">Approve</a> <!-- Reject Button -->
+											<button type="button" class="btn btn-danger"
+												style="width: 90px;" data-name="${journal.id}"
+												data-toggle="modal" data-target="#myModal"
+												onclick="setModalValue(this)">Reject</button> <!-- Reject Modal -->
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
 
@@ -301,21 +319,17 @@ div.transbox {
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">
-																Reason to Reject
-															</h4>
+															<h4 class="modal-title">Reason to Reject</h4>
 														</div>
 														<div class="modal-body">
 															<form action="${reject}" method="get">
 																<input type="text" class="form-control" name="reason">
 																<input type="hidden" class="form-control" name="id"
-																	id="reject_id">
-																<input type="hidden" class="form-control" name="level"
-																	value="2">
-																<input type="hidden" class="form-control" name="status"
-																	value="-2">	
-																<input type="hidden" class="form-control" name="type"
-																	value="J">	
+																	id="reject_id"> <input type="hidden"
+																	class="form-control" name="level" value="2"> <input
+																	type="hidden" class="form-control" name="status"
+																	value="-2"> <input type="hidden"
+																	class="form-control" name="type" value="J">
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>

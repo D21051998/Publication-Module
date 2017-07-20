@@ -63,13 +63,10 @@ public class DownloadResource extends HttpServlet {
 		
 		}
 		
-		for (String s : filenames) {
-			System.out.println(s);
-		}
 		File file = new File(System.getProperty("catalina.base") + "\\uploads");
 		
 		System.out.println(filenames.length);
-		if (null != filenames[0] && null != filenames[1] && null != filenames[2]) {
+		if (null != filenames[0] && null != filenames[1]) {
 			filePath = file.getAbsolutePath() + File.separator + filenames[index];
 			response.setContentType("APPLICATION/OCTET-STREAM");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + filenames[index] + "\"");

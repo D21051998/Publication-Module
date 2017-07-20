@@ -57,7 +57,14 @@ ul {
 </script>
 <body>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
-	<jsp:useBean id="dao" class="com.publication.impl.JournalIMPL" />
+	<jsp:useBean id="d1ao" class="com.publication.impl.JournalIMPL" />
+	<jsp:useBean id="d2ao" class="com.publication.impl.BooksIMPL" />
+	<jsp:useBean id="d3ao" class="com.publication.impl.BookChapterIMPL" />
+	<jsp:useBean id="d4ao" class="com.publication.impl.ConferencePresentationIMPL" />
+	<jsp:useBean id="d5ao" class="com.publication.impl.ConferenceProceedingIMPL" />
+	<jsp:useBean id="d6ao" class="com.publication.impl.TechnicalReportIMPL"/>
+	<jsp:useBean id="d7ao" class="com.publication.impl.PatentIMPL"/>
+	
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 	<%
 		String sid = (String) request.getSession(false).getAttribute("sid");
@@ -81,18 +88,53 @@ ul {
 			<h2>Faculty Home</h2>
 
 			<%
-				if (dao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) >  0) {
-					%>
-					
-					<table>
-					<caption><h4><strong>Notifications</strong></h4></caption>
-					<tr>
+				if (d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) > 0) {
+			%>
+
+			<table>
+				<caption>
+					<h4>
+						<strong>Notifications</strong>
+					</h4>
+				</caption>
+				<tr>
 					<td>&bull;&nbsp;</td>
 					<td>Journals Rejected:</td>
-					<td>&nbsp;<%=dao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					</table>
-					<%
+					<td>&nbsp;<%=d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Books Rejected:</td>
+					<td>&nbsp;<%=d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Book Chapters Rejected:</td>
+					<td>&nbsp;<%=d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Presentations Rejected:</td>
+					<td>&nbsp;<%=d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Proceedings Rejected:</td>
+					<td>&nbsp;<%=d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Reports Rejected:</td>
+					<td>&nbsp;<%=d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				<tr>
+					<td>&bull;&nbsp;</td>
+					<td>Patents Rejected:</td>
+					<td>&nbsp;<%=d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid))%></td>
+				</tr>
+				
+			</table>
+			<%
 				}
 			%>
 

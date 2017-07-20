@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Journal</title>
+<title>View Patent</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -171,8 +171,35 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Patents</h3>
-				${message}
-				<table class="table table-bordered">
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
+
+				<table class="table table-bordered" id="table">
 
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -190,8 +217,6 @@ div.transbox {
 						<th>Resource</th>
 						<th>Plag. Report</th>
 						<th>Status</th>
-						<th>Edit</th>
-						<th>Delete</th>
 					</thead>
 					<c:forEach items="${eList}" var="patent">
 						<c:if test="${sorter == patent.deptt}">
@@ -217,7 +242,7 @@ div.transbox {
 								<td><c:out value="${patent.awardDate}" /></td>
 								<td><c:out value="${patent.patentNo}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="id" value="${patent.id}"></c:param>
 									<c:param name="type" value="T"></c:param>
 								</c:url>
 
@@ -305,7 +330,7 @@ div.transbox {
 
 		</div>
 	</div>
-	<script>
+	
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {

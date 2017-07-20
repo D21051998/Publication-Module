@@ -29,6 +29,7 @@ public class EditPublicationService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * 
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public EditPublicationService() {
@@ -238,9 +239,9 @@ public class EditPublicationService extends HttpServlet {
 							}
 							response.getWriter().println(chapter);
 							if (dao.updateBookChapter(chapter)) {
-								response.sendRedirect("faculty/view/view_book_chapter.jsp");
+								response.sendRedirect("faculty/view/view_book_chapter.jsp?update=success");
 							} else {
-								response.sendRedirect("faculty/view/view_book_chapter.jsp");
+								response.sendRedirect("faculty/view/view_book_chapter.jsp?update=success");
 							}
 							System.out.println(chapter);
 						} catch (Exception e) {

@@ -246,11 +246,12 @@ div.transbox {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-								<c:url value="../edit/edit_report.jsp" var="edit">
+								<c:url value="../edit/edit_tech_rep.jsp" var="edit">
 									<c:param name="id" value="${report.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_report.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
 									<c:param name="id" value="${report.id}"></c:param>
+									<c:param name="type" value="R"></c:param>
 								</c:url>
 
 								<c:if test="${report.status <= 0 }">

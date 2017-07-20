@@ -246,11 +246,12 @@ div.transbox {
 									</c:otherwise>
 								</c:choose>
 								
-								<c:url value="../edit/edit_cp.jsp" var="edit">
+								<c:url value="../edit/edit_conference_proceeding.jsp" var="edit">
 								<c:param name="id" value="${cp.id}"></c:param>
 								</c:url>
-								<c:url value="../../action/delete_cp.jsp" var="delete">
+								<c:url value="../../action/delete.jsp" var="delete">
 								 <c:param name="id" value="${cp.id}"></c:param>
+								 <c:param name="type" value="P" />
 								</c:url>
 								
 								<c:if test="${cp.status <= 0 }">

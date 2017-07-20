@@ -111,10 +111,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color: rgba(255,255,255,0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -169,8 +167,35 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Patents</h3>
-				${message}
-				<table class="table table-bordered">
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
+
+				<table class="table table-bordered" id="table">
 
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -214,7 +239,7 @@ div.transbox {
 								<td><c:out value="${patent.awardDate}" /></td>
 								<td><c:out value="${patent.patentNo}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="id" value="${patent.id}"></c:param>
 									<c:param name="type" value="T"></c:param>
 								</c:url>
 
@@ -293,7 +318,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
+		
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {

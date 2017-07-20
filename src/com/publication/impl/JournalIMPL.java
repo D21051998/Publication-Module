@@ -296,7 +296,6 @@ public class JournalIMPL implements JournalDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return false;
 	}
 

@@ -169,7 +169,33 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Technical Reports</h3>
-				${message}
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
 				<table class="table table-bordered">
 
 					<thead>
@@ -185,8 +211,6 @@ div.transbox {
 						<th>Plag. Report</th>
 						<th>Plag. Copy</th>
 						<th>Status</th>
-						<th>Edit</th>
-						<th>Delete</th>
 					</thead>
 					<c:forEach items="${eList}" var="report">
 						<c:if test="${report.status>0}">
@@ -208,7 +232,7 @@ div.transbox {
 								<td><c:out value="${report.remarks}" /></td>
 								<td><c:out value="${report.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
-									<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="id" value="${report.id}"></c:param>
 									<c:param name="type" value="R"></c:param>
 								</c:url>
 
@@ -289,7 +313,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
+		
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {

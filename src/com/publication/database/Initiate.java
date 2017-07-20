@@ -80,9 +80,10 @@ public class Initiate {
 	    			+ "publicationfilename varchar(500),"
 	    			+ "plagreportfilename varchar(500),"
 	    			+ "plagcopyfilename varchar(500),"
-	    			+ "writtenBy varchar(200)"
+	    			+ "writtenBy varchar(200),"
+	    			+ "message varchar(500),"
 	    			+ "primary key(rej,id));";
-	    	stmt.executeUpdate(q2);
+	    	stmt.executeUpdate(rej_q2);
 	    	
 	    	
 	    	
@@ -233,6 +234,7 @@ public class Initiate {
 	    			+ "plagCopyFile11Name varchar(200),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
+	    			+ "message varchar(500),"
 	    			+ "primary key(rej,id)"
 	    			+ ");";
 	    	stmt.executeUpdate(tech_rep);
@@ -285,6 +287,7 @@ public class Initiate {
 	    			+ "plagCopyFileName varchar(200),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
+	    			+ "message varchar(500),"
 	    			+ "primary key (rej,id)"
 	    			+ ");";
 	    	
@@ -333,6 +336,7 @@ public class Initiate {
 	    			+ "plagReportFileName varchar(2000),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
+	    			+ "message varchar(500),"
 	    			+ "primary key (rej,id)"
 	    			+ ");";
 	    stmt.executeUpdate(conf_pres);
@@ -386,6 +390,7 @@ String rej_book = "create table if not exists rej_book("
 		+ "plagreportfilename varchar(500),"
 		+ "plagcopyfilename varchar(500),"
 		+ "writtenBy varchar(200),"
+		+ "message varchar(500),"
 		+ "primary key (rej,id)"
 		+ ");";
 stmt.executeUpdate(rej_book);

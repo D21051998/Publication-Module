@@ -181,7 +181,6 @@ div.transbox {
 		}
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
 		request.setAttribute("eList", list);
-
 	%>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
 
@@ -191,10 +190,37 @@ div.transbox {
 	<div class="container-fluid content">
 		<div class="row">
 
-			
-			<div class="col-md-12 transbox">
 
-				<table class="table table-condensed table-bordered">
+			<div class="col-md-12 transbox">
+				<h3>Journals</h3>
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<br>
+				<div style="width: 400px;">
+					<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
+				</div>
+				<table id="table" class="table table-condensed table-bordered" >
 					<thead>
 						<th>PCN</th>
 						<th>Name Of Authors</th>
@@ -322,13 +348,15 @@ div.transbox {
 
 									</c:when>
 									<c:when test="${journal.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</td>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</td>
 									</c:when>
 									<c:when test="${journal.status==-1}">
 										<td><a class="btn btn-info disabled">Rejected</a></td>
 									</c:when>
 									<c:when test="${journal.status==2}">
-										<td><a class="btn btn-info disabled"> Approved By RDIL</a></td>
+										<td><a class="btn btn-info disabled"> Approved By
+												RDIL</a></td>
 									</c:when>
 									<c:when test="${journal.status==-2}">
 										<td><a class="btn btn-info disabled">Rejected By RDIL</a></td>
@@ -345,7 +373,7 @@ div.transbox {
 
 		</div>
 	</div>
-	<script>
+	
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {

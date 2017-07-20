@@ -112,10 +112,9 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
-	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
+	background-color: rgba(255,255,255,0.6);
+	border: 0px solid;
+	border-radius:5px;
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -170,7 +169,28 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Presentations</h3>
-				${message}
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 
 					<thead>
@@ -227,8 +247,8 @@ div.transbox {
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${cpo.id}" />
 									<c:param name="level" value="2"></c:param>
-									<input type="hidden" class="form-control" name="type"
-																	value="C">	
+									<c:param name="type" value="C"></c:param>
+									
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>

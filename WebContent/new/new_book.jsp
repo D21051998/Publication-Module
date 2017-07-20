@@ -185,6 +185,10 @@ ul {
 				<h3>Add New Book</h3>
 				<form method="post" action="../AddPublicationService"
 					enctype="multipart/form-data">
+					<input type="hidden" name="writtenBy"
+								value="<%=lao.getUsernameBySessionID(sid)%>" />
+								<input type="hidden" name="status" value="0" />
+							<input type="hidden" name="publicationType" value="B" />
 					<style>
 					.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
@@ -283,22 +287,19 @@ ul {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type="file" name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td><input type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Plag. Copy</td>
-							<td><input type=file name=plagCopy /></td>
+							<td><input type="file" name="plagCopy" /></td>
 						</tr>
 
 						<tr>
-							<input type="hidden" name="writtenBy"
-								value="<%=lao.getUsernameBySessionID(sid)%>" />
-								<input type="hidden" name="status" value="0" />
-							<input type="hidden" name="publicationType" value="B" />
+							
 							<td><button class="btn" class="form-control" type="reset">Reset</button></td>
 							<td><button class="btn" class="form-control" type="submit">Submit</button></td>
 						</tr>
@@ -311,8 +312,5 @@ ul {
 
 		</div>
 	</div>
-
-
-
 </body>
 </html>

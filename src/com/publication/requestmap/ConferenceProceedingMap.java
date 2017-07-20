@@ -78,6 +78,7 @@ public class ConferenceProceedingMap {
 			}
 		}
 		conferenceProceeding.setIndex(indices);
+		indices="";
 		return conferenceProceeding;
 	}
 	
