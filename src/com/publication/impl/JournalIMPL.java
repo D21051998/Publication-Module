@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.JournalDAO;
@@ -387,7 +389,75 @@ public class JournalIMPL implements JournalDAO {
 		return 0;
 	}
 	
+	@Override
+	public Map<String,Journal> getAllRejJournals() {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Map<String,Journal> map = new HashMap<String,Journal>();
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_journal");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Journal j = new Journal();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				j.setId(rs.getString("id"));
+				j.setPcn(rs.getString("pcn"));
+				j.setNameOauthors(rs.getString("nameOauthors"));
+				j.setDeptt(rs.getString("deptt"));
+				j.setTitle(rs.getString("title"));
+				j.setJournal(rs.getString("journal"));
+				j.setNationality(rs.getString("nationality"));
+				j.setYear(rs.getInt("year"));
+				j.setMonthPublished(rs.getString("monthPublished"));
+				j.setMonthAssigned(rs.getString("monthAssigned"));
+				j.setVolume(rs.getInt("volume"));
+				j.setIssue(rs.getInt("issue"));
+				j.setPageNo(rs.getInt("pageNo"));
+				j.setDoiNo(rs.getInt("doiNo"));
+				j.setImpactFactor(rs.getString("impactFactor"));
+				j.setWhatImpactFactor(rs.getString("whatImpactFactor"));
+				j.setLinkImpFactor(rs.getString("linkImpFactor"));
+				j.setPaidOrUnpaid(rs.getString("paidOrUnpaid"));
+				j.setPaymentFlag(rs.getString("paymentFlag"));
+				j.setPwFlag(rs.getString("pwFlag"));
+				j.setPsFlag(rs.getString("psFlag"));
+				j.setPgFlag(rs.getString("pgFlag"));
+				j.setPiFlag(rs.getString("piFlag"));
+				j.setPublicationFileName(rs.getString("publicationFileName"));
+				j.setPlagReportFileName(rs.getString("plagReportFileName"));
+				j.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				j.setStatus(rs.getInt("status"));
+				j.setWrittenBy(rs.getString("writtenBy"));
+				map.put(rejID,j);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
 
-
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_journal where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
+	}
 	
 }

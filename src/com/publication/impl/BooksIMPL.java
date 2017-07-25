@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.BookDAO;
@@ -350,6 +352,69 @@ public class BooksIMPL implements BookDAO {
 			ConnectionFactory.close(connection);
 		}
 		return 0;
+	}
+	
+	@Override
+	public Map<String,Books> getAllRejBooks() {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Map<String,Books> map = new HashMap<String,Books>();
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_book");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Books books = new Books();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				books.setId(rs.getString("id"));
+				books.setPcn(rs.getString("pcn"));
+				books.setNameOauthors(rs.getString("nameOauthors"));
+				books.setDeptt(rs.getString("deptt"));
+				books.setTitle(rs.getString("title"));
+				books.setPublisher(rs.getString("publisher"));
+				books.setNationality(rs.getString("nationality"));
+				books.setYear(rs.getInt("year"));
+				books.setMonthPublished(rs.getString("monthPublished"));
+				books.setMonthAssigned(rs.getString("monthAssigned"));
+				books.setPageNo(rs.getInt("pageNo"));
+				books.setIsbn(rs.getString("isbn"));
+				books.setHyperlink(rs.getString("hyperlink"));
+				books.setIndex(rs.getString("indices"));
+				books.setLink(rs.getString("link"));
+				books.setPublicationFileName(rs.getString("publicationFileName"));
+				books.setPlagReportFileName(rs.getString("plagReportFileName"));
+				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				books.setStatus(rs.getInt("status"));
+				books.setWrittenBy(rs.getString("writtenBy"));
+				map.put(rejID, books);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
+
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_book where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
 	}
 
 }

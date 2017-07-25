@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.ConferenceProceedingDAO;
@@ -357,6 +359,72 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ConnectionFactory.close(connection);
 		}
 		return 0;
+	}
+
+	@Override
+	public Map<String,ConferenceProceedings> getAllRejConferenceProceedingss() throws SQLException {
+		Map<String,ConferenceProceedings> map = new HashMap<String,ConferenceProceedings>();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_conf_proc");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ConferenceProceedings cp = new ConferenceProceedings();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				cp.setId(rs.getString("id"));
+				cp.setPcn(rs.getString("pcn"));
+				cp.setNameOauthors(rs.getString("nameOauthors"));
+				cp.setDeptt(rs.getString("deptt"));
+				cp.setTitle(rs.getString("title"));
+				cp.setProceedingsOf(rs.getString("proceedingsOf"));
+				cp.setNationality(rs.getString("nationality"));
+				cp.setVenue(rs.getString("venue"));
+				cp.setYear(rs.getInt("year"));
+				cp.setMonthAssigned(rs.getString("monthAssigned"));
+				cp.setMonthPublished(rs.getString("monthPublished"));
+				cp.setPublisher(rs.getString("publisher"));
+				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setHyperlink(rs.getString("hyperlink"));
+				cp.setIndex(rs.getString("indices"));
+				cp.setLink(rs.getString("link"));
+				cp.setPublicationFileName(rs.getString("publicationFileName"));
+				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
+				cp.setStatus(rs.getInt("status"));
+				cp.setWrittenBy(rs.getString("writtenBy"));
+				map.put(rejID, cp);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		
+		return map;
+	}
+	
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_conf_proc where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.publication.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.model.ConferencePresentation;
 
@@ -16,5 +17,7 @@ public interface ConferencePresentationDAO {
 	public boolean reject(String id,int status, String message);
 	int getMissing(int a[], int n);
 	public int notificationRejectedConferencePresentations(String id);
+	Map<String, ConferencePresentation> getAllRejConferencePresentations();
+	boolean checkIfRejected(String id);
 	
 }

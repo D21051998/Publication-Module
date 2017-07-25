@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.PatentDAO;
@@ -331,6 +333,67 @@ public class PatentIMPL implements PatentDAO {
 			ConnectionFactory.close(connection);
 		}
 		return 0;
+	}
+	
+	
+	@Override
+	public Map<String,Patent> getAllRejPatents() {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Map<String, Patent> map = new HashMap<>();
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_patent");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Patent patent = new Patent();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				patent.setId(rs.getString("id"));
+				patent.setPcn(rs.getString("pcn"));
+				patent.setFaculty(rs.getString("faculty"));
+				patent.setDeptt(rs.getString("deptt"));
+				patent.setTitle(rs.getString("title"));
+				patent.setNationality(rs.getString("nationality"));
+				patent.setCountry(rs.getString("country"));
+				patent.setApplicationNo(rs.getString("applicationNo"));
+				patent.setApplicationYear(rs.getInt("applicationYear"));
+				patent.setApplicationDate(rs.getString("applicationDate"));
+				patent.setPatentYear(rs.getInt("patentYear"));
+				patent.setAwardDate(rs.getString("awardDate"));
+				patent.setMonthAssigned(rs.getString("monthAssigned"));
+				patent.setPublicationFileName(rs.getString("publicationFileName"));
+				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
+				patent.setStatus(rs.getInt("status"));
+				patent.setWrittenBy(rs.getString("writtenBy"));
+				patent.setPatentNo(rs.getInt("patentNo"));
+				map.put(rejID,patent);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_patent where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
 	}
 
 }

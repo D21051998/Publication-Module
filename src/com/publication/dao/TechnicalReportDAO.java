@@ -2,6 +2,7 @@ package com.publication.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.model.TechnicalReport;
 
@@ -17,5 +18,7 @@ public interface TechnicalReportDAO {
 	public boolean reject(String id,int status, String message);
 	int getMissing(int a[], int n);
 	public int notificationRejectedTechnicalReports(String id);
+	Map<String, TechnicalReport> getAllRejTechnicalReports();
+	boolean checkIfRejected(String id);
 
 }

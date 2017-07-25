@@ -2,6 +2,7 @@ package com.publication.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.model.Books;
 
@@ -18,5 +19,7 @@ public interface BookDAO {
 	public boolean reject(String id,int status, String message);
 	int getMissing(int a[], int n);
 	public int notificationRejectedBooks(String id);
+	Map<String, Books> getAllRejBooks();
+	boolean checkIfRejected(String id);
 
 }

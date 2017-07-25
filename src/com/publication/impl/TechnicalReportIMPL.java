@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.TechnicalReportDAO;
@@ -315,5 +317,64 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 		}
 		return 0;
 	}
+	
+	@Override
+	public Map<String,TechnicalReport> getAllRejTechnicalReports(){
+		Map<String,TechnicalReport> map = new HashMap<String,TechnicalReport>();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_tech_rep");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				TechnicalReport tc = new TechnicalReport();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				tc.setId(rs.getString("id"));
+				tc.setPcn(rs.getString("pcn"));
+				tc.setFaculty(rs.getString("faculty"));
+				tc.setDeptt(rs.getString("deptt"));
+				tc.setTitle(rs.getString("title"));
+				tc.setYear(rs.getInt("year"));
+				tc.setDate(rs.getString("date"));
+				tc.setRemarks(rs.getString("remarks"));
+				tc.setMonthPublished(rs.getString("monthPublished"));
+				tc.setMonthAssigned(rs.getString("monthAssigned"));
+				tc.setPublicationFileName(rs.getString("publicationFileName"));
+				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setStatus(rs.getInt("status"));
+				tc.setWrittenBy(rs.getString("writtenBy"));
+				map.put(rejID, tc);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
+	
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_tech_rep where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
+	}
+
 
 }

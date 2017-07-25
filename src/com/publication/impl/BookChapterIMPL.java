@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.BookChapterDAO;
@@ -348,5 +350,72 @@ public class BookChapterIMPL implements BookChapterDAO {
 		}
 		return 0;
 	}
+	
+	@Override
+	public Map<String,BookChapter> getAllRejectedBookChapters()  {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Map<String, BookChapter> map = new HashMap<String, BookChapter>();
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_book_chapter");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				BookChapter bc = new BookChapter();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				bc.setId(rs.getString("id"));
+				bc.setPcn(rs.getString("pcn"));
+				bc.setNameOauthors(rs.getString("nameOauthors"));
+				bc.setDeptt(rs.getString("deptt").toUpperCase());
+				bc.setChapterNo(rs.getInt("chapterNo"));
+				bc.setChapterTitle(rs.getString("chapterTitle"));
+				bc.setBookTitle(rs.getString("bookTitle"));
+				bc.setPublisher(rs.getString("publisher"));
+				bc.setNationality(rs.getString("nationality"));
+				bc.setYear(rs.getInt("year"));
+				bc.setMonthPublished(rs.getString("monthPublished"));
+				bc.setMonthAssigned(rs.getString("monthAssigned"));
+				bc.setPageNo(rs.getInt("pageNo"));
+				bc.setIsbn(rs.getString("isbn"));
+				bc.setHyperLink(rs.getString("hyperLink"));
+				bc.setIndexFlag(rs.getString("indexFlag"));
+				bc.setIndexLink(rs.getString("indexLink"));
+				bc.setStatus(rs.getInt("status"));
+				bc.setWrittenBy(rs.getString("writtenby"));
+				bc.setPublicationFileName(rs.getString("publicationFileName"));
+				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
+				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				map.put(rejID, bc);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
+	
+	
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_book_chapter where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
+	}
+
 
 }

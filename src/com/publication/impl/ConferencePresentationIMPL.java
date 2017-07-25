@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.constants.GeneratePCN;
 import com.publication.dao.ConferencePresentationDAO;
@@ -338,4 +340,64 @@ public class ConferencePresentationIMPL implements ConferencePresentationDAO {
 		return 0;
 	}
 
+	@Override
+	public Map<String,ConferencePresentation> getAllRejConferencePresentations() {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		Map<String,ConferencePresentation> map = new HashMap<String,ConferencePresentation>();
+		try {
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("select * from rej_conf_pres");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ConferencePresentation presentation = new ConferencePresentation();
+				String rejID = Integer.toString(rs.getInt("rej"));
+				presentation.setId(rs.getString("id"));
+				presentation.setPcn(rs.getString("pcn"));
+				presentation.setFaculty(rs.getString("faculty"));
+				presentation.setDeptt(rs.getString("deptt"));
+				presentation.setTitle(rs.getString("title"));
+				presentation.setConferencePresentation(rs.getString("conferencePresentation"));
+				presentation.setNationality(rs.getString("nationality"));
+				presentation.setOrganisedBy(rs.getString("organisedBy"));
+				presentation.setVenue(rs.getString("venue"));
+				presentation.setYear(rs.getInt("year"));
+				presentation.setDates(rs.getString("dates"));
+				presentation.setHyperlink(rs.getString("hyperlink"));
+				presentation.setMonthPublished(rs.getString("monthPublished"));
+				presentation.setMonthAssigned(rs.getString("monthAssigned"));
+				presentation.setPublicationFileName(rs.getString("publicationFileName"));
+				presentation.setPlagReportFileName(rs.getString("plagReportFileName"));
+				presentation.setStatus(rs.getInt("status"));
+				presentation.setWrittenBy(rs.getString("writtenBy"));
+				map.put(rejID, presentation);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return map;
+	}
+	@Override
+	public boolean checkIfRejected(String id){
+		Connection connection = null;
+		PreparedStatement statement;
+		try {
+			connection = ConnectionFactory.getConnection();
+			statement = connection.prepareStatement(
+					"select * from rej_conf_pres where id=?");
+			statement.setString(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+		}
+		return false;
+	}
+	
 }

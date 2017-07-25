@@ -2,6 +2,7 @@ package com.publication.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.publication.model.Patent;
 
@@ -17,5 +18,7 @@ public interface PatentDAO {
 	public boolean reject(String id,int status, String message);
 	int getMissing(int a[], int n);
 	public int notificationRejectedPatents(String id);
+	Map<String, Patent> getAllRejPatents();
+	boolean checkIfRejected(String id);
 
 }
