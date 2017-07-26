@@ -17,8 +17,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-<script
+    <link href="../../resources/styles_header/navbar_addition.css"
+	rel="stylesheet" type="text/css">
+    <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 body {
 	background-color: #fcfcfc;
@@ -112,10 +117,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
-	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
+	background-color: rgba(255,255,255,0.6);
+	border: 0px solid;
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -162,7 +165,59 @@ div.transbox {
 		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
 	%>
-	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
+		<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid clearfix">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a
+				style="background-color: transparent !important; color: #9e433d !important;"
+				class="navbar-brand"><strong> <img
+					src="../../resources/images/ncu logo.png" width="150px"
+					height="50px" id="logo" /> The NorthCap University
+			</strong></a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+
+			<ul class="nav navbar-nav navbar-left">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false" style="color: #9e433d !important;">Navigate
+						To<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="../faculty_home.jsp">Home</a></li>
+						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
+						<li><a href="view_conference_presentation.jsp">View Conference
+								Presentation</a></li>
+						<li><a href="view_conference_proceeding.jsp">View
+								Conference Proceeding</a></li>
+						<li><a href="view_journal.jsp">View Journal</a></li>
+						<li><a href="view_patent.jsp">View Patents</a></li>
+						<li><a href="view_tech_rep.jsp">View Technical Reports</a></li>
+						<li><a href="view_book.jsp">View Books</a></li>
+						<li><a href="view_rejected.jsp">View Rejected</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown pull-left"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><span
+						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" id="profile-menu">
+						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/logout.jsp">Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
 	<div class="container-fluid content">
 	<br><br><br>
 		<div class="row">

@@ -47,7 +47,7 @@
 		
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu3"
 			class="collapsed active" role="button" aria-haspopup="true"
-			aria-expanded="false">New Conf. Presentation<span class="caret"></span></a>
+			aria-expanded="false">Conf. Presentation<span class="caret"></span></a>
 			<ul id="dd-menu3" class="collapse">
 				<li><a href="../new/new_conf_presentation.jsp">Add</a></li>
 				<li><a href="view/view_conference_presentation.jsp">View</a></li>
@@ -55,7 +55,7 @@
 		</li>
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu4"
 			class="collapsed active" role="button" aria-haspopup="true"
-			aria-expanded="false">New Conf. Proceeding<span class="caret"></span></a>
+			aria-expanded="false">Conf. Proceeding<span class="caret"></span></a>
 			<ul id="dd-menu4" class="collapse">
 				<li><a href="../new/new_conference_proceeding.jsp">Add</a></li>
 				<li><a href="view/view_conference_proceeding.jsp">View</a></li>
@@ -73,7 +73,7 @@
 		
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu6"
 			class="collapsed active" role="button" aria-haspopup="true"
-			aria-expanded="false">New Technical Reports<span class="caret"></span></a>
+			aria-expanded="false">Technical Reports<span class="caret"></span></a>
 			<ul id="dd-menu6" class="collapse">
 				<li><a href="../new/new_tech_rep.jsp">Add</a></li>
 				<li><a href="view/view_tech_rep.jsp">View</a></li>
@@ -83,7 +83,7 @@
 		
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu7"
 			class="collapsed active" role="button" aria-haspopup="true"
-			aria-expanded="false">New Books<span class="caret"></span></a>
+			aria-expanded="false">Books<span class="caret"></span></a>
 			<ul id="dd-menu7" class="collapse">
 				<li><a href="../new/new_book.jsp">Add</a></li>
 				<li><a href="view/view_book.jsp">View</a></li>
