@@ -12,10 +12,51 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <style>
+
+body {
+	background-color: #fcfcfc;
+}
+
+.navbar-default .navbar-brand {
+	color: #9e433d !important;
+}
+
+.navbar-default {
+	background-color: #dddcdb !important;
+}
+
+.navbar-fixed-top {
+	min-height: 80px !important;
+}
+
+.navbar-nav>li>a {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	line-height: 80px !important;
+}
+
+@media ( max-width : 767px) {
+	.navbar-nav>li>a {
+		line-height: 20px !important;
+		padding-top: 10px !important;
+		padding-bottom: 10px !important;
+	}
+}
+
+.blank_row {
+	height: 10px !important; /* overwrites any other rules */
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
 td {
+	text-align: left;
 	vertical-align: middle;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-size: 15px;
@@ -23,7 +64,7 @@ td {
 	font-variant: normal;
 	font-weight: bold;
 	line-height: 23px;
-	width: 220px;
+	padding: 10px;
 }
 
 th {
@@ -74,7 +115,7 @@ ul {
 	list-style: none;
 }
 
-.content:before {
+.content2:before {
 	content: "";
 	position: fixed;
 	top: 0;
@@ -96,46 +137,34 @@ ul {
 	filter: blur(10px);
 }
 
-.content {
+.content2 {
 	overflow: visible;
 	position: relative;
 }
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
-	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
+	background-color: rgba(255, 255, 255, 0.6);
+	border: 0px solid;
 	width: auto;
-	border-radius: 5px;
 	/* For IE8 and earlier */
 }
 
-.content p {
+.content2 p {
 	margin: 15px;
 	background: rgba(255, 255, 255, 0.3);
 	padding: 5px;
 	box-shadow: 0 0 5px gray;
 }
 
-.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
-	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
-	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
-	border: none;
-}
-.container {
-	width: 100%;
+.ui-content {
+	width: auto;
 }
 
-li.borderless {
-	border-bottom: 0 none;
-	border-top: none;
+.notificationTable{
+padding:10px;
 }
 
-ul {
-	list-style: none;
-}
 
 </style>
 
@@ -168,8 +197,43 @@ ul {
 			return;
 		}
 	%>
-	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-	<div class="container-fluid content">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid clearfix">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a
+				style="background-color: transparent !important; color: #9e433d !important;"
+				class="navbar-brand"><strong> <img
+					src="../resources/images/ncu logo.png" width="150px" height="50px"
+					id="logo" /> The NorthCap University
+			</strong></a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown pull-left"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><span
+						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" id="profile-menu">
+						<li><a href="">Edit Profile</a></li>
+						<li><a href="../account/logout.jsp">Logout</a></li>
+					</ul></li>
+			</ul>
+</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<div class="container-fluid content2">
 		<div class="row">
 			<div class="col-md-2 transbox" >
 			<jsp:include page="../sidebars/rdil_home_sidebar.jsp"></jsp:include>

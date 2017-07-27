@@ -153,7 +153,7 @@ div.transbox {
 				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10 transbox">
-				<h3>Add New Patents</h3>
+				<h3>Add Patents</h3>
 				<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,

@@ -26,20 +26,18 @@
 
 </head>
 <body>
-
 	<ul class="nav sidebar-nav">
-	<li><a href="../faculty_home.jsp">Home</a></li>
-		<li><a href="../view/view_book_chapter.jsp">View Book Chapter</a></li>
-		<li><a href="../view/view_conf_presentation.jsp">View Conference
+
+		<li><a href="../faculty/faculty_home.jsp">Home</a></li>
+		<li><a href="new_book_chapter.jsp">New Book Chapter</a></li>
+		<li><a href="new_conf_presentation.jsp">New Conference
 				Presentation</a></li>
-		<li><a href="../view/view_conference_proceeding.jsp">View
-				Conference Proceeding</a></li>
-		<li><a href="../view/view_journal.jsp">View Journal</a></li>
-		<li><a href="../view/view_patents.jsp">View Patents</a></li>
-		<li><a href="../view/view_tech_rep.jsp">View Technical Reports</a></li>
-		<li><a href="../view/view_book.jsp">View Books</a></li>
-
+		<li><a href="new_conference_proceeding.jsp">New Conference
+				Proceeding</a></li>
+		<li><a href="new_journal.jsp">New Journal</a></li>
+		<li><a href="new_patents.jsp">New Patents</a></li>
+		<li><a href="new_tech_rep.jsp">New Technical Reports</a></li>
+		<li><a href="new_book.jsp">New Books</a></li>
 	</ul>
-
 </body>
 </html>

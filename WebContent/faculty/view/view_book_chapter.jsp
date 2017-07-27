@@ -151,16 +151,17 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 		List<BookChapter> list = dao.getAllBookChapters();
 		for (BookChapter b : list) {
 			System.out.println(b);
 		}
 
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-			return;
-		}
+		
 		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
 		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);

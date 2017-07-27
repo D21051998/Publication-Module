@@ -182,7 +182,7 @@ ul {
 				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10 transbox">
-				<h3>Add New Book</h3>
+				<h3>Add Book</h3>
 				<form method="post" action="../AddPublicationService"
 					enctype="multipart/form-data">
 					<input type="hidden" name="writtenBy"

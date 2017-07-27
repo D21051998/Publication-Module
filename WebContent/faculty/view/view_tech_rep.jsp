@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Technical Reports</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
@@ -225,8 +225,19 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Technical Reports</h3>
-				${message}
-				<table class="table table-bordered">
+				<div>
+<c:if test="${not empty param.add}">
+<p>
+<c:if test="${param.add == 'success'}"><c:out value="Adding Record Successful"></c:out></c:if>
+<c:if test="${param.add == 'failed'}"><c:out value="Adding Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+<c:if test="${not empty param.update}">
+<p>
+<c:if test="${param.update == 'success'}"><c:out value="Updating Record Successful"></c:out></c:if>
+<c:if test="${param.update == 'failed'}"><c:out value="Updating Record Unsuccessful"></c:out></c:if></p>
+</c:if>
+</div>
+		<table class="table table-bordered">
 
 					<thead>
 						<th>PCN & Date Assigned</th>

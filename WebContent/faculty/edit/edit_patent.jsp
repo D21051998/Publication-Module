@@ -8,16 +8,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Patent</title>
+<title>Edit Patent</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
+    <link href="../../resources/styles_header/navbar_addition.css"
+	rel="stylesheet" type="text/css">
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
 .container {
 	width: 100%;
 }
@@ -152,15 +155,48 @@ div.transbox {
 	pageContext.setAttribute("patent",patent );
 	%>
 
-	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
-	<br><br>
+	
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid clearfix">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a
+				style="background-color: transparent !important; color: #9e433d !important;"
+				class="navbar-brand"><strong> <img
+					src="../../resources/images/ncu logo.png" width="150px"
+					height="50px" id="logo" /> The NorthCap University
+			</strong></a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown pull-left"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><span
+						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" id="profile-menu">
+						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/logout.jsp">Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+	</nav><br><br><br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
 				<jsp:include page="../../sidebars/new_pages_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10 transbox">
-				<h3>Edit New Patents</h3>
+				<h3>Edit Patents</h3>
 				<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,

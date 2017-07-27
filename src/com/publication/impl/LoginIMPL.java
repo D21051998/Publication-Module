@@ -15,7 +15,14 @@ import org.apache.commons.net.ntp.TimeInfo;
 
 import com.publication.constants.BCrypt;
 import com.publication.constants.LoginStatus;
+import com.publication.dao.BookChapterDAO;
+import com.publication.dao.BookDAO;
+import com.publication.dao.ConferencePresentationDAO;
+import com.publication.dao.ConferenceProceedingDAO;
+import com.publication.dao.JournalDAO;
 import com.publication.dao.LoginDAO;
+import com.publication.dao.PatentDAO;
+import com.publication.dao.TechnicalReportDAO;
 import com.publication.database.ConnectionFactory;
 import com.publication.model.Login;
 
@@ -313,5 +320,19 @@ public class LoginIMPL implements LoginDAO {
 	public String generateToken() {
 		return UUID.randomUUID().toString();
 	}
+	
+	public int checkRejectedSum(String id){
+		JournalDAO  dao1 = new JournalIMPL();
+		PatentDAO dao2 = new PatentIMPL();
+		BookDAO dao3 = new BooksIMPL();
+		BookChapterDAO dao4 = new BookChapterIMPL();
+		ConferencePresentationDAO dao5 = new ConferencePresentationIMPL();
+		ConferenceProceedingDAO dao6 =  new ConferenceProceedingIMPL();
+		TechnicalReportDAO dao7 = new TechnicalReportIMPL();
+		
+		return dao1.notificationRejectedJournal(id)+dao2.notificationRejectedPatents(id)+dao3.notificationRejectedBooks(id)+
+				dao4.notificationRejectedBookChapters(id)+dao5.notificationRejectedConferencePresentations(id)+dao6.notificationRejectedConferenceProceedingss(id)
+				+dao7.notificationRejectedTechnicalReports(id);
+		}
 
 }

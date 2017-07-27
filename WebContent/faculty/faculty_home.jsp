@@ -19,10 +19,11 @@
 
 <title>Faculty Home</title>
 <style>
-<
+
 body {
 	background-color: #fcfcfc;
 }
+
 .navbar-default .navbar-brand {
 	color: #9e433d !important;
 }
@@ -38,16 +39,17 @@ body {
 .navbar-nav>li>a {
 	padding-top: 0px !important;
 	padding-bottom: 0px !important;
-	line-height:80px !important;
+	line-height: 80px !important;
 }
 
 @media ( max-width : 767px) {
 	.navbar-nav>li>a {
 		line-height: 20px !important;
 		padding-top: 10px !important;
-		padding-bottom: 10px!important;
+		padding-bottom: 10px !important;
 	}
 }
+
 .blank_row {
 	height: 10px !important; /* overwrites any other rules */
 	background-color: rgba(255, 255, 255, 0.6);
@@ -157,7 +159,14 @@ div.transbox {
 
 .ui-content {
 	width: auto;
-}</style>
+}
+
+.notificationTable{
+padding:10px;
+}
+
+
+</style>
 </head>
 <input type="hidden" id="refreshed" value="no">
 <script type="text/javascript">
@@ -172,7 +181,7 @@ div.transbox {
 	}
 </script>
 <body>
-	
+
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="d1ao" class="com.publication.impl.JournalIMPL" />
 	<jsp:useBean id="d2ao" class="com.publication.impl.BooksIMPL" />
@@ -199,7 +208,7 @@ div.transbox {
 		System.out.println(sid);
 	%>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -212,13 +221,13 @@ div.transbox {
 			<a
 				style="background-color: transparent !important; color: #9e433d !important;"
 				class="navbar-brand"><strong> <img
-					src="../resources/images/ncu logo.png" width="150px"
-					height="50px" id="logo" /> The NorthCap University
+					src="../resources/images/ncu logo.png" width="150px" height="50px"
+					id="logo" /> The NorthCap University
 			</strong></a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-		
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -228,6 +237,128 @@ div.transbox {
 					<ul class="dropdown-menu" id="profile-menu">
 						<li><a href="">Edit Profile</a></li>
 						<li><a href="../account/logout.jsp">Logout</a></li>
+					</ul></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" >
+				<li class="dropdown pull-left"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><%
+				if(	lao.checkRejectedSum(lao.getUsernameBySessionID(sid))>0){
+					out.print("&nbsp;Notifications&nbsp;("+lao.checkRejectedSum(lao.getUsernameBySessionID(sid))+")*");
+				}else{
+					out.print("&nbsp;Notifications&nbsp;(0)");
+				}
+					%><span
+						class="caret"></span></a>
+					<ul class="dropdown-menu"  id="profile-menu" style="width:270px;">
+						<%
+							if (d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Journals Rejected</th>
+									<th style="padding:10px;"><%=d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></th>
+									
+								</tr>
+							</table>
+							<hr>
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Books Rejected</th>
+									<th style="padding:10px;"><%=d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							<hr>
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Book Chapters Rejected</th>
+									<th style="padding:10px;"><%=d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							<hr >
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Presentations Rejected</th>
+									<th style="padding:10px;"><%=d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							<hr >
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Proceedings Rejected</th>
+									<th style="padding:10px;"><%=d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							<hr >
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Reports Rejected</th>
+									<th style="padding:10px;"><%=d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							<hr >
+						</li>
+						<%
+							}
+						%>
+						<%
+							if (d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid)) > 0) {
+						%>
+						<li>
+							<table>
+								<tr>
+									<th style="padding:10px;">Patent Rejected</th>
+									<th style="padding:10px;"><%=d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid))%></th>
+								</tr>
+							</table>
+							
+						</li>
+						<%
+							}
+						%>
+						
+
 					</ul></li>
 			</ul>
 		</div>
@@ -241,56 +372,9 @@ div.transbox {
 			<div style="width: 400px;" class="col-md-9 transbox">
 				<h2>Faculty Home</h2>
 
-				<%
-					if (d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) > 0) {
-				%>
 
-				<table>
-					<caption>
-						<h4>
-							<strong>Notifications</strong>
-						</h4>
-					</caption>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Journals Rejected:</td>
-						<td>&nbsp;<%=d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Books Rejected:</td>
-						<td>&nbsp;<%=d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Book Chapters Rejected:</td>
-						<td>&nbsp;<%=d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Presentations Rejected:</td>
-						<td>&nbsp;<%=d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Proceedings Rejected:</td>
-						<td>&nbsp;<%=d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Reports Rejected:</td>
-						<td>&nbsp;<%=d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
-					<tr>
-						<td>>&nbsp;</td>
-						<td>Patents Rejected:</td>
-						<td>&nbsp;<%=d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid))%></td>
-					</tr>
 
-				</table>
-				<%
-					}
-				%>
+
 			</div>
 		</div>
 	</div>

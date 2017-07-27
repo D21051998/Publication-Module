@@ -1,4 +1,5 @@
- <%@page import="com.publication.constants.FetchDepptCode"%>
+
+<%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="com.publication.model.Journal"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,17 +10,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Journal</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    
-    <link href="../../resources/styles_header/navbar_addition.css"
+
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -186,7 +187,7 @@ div.transbox {
 		request.setAttribute("eList", list);
 	%>
 
-		<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -214,8 +215,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../faculty_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -239,13 +240,37 @@ div.transbox {
 		</div>
 	</div>
 	</nav>
-    
+
 
 	<div class="container-fluid content">
-<br><br><br>
+		<br>
+		<br>
+		<br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-			<h3>View Journals</h3>
+				<h3>View Journals</h3>
+				<div>
+					<c:if test="${not empty param.add}">
+						<p>
+							<c:if test="${param.add == 'success'}">
+								<c:out value="Adding Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.add == 'failed'}">
+								<c:out value="Adding Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.update}">
+						<p>
+							<c:if test="${param.update == 'success'}">
+								<c:out value="Updating Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.update == 'failed'}">
+								<c:out value="Updating Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN</th>
@@ -281,10 +306,11 @@ div.transbox {
 							<tr>
 								<td><c:if test="${empty journal.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty journal.pcn}">
-										<c:out value="${journal.pcn}" /><br> <br> <c:out
-										value="${journal.monthAssigned}" />
+									</c:if> <c:if test="${not empty journal.pcn}">
+										<c:out value="${journal.pcn}" />
+										<br>
+										<br>
+										<c:out value="${journal.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${journal.nameOauthors}" /></td>
 								<td><c:out value="${journal.deptt}" /></td>
@@ -306,18 +332,21 @@ div.transbox {
 								<td><c:out value="${journal.psFlag}" /></td>
 								<td><c:out value="${journal.pgFlag}" /></td>
 								<td><c:out value="${journal.piFlag}" /></td>
-								
+
 								<c:url value="../../DownloadResource" var="download">
-								<c:param name="id" value="${journal.id}"></c:param>
+									<c:param name="id" value="${journal.id}"></c:param>
 									<c:param name="type" value="J"></c:param>
-								
+
 								</c:url>
-								
-								<td><a href="${download}&index=0"><span class="glyphicon glyphicon-download"></a></td>
-								<td><a href="${download}&index=1"><span class="glyphicon glyphicon-download"></a></td>
-								<td><a href="${download}&index=2"><span class="glyphicon glyphicon-download"></a></td>
-								
-								
+
+								<td><a href="${download}&index=0"><span
+										class="glyphicon glyphicon-download"></a></td>
+								<td><a href="${download}&index=1"><span
+										class="glyphicon glyphicon-download"></a></td>
+								<td><a href="${download}&index=2"><span
+										class="glyphicon glyphicon-download"></a></td>
+
+
 								<c:choose>
 									<c:when test="${journal.status==0}">
 										<td>Pending</td>
@@ -338,24 +367,24 @@ div.transbox {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-								
+
 								<c:url value="../edit/edit_journal.jsp" var="edit">
-								<c:param name="id" value="${journal.id}"></c:param>
+									<c:param name="id" value="${journal.id}"></c:param>
 								</c:url>
 								<c:url value="../../action/delete.jsp" var="delete">
-								 <c:param name="id" value="${journal.id}"></c:param>
-								 <c:param name="type" value="J"></c:param>
+									<c:param name="id" value="${journal.id}"></c:param>
+									<c:param name="type" value="J"></c:param>
 								</c:url>
-								
+
 								<c:if test="${journal.status <= 0 }">
-								<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
-								<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
+									<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
+									<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
 								</c:if>
 								<c:if test="${ journal.status > 0}">
-								<td>Cannot be edited</td>
-								<td>Cannot be deleted</td>
+									<td>Cannot be edited</td>
+									<td>Cannot be deleted</td>
 								</c:if>
-								
+
 							</tr>
 						</c:if>
 					</c:forEach>

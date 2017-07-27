@@ -162,7 +162,7 @@ h3 {
 	font-weight: bolder;
 	line-height: 23px;
 }</style>
-				<h3>New Journal Form</h3>
+				<h3>Add Journal</h3>
 <style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,

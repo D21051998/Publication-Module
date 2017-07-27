@@ -10,16 +10,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Journal</title>
+<title>View Presentations</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat"
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -116,9 +116,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
-	
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -144,9 +143,9 @@ div.transbox {
 	}
 </script>
 <body>
-	
-	<jsp:useBean id="dao" class="com.publication.impl.ConferencePresentationIMPL"
-		scope="page"></jsp:useBean>
+
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferencePresentationIMPL" scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
@@ -191,8 +190,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../faculty_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -216,7 +215,7 @@ div.transbox {
 		</div>
 	</div>
 	</nav>
-    
+
 	<br>
 	<br>
 	<br>
@@ -226,6 +225,28 @@ div.transbox {
 
 			<div class="col-md-12 transbox">
 				<h3>View Presentations</h3>
+				<div>
+					<c:if test="${not empty param.add}">
+						<p>
+							<c:if test="${param.add == 'success'}">
+								<c:out value="Adding Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.add == 'failed'}">
+								<c:out value="Adding Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.update}">
+						<p>
+							<c:if test="${param.update == 'success'}">
+								<c:out value="Updating Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.update == 'failed'}">
+								<c:out value="Updating Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				${message}
 				<table class="table table-bordered">
 
@@ -254,10 +275,11 @@ div.transbox {
 
 								<td><c:if test="${empty cpo.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty cpo.pcn}">
-										<c:out value="${cpo.pcn}" /><br> <br> <c:out
-										value="${cpo.monthAssigned}" />
+									</c:if> <c:if test="${not empty cpo.pcn}">
+										<c:out value="${cpo.pcn}" />
+										<br>
+										<br>
+										<c:out value="${cpo.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${cpo.faculty}" /></td>
 								<td><c:out value="${cpo.deptt}" /></td>
@@ -269,7 +291,7 @@ div.transbox {
 								<td><c:out value="${cpo.year}" /></td>
 								<td><c:out value="${cpo.dates}" /></td>
 								<td><c:out value="${cpo.hyperlink}" /></td>
-								
+
 								<td><c:out value="${cpo.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
 									<c:param name="id" value="${cpo.id}"></c:param>
@@ -283,7 +305,7 @@ div.transbox {
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
 
-								
+
 								<c:choose>
 									<c:when test="${cpo.status==0}">
 										<td>Pending</td>
@@ -305,22 +327,22 @@ div.transbox {
 									</c:otherwise>
 								</c:choose>
 								<c:url value="../edit/edit_conf_presentation.jsp" var="edit">
-								<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="id" value="${cpo.id}"></c:param>
 								</c:url>
 								<c:url value="../../action/delete.jsp" var="delete">
-								 <c:param name="id" value="${cpo.id}"></c:param>
-								 <c:param name="type" value="C"></c:param>
+									<c:param name="id" value="${cpo.id}"></c:param>
+									<c:param name="type" value="C"></c:param>
 								</c:url>
-								
+
 								<c:if test="${cpo.status <= 0 }">
-								<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
-								<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
+									<td><a href='<c:out value="${edit}"/>'>Edit</a></td>
+									<td><a href='<c:out value="${delete}"/>'>Delete</a></td>
 								</c:if>
 								<c:if test="${ cpo.status > 0}">
-								<td>Cannot be edited</td>
-								<td>Cannot be deleted</td>
+									<td>Cannot be edited</td>
+									<td>Cannot be deleted</td>
 								</c:if>
-					
+
 							</tr>
 						</c:if>
 					</c:forEach>

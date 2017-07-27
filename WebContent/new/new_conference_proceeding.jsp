@@ -162,7 +162,7 @@ h3 {
 	line-height: 23px;
 }
 </style>
-				<h3>New Conference Proceedings</h3>
+				<h3>Add Conference Proceedings</h3>
 				<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,

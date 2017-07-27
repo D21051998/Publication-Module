@@ -15,9 +15,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
+    <link href="../../resources/styles_header/navbar_addition.css"
+	rel="stylesheet" type="text/css">
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
 td {
 	text-align: center;
 	vertical-align: middle;
@@ -141,8 +144,42 @@ div.transbox {
 	}
 </script>
 <body>
-	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
-	<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"></jsp:useBean>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid clearfix">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a
+				style="background-color: transparent !important; color: #9e433d !important;"
+				class="navbar-brand"><strong> <img
+					src="../../resources/images/ncu logo.png" width="150px"
+					height="50px" id="logo" /> The NorthCap University
+			</strong></a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown pull-left"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><span
+						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" id="profile-menu">
+						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/logout.jsp">Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+		<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"></jsp:useBean>
 	<%
 		ConferenceProceedings cp =dao.getConferenceProceedingsByID(request.getParameter("id"));
 	if(null==cp){
@@ -150,7 +187,7 @@ div.transbox {
 	}
 	pageContext.setAttribute("cp", cp);
 	%>
-	<br><br>
+	<br><br><br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">

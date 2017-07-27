@@ -18,12 +18,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-  <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 body {
 	background-color: #fcfcfc;
 }
@@ -118,7 +119,7 @@ div.transbox {
 	margin: 30px;
 	background-color: #ffffff;
 	border: 1px solid;
-	background-color:rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -167,9 +168,8 @@ div.transbox {
 			return;
 		}
 		request.setAttribute("eList", list);
-		
 	%>
-		<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -195,17 +195,16 @@ div.transbox {
 						To<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="../faculty_home.jsp">Home</a></li>
+						<li><a href="../rdil_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
 						<li><a href="view_patent.jsp">View Patents</a></li>
 						<li><a href="view_tech_rep.jsp">View Technical Reports</a></li>
 						<li><a href="view_book.jsp">View Books</a></li>
-						<li><a href="view_rejected.jsp">View Rejected</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -223,22 +222,34 @@ div.transbox {
 	</div>
 	</nav>
 	<div class="container-fluid content">
-	<br><br><br>
+		<br>
+		<br>
+		<br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-<h3>View Book Chapter</h3>
-<div>
-<c:if test="${not empty param.approve}">
-<p>
-<c:if test="${param.approve == 'success'}"><c:out value="Approving Record Successful"></c:out></c:if>
-<c:if test="${param.approve == 'failed'}"><c:out value="Approving Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-<c:if test="${not empty param.reject}">
-<p>
-<c:if test="${param.reject == 'success'}"><c:out value="Rejecting Record Successful"></c:out></c:if>
-<c:if test="${param.reject == 'failed'}"><c:out value="Rejecting Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-</div>
+				<h3>View Book Chapter</h3>
+				<div>
+					<c:if test="${not empty param.approve}">
+						<p>
+							<c:if test="${param.approve == 'success'}">
+								<c:out value="Approving Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.approve == 'failed'}">
+								<c:out value="Approving Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.reject}">
+						<p>
+							<c:if test="${param.reject == 'success'}">
+								<c:out value="Rejecting Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.reject == 'failed'}">
+								<c:out value="Rejecting Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -290,7 +301,7 @@ div.transbox {
 									<c:param name="id" value="${bookChapter.id}"></c:param>
 									<c:param name="type" value="BC"></c:param>
 								</c:url>
-								
+
 								<td><a href="${download}&index=0" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
@@ -300,7 +311,7 @@ div.transbox {
 								<td><a href="${download}&index=2" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
-								
+
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${bookChapter.id}" />
 									<c:param name="level" value="2"></c:param>
@@ -311,11 +322,13 @@ div.transbox {
 								<c:choose>
 
 									<c:when test="${bookChapter.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a><br> <a
-											href="${action}&status=2" class="btn btn-success">Approve</a>
-											<button type="button" class="btn btn-danger" style="width:90px;"
-												data-name="${bookChapter.id}" data-toggle="modal"
-												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a><br> <a href="${action}&status=2"
+											class="btn btn-success">Approve</a>
+											<button type="button" class="btn btn-danger"
+												style="width: 90px;" data-name="${bookChapter.id}"
+												data-toggle="modal" data-target="#myModal"
+												onclick="setModalValue(this)">Reject</button>
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
 
@@ -323,21 +336,17 @@ div.transbox {
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">
-																Reason to Reject
-															</h4>
+															<h4 class="modal-title">Reason to Reject</h4>
 														</div>
 														<div class="modal-body">
 															<form action="${reject}" method="get">
 																<input type="text" class="form-control" name="reason">
 																<input type="hidden" class="form-control" name="id"
-																	id="reject_id">
-																<input type="hidden" class="form-control" name="level"
-																	value="2">
-																<input type="hidden" class="form-control" name="status"
-																	value="-2">	
-																<input type="hidden" class="form-control" name="type"
-																	value="BC">	
+																	id="reject_id"> <input type="hidden"
+																	class="form-control" name="level" value="2"> <input
+																	type="hidden" class="form-control" name="status"
+																	value="-2"> <input type="hidden"
+																	class="form-control" name="type" value="BC">
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>
@@ -361,7 +370,7 @@ div.transbox {
 									</c:otherwise>
 								</c:choose>
 
-								
+
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -370,7 +379,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
 			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
