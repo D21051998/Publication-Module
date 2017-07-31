@@ -29,4 +29,5 @@ public interface LoginDAO {
 	public String getEmailByUsername(String username);
 	public Object[] forgotResponse(String token);
 	public boolean finishForgetPassword(String token, String password);
+	boolean addFaculty(String id, String name, String email, String contact);
 }

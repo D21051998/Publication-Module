@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
@@ -28,6 +29,55 @@ import com.publication.model.Login;
 
 public class LoginIMPL implements LoginDAO {
 
+	public String getNewPassword(){
+
+	    int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 10;
+	    Random random = new Random();
+	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    for (int i = 0; i < targetStringLength; i++) {
+	        int randomLimitedInt = leftLimit + (int) 
+	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+	        buffer.append((char) randomLimitedInt);
+	    }
+	    String generatedString = buffer.toString();
+	 
+	    System.out.println(generatedString);
+	    return generatedString;
+	}
+	
+	@Override
+	public boolean addFaculty(String id, String name, String email, String contact){
+		Connection conn = null;
+		PreparedStatement ps1 = null;
+
+		try {
+			conn = ConnectionFactory.getConnection();
+			ps1 = conn
+					.prepareStatement("insert into login (username,name, password, salt, role, status)  values (?,?,?,?,?,?)");
+			String salt = BCrypt.gensalt();
+			String password = getNewPassword();
+			ps1.setString(1, id);
+			ps1.setString(2, name);
+			ps1.setString(3, BCrypt.hashpw(password, salt));
+			ps1.setString(4, salt);
+			ps1.setString(5, "ROLE_FACULTY");
+			ps1.setString(6, "active");
+			if (ps1.executeUpdate() > 0) {
+				EmailService.sendEmail("NCU PUBLICATION PORTAL: LOGIN Credentials", "Your Publication Portal Login Credentials: Username:\""+id+"\" and password:\""+password+"\".", email);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(conn);
+		}
+
+
+		return false;
+	}
+	
 	@Override
 	public LoginStatus validateLogin(String username, String password, String role) {
 

@@ -120,10 +120,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
-	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
+	background-color: rgba(255,255,255,0.6);
+	border: 0px solid;
 	width: auto;
 	border-radius: 5px;
 	/* For IE8 and earlier */
@@ -207,7 +205,6 @@ user-select: none;}
 									<option value="ROLE_DC_ME">Deptt. Coordinator (ME)</option>
 									<option value="ROLE_DC_CVU">Deptt. Coordinator (CVU)</option>
 									<option value="ROLE_RDIL">RDIL</option>
-									<option value="ROLE_ADMIN">Admin</option>
 							</select></td>
 						</tr>
 						<tr>

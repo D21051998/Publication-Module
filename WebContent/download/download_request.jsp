@@ -16,6 +16,8 @@
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- Custom styles for this template -->
 <link href="../resources/styles_header/custom.css" rel="stylesheet">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -115,10 +117,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color:rgba(255,255,255,0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	border-radius: 5px;
 	/* For IE8 and earlier */
@@ -155,15 +155,22 @@ div.transbox {
 			<div class="col-md-4"></div>
 			<div class="col-md-4 transbox">
 				<form action="../DownloadResponse" method="get">
-					<table class="table">
+					<style>
+					.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
+	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
+	border: none;
+}
+					</style>
+					<table class="table table-borderless">
 						<tr>
 							<td>From</td>
-							<td><input type="date" class="form-control" required="true"
+							<td><input type="date" id="datePicker2" class="form-control" required="true"
 								name="from"></td>
 						</tr>
 						<tr>
 							<td>TO</td>
-							<td><input type="date" class="form-control" required="true"
+							<td><input type="date" id="datePicker" class="form-control" required="true"
 								name="to"></td>
 						</tr>
 						<tr>
@@ -221,14 +228,7 @@ div.transbox {
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CLL\">CLL");
 											break;
 									}
-								%> <!-- <input type="checkbox" name="branch" value="APS">APS<br>
-								<input type="checkbox" name="branch" value="CEE">CEE<br>
-								<input type="checkbox" name="branch" value="CSE">CSE<br>
-								<input type="checkbox" name="branch" value="ECE">ECE<br>
-								<input type="checkbox" name="branch" value="MED">MED<br>
-								<input type="checkbox" name="branch" value="SOM">SOM<br>
-								<input type="checkbox" name="branch" value="SOL">SOL<br>
-								<input type="checkbox" name="branch" value="CLL">CLL -->
+								%>
 							</td>
 						</tr>
 						<tr>
@@ -246,14 +246,18 @@ div.transbox {
 		</div>
 
 	</div>
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 	<script>
-		$(function() {
-			// Find any date inputs and override their functionality
-			$('input[type="date"]').datepicker({
-				dateFormat : 'yy-mm-dd'
-			}).datepicker("setDate", new Date());
+		$(document).ready(function() {
+			var now = new Date();
+			var month = (now.getMonth() + 1);
+			var day = now.getDate();
+			if (month < 10)
+				month = "0" + month;
+			if (day < 10)
+				day = "0" + day;
+			var today = now.getFullYear() + '-' + month + '-' + day;
+			$('#datePicker').val(today);
 		});
 	</script>
 </body>

@@ -32,8 +32,8 @@ public class DownloadResponse extends HttpServlet {
 		// TODO Auto-generated method stub
 		String dfrom =  request.getParameter("from");
 		String dto = request.getParameter("to");
-		String source = request.getParameter("source");
-		String branch  = request.getParameter("branch");
+		String[] source = request.getParameterValues("source");
+		String branch[]  = request.getParameterValues("branch");
 		System.out.println(dfrom+" "+dto);
 		for(String s: request.getParameterValues("source")){
 			System.out.println(s);
@@ -46,7 +46,7 @@ public class DownloadResponse extends HttpServlet {
 		response.setContentType("application/vnd.ms-excel");
 		response.setHeader("Content-Disposition", "attachment; filename=abc.xlsx");
 
-		downloadRequest.downloadRequest(response.getOutputStream() , request.getParameterValues("source"), request.getParameterValues("branch"), dfrom, dto);
+		downloadRequest.downloadRequest(response.getOutputStream() ,source , branch, dfrom, dto);
 
 	}
 
