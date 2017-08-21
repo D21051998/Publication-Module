@@ -80,7 +80,7 @@ public class EditPublicationService extends HttpServlet {
 							// System.out.println(checkList);
 							Journal journal = new Journal();
 							JournalMap.journalFormMap(journal, checkList);
-							System.out.println("What i got from page" + journal);
+							//System.out.println("What i got from page" + journal);
 
 							for (FileItem item : checkList) {
 								if (item.isFormField()) {
@@ -145,6 +145,23 @@ public class EditPublicationService extends HttpServlet {
 										} else {
 											Journal oldCopy = dao.getJournalByID(journal.getId());
 											journal.setPlagCopyFileName(oldCopy.getPlagCopyFileName());
+										}
+									}
+									if ("certificate".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											Journal oldCopy = dao.getJournalByID(journal.getId());
+											journal.setCertificateName(oldCopy.getCertificateName());
 										}
 									}
 								}
@@ -234,6 +251,23 @@ public class EditPublicationService extends HttpServlet {
 											chapter.setPlagCopyFileName(oldCopy.getPlagCopyFileName());
 										}
 									}
+									if ("certificate".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											BookChapter oldCopy = dao.getBookChapterByID(chapter.getId());
+											chapter.setCertificateName(oldCopy.getCertificateName());
+										}
+									}
 								}
 
 							}
@@ -319,6 +353,23 @@ public class EditPublicationService extends HttpServlet {
 										} else {
 											Books oldCopy = dao.getBookByID(book.getId());
 											book.setPlagCopyFileName(oldCopy.getPlagCopyFileName());
+										}
+									}
+									if ("certificate".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											Books oldCopy = dao.getBookByID(book.getId());
+											book.setCertificateName(oldCopy.getCertificateName());
 										}
 									}
 								}
@@ -484,6 +535,24 @@ public class EditPublicationService extends HttpServlet {
 											cpo.setPlagCopyFileName(oldCopy.getPlagCopyFileName());
 										}
 									}
+									if ("certificate".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											ConferenceProceedings oldCopy = dao
+													.getConferenceProceedingsByID(cpo.getId());
+											cpo.setCertificateName(oldCopy.getCertificateName());
+										}
+									}
 								}
 
 							}
@@ -571,6 +640,23 @@ public class EditPublicationService extends HttpServlet {
 											report.setPlagCopyFileName(oldCopy.getPlagCopyFileName());
 										}
 									}
+									if ("certificate".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											TechnicalReport oldCopy = dao.getTechnicalReportByID(report.getId());
+											report.setCertificateName(oldCopy.getCertificateName());
+										}
+									}
 								}
 
 							}
@@ -638,6 +724,23 @@ public class EditPublicationService extends HttpServlet {
 										} else {
 											Patent oldCopy = dao.getPatentByID(patent.getId());
 											patent.setPlagReportFileName(oldCopy.getPlagReportFileName());
+										}
+									}
+									if ("plagReport".equals(item.getFieldName())) {
+										String fileName = new File(item.getName()).getName();
+										if (item.getName() != null && !item.getName().isEmpty()
+												&& !fileName.isEmpty()) {
+											System.out.println("FILENAME" + fileName);
+											if (!file.exists()) {
+												file.mkdir();
+											}
+											String filePath = file.getAbsolutePath() + File.separator + fileName;
+											System.out.println("FILEPATH" + filePath);
+											File storeFile = new File(filePath);
+											item.write(storeFile);
+										} else {
+											Patent oldCopy = dao.getPatentByID(patent.getId());
+											patent.setCertificateName(oldCopy.getCertificateName());
 										}
 									}
 								}

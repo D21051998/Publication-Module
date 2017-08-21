@@ -14,13 +14,22 @@ public class ConferenceProceedings {
 	private String monthAssigned;
 	private String monthPublished;
 	private String publisher;
-	private int pageNo;
+	private String pageNo;
 	private String hyperlink;
 	private String index;
 	private String link;
 	private String publicationFileName;
 	private String plagReportFileName;
 	private String plagCopyFileName;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	private	int status;
 	private	String writtenBy;
 	
@@ -97,10 +106,10 @@ public class ConferenceProceedings {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public int getPageNo() {
+	public String getPageNo() {
 		return pageNo;
 	}
-	public void setPageNo(int pageNo) {
+	public void setPageNo(String pageNo) {
 		this.pageNo = pageNo;
 	}
 	public String getHyperlink() {

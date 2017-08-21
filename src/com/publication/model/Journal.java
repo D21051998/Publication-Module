@@ -14,8 +14,8 @@ public class Journal {
 	private	String monthAssigned;
 	private	int volume;
 	private	int issue;
-	private	int pageNo;
-	private	int doiNo;
+	private	String pageNo;
+	private	String doiNo;
 	private	String impactFactor;
 	private	String whatImpactFactor;
 	private	String linkImpFactor;
@@ -28,6 +28,15 @@ public class Journal {
 	private String publicationFileName;
 	private String plagReportFileName;
 	private String plagCopyFileName;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	private	int status;
 	private	String writtenBy;
 	
@@ -106,16 +115,16 @@ public class Journal {
 	public void setIssue(int issue) {
 		this.issue = issue;
 	}
-	public int getPageNo() {
+	public String getPageNo() {
 		return pageNo;
 	}
-	public void setPageNo(int pageNo) {
+	public void setPageNo(String pageNo) {
 		this.pageNo = pageNo;
 	}
-	public int getDoiNo() {
+	public String getDoiNo() {
 		return doiNo;
 	}
-	public void setDoiNo(int doiNo) {
+	public void setDoiNo(String doiNo) {
 		this.doiNo = doiNo;
 	}
 	public String getImpactFactor() {

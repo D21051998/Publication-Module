@@ -14,7 +14,7 @@ public class BookChapter {
 	private int year;
 	private String monthPublished;
 	private String monthAssigned;
-	private int pageNo;
+	private String pageNo;
 	private String isbn;
 	private String hyperLink;
 	private String indexFlag;
@@ -22,6 +22,15 @@ public class BookChapter {
 	private String publicationFileName;
 	private String plagReportFileName;
 	private String plagCopyFileName;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	private int status;
 	public String getId() {
 		return id;
@@ -156,11 +165,11 @@ public class BookChapter {
 		this.monthAssigned = monthAssigned;
 	}
 
-	public int getPageNo() {
+	public String getPageNo() {
 		return pageNo;
 	}
 
-	public void setPageNo(int pageNo) {
+	public void setPageNo(String pageNo) {
 		this.pageNo = pageNo;
 	}
 
@@ -209,10 +218,11 @@ public class BookChapter {
 		return "BookChapter [id=" + id + ", pcn=" + pcn + ", nameOauthors=" + nameOauthors + ", deptt=" + deptt
 				+ ", chapterNo=" + chapterNo + ", chapterTitle=" + chapterTitle + ", bookTitle=" + bookTitle
 				+ ", publisher=" + publisher + ", nationality=" + nationality + ", year=" + year + ", monthPublished="
-				+ monthPublished + ", monthOfPCN=" + monthAssigned + ", pageNo=" + pageNo + ", isbn=" + isbn
+				+ monthPublished + ", monthAssigned=" + monthAssigned + ", pageNo=" + pageNo + ", isbn=" + isbn
 				+ ", hyperLink=" + hyperLink + ", indexFlag=" + indexFlag + ", indexLink=" + indexLink
 				+ ", publicationFileName=" + publicationFileName + ", plagReportFileName=" + plagReportFileName
-				+ ", plagCopyFileName=" + plagCopyFileName + ", status=" + status + ", writtenBy=" + writtenBy + "]";
+				+ ", plagCopyFileName=" + plagCopyFileName + ", certificateName=" + certificateName + ", status="
+				+ status + ", writtenBy=" + writtenBy + "]";
 	}
 
 	public BookChapter(BookChapter bookChapter) {

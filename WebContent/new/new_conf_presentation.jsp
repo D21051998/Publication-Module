@@ -140,16 +140,19 @@ div.transbox {
 
 <body>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-		}
-		System.out.println(sid);
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 	%>
-
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 	<div class="container-fluid content">
 		<div class="row">
@@ -170,7 +173,7 @@ div.transbox {
 					<table class="table table-borderless">
 						<tr>
 							<td>Faculty</td>
-							<td><input type="text" name="faculty" class="form-control"></td>
+							<td><input type="text" name="faculty" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
@@ -183,11 +186,11 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" class="form-control"></td>
+							<td><input type="text" name="title" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Conference Presentation</td>
-							<td><input type="text" name="conferencePresentation"
+							<td><input type="text" required="on" autocomplete="off" name="conferencePresentation"
 								class="form-control"></td>
 						</tr>
 						<tr>
@@ -200,12 +203,12 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Organised by</td>
-							<td><input type="text" name="organisedBy"
+							<td><input type="text" name="organisedBy" required="on" autocomplete="off"
 								class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" class="form-control"></td>
+							<td><input type="text" name="venue" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Year</td>
@@ -221,7 +224,7 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Dates (add comma to separate dates..)</td>
-							<td><input type="text" name="dates" class="form-control"></td>
+							<td><input type="text" name="dates" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Month in which published</td>
@@ -239,16 +242,17 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperlink" class="form-control"></td>
+							<td><input type="text" name="hyperlink"  required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file name=publication required="on" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file name=plagReport required="on"  /></td>
 						</tr>
+						
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />

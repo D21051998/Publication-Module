@@ -29,7 +29,7 @@ public class JournalIMPL implements JournalDAO {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
 					"insert into journal (nameOauthors, deptt, title, journal, nationality, year, monthPublished, volume, issue, pageNo,"
-							+ " doiNo, impactFactor, whatImpactFactor, linkImpFactor, paidOrUnpaid, paymentFlag, pwflag, psflag, pgflag, piflag, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							+ " doiNo, impactFactor, whatImpactFactor, linkImpFactor, paidOrUnpaid, paymentFlag, pwflag, psflag, pgflag, piflag, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, journal.getNameOauthors());
 			ps.setString(2, journal.getDeptt().toUpperCase());
 			ps.setString(3, journal.getTitle());
@@ -39,8 +39,8 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(7, journal.getMonthPublished());
 			ps.setInt(8, journal.getVolume());
 			ps.setInt(9, journal.getIssue());
-			ps.setInt(10, journal.getPageNo());
-			ps.setInt(11, journal.getDoiNo());
+			ps.setString(10, journal.getPageNo());
+			ps.setString(11, journal.getDoiNo());
 			ps.setString(12, journal.getImpactFactor());
 			ps.setString(13, journal.getWhatImpactFactor());
 			ps.setString(14, journal.getLinkImpFactor());
@@ -73,6 +73,7 @@ public class JournalIMPL implements JournalDAO {
 				id = String.format("J%04d", sno);
 			}
 			ps.setString(26, id);
+			ps.setString(27, journal.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -96,7 +97,7 @@ public class JournalIMPL implements JournalDAO {
 			ps = connection.prepareStatement(
 					"update journal set nameOauthors=?, deptt=?, title=?, journal=?, nationality=?, year=?, monthPublished=?, volume=?, issue=?, pageNo=?,"
 							+ " doiNo=?, impactFactor=?, whatImpactFactor=?, linkImpFactor=?, paidOrUnpaid=?, paymentFlag=?,"
-							+ " pwflag=?, psflag=?, pgflag=?, piflag=?, publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where  id=?");
+							+ " pwflag=?, psflag=?, pgflag=?, piflag=?, publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=?,certificateName=? where  id=?");
 			ps.setString(1, journal.getNameOauthors());
 			ps.setString(2, journal.getDeptt().toUpperCase());
 			ps.setString(3, journal.getTitle());
@@ -106,8 +107,8 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(7, journal.getMonthPublished());
 			ps.setInt(8, journal.getVolume());
 			ps.setInt(9, journal.getIssue());
-			ps.setInt(10, journal.getPageNo());
-			ps.setInt(11, journal.getDoiNo());
+			ps.setString(10, journal.getPageNo());
+			ps.setString(11, journal.getDoiNo());
 			ps.setString(12, journal.getImpactFactor());
 			ps.setString(13, journal.getWhatImpactFactor());
 			ps.setString(14, journal.getLinkImpFactor());
@@ -122,7 +123,8 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(23, journal.getPlagCopyFileName());
 			ps.setInt(24, journal.getStatus());
 			ps.setString(25, journal.getWrittenBy());
-			ps.setString(26, journal.getId());
+			ps.setString(26, journal.getCertificateName());
+			ps.setString(27, journal.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -158,8 +160,8 @@ public class JournalIMPL implements JournalDAO {
 				j.setMonthAssigned(rs.getString("monthAssigned"));
 				j.setVolume(rs.getInt("volume"));
 				j.setIssue(rs.getInt("issue"));
-				j.setPageNo(rs.getInt("pageNo"));
-				j.setDoiNo(rs.getInt("doiNo"));
+				j.setPageNo(rs.getString("pageNo"));
+				j.setDoiNo(rs.getString("doiNo"));
 				j.setImpactFactor(rs.getString("impactFactor"));
 				j.setWhatImpactFactor(rs.getString("whatImpactFactor"));
 				j.setLinkImpFactor(rs.getString("linkImpFactor"));
@@ -172,6 +174,7 @@ public class JournalIMPL implements JournalDAO {
 				j.setPublicationFileName(rs.getString("publicationFileName"));
 				j.setPlagReportFileName(rs.getString("plagReportFileName"));
 				j.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				j.setCertificateName(rs.getString("certificateName"));
 				j.setStatus(rs.getInt("status"));
 				j.setWrittenBy(rs.getString("writtenBy"));
 				list.add(j);
@@ -198,6 +201,7 @@ public class JournalIMPL implements JournalDAO {
 			if (rs.next()) {
 				Journal j = new Journal();
 				j.setId(rs.getString("id"));
+				j.setCertificateName(rs.getString("certificateName"));
 				j.setPcn(rs.getString("pcn"));
 				j.setNameOauthors(rs.getString("nameOauthors"));
 				j.setDeptt(rs.getString("deptt"));
@@ -209,8 +213,8 @@ public class JournalIMPL implements JournalDAO {
 				j.setMonthAssigned(rs.getString("monthAssigned"));
 				j.setVolume(rs.getInt("volume"));
 				j.setIssue(rs.getInt("issue"));
-				j.setPageNo(rs.getInt("pageNo"));
-				j.setDoiNo(rs.getInt("doiNo"));
+				j.setPageNo(rs.getString("pageNo"));
+				j.setDoiNo(rs.getString("doiNo"));
 				j.setImpactFactor(rs.getString("impactFactor"));
 				j.setWhatImpactFactor(rs.getString("whatImpactFactor"));
 				j.setLinkImpFactor(rs.getString("linkImpFactor"));
@@ -325,8 +329,8 @@ public class JournalIMPL implements JournalDAO {
 			ps.setString(7, journal.getMonthPublished());
 			ps.setInt(8, journal.getVolume());
 			ps.setInt(9, journal.getIssue());
-			ps.setInt(10, journal.getPageNo());
-			ps.setInt(11, journal.getDoiNo());
+			ps.setString(10, journal.getPageNo());
+			ps.setString(11, journal.getDoiNo());
 			ps.setString(12, journal.getImpactFactor());
 			ps.setString(13, journal.getWhatImpactFactor());
 			ps.setString(14, journal.getLinkImpFactor());
@@ -413,13 +417,14 @@ public class JournalIMPL implements JournalDAO {
 				j.setMonthAssigned(rs.getString("monthAssigned"));
 				j.setVolume(rs.getInt("volume"));
 				j.setIssue(rs.getInt("issue"));
-				j.setPageNo(rs.getInt("pageNo"));
-				j.setDoiNo(rs.getInt("doiNo"));
+				j.setPageNo(rs.getString("pageNo"));
+				j.setDoiNo(rs.getString("doiNo"));
 				j.setImpactFactor(rs.getString("impactFactor"));
 				j.setWhatImpactFactor(rs.getString("whatImpactFactor"));
 				j.setLinkImpFactor(rs.getString("linkImpFactor"));
 				j.setPaidOrUnpaid(rs.getString("paidOrUnpaid"));
 				j.setPaymentFlag(rs.getString("paymentFlag"));
+				j.setCertificateName(rs.getString("certificateName"));
 				j.setPwFlag(rs.getString("pwFlag"));
 				j.setPsFlag(rs.getString("psFlag"));
 				j.setPgFlag(rs.getString("pgFlag"));

@@ -45,7 +45,7 @@ public class ConferenceProceedingMap {
 				conferenceProceeding.setPublisher(item.getString());
 				break;
 			case "pageNo":
-				conferenceProceeding.setPageNo(Integer.parseInt(item.getString()));
+				conferenceProceeding.setPageNo((item.getString()));
 				break;
 			case "hyperLink":
 				conferenceProceeding.setHyperlink(item.getString());
@@ -75,6 +75,10 @@ public class ConferenceProceedingMap {
 			case "plagCopy":
 				conferenceProceeding.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
 				break;
+			case "certificate":
+				conferenceProceeding.setCertificateName(FilenameUtils.getName(item.getName()));
+				break;
+			
 			}
 		}
 		conferenceProceeding.setIndex(indices);

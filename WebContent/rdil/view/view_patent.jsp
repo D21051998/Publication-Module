@@ -148,17 +148,21 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	System.out.println(lao.getRoleBySessionID(sid));
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<Patent> list = dao.getAllPatents();
 		for (Patent j : list) {
 			System.out.println(j);
 		}
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-			return;
-		}
-		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
-		System.out.println(pageContext.getAttribute("principal"));
+		
 		request.setAttribute("eList", list);
 	%>
 	
@@ -207,7 +211,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -267,7 +271,8 @@ div.transbox {
 						<th>Award Date</th>
 						<th>Patent No</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
+						<th>Plagiarism Report</th>
+						<th>Certificate</th>
 						<th>Status</th>
 						<th>Edit</th>
 						<th>Delete</th>

@@ -24,9 +24,7 @@ public class DownloadIMPL implements DownloadDAO {
 	@Override
 	public void downloadRequest(ServletOutputStream servletOutputStream, String[] what, String[] branch, String from,
 			String to) {
-		// TODO Auto-generated method stub
 		XSSFWorkbook workbook = new XSSFWorkbook();
-
 		for (String source : what) {
 			switch (source) {
 			case "bookChapter":
@@ -43,6 +41,12 @@ public class DownloadIMPL implements DownloadDAO {
 				break;
 			case "techRep":
 				downloadTechnicalReport(workbook, branch, from, to);
+				break;
+			case "confPresentation":
+				downloadConferencePresentation(workbook, branch, from, to);
+				break;
+			case "confProceeding":
+				downloadConferenceProceedings(workbook, branch, from, to);
 				break;
 			}
 		}
@@ -122,8 +126,8 @@ public class DownloadIMPL implements DownloadDAO {
 		}
 		return sheet;
 	}
+	
 	public XSSFSheet downloadTechnicalReport(XSSFWorkbook workbook, String[] branches, String from, String to) {
-
 		XSSFSheet sheet = workbook.createSheet("Technical Reports");
 		Connection connection = null;
 		PreparedStatement ps1 = null;
@@ -178,6 +182,122 @@ public class DownloadIMPL implements DownloadDAO {
 		return sheet;
 	}
 
+	//TO BE CHANGED
+	
+	public XSSFSheet downloadConferencePresentation(XSSFWorkbook workbook, String[] branches, String from, String to) {
+		XSSFSheet sheet = workbook.createSheet("Conference Presentation");
+		Connection connection = null;
+		PreparedStatement ps1 = null;
+		try {
+			List<Object[]> list = new ArrayList<>();
+			sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, 10));
+			list.add(new Object[] { "S.No", "PCN", "Faculty", "Department", "Title", "Year","Conference Presentation","International/National","Organised By"
+            , "Venue","Year","Dates","Hyperlink","Month Published", "Month Assigned"});
+			connection = ConnectionFactory.getConnection();
+			ps1 = connection
+					.prepareStatement("select * from tech_rep where deptt=? and monthAssigned between ? and ?");
+			int sno = 1;
+			for (String branch : branches) {
+				ps1.setString(1, branch);
+				ps1.setString(2, from);
+				ps1.setString(3, to);
+				ResultSet rs = ps1.executeQuery();
+				while (rs.next()) {
+					list.add(new Object[] { Integer.toString(sno),
+							rs.getString("pcn") == null ? "-" : rs.getString("pcn"), rs.getString("faculty"),
+							rs.getString("deptt").toUpperCase(), rs.getString("title"), rs.getString("year"),
+							rs.getString("conferencePresentation"),rs.getString("nationality"),rs.getString("organisedBy"), rs.getString("venue"), rs.getString("year"),rs.getString("dates"),
+							rs.getString("hyperlink") ,rs.getString("monthPublished"),
+							rs.getString("monthAssigned") == null ? "-" : rs.getString("monthAssigned")});
+				}
+			}
+			int rowCount = 2;
+			for (Object[] objs : list) {
+				Row row = sheet.createRow(rowCount++);
+				int colCount = 0;
+				for (Object field : objs) {
+					try {
+						System.out.print(field.toString() + " ");
+					} catch (NullPointerException e) {
+
+					}
+					Cell cell = row.createCell(colCount++);
+					if (field instanceof String) {
+						cell.setCellValue((String) field);
+					}
+					if (field instanceof Integer) {
+						cell.setCellValue((Integer) field);
+					}
+				}
+				System.out.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+			ps1 = null;
+		}
+		return sheet;
+	}
+
+	
+	public XSSFSheet downloadConferenceProceedings(XSSFWorkbook workbook, String[] branches, String from, String to) {
+
+		XSSFSheet sheet = workbook.createSheet("Conference Proceedings");
+		Connection connection = null;
+		PreparedStatement ps1 = null;
+		try {
+			List<Object[]> list = new ArrayList<>();
+			sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, 10));
+			list.add(new Object[] { "S.No", "PCN", "Name of Authors", "Department", "Title of Report", "Conference Proceedings","International/National", "Venue", "Year", 
+            "Month Published", "Month Assigned","publisher", "pageNo","hyperlink","index" ,"link"});
+			connection = ConnectionFactory.getConnection();
+			ps1 = connection
+					.prepareStatement("select * from conf_proc where deptt=? and monthAssigned between ? and ?");
+			int sno = 1;
+			for (String branch : branches) {
+				ps1.setString(1, branch);
+				ps1.setString(2, from);
+				ps1.setString(3, to);
+				ResultSet rs = ps1.executeQuery();
+				while (rs.next()) {
+					list.add(new Object[] { Integer.toString(sno),
+							rs.getString("pcn") == null ? "-" : rs.getString("pcn"), rs.getString("nameOauthors"),
+							rs.getString("deptt").toUpperCase(), rs.getString("title"), rs.getString("proceedingsOf"), rs.getString("nationality"), rs.getString("venue") ,rs.getString("year"), rs.getString("monthPublished"),
+							rs.getString("monthAssigned") == null ? "-" : rs.getString("monthAssigned"),rs.getString("publisher"), rs.getString("pageNo"), rs.getString("hyperlink"),
+							rs.getString("index"), rs.getString("link")});
+				}
+			}
+			int rowCount = 2;
+			for (Object[] objs : list) {
+				Row row = sheet.createRow(rowCount++);
+				int colCount = 0;
+				for (Object field : objs) {
+					try {
+						System.out.print(field.toString() + " ");
+					} catch (NullPointerException e) {
+
+					}
+					Cell cell = row.createCell(colCount++);
+					if (field instanceof String) {
+						cell.setCellValue((String) field);
+					}
+					if (field instanceof Integer) {
+						cell.setCellValue((Integer) field);
+					}
+				}
+				System.out.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.close(connection);
+			ps1 = null;
+		}
+		return sheet;
+	}
+
+	
 
 	public XSSFSheet downloadJournal(XSSFWorkbook workbook, String[] branches, String from, String to) {
 		XSSFSheet sheet = workbook.createSheet("Journals");
@@ -382,12 +502,12 @@ public class DownloadIMPL implements DownloadDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"select publicationfilename,plagreportfilename, plagcopyfilename from journal where id=?");
+					"select publicationfilename,plagreportfilename, plagcopyfilename,certificateName from journal where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),
-						rs.getString("plagcopyfilename") };
+						rs.getString("plagcopyfilename"),rs.getString("certificateName") };
 			} else {
 				return null;
 			}
@@ -406,12 +526,12 @@ public class DownloadIMPL implements DownloadDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"select publicationfilename,plagreportfilename, plagcopyfilename from book_chapter where id=?");
+					"select publicationfilename,plagreportfilename, plagcopyfilename,certificateName from book_chapter where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),
-						rs.getString("plagcopyfilename") };
+						rs.getString("plagcopyfilename"),rs.getString("certificateName") };
 			} else {
 				return null;
 			}
@@ -430,12 +550,12 @@ public class DownloadIMPL implements DownloadDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"select publicationfilename,plagreportfilename, plagcopyfilename from book where id=?");
+					"select publicationfilename,plagreportfilename, plagcopyfilename,certificateName from book where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),
-						rs.getString("plagcopyfilename") };
+						rs.getString("plagcopyfilename"), rs.getString("certificateName") };
 			} else {
 				return null;
 			}
@@ -458,7 +578,7 @@ public class DownloadIMPL implements DownloadDAO {
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename") };
+				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),"","" };
 			} else {
 				return null;
 			}
@@ -477,12 +597,12 @@ public class DownloadIMPL implements DownloadDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"select publicationfilename,plagreportfilename, plagcopyfilename from conf_proc where id=?");
+					"select publicationfilename,plagreportfilename, plagcopyfilename,certificateName from conf_proc where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),
-						rs.getString("plagcopyfilename") };
+						rs.getString("plagcopyfilename") ,rs.getString("certificateName")};
 			} else {
 				return null;
 			}
@@ -500,11 +620,11 @@ public class DownloadIMPL implements DownloadDAO {
 		PreparedStatement ps = null;
 		try {
 			connection = ConnectionFactory.getConnection();
-			ps = connection.prepareStatement("select publicationfilename,plagreportfilename from patent where id=?");
+			ps = connection.prepareStatement("select publicationfilename,plagreportfilename,certificateName from patent where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename") };
+				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),"" ,rs.getString("certificateName") };
 			} else {
 				return null;
 			}
@@ -523,12 +643,12 @@ public class DownloadIMPL implements DownloadDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"select publicationfilename,plagreportfilename, plagcopyfilename from tech_rep where id=?");
+					"select publicationfilename,plagreportfilename, plagcopyfilename,certificateName from tech_rep where id=?");
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new String[] { rs.getString("publicationfilename"), rs.getString("plagreportfilename"),
-						rs.getString("plagcopyfilename") };
+						rs.getString("plagcopyfilename"),rs.getString("certificateName") };
 			} else {
 				return null;
 			}

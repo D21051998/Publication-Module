@@ -42,10 +42,10 @@ public class JournalMap {
 				journal.setIssue(Integer.parseInt(item.getString()));
 				break;
 			case "pageNo":
-				journal.setPageNo(Integer.parseInt(item.getString()));
+				journal.setPageNo((item.getString()));
 				break;
 			case "doiNo":
-				journal.setDoiNo(Integer.parseInt(item.getString()));
+				journal.setDoiNo((item.getString()));
 				break;
 			case "impactFactor":
 				journal.setImpactFactor(item.getString());
@@ -89,6 +89,10 @@ public class JournalMap {
 			case "plagCopy":
 				journal.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
 				break;
+			case "certificate":
+				journal.setCertificateName(FilenameUtils.getName(item.getName()));
+				break;
+			
 			}
 		}
 

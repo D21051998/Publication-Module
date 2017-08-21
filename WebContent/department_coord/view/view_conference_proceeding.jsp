@@ -1,4 +1,5 @@
- <%@page import="com.publication.model.ConferenceProceedings"%>
+
+<%@page import="com.publication.model.ConferenceProceedings"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,12 +17,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -115,7 +116,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
 	width: auto;
 	/* For IE8 and earlier */
@@ -143,15 +144,12 @@ div.transbox {
 	}
 </script>
 <body>
-	<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"
-		scope="page"></jsp:useBean>
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferenceProceedingIMPL" scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
 		List<ConferenceProceedings> list = dao.getAllConferenceProceedingss();
-		for (ConferenceProceedings j : list) {
-			System.out.println(j);
-		}
 		String sid = (String) request.getSession(false).getAttribute("sid");
 		if (null == sid) {
 			response.sendRedirect("../../account/access_denied.jsp");
@@ -193,8 +191,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../coordinator_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -210,7 +208,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -219,12 +217,14 @@ div.transbox {
 	</nav>
 
 	<div class="container-fluid content">
-<br><br><br>
+		<br>
+		<br>
+		<br>
 		<div class="row">
-		
+
 			<div class="col-md-12 transbox">
-			<h3>View Conference Proceedings</h3>
-			<div>
+				<h3>View Conference Proceedings</h3>
+				<div>
 					<c:if test="${not empty param.approve}">
 						<p>
 							<c:if test="${param.approve == 'success'}">
@@ -268,8 +268,9 @@ div.transbox {
 						<th>Indices</th>
 						<th>Link</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="cp">
@@ -277,10 +278,11 @@ div.transbox {
 							<tr>
 								<td><c:if test="${empty cp.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty cp.pcn}">
-										<c:out value="${cp.pcn}" /><br> <br> <c:out
-										value="${cp.monthAssigned}" />
+									</c:if> <c:if test="${not empty cp.pcn}">
+										<c:out value="${cp.pcn}" />
+										<br>
+										<br>
+										<c:out value="${cp.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${cp.nameOauthors}" /></td>
 								<td><c:out value="${cp.deptt}" /></td>
@@ -299,20 +301,32 @@ div.transbox {
 									<c:param name="id" value="${cp.id}"></c:param>
 									<c:param name="type" value="P"></c:param>
 								</c:url>
-								
-								<td><a href="${download}&index=0">Download</a></td>
-								<td><a href="${download}&index=1">Download</a></td>
-								<td><a href="${download}&index=2">Download</a></td>
-								
+
+								<td><a href="${download}&index=0" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+								<td><a href="${download}&index=1" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+								<td><a href="${download}&index=2" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+								<td><a href="${download}&index=3" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${cp.id}" />
 									<c:param name="level" value="1"></c:param>
 									<c:param name="type" value="P"></c:param>
-									
+
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
-								
+
 								<c:choose>
 									<c:when test="${cp.status==0}">
 										<td><a class="btn btn-info disabled">Pending</a> <br>
@@ -356,13 +370,15 @@ div.transbox {
 
 									</c:when>
 									<c:when test="${cp.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a></td>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a></td>
 									</c:when>
 									<c:when test="${cp.status==-1}">
 										<td><a class="btn btn-info disabled">Rejected</a></td>
 									</c:when>
 									<c:when test="${cp.status==2}">
-										<td><a class="btn btn-info disabled"> Approved By RDIL</a></td>
+										<td><a class="btn btn-info disabled"> Approved By
+												RDIL</a></td>
 									</c:when>
 									<c:when test="${cp.status==-2}">
 										<td><a class="btn btn-info disabled">Rejected By RDIL</a></td>
@@ -383,8 +399,8 @@ div.transbox {
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-	
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
 			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -401,6 +417,6 @@ div.transbox {
 			document.getElementById('reject_id').value = att;
 		}
 	</script>
-	
+
 </body>
 </html>

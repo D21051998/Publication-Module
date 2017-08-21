@@ -151,20 +151,16 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).contains("ROLE_DC")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<BookChapter> list = dao.getAllBookChapters();
-		for (BookChapter b : list) {
-			System.out.println(b);
-		}
-
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../../account/access_denied.jsp");
-			return;
-		}
-		if (!lao.getRoleBySessionID(sid).contains("ROLE_DC")) {
-			response.sendRedirect("../../account/access_denied.jsp");
-			return;
-		}
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
 		request.setAttribute("eList", list);
 
@@ -215,7 +211,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -257,8 +253,9 @@ div.transbox {
 						<th>Index Flag</th>
 						<th>Index Link</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="bookChapter">
@@ -298,6 +295,9 @@ div.transbox {
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
 								<td><a href="${download}&index=2" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+								<td><a href="${download}&index=3" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
 								

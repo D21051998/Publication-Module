@@ -138,14 +138,18 @@ div.transbox {
 </script>
 <body>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-		}
-		System.out.println(sid);
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 	%>
 
 	<div class="container-fluid content">
@@ -176,7 +180,7 @@ h3 {
 						<tr>
 							<td>Name of authors</td>
 							<td><input type="text" class="form-control"
-								name="nameOauthors" placeholder="Name of Authors.."></td>
+								name="nameOauthors" placeholder="Name of Authors.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
@@ -190,12 +194,12 @@ h3 {
 						<tr>
 							<td>Title Of Paper</td>
 							<td><input type="text" class="form-control" name="title"
-								placeholder="Title goes here.."></td>
+								placeholder="Title goes here.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Journal</td>
 							<td><input type="text" class="form-control" name="journal"
-								placeholder="Journal.."></td>
+								placeholder="Journal.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -234,37 +238,37 @@ h3 {
 						<tr>
 							<td>Volume</td>
 							<td><input type="text" class="form-control" name="volume"
-								placeholder="Volume.."></td>
+								placeholder="Volume.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Number/Issue</td>
 							<td><input type="text" class="form-control" name="issue"
-								placeholder="Which volume.."></td>
+								placeholder="Which volume.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Page No.</td>
 							<td><input type="text" class="form-control" name="pageNo"
-								placeholder="Page No.."></td>
+								placeholder="Page No.."> required="on" autocomplete="off"</td>
 						</tr>
 						<tr>
 							<td>DOI No.</td>
 							<td><input type="text" class="form-control" name="doiNo"
-								required="on" placeholder="DOI No.."></td>
+								required="on" placeholder="DOI No.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Impact Factor</td>
 							<td><input type="text" class="form-control"
-								name="impactFactor" placeholder="Impact Factor"></td>
+								name="impactFactor" placeholder="Impact Factor" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Specify which impact factor</td>
 							<td><input type="text" class="form-control"
-								name="whatImpactFactor" placeholder="Which"></td>
+								name="whatImpactFactor" placeholder="Which" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Link for Impact factor</td>
 							<td><input type="text" class="form-control"
-								name="linkImpFactor" placeholder="Link goes here.."></td>
+								name="linkImpFactor" placeholder="Link goes here.." required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Paid/Unpaid</td>
@@ -313,15 +317,19 @@ h3 {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file name=publication required="on"/></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file name=plagReport required="on"/></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
-							<td><input type=file name=plagCopy /></td>
+							<td>Plagiarism Copy</td>
+							<td><input type=file name=plagCopy required="on"/></td>
+						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td><input type=file name=certificate required="on"/></td>
 						</tr>
 						<tr>
 							<input type="hidden" name="writtenBy"

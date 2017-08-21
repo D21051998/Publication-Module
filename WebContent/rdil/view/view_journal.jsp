@@ -172,20 +172,21 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	System.out.println(lao.getRoleBySessionID(sid));
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<Journal> list = dao.getAllJournals();
 		for (Journal j : list) {
 			System.out.println(j);
 		}
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		System.out.println(sid);
-		if (null == sid) {
-			response.sendRedirect("../../");
-			return;
-		}
-		if (!lao.getRoleBySessionID(sid).contains("RDIL")) {
-			response.sendRedirect("../../account/access_denied.jsp");
-			return;
-		}
+		
 		request.setAttribute("eList", list);
 	%>
 	
@@ -234,7 +235,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -307,8 +308,9 @@ div.transbox {
 						<th>PG:(Google Scholar)</th>
 						<th>PI:(Indian Citation Index)</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 
@@ -353,7 +355,9 @@ div.transbox {
 								<td><a href="${download}&index=2" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
-
+								<td><a href="${download}&index=3" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${journal.id}" />
 									<c:param name="level" value="2"></c:param>

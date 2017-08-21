@@ -15,6 +15,15 @@ public class TechnicalReport {
 	private String publicationFileName;
 	private String plagReportFileName;
 	private String plagCopyFileName;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	private int status;
 	private String writtenBy;
 	public String getId() {

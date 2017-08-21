@@ -156,7 +156,17 @@ div.transbox {
 </head>
 <body>
 	<jsp:useBean id="dao" class="com.publication.impl.TechnicalReportIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 	TechnicalReport report = dao.getTechnicalReportByID(request.getParameter("id"));
 	if(null==report){
 		return;
@@ -191,7 +201,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -287,14 +297,19 @@ div.transbox {
 							<input type="file" name="publication" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
+							<td>Plagiarism Report</td>
 							<td>${report.plagReportFileName}<br>
 							<input type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
+							<td>Plagiarism Copy</td>
 							<td>${report.plagCopyFileName}<br>
 							<input type="file" name="plagCopy" /></td>
+						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td>${report.certificateName}<br> <input
+								type="file" name="certificate" /></td>
 						</tr>
 						<tr>
 							<td><button type="reset" class="form-control">Reset</button></td>

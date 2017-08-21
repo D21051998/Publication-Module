@@ -136,14 +136,18 @@ div.transbox {
 
 </head>
 <body>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-		}
-		System.out.println(sid);
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 	%>
 
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
@@ -167,7 +171,7 @@ div.transbox {
 						<tr>
 							<td>Faculty</td>
 							<td><input type="text" class="form-control" required="on"
-								name="faculty"></td>
+								name="faculty" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
@@ -182,7 +186,7 @@ div.transbox {
 						<tr>
 							<td>Title of Patent</td>
 							<td><input type="text" class="form-control" required="on"
-								name="title"></td>
+								name="title" required="on" autocomplete="off"></td>
 						</tr>
 
 						<tr>
@@ -196,13 +200,13 @@ div.transbox {
 
 						<tr>
 							<td>Country</td>
-							<td><input type="text" class="form-control" id="country"
+							<td><input type="text" class="form-control" id="country" required="on" autocomplete="off"
 								name="country"></td>
 						</tr>
 
 						<tr>
 							<td>Patent Application Number</td>
-							<td><input type="text" name="applicationNo"
+							<td><input type="text" name="applicationNo" required="on" autocomplete="off"
 								class="form-control"></td>
 						</tr>
 						<tr>
@@ -261,16 +265,21 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Patent No.</td>
-							<td><input type='text' class="form-control" name="patentNo"></td>
+							<td><input type='text' class="form-control" name="patentNo" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file name=publication required="on"/></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file name=plagReport required="on" /></td>
 						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td><input type=file name=certificate required="on"/></td>
+						</tr>
+						
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />

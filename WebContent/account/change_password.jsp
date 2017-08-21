@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <%@page import="com.publication.constants.Redirect"%>
 <html>
 <head>
@@ -15,7 +17,6 @@
 	max-width: 700px;
 	position: relative;
 	top: 50px;
-
 }
 
 td {
@@ -99,7 +100,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('resources/images/background.jpg');
+	background-image: url('../resources/images/background.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -120,7 +121,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 0px solid;
 	width: auto;
 	border-radius: 5px;
@@ -130,13 +131,15 @@ div.transbox {
 a {
 	color: #000000;
 }
-body{
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;}
+
+body {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 </style>
 
 </head>
@@ -162,16 +165,15 @@ user-select: none;}
 
 		if (sess != null) {
 			String sid = (String) request.getSession(false).getAttribute("sid");
-			if (sid != null) {
-				System.out.println(lao.getUsernameBySessionID(sid));
-				response.sendRedirect(Redirect.redirect(lao.getRoleBySessionID(sid), true));
+			if (sid == null) {
+				response.sendRedirect("../");
 				return;
 			}
 
 		}
 	%>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
    <filter id="blur">
        <feGaussianBlur stdDeviation="3" />
    </filter>
@@ -180,12 +182,29 @@ user-select: none;}
 		<div class="row transbox">
 			<div class="col-md-6" align="center">
 				<br>
-				<!-- <h3><strong>The NorthCap University</strong></h3>
-				 
-				 
-				<p>Sector-23A, Gurugram</p><br>
-				-->
-				<br> <img src="resources/images/ncu logo.png"
+				<div>
+					<c:if test="${not empty param.change}">
+						
+						<c:if test="${param.change == 'success'}">
+								<p style="color: green;"><c:out value="Change Successfull."></c:out></p>
+							</c:if>
+							<c:if test="${param.change == 'illegal'}">
+								<p style="color: red;"><c:out value="Password must be alphanumeric with symbols and  7 to 15 chars long. New Passwords must match."></c:out></p>
+							</c:if>
+							<c:if test="${param.change == 'dataloss'}">
+								<p style="color: red;"><c:out value="Cannot Update Password"></c:out></p>
+							</c:if>
+							<c:if test="${param.change == 'nosuchlogin'}">
+								<p style="color: red;"><c:out value="No Such Account Found"></c:out></p>
+							</c:if>
+							<c:if test="${param.change == 'error'}">
+								<p style="color: red;"><c:out value="Error Occured"></c:out></p>
+							</c:if>
+						
+						
+					</c:if>
+				</div>
+				<img src="../resources/images/ncu logo.png"
 					class="img-responsive" width="300" height="200"> <br>
 				<h4>
 					<strong>Publication Module</strong>
@@ -193,31 +212,33 @@ user-select: none;}
 			</div>
 			<div class="col-md-6 form-group" align="center">
 
-				<form method="POST" action="LoginService">
+				<form method="POST" name="form1" action="../ChangePassword">
 					<table class="table table-borderless">
 						<tr>
-							<td><label for="role">Role</label></td>
-							<td>&nbsp;</td>
-							<td><select class="form-control" id="role" name="role">
-									<option value="ROLE_FACULTY">Faculty</option>
-									<option value="ROLE_DC_CSE">Deptt. Coordinator (CSU)</option>
-									<option value="ROLE_DC_ECE">Deptt. Coordinator (ECE)</option>
-									<option value="ROLE_DC_ME">Deptt. Coordinator (ME)</option>
-									<option value="ROLE_DC_CVU">Deptt. Coordinator (CVU)</option>
-									<option value="ROLE_RDIL">RDIL</option>
-							</select></td>
+							<td colspan="3">Logged in as:<c:out
+									value="<%=lao.getUsernameBySessionID(request.getSession(false).getAttribute(\"sid\").toString())%>"></c:out>
+							</td>
 						</tr>
+
 						<tr>
-							<td><label for="username">Username</label></td>
-							<td>&nbsp;</td>
-							<td><input class="form-control" type="text" name="username"
-								id="username"></td>
-						</tr>
-						<tr>
-							<td><label for="password">Password</label></td>
+							<td><label for="password">Old Password</label></td>
 							<td>&nbsp;</td>
 							<td><input class="form-control" type="password"
-								name="password" id="password"></td>
+								name="oldPassword" id="oldPassword"></td>
+						</tr>
+						<tr>
+							<td><label for="password">New Password</label></td>
+							<td>&nbsp;</td>
+							<td><input class="form-control" type="password"
+								name="newPassword1" id="newPassword1" onkeyup='check();'></td>
+						</tr>
+						<tr>
+							<td><label for="password">Again New Password</label></td>
+							<td>&nbsp;</td>
+							<td><input class="form-control" type="password"
+								name="newPassword2" id="newPassword2" onkeyup='check();'>
+								<span id='message'></span></td>
+
 						</tr>
 						<tr>
 							<td>
@@ -225,19 +246,37 @@ user-select: none;}
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<button class="form-control" type="submit">Submit</button>
+								<button class="form-control" type="submit"
+									onclick="CheckPassword(document.form1.newPassword1)">Submit</button>
 							</td>
 						</tr>
 					</table>
 
 				</form>
-				<h5>
-					<strong><a href="account/forgot_password_request.jsp">Forgot
-							Password(Click Here..)</a></strong>
-				</h5>
+
 			</div>
 		</div>
 	</div>
-
+	<script type="text/javascript">
+		function CheckPassword(inputtxt) {
+			var paswd = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+			if (inputtxt.value.match(paswd)) {
+				return true;
+			} else {
+				alert('Password must be alphanumeric with symbols and  7 to 15 chars long.')
+				return false;
+			}
+		}
+		var check = function() {
+			if (document.getElementById('newPassword1').value == document
+					.getElementById('newPassword2').value) {
+				document.getElementById('message').style.color = 'green';
+				document.getElementById('message').innerHTML = 'matching';
+			} else {
+				document.getElementById('message').style.color = 'red';
+				document.getElementById('message').innerHTML = 'not matching';
+			}
+		}
+	</script>
 </body>
 </html>

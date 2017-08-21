@@ -31,7 +31,7 @@ public class BooksIMPL implements BookDAO {
 			ps = connection.prepareStatement(
 					"insert into book (nameOauthors, deptt, title, publisher, nationality, year, monthPublished,pageNo"
 							+ ",isbn, hyperlink, indices, link"
-							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							+ ", publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());
 			ps.setString(3, book.getTitle());
@@ -39,7 +39,7 @@ public class BooksIMPL implements BookDAO {
 			ps.setString(5, book.getNationality());
 			ps.setInt(6, book.getYear());
 			ps.setString(7, book.getMonthPublished());
-			ps.setInt(8, book.getPageNo());
+			ps.setString(8, book.getPageNo());
 			ps.setString(9, book.getIsbn());
 			ps.setString(10, book.getHyperlink());
 			ps.setString(11, book.getIndex());
@@ -67,6 +67,7 @@ public class BooksIMPL implements BookDAO {
 				id = String.format("B%04d", sno);
 			}
 			ps.setString(18, id);
+			ps.setString(19, book.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -92,7 +93,7 @@ public class BooksIMPL implements BookDAO {
 			ps = connection.prepareStatement(
 					"update book set nameOauthors=?, deptt=?, title=?, publisher=?, nationality=?, year=?, monthPublished=?,pageNo=?"
 							+ ",isbn=?, hyperlink=?, indices=?, link=?"
-							+ ", publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where id=?");
+							+ ", publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=?,certificateName=? where id=?");
 			ps.setString(1, book.getNameOauthors());
 			ps.setString(2, book.getDeptt().toUpperCase());
 			ps.setString(3, book.getTitle());
@@ -100,7 +101,7 @@ public class BooksIMPL implements BookDAO {
 			ps.setString(5, book.getNationality());
 			ps.setInt(6, book.getYear());
 			ps.setString(7, book.getMonthPublished());
-			ps.setInt(8, book.getPageNo());
+			ps.setString(8, book.getPageNo());
 			ps.setString(9, book.getIsbn());
 			ps.setString(10, book.getHyperlink());
 			ps.setString(11, book.getIndex());
@@ -110,7 +111,8 @@ public class BooksIMPL implements BookDAO {
 			ps.setString(15, book.getPlagCopyFileName());
 			ps.setInt(16, book.getStatus());
 			ps.setString(17, book.getWrittenBy());
-			ps.setString(18, book.getId());
+			ps.setString(18, book.getCertificateName());
+			ps.setString(19, book.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -144,7 +146,7 @@ public class BooksIMPL implements BookDAO {
 				books.setYear(rs.getInt("year"));
 				books.setMonthPublished(rs.getString("monthPublished"));
 				books.setMonthAssigned(rs.getString("monthAssigned"));
-				books.setPageNo(rs.getInt("pageNo"));
+				books.setPageNo(rs.getString("pageNo"));
 				books.setIsbn(rs.getString("isbn"));
 				books.setHyperlink(rs.getString("hyperlink"));
 				books.setIndex(rs.getString("indices"));
@@ -154,6 +156,7 @@ public class BooksIMPL implements BookDAO {
 				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 				books.setStatus(rs.getInt("status"));
 				books.setWrittenBy(rs.getString("writtenBy"));
+				books.setCertificateName(rs.getString("certificateName"));
 				list.add(books);
 			}
 		} catch (Exception e) {
@@ -186,7 +189,7 @@ public class BooksIMPL implements BookDAO {
 				books.setYear(rs.getInt("year"));
 				books.setMonthPublished(rs.getString("monthPublished"));
 				books.setMonthAssigned(rs.getString("monthAssigned"));
-				books.setPageNo(rs.getInt("pageNo"));
+				books.setPageNo(rs.getString("pageNo"));
 				books.setIsbn(rs.getString("isbn"));
 				books.setHyperlink(rs.getString("hyperlink"));
 				books.setIndex(rs.getString("indices"));
@@ -194,6 +197,7 @@ public class BooksIMPL implements BookDAO {
 				books.setPublicationFileName(rs.getString("publicationFileName"));
 				books.setPlagReportFileName(rs.getString("plagReportFileName"));
 				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				books.setCertificateName(rs.getString("certificateName"));
 				books.setStatus(rs.getInt("status"));
 				books.setWrittenBy(rs.getString("writtenBy"));
 			}
@@ -296,7 +300,7 @@ public class BooksIMPL implements BookDAO {
 			ps.setString(5, book.getNationality());
 			ps.setInt(6, book.getYear());
 			ps.setString(7, book.getMonthPublished());
-			ps.setInt(8, book.getPageNo());
+			ps.setString(8, book.getPageNo());
 			ps.setString(9, book.getIsbn());
 			ps.setString(10, book.getHyperlink());
 			ps.setString(11, book.getIndex());
@@ -376,7 +380,7 @@ public class BooksIMPL implements BookDAO {
 				books.setYear(rs.getInt("year"));
 				books.setMonthPublished(rs.getString("monthPublished"));
 				books.setMonthAssigned(rs.getString("monthAssigned"));
-				books.setPageNo(rs.getInt("pageNo"));
+				books.setPageNo(rs.getString("pageNo"));
 				books.setIsbn(rs.getString("isbn"));
 				books.setHyperlink(rs.getString("hyperlink"));
 				books.setIndex(rs.getString("indices"));
@@ -384,6 +388,7 @@ public class BooksIMPL implements BookDAO {
 				books.setPublicationFileName(rs.getString("publicationFileName"));
 				books.setPlagReportFileName(rs.getString("plagReportFileName"));
 				books.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				books.setCertificateName(rs.getString("certificateName"));
 				books.setStatus(rs.getInt("status"));
 				books.setWrittenBy(rs.getString("writtenBy"));
 				map.put(rejID, books);

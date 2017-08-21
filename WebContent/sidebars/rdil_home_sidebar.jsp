@@ -37,6 +37,7 @@
 		<li><a href="view/view_patent.jsp">View Patents</a></li>
 		<li><a href="view/view_tech_rep.jsp">View Technical Reports</a></li>
 		<li><a href="view/view_book.jsp">View Books</a></li>
+		<li><a href="../download/download_request.jsp">Download Data</a></li>
 
 	</ul>
 

@@ -137,14 +137,18 @@ div.transbox {
 </script>
 <body>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-		}
-		System.out.println(sid);
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 	%>
 	<div class="container-fluid content">
 		<div class="row">
@@ -177,9 +181,11 @@ h3 {
 
 						<tr>
 							<td>Name of Authors<br>(in the seq. as mentioned in the
-								Conference Proceedings)</td>
+								Conference Proceedings)
+							</td>
 							<td><input type="text" name="nameOauthors"
-								placeholder="Seperate all names with commas" class="form-control"></td>
+								placeholder="Seperate all names with commas" required="on" autocomplete="off"
+								class="form-control"></td>
 						</tr>
 						<tr>
 						<tr>
@@ -193,15 +199,16 @@ h3 {
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" class="form-control"></td>
+							<td><input type="text" name="title" class="form-control" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Proceedings of</td>
-							<td><input type="text" name="proceedingsOf" class="form-control"></td>
+							<td><input type="text" name="proceedingsOf" required="on" autocomplete="off"
+								class="form-control"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
-							<td><select name="nationality"  id="nationality"
+							<td><select name="nationality" id="nationality"
 								class="form-control">
 									<option value="International">International</option>
 									<option value="National">National</option>
@@ -209,7 +216,7 @@ h3 {
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" class="form-control"></td>
+							<td><input type="text" name="venue" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 
 						<tr>
@@ -240,46 +247,53 @@ h3 {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input type="text" name="pageNo" class="form-control"></td>
+							<td><input type="text" name="pageNo"  required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publishers</td>
-							<td><input type="text" name="publisher" class="form-control"></td>
+							<td><input type="text" name="publisher" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperLink" class="form-control"></td>
+							<td><input type="text" name="hyperLink" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
 							<td>
-							<div align="left"><input type="checkbox" name="index" value="WOS">WOS<br>
-								<input type="checkbox" name="index" value="Scopus">Scopus<br>
-								<input type="checkbox" name="index" value="Google Scholar">Google
-								Scholar<br> <input type="checkbox" name="index"
-								value="Thomson Reuter">Thomson Reuter<br> <input
-								type="checkbox" name="index" value="Elsevier">Elsevier<br>
-								<input type="checkbox" name="index" value="none">Not
-								Indexed at all..<br></div>
+								<div align="left">
+									<input type="checkbox" name="index" value="WOS">WOS<br>
+									<input type="checkbox" name="index" value="Scopus">Scopus<br>
+									<input type="checkbox" name="index" value="Google Scholar">Google
+									Scholar<br> <input type="checkbox" name="indexFlag"
+										value="Indian Citation Index">Indian Citation Index<br>
+									<input type="text" class="form-control" name="indexFlag"
+										placeholder="Any Other"> <input type="checkbox"
+										name="index" value="none">Not Indexed at all..<br>
+								</div>
 							<td>
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" name="link" class="form-control"></td>
+							<td><input type="text" name="link" required="on" autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file name=publication required="on" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file name=plagReport required="on" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
-							<td><input type=file name=plagCopy /></td>
+							<td>Plagiarism Copy</td>
+							<td><input type=file name=plagCopy required="on" /></td>
 						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td><input type=file name=certificate required="on" /></td>
+						</tr>
+
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />

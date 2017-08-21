@@ -44,7 +44,7 @@ public class DownloadResponse extends HttpServlet {
 		
 		DownloadDAO downloadRequest = new DownloadIMPL();
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename=abc.xlsx");
+		response.setHeader("Content-Disposition", "attachment; filename=data.xlsx");
 
 		downloadRequest.downloadRequest(response.getOutputStream() ,source , branch, dfrom, dto);
 

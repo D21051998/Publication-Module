@@ -145,14 +145,18 @@ div.transbox {
 
 </head>
 <body>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-		}
-		System.out.println(sid);
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../account/access_denied.jsp");
+		return;
+	}
 	%>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 	<div class="container-fluid content">
@@ -176,7 +180,7 @@ div.transbox {
 
 						<tr>
 							<td>Faculty</td>
-							<td><input type="text" class="form-control" required="on"
+							<td><input type="text" class="form-control" required="on" autocomplete="off"
 								name="faculty"></td>
 						</tr>
 						<tr>
@@ -191,7 +195,7 @@ div.transbox {
 
 						<tr>
 							<td>Title of Technical Report</td>
-							<td><input type="text" class="form-control" required="on"
+							<td><input type="text" class="form-control" required="on" autocomplete="off"
 								name="title"></td>
 						</tr>
 
@@ -224,25 +228,30 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Date</td>
-							<td><input type='date' class="form-control" name="date"></td>
+							<td><input type='date' class="form-control" name="date" required="on" autocomplete="off"></td>
 						</tr>
 
 						<tr>
 							<td>Remarks</td>
-							<td><input type="text" name="remarks" class="form-control"></td>
+							<td><input type="text" name="remarks" class="form-control" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file name=publication required="on"/></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file name=plagReport required="on" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
-							<td><input type=file name=plagCopy /></td>
+							<td>Plagiarism Copy</td>
+							<td><input type=file name=plagCopy  required="on" /></td>
 						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td><input type=file name=certificate required="on"  /></td>
+						</tr>
+						
 						<input type="hidden" name="writtenBy"
 							value="<%=lao.getUsernameBySessionID(sid)%>" />
 						<input type="hidden" name="status" value="0" />

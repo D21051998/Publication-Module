@@ -153,18 +153,22 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	System.out.println(lao.getRoleBySessionID(sid));
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<Books> list = dao.getAllBooks();
 		for (Books b : list) {
 			System.out.println(b);
 		}
 
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-			return;
-		}
-		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
-		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
 	%>
 	
@@ -213,7 +217,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -255,8 +259,9 @@ div.transbox {
 						<th>Indices</th>
 						<th>Index Link</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="book">
@@ -295,6 +300,9 @@ div.transbox {
 								<td><a href="${download}&index=2" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td> 
+								<td><a href="${download}&index=3" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${book.id}" />
 									<c:param name="level" value="2"></c:param>

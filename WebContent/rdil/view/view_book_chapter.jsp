@@ -152,20 +152,19 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	System.out.println(lao.getRoleBySessionID(sid));
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<BookChapter> list = dao.getAllBookChapters();
 		for (BookChapter b : list) {
 			System.out.println(b);
-		}
-
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		System.out.println(sid);
-		if (null == sid) {
-			response.sendRedirect("../");
-			return;
-		}
-		if (!lao.getRoleBySessionID(sid).contains("RDIL")) {
-			response.sendRedirect("../../account/access_denied.jsp");
-			return;
 		}
 		request.setAttribute("eList", list);
 	%>
@@ -214,7 +213,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -222,9 +221,7 @@ div.transbox {
 	</div>
 	</nav>
 	<div class="container-fluid content">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-md-12 transbox">
 				<h3>View Book Chapter</h3>
@@ -268,8 +265,9 @@ div.transbox {
 						<th>Index Flag</th>
 						<th>Index Link</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="bookChapter">
@@ -311,7 +309,6 @@ div.transbox {
 								<td><a href="${download}&index=2" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
-
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${bookChapter.id}" />
 									<c:param name="level" value="2"></c:param>
@@ -320,7 +317,6 @@ div.transbox {
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
 								<c:choose>
-
 									<c:when test="${bookChapter.status==1}">
 										<td><a class="btn btn-info disabled">Approved by
 												Deptt. Coordinator</a><br> <a href="${action}&status=2"
@@ -331,8 +327,6 @@ div.transbox {
 												onclick="setModalValue(this)">Reject</button>
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
-
-													<!-- Modal content-->
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -350,33 +344,27 @@ div.transbox {
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>
-
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-default"
 																data-dismiss="modal">Close</button>
 														</div>
 													</div>
-
 												</div>
 											</div></td>
 									</c:when>
 									<c:when test="${bookChapter.status==2}">
 										<td><a class="btn btn-info">Approved By RDIL</a></td>
 									</c:when>
-
 									<c:otherwise>
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-
-
 							</tr>
 						</c:if>
 					</c:forEach>
 				</table>
 			</div>
-
 		</div>
 	</div>
 	<script type="text/javascript">

@@ -6,7 +6,7 @@ import java.sql.Statement;
 public class Initiate {
 	
 	
-	public Initiate(){
+	public static void createTables(){
 
 		Statement stmt;
 		Connection conn = null;
@@ -53,6 +53,7 @@ public class Initiate {
 	    			+ "publicationfilename varchar(500),"
 	    			+ "plagreportfilename varchar(500),"
 	    			+ "plagcopyfilename varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "writtenBy varchar(200));";
 	    	stmt.executeUpdate(q2);
 	    	
@@ -80,6 +81,7 @@ public class Initiate {
 	    			+ "publicationfilename varchar(500),"
 	    			+ "plagreportfilename varchar(500),"
 	    			+ "plagcopyfilename varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "writtenBy varchar(200),"
 	    			+ "message varchar(500),"
 	    			+ "primary key(rej,id));";
@@ -100,8 +102,8 @@ public class Initiate {
 	    			+ "monthAssigned date,"
 	    			+ "volume int,"
 	    			+ "issue int,"
-	    			+ "pageNo int,"
-	    			+ "doiNo int,"
+	    			+ "pageNo varchar(100),"
+	    			+ "doiNo varchar(300),"
 	    			+ "impactFactor varchar(200),"
 	    			+ "whatImpactFactor varchar(200),"
 	    			+ "linkImpFactor varchar(200),"
@@ -115,6 +117,7 @@ public class Initiate {
 	    			+ "publicationfilename varchar(500),"
 	    			+ "plagreportfilename varchar(500),"
 	    			+ "plagcopyfilename varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "writtenBy varchar(200));";
 	    	stmt.executeUpdate(q3);
 	    	
@@ -132,8 +135,8 @@ public class Initiate {
 	    			+ "monthAssigned date,"
 	    			+ "volume int,"
 	    			+ "issue int,"
-	    			+ "pageNo int,"
-	    			+ "doiNo int,"
+	    			+ "pageNo varchar(100),"
+	    			+ "doiNo varchar(300),"
 	    			+ "impactFactor varchar(200),"
 	    			+ "whatImpactFactor varchar(200),"
 	    			+ "linkImpFactor varchar(200),"
@@ -149,6 +152,7 @@ public class Initiate {
 	    			+ "plagcopyfilename varchar(500),"
 	    			+ "writtenBy varchar(200),"
 	    			+ "message varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "primary key(rej,id));";
 	    	stmt.executeUpdate(r1);
 	
@@ -169,6 +173,7 @@ public class Initiate {
 	    			+ "monthAssigned date,"
 	    			+ "publicationFileName varchar(500),"
 	    			+ "plagReportFileName varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200)"
 	    			+ ");"; 
@@ -193,6 +198,7 @@ public class Initiate {
 	    			+ "monthAssigned date,"
 	    			+ "publicationFileName varchar(500),"
 	    			+ "plagReportFileName varchar(500),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
 	    			+ "message varchar(500),"
@@ -214,6 +220,7 @@ public class Initiate {
 	    			+ "publicationFileName  varchar(200),"
 	    			+ "plagReportFileName varchar(2000),"
 	    			+ "plagCopyFileName varchar(200),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200)"
 	    			+ ");";
@@ -232,6 +239,7 @@ public class Initiate {
 	    			+ "publicationFileName  varchar(200),"
 	    			+ "plagReportFileName varchar(2000),"
 	    			+ "plagCopyFile11Name varchar(200),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
 	    			+ "message varchar(500),"
@@ -253,13 +261,14 @@ public class Initiate {
 	    			+ "monthPublished varchar(200),"
 	    			+ "monthAssigned date,"
 	    			+ "publisher varchar(500),"
-	    			+ "pageNo int,"
+	    			+ "pageNo varchar(100),"
 	    			+ "hyperLink varchar(500),"
 	    			+ "indices varchar(200),"
 	    			+ "link varchar(200),"
 	    			+ "publicationFileName  varchar(200),"
 	    			+ "plagReportFileName varchar(2000),"
 	    			+ "plagCopyFileName varchar(200),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200)"
 	    			+ ");";
@@ -278,13 +287,14 @@ public class Initiate {
 	    			+ "monthPublished varchar(200),"
 	    			+ "monthAssigned date,"
 	    			+ "publisher varchar(500),"
-	    			+ "pageNo int,"
+	    			+ "pageNo varchar(100),"
 	    			+ "hyperLink varchar(500),"
 	    			+ "indices varchar(200),"
 	    			+ "link varchar(200),"
 	    			+ "publicationFileName  varchar(200),"
 	    			+ "plagReportFileName varchar(2000),"
 	    			+ "plagCopyFileName varchar(200),"
+	    			+ "certificatename varchar(500),"
 	    			+ "status int,"
 	    			+ "writtenBy varchar(200),"
 	    			+ "message varchar(500),"
@@ -363,6 +373,7 @@ public class Initiate {
 		+ "publicationfilename varchar(500),"
 		+ "plagreportfilename varchar(500),"
 		+ "plagcopyfilename varchar(500),"
+		+ "certificatename varchar(500),"
 		+ "writtenBy varchar(200));";
 stmt.executeUpdate(book);
 
@@ -391,6 +402,7 @@ String rej_book = "create table if not exists rej_book("
 		+ "plagcopyfilename varchar(500),"
 		+ "writtenBy varchar(200),"
 		+ "message varchar(500),"
+		+ "certificatename varchar(500),"
 		+ "primary key (rej,id)"
 		+ ");";
 stmt.executeUpdate(rej_book);
@@ -403,7 +415,5 @@ stmt.executeUpdate(rej_book);
 			stmt=null;
 		}	
 	}
-	public static void main(String[] args) {
-		new Initiate();
-	}
+
 }

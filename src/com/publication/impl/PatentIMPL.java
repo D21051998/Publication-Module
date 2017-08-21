@@ -16,6 +16,8 @@ import com.publication.dao.PatentDAO;
 import com.publication.database.ConnectionFactory;
 import com.publication.model.Patent;
 
+import oracle.net.aso.p;
+
 public class PatentIMPL implements PatentDAO {
 
 	@Override
@@ -28,7 +30,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into patent (faculty, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id, patentNo) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into patent (faculty, deptt, title, nationality,country, applicationNo, applicationYear, applicationDate, patentYear, awardDate , publicationfilename, plagreportfilename,status, writtenBy, id, patentNo,certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -63,7 +65,7 @@ public class PatentIMPL implements PatentDAO {
 			}
 			ps.setString(15, id);
 			ps.setInt(16, patent.getPatentNo());
-			
+			ps.setString(17, patent.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -85,7 +87,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update patent set faculty=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=?,patentNo=? where id=?");
+					"update patent set faculty=?, deptt=?, title=?, nationality=?,country=?, applicationNo=?, applicationYear=?, applicationDate=?, patentYear=?, awardDate=? , publicationfilename=?, plagreportfilename=?,status=?, writtenBy=?,patentNo=?,certificateName=? where id=?");
 			ps.setString(1, patent.getFaculty());
 			ps.setString(2, patent.getDeptt().toUpperCase());
 			ps.setString(3, patent.getTitle());
@@ -101,7 +103,8 @@ public class PatentIMPL implements PatentDAO {
 			ps.setInt(13, patent.getStatus());
 			ps.setString(14, patent.getWrittenBy());
 			ps.setInt(15, patent.getPatentNo());
-			ps.setString(16, patent.getId());
+			ps.setString(16, patent.getCertificateName());
+			ps.setString(17, patent.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -139,6 +142,7 @@ public class PatentIMPL implements PatentDAO {
 				patent.setMonthAssigned(rs.getString("monthAssigned"));
 				patent.setPublicationFileName(rs.getString("publicationFileName"));
 				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
+				patent.setCertificateName(rs.getString("certificateName"));
 				patent.setStatus(rs.getInt("status"));
 				patent.setWrittenBy(rs.getString("writtenBy"));
 				patent.setPatentNo(rs.getInt("patentNo"));
@@ -179,6 +183,7 @@ public class PatentIMPL implements PatentDAO {
 				patent.setMonthAssigned(rs.getString("monthAssigned"));
 				patent.setPublicationFileName(rs.getString("publicationFileName"));
 				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
+				patent.setCertificateName(rs.getString("certificateName"));
 				patent.setStatus(rs.getInt("status"));
 				patent.setWrittenBy(rs.getString("writtenBy"));
 				patent.setPatentNo(rs.getInt("patentNo"));
@@ -363,6 +368,7 @@ public class PatentIMPL implements PatentDAO {
 				patent.setMonthAssigned(rs.getString("monthAssigned"));
 				patent.setPublicationFileName(rs.getString("publicationFileName"));
 				patent.setPlagReportFileName(rs.getString("plagReportFileName"));
+				patent.setCertificateName(rs.getString("certificateName"));
 				patent.setStatus(rs.getInt("status"));
 				patent.setWrittenBy(rs.getString("writtenBy"));
 				patent.setPatentNo(rs.getInt("patentNo"));

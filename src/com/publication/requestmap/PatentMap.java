@@ -57,6 +57,10 @@ public class PatentMap {
 			case "writtenBy":
 				patent.setWrittenBy(item.getString());
 				break;
+			case "certificate":
+				patent.setCertificateName(FilenameUtils.getName(item.getName()));
+				break;
+			
 			}
 		}
 		return patent;

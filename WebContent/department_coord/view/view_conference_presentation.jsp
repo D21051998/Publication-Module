@@ -152,9 +152,7 @@ div.transbox {
 		scope="page"></jsp:useBean>
 	<%
 		List<ConferencePresentation> list = dao.getAllConferencePresentations();
-		for (ConferencePresentation j : list) {
-			System.out.println(j);
-		}
+		
 		String sid = (String) request.getSession(false).getAttribute("sid");
 		if (null == sid) {
 			response.sendRedirect("../../account/access_denied.jsp");
@@ -212,7 +210,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -266,7 +264,7 @@ div.transbox {
 						<th>Hyperlink</th>
 						<th>Month Published</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
+						<th>Plagiarism Report</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="cpo">

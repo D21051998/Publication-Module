@@ -28,7 +28,7 @@ public class BookMap {
 				break;
 			case "monthPublished":book.setMonthPublished(item.getString());
 				break;
-			case "pageNo":book.setPageNo(Integer.parseInt(item.getString()));
+			case "pageNo":book.setPageNo((item.getString()));
 				break;
 			case "isbn":book.setIsbn(item.getString());
 				break;
@@ -51,6 +51,9 @@ public class BookMap {
 			case "status":book.setStatus(Integer.parseInt(item.getString()));
 				break;
 			case "writtenBy":book.setWrittenBy(item.getString());
+				break;
+			case "certificate":
+				book.setCertificateName(FilenameUtils.getName(item.getName()));
 				break;
 			}
 		}

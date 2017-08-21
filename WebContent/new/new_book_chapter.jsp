@@ -167,14 +167,19 @@ ul {
 }
 </style>
 <body>
+
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 		String sid = (String) request.getSession(false).getAttribute("sid");
 		if (null == sid) {
 			response.sendRedirect("../account/access_denied.jsp");
+			return;
 		}
-		System.out.println(sid);
+		if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+			response.sendRedirect("../account/access_denied.jsp");
+			return;
+		}
 	%>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 	<div class="container-fluid content">
 		<div class="row">
@@ -186,20 +191,20 @@ ul {
 				<form method="post" action="../AddPublicationService"
 					enctype="multipart/form-data">
 					<style>
-					.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
 	border: none;
 }
 </style>
-					
+
 					<table class="table table-borderless">
 
 						<tr>
 							<td>Name of Authors in the seq. as mentioned in the Book
 								Chapter</td>
-							<td><input type="text" class="form-control" name="nameOauthors"
-								placeholder="Seperate all names with commas"></td>
+							<td><input type="text" required="on" autocomplete="off" class="form-control"
+								name="nameOauthors" placeholder="Seperate all names with commas"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
@@ -212,19 +217,20 @@ ul {
 						</tr>
 						<tr>
 							<td>Chapter No.</td>
-							<td><input class="form-control" type="text" name="chapterNo"></td>
+							<td><input class="form-control" type="text" name="chapterNo" pattern="[0-9]+" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Chapter Title</td>
-							<td><input class="form-control" type="text" name="chapterTitle"></td>
+							<td><input class="form-control" type="text"
+								name="chapterTitle" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control" type="text" name="bookTitle"></td>
+							<td><input class="form-control" type="text" name="bookTitle" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
-							<td><input class="form-control" type="text" name="publisher"></td>
+							<td><input class="form-control" type="text" name="publisher" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -262,53 +268,62 @@ ul {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input class="form-control" type="text" name="pageNo"></td>
+							<td><input class="form-control" type="text" name="pageNo" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Book ISBN No.</td>
-							<td><input class="form-control" type="text" name="isbn"></td>
+							<td><input class="form-control" type="text" name="isbn" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input class="form-control" type="text" name="hyperLink"></td>
+							<td><input class="form-control" type="text" name="hyperLink" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
 							<td>
-							<div align="left"><input type="checkbox"  name="indexFlag" value="WOS">WOS<br>
-								<input type="checkbox"  name="indexFlag" value="Scopus">Scopus<br>
-								<input type="checkbox"  name="indexFlag" value="Google Scholar">Google
-								Scholar<br> <input type="checkbox"  name="indexFlag"
-								value="Thomson Reuter">Thomson Reuter<br> <input
-								type="checkbox"  name="indexFlag" value="Elsevier">Elsevier<br>
-								<input type="checkbox"  name="indexFlag" value="none">Not
-								Indexed at all..<br></div>
+								<div align="left">
+									<input type="checkbox" name="indexFlag" value="WOS">WOS<br>
+									<input type="checkbox" name="indexFlag" value="Scopus">Scopus<br>
+									<input type="checkbox" name="indexFlag" value="Google Scholar">Google
+									Scholar<br> <input type="checkbox" name="indexFlag"
+										value="Indian Citation Index">Indian Citation Index<br>
+									<input type="text" class="form-control" name="indexFlag"
+										placeholder="Any Other"> <input type="checkbox"
+										name="indexFlag" value="none">Not Indexed at all..<br>
+								</div>
 							<td>
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" class="form-control" name="indexLink"></td>
+							<td><input type="text" class="form-control" name="indexLink" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication /></td>
+							<td><input type=file required="on"  name=publication /></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td><input type=file name=plagReport /></td>
+							<td>Plagiarism Report</td>
+							<td><input type=file required="on" name=plagReport /></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
-							<td><input type=file name=plagCopy /></td>
+							<td>Plagiarism Copy</td>
+							<td><input type=file required="on"  name=plagCopy /></td>
 						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td><input type=file required="on" autocomplete="off" name=certificate /></td>
+						</tr>
+
 
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />
-								<input type="hidden" name="status" value="0" />
+							<input type="hidden" name="status" value="0" />
 							<input type="hidden" name="publicationType" value="BC" />
-							<td><button class="btn btn-danger" class="form-control" type="reset">Reset</button></td>
-							<td><button class="btn btn-success" class="form-control" type="submit">Submit</button></td>
+							<td><button class="btn btn-danger" class="form-control"
+									type="reset">Reset</button></td>
+							<td><button class="btn btn-success" class="form-control"
+									type="submit">Submit</button></td>
 						</tr>
 
 					</table>

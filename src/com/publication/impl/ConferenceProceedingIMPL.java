@@ -30,7 +30,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps = connection.prepareStatement(
 					"insert into conf_proc (nameOauthors, deptt, title,proceedingsOf, nationality,venue,  year, "
 							+ "monthPublished, publisher, pageNo, hyperLink, indices, link, publicationfilename, plagreportfilename,"
-							+ " plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+							+ " plagcopyfilename, status, writtenBy, id,certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
 			ps.setString(3, conferenceProceedings.getTitle());
@@ -40,7 +40,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps.setInt(7, conferenceProceedings.getYear());
 			ps.setString(8, conferenceProceedings.getMonthPublished());
 			ps.setString(9, conferenceProceedings.getPublisher());
-			ps.setInt(10, conferenceProceedings.getPageNo());
+			ps.setString(10, conferenceProceedings.getPageNo());
 			ps.setString(11, conferenceProceedings.getHyperlink());
 			ps.setString(12, conferenceProceedings.getIndex());
 			ps.setString(13, conferenceProceedings.getLink());
@@ -49,6 +49,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps.setString(16, conferenceProceedings.getPlagCopyFileName());
 			ps.setInt(17, conferenceProceedings.getStatus());
 			ps.setString(18, conferenceProceedings.getWrittenBy());
+			
 			String id;
 			PreparedStatement ps1 = connection.prepareStatement("select id from conf_proc");
 			ResultSet rs = ps1.executeQuery();
@@ -67,6 +68,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				id = String.format("P%04d", sno);
 			}
 			ps.setString(19, id);
+			ps.setString(20, conferenceProceedings.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -91,7 +93,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps = connection.prepareStatement(
 					"update conf_proc set nameOauthors=?, deptt=?, title=?,proceedingsOf=?, nationality=?,venue=?,  year=?, "
 							+ "monthPublished=?, publisher=?, pageNo=?, hyperLink=?, indices=?, link=?, publicationfilename=?, plagreportfilename=?,"
-							+ " plagcopyfilename=?, status=?, writtenBy=? where id=?");
+							+ " plagcopyfilename=?, status=?, writtenBy=?,certificateName=? where id=?");
 			ps.setString(1, conferenceProceedings.getNameOauthors());
 			ps.setString(2, conferenceProceedings.getDeptt().toUpperCase());
 			ps.setString(3, conferenceProceedings.getTitle());
@@ -101,7 +103,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps.setInt(7, conferenceProceedings.getYear());
 			ps.setString(8, conferenceProceedings.getMonthPublished());
 			ps.setString(9, conferenceProceedings.getPublisher());
-			ps.setInt(10, conferenceProceedings.getPageNo());
+			ps.setString(10, conferenceProceedings.getPageNo());
 			ps.setString(11, conferenceProceedings.getHyperlink());
 			ps.setString(12, conferenceProceedings.getIndex());
 			ps.setString(13, conferenceProceedings.getLink());
@@ -110,7 +112,8 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps.setString(16, conferenceProceedings.getPlagCopyFileName());
 			ps.setInt(17, conferenceProceedings.getStatus());
 			ps.setString(18, conferenceProceedings.getWrittenBy());
-			ps.setString(19, conferenceProceedings.getId());
+			ps.setString(19, conferenceProceedings.getCertificateName());
+			ps.setString(20, conferenceProceedings.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -147,11 +150,12 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				cp.setMonthAssigned(rs.getString("monthAssigned"));
 				cp.setMonthPublished(rs.getString("monthPublished"));
 				cp.setPublisher(rs.getString("publisher"));
-				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setPageNo(rs.getString("pageNo"));
 				cp.setHyperlink(rs.getString("hyperlink"));
 				cp.setIndex(rs.getString("indices"));
 				cp.setLink(rs.getString("link"));
 				cp.setPublicationFileName(rs.getString("publicationFileName"));
+				cp.setCertificateName(rs.getString("certificateName"));
 				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
 				cp.setStatus(rs.getInt("status"));
@@ -192,13 +196,14 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				cp.setMonthAssigned(rs.getString("monthAssigned"));
 				cp.setMonthPublished(rs.getString("monthPublished"));
 				cp.setPublisher(rs.getString("publisher"));
-				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setPageNo(rs.getString("pageNo"));
 				cp.setHyperlink(rs.getString("hyperlink"));
 				cp.setIndex(rs.getString("indices"));
 				cp.setLink(rs.getString("link"));
 				cp.setPublicationFileName(rs.getString("publicationFileName"));
 				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
+				cp.setCertificateName(rs.getString("certificateName"));
 				cp.setStatus(rs.getInt("status"));
 				cp.setWrittenBy(rs.getString("writtenBy"));
 			}
@@ -303,7 +308,7 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 			ps.setInt(7, conferenceProceedings.getYear());
 			ps.setString(8, conferenceProceedings.getMonthPublished());
 			ps.setString(9, conferenceProceedings.getPublisher());
-			ps.setInt(10, conferenceProceedings.getPageNo());
+			ps.setString(10, conferenceProceedings.getPageNo());
 			ps.setString(11, conferenceProceedings.getHyperlink());
 			ps.setString(12, conferenceProceedings.getIndex());
 			ps.setString(13, conferenceProceedings.getLink());
@@ -385,13 +390,14 @@ public class ConferenceProceedingIMPL implements ConferenceProceedingDAO {
 				cp.setMonthAssigned(rs.getString("monthAssigned"));
 				cp.setMonthPublished(rs.getString("monthPublished"));
 				cp.setPublisher(rs.getString("publisher"));
-				cp.setPageNo(rs.getInt("pageNo"));
+				cp.setPageNo(rs.getString("pageNo"));
 				cp.setHyperlink(rs.getString("hyperlink"));
 				cp.setIndex(rs.getString("indices"));
 				cp.setLink(rs.getString("link"));
 				cp.setPublicationFileName(rs.getString("publicationFileName"));
 				cp.setPlagCopyFileName(rs.getString("plagCopyFileName"));
 				cp.setPlagReportFileName(rs.getString("plagReportFileName"));
+				cp.setCertificateName(rs.getString("certificateName"));
 				cp.setStatus(rs.getInt("status"));
 				cp.setWrittenBy(rs.getString("writtenBy"));
 				map.put(rejID, cp);

@@ -20,6 +20,15 @@ public class Patent {
 	private String plagReportFileName;
 	private int status;
 	private String writtenBy;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	
 	public int getPatentNo() {
 		return patentNo;

@@ -15,12 +15,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 td {
 	text-align: center;
 	vertical-align: middle;
@@ -109,7 +110,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
 	width: auto;
 	border-radius: 5px;
@@ -145,7 +146,7 @@ div.transbox {
 </script>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -164,7 +165,7 @@ div.transbox {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -172,22 +173,36 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
 	</div>
 	</nav>
-		<jsp:useBean id="dao" class="com.publication.impl.ConferenceProceedingIMPL"></jsp:useBean>
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferenceProceedingIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
-		ConferenceProceedings cp =dao.getConferenceProceedingsByID(request.getParameter("id"));
-	if(null==cp){
-		return;
-	}
-	pageContext.setAttribute("cp", cp);
+		String sid = (String) request.getSession(false).getAttribute("sid");
+		if (null == sid) {
+			response.sendRedirect("../../account/access_denied.jsp");
+			return;
+		}
+		if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+			response.sendRedirect("../../account/access_denied.jsp");
+			return;
+		}
+
+		ConferenceProceedings cp = dao.getConferenceProceedingsByID(request.getParameter("id"));
+		if (null == cp) {
+			return;
+		}
+		pageContext.setAttribute("cp", cp);
 	%>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -214,23 +229,24 @@ h3 {
 </style>
 				<form method="POST" action="../../EditPublicationService"
 					enctype="multipart/form-data">
-					<input type="hidden" name="publicationType" value="P">
-					<input type="hidden" name="id" value="${cp.id}">
+					<input type="hidden" name="publicationType" value="P"> <input
+						type="hidden" name="id" value="${cp.id}">
 
 					<table class="table table-borderless">
 
 						<tr>
 							<td>Name of Authors<br>(in the seq. as mentioned in the
-								Conference Proceedings)</td>
+								Conference Proceedings)
+							</td>
 							<td><input type="text" name="nameOauthors"
-								placeholder="Seperate all names with commas" 
+								placeholder="Seperate all names with commas"
 								value="${cp.nameOauthors}" class="form-control"></td>
 						</tr>
 						<tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
-							<option value="${cp.deptt}">${cp.deptt}</option>
+									<option value="${cp.deptt}">${cp.deptt}</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
 									<option value="me">ME</option>
@@ -239,11 +255,13 @@ h3 {
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" class="form-control" value="${cp.title}"></td>
+							<td><input type="text" name="title" class="form-control"
+								value="${cp.title}"></td>
 						</tr>
 						<tr>
 							<td>Proceedings of</td>
-							<td><input type="text" name="proceedingsOf" class="form-control" value="${cp.proceedingsOf}"></td>
+							<td><input type="text" name="proceedingsOf"
+								class="form-control" value="${cp.proceedingsOf}"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -262,13 +280,14 @@ h3 {
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" class="form-control" value="${cp.venue}"></td>
+							<td><input type="text" name="venue" class="form-control"
+								value="${cp.venue}"></td>
 						</tr>
 
 						<tr>
 							<td>Year</td>
 							<td><select class="form-control" name="year">
-							<option value="${cp.year}">${cp.year}</option>
+									<option value="${cp.year}">${cp.year}</option>
 									<%
 										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
 									%>
@@ -281,7 +300,7 @@ h3 {
 						<tr>
 							<td>Month in which published</td>
 							<td><select class="form-control" name="monthPublished">
-							<option value="${cp.monthPublished}">${cp.monthPublished}</option>
+									<option value="${cp.monthPublished}">${cp.monthPublished}</option>
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -295,53 +314,61 @@ h3 {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input type="text" name="pageNo" class="form-control" value="${cp.pageNo}"></td>
+							<td><input type="text" name="pageNo" class="form-control"
+								value="${cp.pageNo}"></td>
 						</tr>
 						<tr>
 							<td>Publishers</td>
-							<td><input type="text" name="publisher" class="form-control" value="${cp.publisher}"></td>
+							<td><input type="text" name="publisher" class="form-control"
+								value="${cp.publisher}"></td>
 						</tr>
 
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperLink" class="form-control" value="${cp.hyperlink}"></td>
+							<td><input type="text" name="hyperLink" class="form-control"
+								value="${cp.hyperlink}"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
-							<td>
-							Current Indices:${cp.index}
-							<br>
-							<div align="left"><input type="checkbox" name="index" value="WOS">WOS<br>
-								<input type="checkbox" name="index" value="Scopus">Scopus<br>
-								<input type="checkbox" name="index" value="Google Scholar">Google
-								Scholar<br> <input type="checkbox" name="index"
-								value="Thomson Reuter">Thomson Reuter<br> <input
-								type="checkbox" name="index" value="Elsevier">Elsevier<br>
-								<input type="checkbox" name="index" value="none">Not
-								Indexed at all..<br></div>
+							<td>Current Indices:${cp.index} <br>
+								<div align="left">
+									<input type="checkbox" name="index" value="WOS">WOS<br>
+									<input type="checkbox" name="index" value="Scopus">Scopus<br>
+									<input type="checkbox" name="index" value="Google Scholar">Google
+									Scholar<br> <input type="checkbox" name="index"
+										value="Thomson Reuter">Thomson Reuter<br> <input
+										type="checkbox" name="index" value="Elsevier">Elsevier<br>
+									<input type="checkbox" name="index" value="none">Not
+									Indexed at all..<br>
+								</div>
 							<td>
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" name="link" class="form-control"  value="${cp.link}"></td>
+							<td><input type="text" name="link" class="form-control"
+								value="${cp.link}"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${cp.publicationFileName}<br>
-							<input type="file" name="publication" /></td>
+							<td>${cp.publicationFileName}<br> <input type="file"
+								name="publication" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Report</td>
-							<td>${cp.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
+							<td>Plagiarism Report</td>
+							<td>${cp.plagReportFileName}<br> <input type="file"
+								name="plagReport" /></td>
 						</tr>
 						<tr>
-							<td>Plag. Copy</td>
-							<td>${cp.plagCopyFileName}<br>
-							<input type="file" name="plagCopy" /></td>
+							<td>Plagiarism Copy</td>
+							<td>${cp.plagCopyFileName}<br> <input type="file"
+								name="plagCopy" /></td>
 						</tr>
 						<tr>
-						
+							<td>Certificate</td>
+							<td>${cp.certificateName}<br> <input type="file"
+								name="certificate" /></td>
+						</tr>
+
 						<tr>
 							<td><button type="reset">Reset</button></td>
 							<td><button type="submit">Submit</button></td>

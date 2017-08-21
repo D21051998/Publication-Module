@@ -12,14 +12,29 @@ public class Books {
 	private int year;
 	private String monthPublished;
 	private String monthAssigned;
-	private int pageNo;
+	private String pageNo;
+	public void setPageNo(String pageNo) {
+		this.pageNo = pageNo;
+	}
 	private String isbn;
 	private String hyperlink;
 	private String index;
+	public String getPageNo() {
+		return pageNo;
+	}
 	private String link;
 	private String publicationFileName;
 	private String plagReportFileName;
 	private String plagCopyFileName;
+	private String certificateName;
+	public String getCertificateName() {
+		return certificateName;
+	}
+
+	public void setCertificateName(String certificateName) {
+		this.certificateName = certificateName;
+	}
+
 	private int status;
 	private String writtenBy;
 	public String getId() {
@@ -82,12 +97,7 @@ public class Books {
 	public void setMonthAssigned(String monthAssigned) {
 		this.monthAssigned = monthAssigned;
 	}
-	public int getPageNo() {
-		return pageNo;
-	}
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
+	
 	public String getIsbn() {
 		return isbn;
 	}

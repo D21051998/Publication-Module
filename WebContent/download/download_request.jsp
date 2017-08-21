@@ -178,11 +178,15 @@ div.transbox {
 							<td><input type="checkbox" name="source" value="journal">Journal<br>
 								<input type="checkbox" name="source" value="books">Books<br>
 								<input type="checkbox" name="source" value="bookChapter">Book
-								Chapter<br> <input type="checkbox" name="source"
-								value="confProceeding">Conference Proceedings<br> <input
+								Chapter<br> 
+								<input type="checkbox" name="source"
+								value="confProceeding">Conference Proceedings<br> 
+								<input
 								type="checkbox" name="source" value="confPresentation">Conference
-								Presentation<br> <input type="checkbox" name="source"
-								value="patent">Patents<br> <input type="checkbox"
+								Presentation<br> 
+								<input type="checkbox" name="source"
+								value="patent">Patents<br> 
+								<input type="checkbox"
 								name="source" value="techRep">Technical Report</td>
 						</tr>
 						<tr>

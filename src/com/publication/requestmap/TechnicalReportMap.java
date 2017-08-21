@@ -49,6 +49,10 @@ public class TechnicalReportMap {
 			case "plagCopy":
 				report.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
 				break;
+			case "certificate":
+				report.setCertificateName(FilenameUtils.getName(item.getName()));
+				break;
+			
 			}
 		}
 

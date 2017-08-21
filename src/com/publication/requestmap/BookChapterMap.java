@@ -45,7 +45,7 @@ public class BookChapterMap {
 				chapter.setMonthPublished(item.getString());
 				break;
 			case "pageNo":
-				chapter.setPageNo(Integer.parseInt(item.getString()));
+				chapter.setPageNo(item.getString());
 				break;
 			case "isbn":
 				chapter.setIsbn(item.getString());
@@ -77,10 +77,14 @@ public class BookChapterMap {
 			case "plagCopy":
 				chapter.setPlagCopyFileName(FilenameUtils.getName(item.getName()));
 				break;
+			case "certificate":
+				chapter.setCertificateName(FilenameUtils.getName(item.getName()));
+				break;
 
 			}
 		}
 		chapter.setIndexFlag(indices);
+		indices="";
 		return chapter;
 	}
 

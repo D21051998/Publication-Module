@@ -168,11 +168,15 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-			return;
-		}
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
 
 		pageContext.setAttribute("accBookChapter", bookChapterDao.getAllBookChapters());
@@ -237,7 +241,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -286,8 +290,8 @@ div.transbox {
 								<th>Index Flag</th>
 								<th>Index Link</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
-								<th>Plag. Copy</th>
+								<th>Plagiarism Report</th>
+								<th>Plagiarism Copy</th>
 							</tr>
 							<c:forEach items="${accBookChapter}" var="bc">
 								<c:if test="${bookChapterDao.checkIfRejected(bc.id)}">
@@ -410,8 +414,8 @@ div.transbox {
 								<th>Indices</th>
 								<th>Index Link</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
-								<th>Plag. Copy</th>
+								<th>Plagiarism Report</th>
+								<th>Plagiarism Copy</th>
 							</tr>
 							<c:forEach items="${accBook}" var="b">
 								<c:if test="${bookDao.checkIfRejected(b.id)}">
@@ -538,8 +542,8 @@ div.transbox {
 								<th>PG: Publication reported in Google Scholar</th>
 								<th>PI: Publication reported in Indian Citation Index</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
-								<th>Plag. Copy</th>
+								<th>Plagiarism Report</th>
+								<th>Plagiarism Copy</th>
 							</tr>
 							<c:forEach items="${accJournal}" var="j">
 								<c:if test="${journalDao.checkIfRejected(j.id)}">
@@ -677,8 +681,8 @@ div.transbox {
 								<th>Indices</th>
 								<th>Link</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
-								<th>Plag. Copy</th>
+								<th>Plagiarism Report</th>
+								<th>Plagiarism Copy</th>
 							</tr>
 
 
@@ -795,7 +799,7 @@ div.transbox {
 								<th>Hyperlink</th>
 								<th>Month Published</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
+								<th>Plagiarism Report</th>
 							</tr>
 
 
@@ -911,7 +915,7 @@ div.transbox {
 								<th>Award Date</th>
 								<th>Patent No</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
+								<th>Plagiarism Report</th>
 							</tr>
 
 
@@ -1023,8 +1027,8 @@ div.transbox {
 								<th>Remarks</th>
 								<th>Month Published</th>
 								<th>Resource</th>
-								<th>Plag. Report</th>
-								<th>Plag. Copy</th>
+								<th>Plagiarism Report</th>
+								<th>Plagiarism Copy</th>
 							</tr>
 
 

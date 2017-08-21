@@ -28,7 +28,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into book_chapter (nameOauthors, deptt, chapterNo, chapterTitle, bookTitle, publisher, nationality, year, monthPublished, pageNo, isbn, hyperLink, indexFlag, indexLink, status, writtenby,id, publicationfilename,plagreportfilename, plagcopyfilename, certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
@@ -38,7 +38,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(7, bookChapter.getNationality());
 			ps.setInt(8, bookChapter.getYear());
 			ps.setString(9, bookChapter.getMonthPublished());
-			ps.setInt(10, bookChapter.getPageNo());
+			ps.setString(10, bookChapter.getPageNo());
 			ps.setString(11, bookChapter.getIsbn());
 			ps.setString(12, bookChapter.getHyperLink());
 			ps.setString(13, bookChapter.getIndexFlag());
@@ -66,6 +66,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(18, bookChapter.getPublicationFileName());
 			ps.setString(19, bookChapter.getPlagReportFileName());
 			ps.setString(20, bookChapter.getPlagCopyFileName());
+			ps.setString(21, bookChapter.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -87,7 +88,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update book_chapter set nameOauthors=?, deptt=?, chapterNo=?, chapterTitle=?, bookTitle=?, publisher=?, nationality=?, year=?, monthPublished=?, pageNo=?, isbn=?, hyperLink=?, indexFlag=?, indexLink=?, status=?, writtenby=?, publicationfilename=?,plagreportfilename=?, plagcopyfilename=? where id=?");
+					"update book_chapter set nameOauthors=?, deptt=?, chapterNo=?, chapterTitle=?, bookTitle=?, publisher=?, nationality=?, year=?, monthPublished=?, pageNo=?, isbn=?, hyperLink=?, indexFlag=?, indexLink=?, status=?, writtenby=?, publicationfilename=?,plagreportfilename=?, plagcopyfilename=?,certificatename=? where id=?");
 			ps.setString(1, bookChapter.getNameOauthors());
 			ps.setString(2, bookChapter.getDeptt().toUpperCase());
 			ps.setInt(3, bookChapter.getChapterNo());
@@ -97,7 +98,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(7, bookChapter.getNationality());
 			ps.setInt(8, bookChapter.getYear());
 			ps.setString(9, bookChapter.getMonthPublished());
-			ps.setInt(10, bookChapter.getPageNo());
+			ps.setString(10, bookChapter.getPageNo());
 			ps.setString(11, bookChapter.getIsbn());
 			ps.setString(12, bookChapter.getHyperLink());
 			ps.setString(13, bookChapter.getIndexFlag());
@@ -107,7 +108,8 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(17, bookChapter.getPublicationFileName());
 			ps.setString(18, bookChapter.getPlagReportFileName());
 			ps.setString(19, bookChapter.getPlagCopyFileName());
-			ps.setString(20, bookChapter.getId());
+			ps.setString(20, bookChapter.getCertificateName());
+			ps.setString(21, bookChapter.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -143,7 +145,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setYear(rs.getInt("year"));
 				bc.setMonthPublished(rs.getString("monthPublished"));
 				bc.setMonthAssigned(rs.getString("monthAssigned"));
-				bc.setPageNo(rs.getInt("pageNo"));
+				bc.setPageNo(rs.getString("pageNo"));
 				bc.setIsbn(rs.getString("isbn"));
 				bc.setHyperLink(rs.getString("hyperLink"));
 				bc.setIndexFlag(rs.getString("indexFlag"));
@@ -153,6 +155,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setPublicationFileName(rs.getString("publicationFileName"));
 				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				bc.setCertificateName(rs.getString("certificateName"));
 				list.add(bc);
 			}
 		} catch (Exception e) {
@@ -216,7 +219,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setYear(rs.getInt("year"));
 				bc.setMonthPublished(rs.getString("monthPublished"));
 				bc.setMonthAssigned(rs.getString("monthAssigned"));
-				bc.setPageNo(rs.getInt("pageNo"));
+				bc.setPageNo(rs.getString("pageNo"));
 				bc.setIsbn(rs.getString("isbn"));
 				bc.setHyperLink(rs.getString("hyperLink"));
 				bc.setIndexFlag(rs.getString("indexFlag"));
@@ -226,6 +229,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setPublicationFileName(rs.getString("publicationFileName"));
 				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				bc.setCertificateName(rs.getString("certificateName"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -305,7 +309,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 			ps.setString(7, bookChapter.getNationality());
 			ps.setInt(8, bookChapter.getYear());
 			ps.setString(9, bookChapter.getMonthPublished());
-			ps.setInt(10, bookChapter.getPageNo());
+			ps.setString(10, bookChapter.getPageNo());
 			ps.setString(11, bookChapter.getIsbn());
 			ps.setString(12, bookChapter.getHyperLink());
 			ps.setString(13, bookChapter.getIndexFlag());
@@ -375,7 +379,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setYear(rs.getInt("year"));
 				bc.setMonthPublished(rs.getString("monthPublished"));
 				bc.setMonthAssigned(rs.getString("monthAssigned"));
-				bc.setPageNo(rs.getInt("pageNo"));
+				bc.setPageNo(rs.getString("pageNo"));
 				bc.setIsbn(rs.getString("isbn"));
 				bc.setHyperLink(rs.getString("hyperLink"));
 				bc.setIndexFlag(rs.getString("indexFlag"));
@@ -385,6 +389,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 				bc.setPublicationFileName(rs.getString("publicationFileName"));
 				bc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				bc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				bc.setCertificateName(rs.getString("certificateName"));
 				map.put(rejID, bc);
 			}
 		} catch (Exception e) {

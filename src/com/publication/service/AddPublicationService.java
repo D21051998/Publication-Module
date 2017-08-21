@@ -181,7 +181,6 @@ public class AddPublicationService extends HttpServlet {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-
 				} else if (caseOf.getString().equals("C")) {
 					ConferencePresentationDAO dao = new ConferencePresentationIMPL();
 					try {

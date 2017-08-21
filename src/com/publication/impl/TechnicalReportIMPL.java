@@ -28,7 +28,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"insert into tech_rep (faculty, deptt, title, year, date, remarks, monthPublished, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"insert into tech_rep (faculty, deptt, title, year, date, remarks, monthPublished, publicationfilename, plagreportfilename, plagcopyfilename, status, writtenBy, id,certificateName) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, technicalReport.getFaculty());
 			ps.setString(2, technicalReport.getDeptt().toUpperCase());
 			ps.setString(3, technicalReport.getTitle());
@@ -59,6 +59,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 				id = String.format("R%04d", sno);
 			}
 			ps.setString(13, id);
+			ps.setString(14, technicalReport.getCertificateName());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -81,7 +82,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			ps = connection.prepareStatement(
-					"update tech_rep set faculty=?, deptt=?, title=?, year=?, date=?, remarks=?, monthPublished=?, publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=? where  id=?");
+					"update tech_rep set faculty=?, deptt=?, title=?, year=?, date=?, remarks=?, monthPublished=?, publicationfilename=?, plagreportfilename=?, plagcopyfilename=?, status=?, writtenBy=?,certificateName=? where  id=?");
 			ps.setString(1, technicalReport.getFaculty());
 			ps.setString(2, technicalReport.getDeptt().toUpperCase());
 			ps.setString(3, technicalReport.getTitle());
@@ -94,7 +95,8 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 			ps.setString(10, technicalReport.getPlagCopyFileName());
 			ps.setInt(11, technicalReport.getStatus());
 			ps.setString(12, technicalReport.getWrittenBy());
-			ps.setString(13, technicalReport.getId());
+			ps.setString(13, technicalReport.getCertificateName());
+			ps.setString(14, technicalReport.getId());
 			if (ps.executeUpdate() > 0) {
 				return true;
 			}
@@ -131,6 +133,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 				tc.setPublicationFileName(rs.getString("publicationFileName"));
 				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setCertificateName(rs.getString("certificateName"));
 				tc.setStatus(rs.getInt("status"));
 				tc.setWrittenBy(rs.getString("writtenBy"));
 				list.add(tc);
@@ -168,6 +171,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 				tc.setPublicationFileName(rs.getString("publicationFileName"));
 				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setCertificateName(rs.getString("certificateName"));
 				tc.setStatus(rs.getInt("status"));
 				tc.setWrittenBy(rs.getString("writtenBy"));
 			}
@@ -343,6 +347,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 				tc.setPublicationFileName(rs.getString("publicationFileName"));
 				tc.setPlagReportFileName(rs.getString("plagReportFileName"));
 				tc.setPlagCopyFileName(rs.getString("plagCopyFileName"));
+				tc.setCertificateName(rs.getString("certificateName"));
 				tc.setStatus(rs.getInt("status"));
 				tc.setWrittenBy(rs.getString("writtenBy"));
 				map.put(rejID, tc);

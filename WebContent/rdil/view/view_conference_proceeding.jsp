@@ -18,9 +18,9 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
- <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -150,22 +150,27 @@ div.transbox {
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	System.out.println(lao.getRoleBySessionID(sid));
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		List<ConferenceProceedings> list = dao.getAllConferenceProceedingss();
 		for (ConferenceProceedings j : list) {
 			System.out.println(j);
 		}
 
-		String sid = (String) request.getSession(false).getAttribute("sid");
-		if (null == sid) {
-			response.sendRedirect("../account/access_denied.jsp");
-			return;
-		}
-		pageContext.setAttribute("principal", lao.getUsernameBySessionID(sid));
-		System.out.println(pageContext.getAttribute("principal"));
+		
+		
 		request.setAttribute("eList", list);
 	%>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -193,8 +198,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../rdil_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -210,7 +215,7 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -218,9 +223,7 @@ div.transbox {
 	</div>
 	</nav>
 	<div class="container-fluid content">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="row">
 
 			<div class="col-md-12 transbox">
@@ -252,7 +255,7 @@ div.transbox {
 					<input type="text" class="form-control" id="search"
 						placeholder="Type to search">
 				</div>
-			
+
 				<table class="table table-bordered" id="table">
 					<thead>
 						<th>PCN</th>
@@ -270,8 +273,9 @@ div.transbox {
 						<th>Indices</th>
 						<th>Link</th>
 						<th>Resource</th>
-						<th>Plag. Report</th>
-						<th>Plag. Copy</th>
+						<th>Plagiarism Report</th>
+						<th>Plagiarism Copy</th>
+						<th>Certificate</th>
 						<th>Status</th>
 					</thead>
 					<c:forEach items="${eList}" var="cp">
@@ -302,10 +306,23 @@ div.transbox {
 									<c:param name="id" value="${cp.id}"></c:param>
 									<c:param name="type" value="P"></c:param>
 								</c:url>
+								<td><a href="${download}&index=0" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
 
-								<td><a href="${download}&index=0">Download</a></td>
-								<td><a href="${download}&index=1">Download</a></td>
-								<td><a href="${download}&index=2">Download</a></td>
+								<td><a href="${download}&index=1" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+								<td><a href="${download}&index=2" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+								<td><a href="${download}&index=3" class="btn btn-info">
+										<span class="glyphicon glyphicon-download"></span>
+								</a></td>
+
+
 
 								<c:url value="../../action/approve.jsp" var="action">
 									<c:param name="id" value="${cp.id}" />

@@ -15,12 +15,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 .container {
 	width: 100%;
 }
@@ -180,17 +181,27 @@ ul {
 }
 </style>
 <jsp:useBean id="dao" class="com.publication.impl.BookChapterIMPL"></jsp:useBean>
+<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 <body>
 	<%
+	String sid = (String) request.getSession(false).getAttribute("sid");
+	System.out.println("AT FACULTY" + sid);
+	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 		BookChapter bookChapter = dao.getBookChapterByID(request.getParameter("id"));
 		if (null == bookChapter) {
 			return;
 		}
 		pageContext.setAttribute("bookChapter", bookChapter);
 	%>
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
-	
-<nav class="navbar navbar-default navbar-fixed-top">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -209,7 +220,7 @@ ul {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-		
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -217,14 +228,16 @@ ul {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="">Edit Profile</a></li>
+						<li><a href="../../account/change_password.jsp">Change Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
 	</div>
 	</nav>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -234,8 +247,8 @@ ul {
 				<h3>Edit Book Chapter</h3>
 				<form method="post" action="../../EditPublicationService"
 					enctype="multipart/form-data">
-					<input type="hidden" name="publicationType" value="BC">
-					<input type="hidden" name="id" value="${bookChapter.id}">
+					<input type="hidden" name="publicationType" value="BC"> <input
+						type="hidden" name="id" value="${bookChapter.id}">
 					<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
@@ -248,13 +261,14 @@ ul {
 
 						<tr>
 							<td>Name of Authors</td>
-							<td><input type="text" value="${bookChapter.nameOauthors}" class="form-control"
-								name="nameOauthors" placeholder="Seperate all names with commas"></td>
+							<td><input type="text" value="${bookChapter.nameOauthors}"
+								class="form-control" name="nameOauthors"
+								placeholder="Seperate all names with commas"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
-							<option value="${bookChapter.deptt}">${bookChapter.deptt}</option>
+									<option value="${bookChapter.deptt}">${bookChapter.deptt}</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
 									<option value="me">ME</option>
@@ -263,7 +277,8 @@ ul {
 						</tr>
 						<tr>
 							<td>Chapter No.</td>
-							<td><input class="form-control" type="text" value="${bookChapter.chapterNo	}" name="chapterNo"></td>
+							<td><input class="form-control" type="text"
+								value="${bookChapter.chapterNo	}" name="chapterNo"></td>
 						</tr>
 						<tr>
 							<td>Chapter Title</td>
@@ -272,31 +287,33 @@ ul {
 						</tr>
 						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control" type="text" name="bookTitle" value="${bookChapter.bookTitle}"></td>
+							<td><input class="form-control" type="text" name="bookTitle"
+								value="${bookChapter.bookTitle}"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
-							<td><input class="form-control" type="text" name="publisher" value="${bookChapter.publisher}"></td>
+							<td><input class="form-control" type="text" name="publisher"
+								value="${bookChapter.publisher}"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
 							<td><select name="nationality" id="nationality"
 								class="form-control">
-								<c:if test="${bookChapter.nationality == 'International' }">
-								<option value="International">International</option>
-									<option value="National">National</option>
+									<c:if test="${bookChapter.nationality == 'International' }">
+										<option value="International">International</option>
+										<option value="National">National</option>
 									</c:if>
-								<c:if test="${bookChapter.nationality == 'National' }">
-								<option value="National">National</option>
-								<option value="International">International</option>
+									<c:if test="${bookChapter.nationality == 'National' }">
+										<option value="National">National</option>
+										<option value="International">International</option>
 									</c:if>
-									
+
 							</select></td>
 						</tr>
 						<tr>
 							<td>Year</td>
 							<td><select class="form-control" name="year">
-							<option value="${bookChapter.year}">${bookChapter.year}</option>
+									<option value="${bookChapter.year}">${bookChapter.year}</option>
 									<%
 										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
 									%>
@@ -309,7 +326,7 @@ ul {
 						<tr>
 							<td>Month in which published</td>
 							<td><select class="form-control" name="monthPublished">
-							<option value="${bookChapter.monthPublished}">${bookChapter.monthPublished}</option>
+									<option value="${bookChapter.monthPublished}">${bookChapter.monthPublished}</option>
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -323,20 +340,22 @@ ul {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input class="form-control" type="text" name="pageNo" value="${bookChapter.pageNo}"></td>
+							<td><input class="form-control" type="text" name="pageNo"
+								value="${bookChapter.pageNo}"></td>
 						</tr>
 						<tr>
 							<td>Book ISBN No.</td>
-							<td><input class="form-control" type="text" name="isbn" value="${bookChapter.isbn}"></td>
+							<td><input class="form-control" type="text" name="isbn"
+								value="${bookChapter.isbn}"></td>
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input class="form-control" type="text" name="hyperLink" value="${bookChapter.hyperLink}"></td>
+							<td><input class="form-control" type="text" name="hyperLink"
+								value="${bookChapter.hyperLink}"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
-							<td>Current Indices:${bookChapter.indexFlag}
-							<br>
+							<td>Current Indices:${bookChapter.indexFlag} <br>
 								<div align="left">
 									<input type="checkbox" name="indexFlag" value="WOS">WOS<br>
 									<input type="checkbox" name="indexFlag" value="Scopus">Scopus<br>
@@ -351,27 +370,32 @@ ul {
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" class="form-control" name="indexLink" value="${bookChapter.indexLink}"></td>
+							<td><input type="text" class="form-control" name="indexLink"
+								value="${bookChapter.indexLink}"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${bookChapter.publicationFileName}<br>
-							<input type="file" name="publication"/></td>
-							
-						</tr>
-						<tr>
-							<td>Plag. Report</td>
-							<td>${bookChapter.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
-						</tr>
-						<tr>
-							<td>Plag. Copy</td>
-							<td>${bookChapter.plagCopyFileName}<br>
-							<input type="file" name="plagCopy" /></td>
-						</tr>
+							<td>${bookChapter.publicationFileName}<br> <input
+								type="file" name="publication" /></td>
 
+						</tr>
 						<tr>
-							
+							<td>Plagiarism Report</td>
+							<td>${bookChapter.plagReportFileName}<br> <input
+								type="file" name="plagReport" /></td>
+						</tr>
+						<tr>
+							<td>Plagiarism Copy</td>
+							<td>${bookChapter.plagCopyFileName}<br> <input
+								type="file" name="plagCopy" /></td>
+						</tr>
+						<tr>
+							<td>Certificate</td>
+							<td>${bookChapter.certificateName}<br> <input
+								type="file" name="certificate" /></td>
+						</tr>
+						<tr>
+
 							<td><button class="btn btn-danger" class="form-control"
 									type="reset">Reset</button></td>
 							<td><button class="btn btn-success" class="form-control"
