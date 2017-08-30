@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,12 +11,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -126,12 +126,10 @@ div.transbox {
 </style>
 </head>
 <body>
-<div class="content ">
-<div class="transbox">
-<h3>
-You are not authorised to view requested page.
-</h3>
-</div>
-</div>
+	<div class="content ">
+		<div class="transbox">
+			<h3>You are not authorised to view requested page.</h3>
+		</div>
+	</div>
 </body>
 </html>

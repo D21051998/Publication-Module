@@ -141,7 +141,7 @@ div.transbox {
 <body>
 	<jsp:include page="../headers/new_pages_header.jsp"></jsp:include>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 	String sid = (String) request.getSession(false).getAttribute("sid");
 	if (null == sid) {
@@ -173,25 +173,31 @@ div.transbox {
 					<table class="table table-borderless">
 						<tr>
 							<td>Faculty</td>
-							<td><input type="text" name="faculty" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="faculty" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="title" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Conference Presentation</td>
-							<td><input type="text" required="on" autocomplete="off" name="conferencePresentation"
-								class="form-control"></td>
+							<td><input type="text" required="on" autocomplete="off"
+								name="conferencePresentation" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -203,12 +209,13 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Organised by</td>
-							<td><input type="text" name="organisedBy" required="on" autocomplete="off"
-								class="form-control"></td>
+							<td><input type="text" name="organisedBy" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="venue" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Year</td>
@@ -224,7 +231,8 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Dates (add comma to separate dates..)</td>
-							<td><input type="text" name="dates" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="dates" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Month in which published</td>
@@ -242,7 +250,8 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperlink"  required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="hyperlink" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
@@ -250,9 +259,9 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
-							<td><input type=file name=plagReport required="on"  /></td>
+							<td><input type=file name=plagReport required="on" /></td>
 						</tr>
-						
+
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />

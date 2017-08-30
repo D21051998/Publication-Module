@@ -17,12 +17,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -118,7 +118,7 @@ div.transbox {
 	margin: 30px;
 	background-color: #ffffff;
 	border: 1px solid;
-	background-color:rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	width: auto;
 	border-radius: 5px;
 	/* For IE8 and earlier */
@@ -145,9 +145,9 @@ div.transbox {
 	}
 </script>
 <body>
-	
-	<jsp:useBean id="dao" class="com.publication.impl.ConferencePresentationIMPL"
-		scope="page"></jsp:useBean>
+
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferencePresentationIMPL" scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
@@ -193,8 +193,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../coordinator_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -210,7 +210,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -273,10 +274,11 @@ div.transbox {
 
 								<td><c:if test="${empty cpo.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty cpo.pcn}">
-										<c:out value="${cpo.pcn}" /><br> <br> <c:out
-										value="${cpo.monthAssigned}" />
+									</c:if> <c:if test="${not empty cpo.pcn}">
+										<c:out value="${cpo.pcn}" />
+										<br>
+										<br>
+										<c:out value="${cpo.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${cpo.faculty}" /></td>
 								<td><c:out value="${cpo.deptt}" /></td>
@@ -288,7 +290,7 @@ div.transbox {
 								<td><c:out value="${cpo.year}" /></td>
 								<td><c:out value="${cpo.dates}" /></td>
 								<td><c:out value="${cpo.hyperlink}" /></td>
-								
+
 								<td><c:out value="${cpo.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
 									<c:param name="id" value="${cpo.id}"></c:param>
@@ -308,7 +310,7 @@ div.transbox {
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
-								
+
 								<c:choose>
 									<c:when test="${cpo.status==0}">
 										<td><a class="btn btn-info disabled">Pending</a> <br>
@@ -352,13 +354,15 @@ div.transbox {
 
 									</c:when>
 									<c:when test="${cpo.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a></td>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a></td>
 									</c:when>
 									<c:when test="${cpo.status==-1}">
 										<td><a class="btn btn-info disabled">Rejected</a></td>
 									</c:when>
 									<c:when test="${cpo.status==2}">
-										<td><a class="btn btn-info disabled"> Approved By RDIL</a></td>
+										<td><a class="btn btn-info disabled"> Approved By
+												RDIL</a></td>
 									</c:when>
 									<c:when test="${cpo.status==-2}">
 										<td><a class="btn btn-info disabled">Rejected By RDIL</a></td>
@@ -366,7 +370,7 @@ div.transbox {
 									<c:otherwise>
 										<td>Invalid</td>
 									</c:otherwise>
-								</c:choose>					
+								</c:choose>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -375,7 +379,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
+	<script>
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
@@ -393,7 +397,7 @@ div.transbox {
 			document.getElementById('reject_id').value = att;
 		}
 	</script>
-	
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>

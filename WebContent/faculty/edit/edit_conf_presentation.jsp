@@ -16,12 +16,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-	    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -115,7 +115,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 0px solid;
 	width: auto;
 	/* For IE8 and earlier */
@@ -145,8 +145,9 @@ div.transbox {
 
 <body>
 	<jsp:include page="../../headers/new_pages_header.jsp"></jsp:include>
-	<jsp:useBean id="dao" class="com.publication.impl.ConferencePresentationIMPL"></jsp:useBean>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferencePresentationIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 	
 	String sid = (String) request.getSession(false).getAttribute("sid");
@@ -165,7 +166,7 @@ div.transbox {
 	pageContext.setAttribute("presentation", presentation);
 	%>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -184,7 +185,7 @@ div.transbox {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -192,14 +193,17 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
 	</div>
 	</nav>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -216,31 +220,38 @@ div.transbox {
 </style>
 				<form method="post" action="../../EditPublicationService"
 					enctype="multipart/form-data">
-					<input type="hidden" name="publicationType" value="C">
-					<input type="hidden" name="id" value="${presentation.id}">
+					<input type="hidden" name="publicationType" value="C"> <input
+						type="hidden" name="id" value="${presentation.id}">
 					<table class="table table-borderless">
 						<tr>
 							<td>Faculty</td>
-							<td><input type="text" name="faculty" class="form-control" value="${presentation.faculty}"></td>
+							<td><input type="text" name="faculty" class="form-control"
+								value="${presentation.faculty}"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
-							<option value="${presentation.deptt}">${presentation.deptt}</option>
+									<option value="${presentation.deptt}">${presentation.deptt}</option>
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" class="form-control" value="${presentation.title}"></td>
+							<td><input type="text" name="title" class="form-control"
+								value="${presentation.title}"></td>
 						</tr>
 						<tr>
 							<td>Conference Presentation</td>
 							<td><input type="text" name="conferencePresentation"
-								class="form-control" value="${presentation.conferencePresentation}"></td>
+								class="form-control"
+								value="${presentation.conferencePresentation}"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -264,12 +275,13 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" class="form-control" value="${presentation.venue}"></td>
+							<td><input type="text" name="venue" class="form-control"
+								value="${presentation.venue}"></td>
 						</tr>
 						<tr>
 							<td>Year</td>
 							<td><select class="form-control" name="year">
-							<option value="${presentation.year}">${presentation.year}</option>
+									<option value="${presentation.year}">${presentation.year}</option>
 									<%
 										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
 									%>
@@ -281,12 +293,13 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Dates (add comma to separate dates..)</td>
-							<td><input type="text" name="dates" class="form-control" value="${presentation.dates}"></td>
+							<td><input type="text" name="dates" class="form-control"
+								value="${presentation.dates}"></td>
 						</tr>
 						<tr>
 							<td>Month in which published</td>
 							<td><select class="form-control" name="monthPublished">
-							<option value="${presentation.monthPublished}">${presentation.monthPublished}</option>
+									<option value="${presentation.monthPublished}">${presentation.monthPublished}</option>
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -300,20 +313,20 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperlink" class="form-control" value="${presentation.hyperlink}"></td>
+							<td><input type="text" name="hyperlink" class="form-control"
+								value="${presentation.hyperlink}"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${presentation.publicationFileName}<br>
-							<input type="file" name="publication" /></td>
+							<td>${presentation.publicationFileName}<br> <input
+								type="file" name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
-							<td>${presentation.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
+							<td>${presentation.plagReportFileName}<br> <input
+								type="file" name="plagReport" /></td>
 						</tr>
 						<tr>
-
 						<tr>
 							<td><button type="reset" class="form-control">Reset</button></td>
 							<td><button type="submit" class="form-control">Submit</button></td>

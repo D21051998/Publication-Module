@@ -1,3 +1,6 @@
+<%@page import="com.publication.constants.RoleMap"%>
+<%@page import="java.util.LinkedHashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.publication.constants.Roles"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -17,7 +20,7 @@
 <!-- Custom styles for this template -->
 <link href="../resources/styles_header/custom.css" rel="stylesheet">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -117,7 +120,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color:rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
 	width: auto;
 	border-radius: 5px;
@@ -149,6 +152,9 @@ div.transbox {
 			return;
 		}
 		String role = dao.getRoleBySessionID(sid);
+		
+		Integer val = RoleMap.RoleStringToInteger(role);
+		
 	%>
 	<div class="container">
 		<div class="row content">
@@ -156,37 +162,33 @@ div.transbox {
 			<div class="col-md-4 transbox">
 				<form action="../DownloadResponse" method="get">
 					<style>
-					.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
 	border: none;
 }
-					</style>
+</style>
 					<table class="table table-borderless">
 						<tr>
 							<td>From</td>
-							<td><input type="date" id="datePicker2" class="form-control" required="true"
-								name="from"></td>
+							<td><input type="date" id="datePicker2" class="form-control"
+								required="true" name="from"></td>
 						</tr>
 						<tr>
 							<td>TO</td>
-							<td><input type="date" id="datePicker" class="form-control" required="true"
-								name="to"></td>
+							<td><input type="date" id="datePicker" class="form-control"
+								required="true" name="to"></td>
 						</tr>
 						<tr>
 							<td>Source</td>
 							<td><input type="checkbox" name="source" value="journal">Journal<br>
 								<input type="checkbox" name="source" value="books">Books<br>
 								<input type="checkbox" name="source" value="bookChapter">Book
-								Chapter<br> 
-								<input type="checkbox" name="source"
-								value="confProceeding">Conference Proceedings<br> 
-								<input
+								Chapter<br> <input type="checkbox" name="source"
+								value="confProceeding">Conference Proceedings<br> <input
 								type="checkbox" name="source" value="confPresentation">Conference
-								Presentation<br> 
-								<input type="checkbox" name="source"
-								value="patent">Patents<br> 
-								<input type="checkbox"
+								Presentation<br> <input type="checkbox" name="source"
+								value="patent">Patents<br> <input type="checkbox"
 								name="source" value="techRep">Technical Report</td>
 						</tr>
 						<tr>
@@ -194,10 +196,12 @@ div.transbox {
 
 							<td>
 								<%
-									switch (role) {
-										case "ROLE_FACULTY" :
+								
+								
+									switch (val) {
+										case 1 :
 											break;
-										case "ROLE_RDIL" :
+										case 2 :
 											out.print("<input type=\"checkbox\" name=\"branch\" value=\"APS\">APS<br>");
 											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CSE\">CSE<br>");
 											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CEE\">CEE<br>");
@@ -207,28 +211,28 @@ div.transbox {
 											out.print("<input type=\"checkbox\" name=\"branch\" value=\"SOL\">SOL<br>");
 											out.print("<input type=\"checkbox\" name=\"branch\" value=\"CLL\">CLL");
 											break;
-										case "ROLE_DC_APS" :
+										case 3 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected value=\"APS\">APS");
 											break;
-										case "ROLE_DC_CSE" :
+										case 4 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CSE\">CSE");
 											break;
-										case "ROLE_DC_CEE" :
+										case 5 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CEE\">CEE");
 											break;
-										case "ROLE_DC_ECE" :
+										case 6 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"ECE\">ECE");
 											break;
-										case "ROLE_DC_MED" :
+										case 7 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"MED\">MED");
 											break;
-										case "ROLE_DC_SOM" :
+										case 8 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOM\">SOM");
 											break;
-										case "ROLE_DC_SOL" :
+										case 9 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"SOL\">SOL");
 											break;
-										case "ROLE_DC_CLL" :
+										case 10 :
 											out.print("<input type=\"checkbox\" name=\"branch\" selected  value=\"CLL\">CLL");
 											break;
 									}

@@ -137,7 +137,7 @@ div.transbox {
 </head>
 <body>
 	<jsp:useBean id="fao" class="com.publication.impl.FacultyIMPL"></jsp:useBean>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 	String sid = (String) request.getSession(false).getAttribute("sid");
 	if (null == sid) {
@@ -176,10 +176,14 @@ div.transbox {
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
-									<option value="cse">CSE</option>	
+									<option value="aps">APS</option>
+									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 
@@ -200,14 +204,14 @@ div.transbox {
 
 						<tr>
 							<td>Country</td>
-							<td><input type="text" class="form-control" id="country" required="on" autocomplete="off"
-								name="country"></td>
+							<td><input type="text" class="form-control" id="country"
+								required="on" autocomplete="off" name="country"></td>
 						</tr>
 
 						<tr>
 							<td>Patent Application Number</td>
-							<td><input type="text" name="applicationNo" required="on" autocomplete="off"
-								class="form-control"></td>
+							<td><input type="text" name="applicationNo" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Patent Application Year</td>
@@ -265,11 +269,12 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Patent No.</td>
-							<td><input type='text' class="form-control" name="patentNo" required="on" autocomplete="off"></td>
+							<td><input type='text' class="form-control" name="patentNo"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication required="on"/></td>
+							<td><input type=file name=publication required="on" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
@@ -277,9 +282,9 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td><input type=file name=certificate required="on"/></td>
+							<td><input type=file name=certificate required="on" /></td>
 						</tr>
-						
+
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />
@@ -294,7 +299,7 @@ div.transbox {
 			</div>
 		</div>
 	</div>
-<script>
+	<script>
 	function getNation() {
 		var form = document.getElementById("nationality");
 		var val = form.options[form.selectedIndex].value;

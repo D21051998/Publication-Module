@@ -308,7 +308,7 @@ public class TechnicalReportIMPL implements TechnicalReportDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			statement = connection.prepareStatement(
-					"select distinct count(*) as number from tech_rep where status>0 and writtenby=?");
+					"select distinct count(*) as number from tech_rep where status<0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,12 +11,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-
 body {
 	background-color: #fcfcfc;
 }
@@ -158,11 +158,9 @@ div.transbox {
 	width: auto;
 }
 
-.notificationTable{
-padding:10px;
+.notificationTable {
+	padding: 10px;
 }
-
-
 </style>
 
 </head>
@@ -179,7 +177,7 @@ padding:10px;
 	}
 </script>
 <body>
-<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
+	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
 		String sid = (String) request.getSession(false).getAttribute("sid");
@@ -220,23 +218,25 @@ padding:10px;
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../account/logout.jsp">Logout</a></li>
 					</ul></li>
-			</ul></li>
+			</ul>
+			</li>
 			</ul>
 		</div>
 	</div>
 	</nav>
 	<div class="container-fluid content2">
 		<div class="row">
-			<div class="col-md-2 transbox" >
-			<jsp:include page="../sidebars/rdil_home_sidebar.jsp"></jsp:include>
+			<div class="col-md-2 transbox">
+				<jsp:include page="../sidebars/rdil_home_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10 transbox">
-			<h2>RDIL Home</h2>
+				<h2>RDIL Home</h2>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

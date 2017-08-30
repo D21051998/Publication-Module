@@ -19,7 +19,6 @@
 
 <title>Faculty Home</title>
 <style>
-
 body {
 	background-color: #fcfcfc;
 }
@@ -161,11 +160,9 @@ div.transbox {
 	width: auto;
 }
 
-.notificationTable{
-padding:10px;
+.notificationTable {
+	padding: 10px;
 }
-
-
 </style>
 </head>
 <input type="hidden" id="refreshed" value="no">
@@ -235,31 +232,33 @@ padding:10px;
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right" >
+			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-haspopup="true" aria-expanded="false"><%
+					aria-haspopup="true" aria-expanded="false">
+						<%
 				if(	lao.checkRejectedSum(lao.getUsernameBySessionID(sid))>0){
 					out.print("&nbsp;Notifications&nbsp;("+lao.checkRejectedSum(lao.getUsernameBySessionID(sid))+")*");
 				}else{
 					out.print("&nbsp;Notifications&nbsp;(0)");
 				}
-					%><span
-						class="caret"></span></a>
-					<ul class="dropdown-menu"  id="profile-menu" style="width:270px;">
+					%><span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" id="profile-menu" style="width: 270px;">
 						<%
 							if (d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid)) > 0) {
 						%>
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Journals Rejected</th>
-									<th style="padding:10px;"><%=d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></th>
-									
+									<th style="padding: 10px;">Journals Rejected</th>
+									<th style="padding: 10px;"><%=d1ao.notificationRejectedJournal(lao.getUsernameBySessionID(sid))%></th>
+
 								</tr>
 							</table>
 							<hr>
@@ -273,8 +272,8 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Books Rejected</th>
-									<th style="padding:10px;"><%=d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Books Rejected</th>
+									<th style="padding: 10px;"><%=d2ao.notificationRejectedBooks(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
 							<hr>
@@ -288,11 +287,11 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Book Chapters Rejected</th>
-									<th style="padding:10px;"><%=d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Book Chapters Rejected</th>
+									<th style="padding: 10px;"><%=d3ao.notificationRejectedBookChapters(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
-							<hr >
+							<hr>
 						</li>
 						<%
 							}
@@ -303,11 +302,11 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Presentations Rejected</th>
-									<th style="padding:10px;"><%=d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Presentations Rejected</th>
+									<th style="padding: 10px;"><%=d4ao.notificationRejectedConferencePresentations(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
-							<hr >
+							<hr>
 						</li>
 						<%
 							}
@@ -318,11 +317,11 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Proceedings Rejected</th>
-									<th style="padding:10px;"><%=d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Proceedings Rejected</th>
+									<th style="padding: 10px;"><%=d5ao.notificationRejectedConferenceProceedingss(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
-							<hr >
+							<hr>
 						</li>
 						<%
 							}
@@ -333,11 +332,11 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Reports Rejected</th>
-									<th style="padding:10px;"><%=d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Reports Rejected</th>
+									<th style="padding: 10px;"><%=d6ao.notificationRejectedTechnicalReports(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
-							<hr >
+							<hr>
 						</li>
 						<%
 							}
@@ -348,16 +347,16 @@ padding:10px;
 						<li>
 							<table>
 								<tr>
-									<th style="padding:10px;">Patent Rejected</th>
-									<th style="padding:10px;"><%=d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid))%></th>
+									<th style="padding: 10px;">Patent Rejected</th>
+									<th style="padding: 10px;"><%=d7ao.notificationRejectedPatents(lao.getUsernameBySessionID(sid))%></th>
 								</tr>
 							</table>
-							
+
 						</li>
 						<%
 							}
 						%>
-						
+
 
 					</ul></li>
 			</ul>

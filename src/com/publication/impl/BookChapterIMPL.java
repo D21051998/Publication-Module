@@ -341,7 +341,7 @@ public class BookChapterIMPL implements BookChapterDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			statement = connection.prepareStatement(
-					"select distinct count(*) as number from book_chapter where status>0 and writtenby=?");
+					"select distinct count(*) as number from book_chapter where status<0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
@@ -422,5 +422,8 @@ public class BookChapterIMPL implements BookChapterDAO {
 		return false;
 	}
 
+	public static void main(String[] args) {
+		
+	}
 
 }

@@ -16,12 +16,12 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -117,7 +117,7 @@ div.transbox {
 	margin: 30px;
 	background-color: #ffffff;
 	border: 1px solid;
-	background-color:rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -163,8 +163,8 @@ div.transbox {
 		pageContext.setAttribute("sorter", FetchDepptCode.getDepttCode(lao.getRoleBySessionID(sid)));
 		request.setAttribute("eList", list);
 	%>
-	
-<nav class="navbar navbar-default navbar-fixed-top">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -192,8 +192,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../coordinator_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -209,7 +209,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -312,7 +313,7 @@ div.transbox {
 									<c:param name="id" value="${patent.id}" />
 									<c:param name="level" value="1"></c:param>
 									<c:param name="type" value="T"></c:param>
-									
+
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
@@ -385,8 +386,8 @@ div.transbox {
 
 		</div>
 	</div>
-	
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
 			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();

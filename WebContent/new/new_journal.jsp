@@ -20,7 +20,6 @@ td {
 	line-height: 23px;
 }
 
-
 th {
 	text-align: center;
 	vertical-align: middle;
@@ -46,8 +45,9 @@ table {
 	text-overflow: ellipsis;
 	word-wrap: break-word;
 }
-a{
-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+
+a {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-size: 17px;
 	font-style: normal;
 	font-variant: normal;
@@ -69,58 +69,55 @@ ul {
 }
 
 .content:before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  
-  display: block;
-  background-image: url('../resources/images/DSCN7348.jpg');
-  
-   -webkit-filter: brightness(0.8);
-    filter: brightness(0.8);
-  background-size:cover;
-  width: 100%;
-  height: 100%;
-  
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('../resources/images/DSCN7348.jpg');
+	-webkit-filter: brightness(0.8);
+	filter: brightness(0.8);
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
 }
 
 .content {
-  overflow:visible;
-  position: relative;
-}
-div.transbox {
-  margin: 30px;
-  background-color: #ffffff;
-  border: 1px solid;
-  opacity: 0.6;
-  filter: alpha(opacity=60); 
-  width: auto;
-  border-radius: 5px;
-  /* For IE8 and earlier */
+	overflow: visible;
+	position: relative;
 }
 
+div.transbox {
+	margin: 30px;
+	background-color: #ffffff;
+	border: 1px solid;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+	width: auto;
+	border-radius: 5px;
+	/* For IE8 and earlier */
+}
 
 .content p {
-  margin: 15px;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 5px;
-  box-shadow: 0 0 5px gray;
+	margin: 15px;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 5px;
+	box-shadow: 0 0 5px gray;
 }
+
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
 	border: none;
 }
-
 </style>
 
 </head>
@@ -157,7 +154,7 @@ div.transbox {
 			<div class="col-md-2 transbox">
 				<jsp:include page="../sidebars/new_pages_sidebar.jsp"></jsp:include></div>
 			<div class="col-md-10 transbox">
-<style>
+				<style>
 h3 {
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-size: 20px;
@@ -165,9 +162,10 @@ h3 {
 	font-variant: normal;
 	font-weight: bolder;
 	line-height: 23px;
-}</style>
+}
+</style>
 				<h3>Add Journal</h3>
-<style>
+				<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
@@ -180,15 +178,20 @@ h3 {
 						<tr>
 							<td>Name of authors</td>
 							<td><input type="text" class="form-control"
-								name="nameOauthors" placeholder="Name of Authors.." required="on" autocomplete="off"></td>
+								name="nameOauthors" placeholder="Name of Authors.."
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -248,27 +251,32 @@ h3 {
 						<tr>
 							<td>Page No.</td>
 							<td><input type="text" class="form-control" name="pageNo"
-								placeholder="Page No.."> required="on" autocomplete="off"</td>
+								placeholder="Page No.."> required="on"
+								autocomplete="off"</td>
 						</tr>
 						<tr>
 							<td>DOI No.</td>
 							<td><input type="text" class="form-control" name="doiNo"
-								required="on" placeholder="DOI No.." required="on" autocomplete="off"></td>
+								required="on" placeholder="DOI No.." required="on"
+								autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Impact Factor</td>
 							<td><input type="text" class="form-control"
-								name="impactFactor" placeholder="Impact Factor" required="on" autocomplete="off"></td>
+								name="impactFactor" placeholder="Impact Factor" required="on"
+								autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Specify which impact factor</td>
 							<td><input type="text" class="form-control"
-								name="whatImpactFactor" placeholder="Which" required="on" autocomplete="off"></td>
+								name="whatImpactFactor" placeholder="Which" required="on"
+								autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Link for Impact factor</td>
 							<td><input type="text" class="form-control"
-								name="linkImpFactor" placeholder="Link goes here.." required="on" autocomplete="off"></td>
+								name="linkImpFactor" placeholder="Link goes here.."
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Paid/Unpaid</td>
@@ -317,26 +325,26 @@ h3 {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication required="on"/></td>
+							<td><input type=file name=publication required="on" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
-							<td><input type=file name=plagReport required="on"/></td>
+							<td><input type=file name=plagReport required="on" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Copy</td>
-							<td><input type=file name=plagCopy required="on"/></td>
+							<td><input type=file name=plagCopy required="on" /></td>
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td><input type=file name=certificate required="on"/></td>
+							<td><input type=file name=certificate required="on" /></td>
 						</tr>
 						<tr>
 							<input type="hidden" name="writtenBy"
 								value="<%=lao.getUsernameBySessionID(sid)%>" />
 							<input type="hidden" name="status" value="0">
 							<input type="hidden" name="publicationType" value="J">
-							
+
 							<td>
 								<button class="form-control" type="reset">Reset</button>
 							</td>
@@ -350,8 +358,8 @@ h3 {
 
 		</div>
 	</div>
-	
-<script>
+
+	<script>
 	function disable_unpaid() {
 		var form = document.getElementById("paidOrUnpaid");
 		var val = form.options[form.selectedIndex].value;

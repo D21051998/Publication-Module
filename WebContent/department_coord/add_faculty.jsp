@@ -20,7 +20,7 @@
 
 
 <style>
-body {1
+body { 1
 	background-color: #fcfcfc;
 }
 
@@ -221,7 +221,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -238,12 +239,13 @@ div.transbox {
 			<div class="col-md-10  transbox">
 				<h2>Add Faculty</h2>
 				<form action="../AddFaculty" method="post">
-				<style>
-				.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
+					<style>
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
 	border: none;
-				</style>
+}
+</style>
 					<table class="table table-borderless">
 						<tr>
 							<td>New ID</td>
@@ -262,12 +264,12 @@ div.transbox {
 							<td><input type="text" class="form-control" name="contact"></td>
 						</tr>
 						<tr>
-						<td>
-						<button type="reset" class="btn">Reset</button>
-						</td>
-						<td>
-						<button type="submit" class="btn">Submit</button>
-						</td>
+							<td>
+								<button type="reset" class="btn">Reset</button>
+							</td>
+							<td>
+								<button type="submit" class="btn">Submit</button>
+							</td>
 						</tr>
 					</table>
 				</form>

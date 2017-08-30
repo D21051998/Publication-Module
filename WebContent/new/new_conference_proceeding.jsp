@@ -184,27 +184,32 @@ h3 {
 								Conference Proceedings)
 							</td>
 							<td><input type="text" name="nameOauthors"
-								placeholder="Seperate all names with commas" required="on" autocomplete="off"
-								class="form-control"></td>
+								placeholder="Seperate all names with commas" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Title of Paper</td>
-							<td><input type="text" name="title" class="form-control" required="on" autocomplete="off"></td>
+							<td><input type="text" name="title" class="form-control"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Proceedings of</td>
-							<td><input type="text" name="proceedingsOf" required="on" autocomplete="off"
-								class="form-control"></td>
+							<td><input type="text" name="proceedingsOf" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -216,7 +221,8 @@ h3 {
 						</tr>
 						<tr>
 							<td>Venue Details for Conference</td>
-							<td><input type="text" name="venue" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="venue" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 
 						<tr>
@@ -247,16 +253,19 @@ h3 {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input type="text" name="pageNo"  required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="pageNo" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publishers</td>
-							<td><input type="text" name="publisher" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="publisher" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 
 						<tr>
 							<td>Hyper Link</td>
-							<td><input type="text" name="hyperLink" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="hyperLink" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
@@ -275,7 +284,8 @@ h3 {
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" name="link" required="on" autocomplete="off" class="form-control"></td>
+							<td><input type="text" name="link" required="on"
+								autocomplete="off" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>

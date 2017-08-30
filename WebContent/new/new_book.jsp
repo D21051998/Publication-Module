@@ -209,24 +209,31 @@ ul {
 								Book Chapter)
 							</td>
 							<td><input type="text" class="form-control"
-								name="nameOauthors"  required="on" autocomplete="off" placeholder="Seperate all names with commas"></td>
+								name="nameOauthors" required="on" autocomplete="off"
+								placeholder="Seperate all names with commas"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control"  required="on" autocomplete="off" type="text" name="title"></td>
+							<td><input class="form-control" required="on"
+								autocomplete="off" type="text" name="title"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
-							<td><input class="form-control"  required="on" autocomplete="off" type="text" name="publisher"></td>
+							<td><input class="form-control" required="on"
+								autocomplete="off" type="text" name="publisher"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -250,7 +257,7 @@ ul {
 						</tr>
 						<tr>
 							<td>Month in which published</td>
-							<td><select class="form-control"  name="monthPublished">
+							<td><select class="form-control" name="monthPublished">
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -264,15 +271,18 @@ ul {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input class="form-control" type="text"  required="on" autocomplete="off" name="pageNo"></td>
+							<td><input class="form-control" type="text" required="on"
+								autocomplete="off" name="pageNo"></td>
 						</tr>
 						<tr>
 							<td>Book ISBN No.</td>
-							<td><input class="form-control" type="text"  required="on" autocomplete="off" name="isbn"></td>
+							<td><input class="form-control" type="text" required="on"
+								autocomplete="off" name="isbn"></td>
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input class="form-control" type="text"  required="on" autocomplete="off" name="hyperLink"></td>
+							<td><input class="form-control" type="text" required="on"
+								autocomplete="off" name="hyperLink"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
@@ -291,7 +301,8 @@ ul {
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" class="form-control"  required="on" autocomplete="off" name="indexLink"></td>
+							<td><input type="text" class="form-control" required="on"
+								autocomplete="off" name="indexLink"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>

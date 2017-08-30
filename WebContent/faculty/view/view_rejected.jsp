@@ -136,8 +136,6 @@ div.transbox {
 .ui-content {
 	width: auto;
 }
-
-
 </style>
 </head>
 <input type="hidden" id="refreshed" value="no">
@@ -223,8 +221,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../faculty_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -241,7 +239,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>

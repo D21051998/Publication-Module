@@ -173,7 +173,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -247,10 +248,14 @@ h3 {
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
 									<option value="${cp.deptt}">${cp.deptt}</option>
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>

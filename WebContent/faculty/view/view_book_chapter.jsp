@@ -215,7 +215,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -223,9 +224,7 @@ div.transbox {
 	</div>
 	</nav>
 	<div class="container-fluid content">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-md-12 transbox">
 				<h3>View Book Chapter</h3>

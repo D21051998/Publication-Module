@@ -184,28 +184,39 @@ body {
 				<br>
 				<div>
 					<c:if test="${not empty param.change}">
-						
+
 						<c:if test="${param.change == 'success'}">
-								<p style="color: green;"><c:out value="Change Successfull."></c:out></p>
-							</c:if>
-							<c:if test="${param.change == 'illegal'}">
-								<p style="color: red;"><c:out value="Password must be alphanumeric with symbols and  7 to 15 chars long. New Passwords must match."></c:out></p>
-							</c:if>
-							<c:if test="${param.change == 'dataloss'}">
-								<p style="color: red;"><c:out value="Cannot Update Password"></c:out></p>
-							</c:if>
-							<c:if test="${param.change == 'nosuchlogin'}">
-								<p style="color: red;"><c:out value="No Such Account Found"></c:out></p>
-							</c:if>
-							<c:if test="${param.change == 'error'}">
-								<p style="color: red;"><c:out value="Error Occured"></c:out></p>
-							</c:if>
-						
-						
+							<p style="color: green;">
+								<c:out value="Change Successfull."></c:out>
+							</p>
+						</c:if>
+						<c:if test="${param.change == 'illegal'}">
+							<p style="color: red;">
+								<c:out
+									value="Password must be alphanumeric with symbols and  7 to 15 chars long. New Passwords must match."></c:out>
+							</p>
+						</c:if>
+						<c:if test="${param.change == 'dataloss'}">
+							<p style="color: red;">
+								<c:out value="Cannot Update Password"></c:out>
+							</p>
+						</c:if>
+						<c:if test="${param.change == 'nosuchlogin'}">
+							<p style="color: red;">
+								<c:out value="No Such Account Found"></c:out>
+							</p>
+						</c:if>
+						<c:if test="${param.change == 'error'}">
+							<p style="color: red;">
+								<c:out value="Error Occured"></c:out>
+							</p>
+						</c:if>
+
+
 					</c:if>
 				</div>
-				<img src="../resources/images/ncu logo.png"
-					class="img-responsive" width="300" height="200"> <br>
+				<img src="../resources/images/ncu logo.png" class="img-responsive"
+					width="300" height="200"> <br>
 				<h4>
 					<strong>Publication Module</strong>
 				</h4>
@@ -223,19 +234,19 @@ body {
 						<tr>
 							<td><label for="password">Old Password</label></td>
 							<td>&nbsp;</td>
-							<td><input class="form-control" type="password"
+							<td><input class="form-control" type="password" autocomplete="off" required="required"
 								name="oldPassword" id="oldPassword"></td>
 						</tr>
 						<tr>
 							<td><label for="password">New Password</label></td>
 							<td>&nbsp;</td>
-							<td><input class="form-control" type="password"
+							<td><input class="form-control" type="password"  autocomplete="off" required="required"
 								name="newPassword1" id="newPassword1" onkeyup='check();'></td>
 						</tr>
 						<tr>
 							<td><label for="password">Again New Password</label></td>
 							<td>&nbsp;</td>
-							<td><input class="form-control" type="password"
+							<td><input class="form-control" type="password"  autocomplete="off" required="required"
 								name="newPassword2" id="newPassword2" onkeyup='check();'>
 								<span id='message'></span></td>
 

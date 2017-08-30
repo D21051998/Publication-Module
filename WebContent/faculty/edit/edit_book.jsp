@@ -15,12 +15,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 <
 style>.container {
 	width: 100%;
@@ -198,7 +199,7 @@ ul {
 		pageContext.setAttribute("book", book);
 	%>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -217,7 +218,7 @@ ul {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -225,14 +226,17 @@ ul {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
 	</div>
 	</nav>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -242,7 +246,7 @@ ul {
 				<h3>Edit Book Chapter</h3>
 				<form method="post" action="../../EditPublicationService"
 					enctype="multipart/form-data">
-<style>
+					<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
@@ -264,10 +268,14 @@ ul {
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
 									<option value="${book.deptt}">${book.deptt}</option>
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -360,26 +368,26 @@ ul {
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${book.publicationFileName}<br>
-							<input type="file" name="publication" /></td>
+							<td>${book.publicationFileName}<br> <input type="file"
+								name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
-							<td>${book.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
+							<td>${book.plagReportFileName}<br> <input type="file"
+								name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Copy</td>
-							<td>${book.plagCopyFileName}<br>
-							<input type="file" name="plagCopy" /></td>
+							<td>${book.plagCopyFileName}<br> <input type="file"
+								name="plagCopy" /></td>
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td>${book.certificateName}<br> <input
-								type="file" name="certificate" /></td>
+							<td>${book.certificateName}<br> <input type="file"
+								name="certificate" /></td>
 						</tr>
 						<input type="hidden" name="publicationType" value="B">
-					<input type="hidden" name="id" value="${book.id}">
+						<input type="hidden" name="id" value="${book.id}">
 
 						<tr>
 

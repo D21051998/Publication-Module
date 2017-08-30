@@ -15,7 +15,6 @@
 	max-width: 700px;
 	position: relative;
 	top: 50px;
-
 }
 
 td {
@@ -99,7 +98,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('resources/images/background.jpg');
+	background-image: url('resources/images/DSCN7348.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -120,7 +119,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 0px solid;
 	width: auto;
 	border-radius: 5px;
@@ -130,13 +129,15 @@ div.transbox {
 a {
 	color: #000000;
 }
-body{
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;}
+
+body {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 </style>
 
 </head>
@@ -154,7 +155,7 @@ user-select: none;}
 	}
 </script>
 <body class="content">
-	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"></jsp:useBean>
+	<jsp:useBean id="lao" scope="page" class="com.publication.impl.LoginIMPL"></jsp:useBean>
 	<%
 		HttpSession sess = request.getSession(false);
 		System.out.println(sess);
@@ -171,7 +172,7 @@ user-select: none;}
 		}
 	%>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
    <filter id="blur">
        <feGaussianBlur stdDeviation="3" />
    </filter>
@@ -200,10 +201,14 @@ user-select: none;}
 							<td>&nbsp;</td>
 							<td><select class="form-control" id="role" name="role">
 									<option value="ROLE_FACULTY">Faculty</option>
-									<option value="ROLE_DC_CSE">Deptt. Coordinator (CSU)</option>
+									<option value="ROLE_DC_APS">Deptt. Coordinator (APS)</option>
+									<option value="ROLE_DC_CSE">Deptt. Coordinator (CSE)</option>
 									<option value="ROLE_DC_ECE">Deptt. Coordinator (ECE)</option>
-									<option value="ROLE_DC_ME">Deptt. Coordinator (ME)</option>
-									<option value="ROLE_DC_CVU">Deptt. Coordinator (CVU)</option>
+									<option value="ROLE_DC_MED">Deptt. Coordinator (MED)</option>
+									<option value="ROLE_DC_CEE">Deptt. Coordinator (CEE)</option>
+									<option value="ROLE_DC_SOM">Deptt. Coordinator (SOM)</option>
+									<option value="ROLE_DC_SOL">Deptt. Coordinator (SOL)</option>
+									<option value="ROLE_DC_CLL">Deptt. Coordinator (CLL)</option>
 									<option value="ROLE_RDIL">RDIL</option>
 							</select></td>
 						</tr>

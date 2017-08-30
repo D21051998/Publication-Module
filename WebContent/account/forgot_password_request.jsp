@@ -20,13 +20,16 @@
 
 body {
 	background-color: #ffa830;
-	background-image: url("../resources/images/DSCN7348.jpg");
+	background-image: url("../resources/images/background.jpg");
 }
 
 a {
 	color: #000000;
 }
-input{border-style:none;}
+
+input {
+	border-style: none;
+}
 </style>
 
 </head>
@@ -82,10 +85,10 @@ input{border-style:none;}
 							<td><label for="username">Enter Username</label></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="username" id="username"></td>
+							<td><input type="text" name="username" autocomplete="off" required="on" id="username"></td>
 						</tr>
 						<tr>
-						<td><br></td>
+							<td><br></td>
 						</tr>
 						<tr>
 							<td>

@@ -51,11 +51,9 @@ public class LoginIMPL implements LoginDAO {
 	public boolean addFaculty(String id, String name, String email, String contact){
 		Connection conn = null;
 		PreparedStatement ps1 = null;
-
 		try {
 			conn = ConnectionFactory.getConnection();
-			ps1 = conn
-					.prepareStatement("insert into login (username,name, password, salt, role, status)  values (?,?,?,?,?,?)");
+			ps1 = conn.prepareStatement("insert into login (username,name, password, salt, role, status)  values (?,?,?,?,?,?)");
 			String salt = BCrypt.gensalt();
 			String password = getNewPassword();
 			ps1.setString(1, id);
@@ -385,4 +383,9 @@ public class LoginIMPL implements LoginDAO {
 				+dao7.notificationRejectedTechnicalReports(id);
 		}
 
+	public static void main(String[] args) {
+		LoginIMPL impl = new LoginIMPL();
+		System.out.println(impl.checkRejectedSum("F001"));
+	}
+	
 }

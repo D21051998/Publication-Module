@@ -15,12 +15,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 .container {
 	width: 100%;
 }
@@ -122,7 +123,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 0px solid;
 	width: auto;
 	border-radius: 5px;
@@ -165,8 +166,8 @@ div.transbox {
 	pageContext.setAttribute("patent",patent );
 	%>
 
-	
-<nav class="navbar navbar-default navbar-fixed-top">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -185,7 +186,7 @@ div.transbox {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -193,13 +194,17 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
 	</div>
-	</nav><br><br><br>
+	</nav>
+	<br>
+	<br>
+	<br>
 	<div class="container-fluid content">
 		<div class="row">
 			<div class="col-md-2 transbox">
@@ -216,9 +221,9 @@ div.transbox {
 </style>
 				<form method="post" action="../../EditPublicationService"
 					enctype="multipart/form-data">
-					<input type="hidden" name="publicationType" value="T">
-					<input type="hidden" name="id" value="${patent.id}">
-						<style>
+					<input type="hidden" name="publicationType" value="T"> <input
+						type="hidden" name="id" value="${patent.id}">
+					<style>
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th,
 	.table-borderless>tfoot>tr>td, .table-borderless>tfoot>tr>th,
 	.table-borderless>thead>tr>td, .table-borderless>thead>tr>th {
@@ -234,11 +239,15 @@ div.transbox {
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
-							<option value="${patent.deptt}">${patent.deptt}</option>
-									<option value="cse">CSE</option>	
+									<option value="${patent.deptt}">${patent.deptt}</option>
+									<option value="aps">APS</option>
+									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 
@@ -277,7 +286,7 @@ div.transbox {
 						<tr>
 							<td>Patent Application Year</td>
 							<td><select class="form-control" name="applicationYear">
-							<option value="${patent.applicationYear}">${patent.applicationYear}</option>
+									<option value="${patent.applicationYear}">${patent.applicationYear}</option>
 									<%
 										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
 									%>
@@ -291,7 +300,7 @@ div.transbox {
 						<tr>
 							<td>Patent Application Date</td>
 							<td><select class="form-control" name="applicationDate">
-							<option value="${patent.applicationDate}">${patent.applicationDate}</option>
+									<option value="${patent.applicationDate}">${patent.applicationDate}</option>
 									<%
 										String[] months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -305,9 +314,9 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Patent Award Year</td>
-							
+
 							<td><select class="form-control" name="patentYear">
-							<option value="${patent.patentYear}">${patent.patentYear}</option>
+									<option value="${patent.patentYear}">${patent.patentYear}</option>
 									<%
 										for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1980; i--) {
 									%>
@@ -321,7 +330,7 @@ div.transbox {
 						<tr>
 							<td>Patent Award Date</td>
 							<td><select class="form-control" name="awardDate">
-							<option value="${patent.awardDate}">${patent.awardDate}</option>
+									<option value="${patent.awardDate}">${patent.awardDate}</option>
 									<%
 										months = new String[] { "January", "Feburary", "March", "April", "May", "June", "July", "August",
 												"September", "October", "November", "December" };
@@ -335,22 +344,23 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Patent No.</td>
-							<td><input type='text' class="form-control" name="patentNo" value='${patent.patentNo}'></td>
+							<td><input type='text' class="form-control" name="patentNo"
+								value='${patent.patentNo}'></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td>${patent.publicationFileName}<br>
-							<input type="file" name="publication" /></td>
+							<td>${patent.publicationFileName}<br> <input
+								type="file" name="publication" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
-							<td>${patent.plagReportFileName}<br>
-							<input type="file" name="plagReport" /></td>
+							<td>${patent.plagReportFileName}<br> <input type="file"
+								name="plagReport" /></td>
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td>${patent.certificateName}<br> <input
-								type="file" name="certificate" /></td>
+							<td>${patent.certificateName}<br> <input type="file"
+								name="certificate" /></td>
 						</tr>
 						<tr>
 
@@ -362,7 +372,7 @@ div.transbox {
 			</div>
 		</div>
 	</div>
-<script>
+	<script>
 	function getNation() {
 		var form = document.getElementById("nationality");
 		var val = form.options[form.selectedIndex].value;

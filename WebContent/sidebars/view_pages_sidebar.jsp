@@ -28,15 +28,16 @@
 <body>
 
 	<ul class="nav sidebar-nav">
-	<li><a href="../faculty_home.jsp">Home</a></li>
+		<li><a href="../faculty_home.jsp">Home</a></li>
 		<li><a href="../view/view_book_chapter.jsp">View Book Chapter</a></li>
-		<li><a href="../view/view_conf_presentation.jsp">View Conference
-				Presentation</a></li>
+		<li><a href="../view/view_conf_presentation.jsp">View
+				Conference Presentation</a></li>
 		<li><a href="../view/view_conference_proceeding.jsp">View
 				Conference Proceeding</a></li>
 		<li><a href="../view/view_journal.jsp">View Journal</a></li>
 		<li><a href="../view/view_patents.jsp">View Patents</a></li>
-		<li><a href="../view/view_tech_rep.jsp">View Technical Reports</a></li>
+		<li><a href="../view/view_tech_rep.jsp">View Technical
+				Reports</a></li>
 		<li><a href="../view/view_book.jsp">View Books</a></li>
 
 	</ul>

@@ -1,17 +1,18 @@
-package com.publication.impl;
+package com.publication.test;
+
+import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
-import java.util.Properties;
-
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EmailService {
-
-	public static void sendEmail(String subject, String text, String to){
+public class MailTest {
+	
+	
+	public static void main(String[] args) {
 		Properties properties = System.getProperties();
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -28,14 +29,13 @@ public class EmailService {
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress("publication.ncu@gmail.com"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to) ); 
-            message.setSubject(subject);
-            message.setText(text);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("ilikeitmyway1998@gmail.com") ); 
+            message.setSubject("Subject");
+            message.setText("Text");
             Transport.send(message);
         } catch (Exception e) {
             e.printStackTrace();
         }
 	}
-	
-	
+
 }

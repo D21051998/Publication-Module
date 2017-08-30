@@ -17,9 +17,9 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -116,7 +116,7 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 1px solid;
 	width: auto;
 	/* For IE8 and earlier */
@@ -168,7 +168,7 @@ div.transbox {
 		System.out.println(pageContext.getAttribute("principal"));
 		request.setAttribute("eList", list);
 	%>
-		<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -196,8 +196,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../faculty_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -214,7 +214,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -222,22 +223,34 @@ div.transbox {
 	</div>
 	</nav>
 	<div class="container-fluid content">
-	<br><br><br>
+		<br>
+		<br>
+		<br>
 		<div class="row">
 			<div class="col-md-12 transbox">
-<h3>View Book</h3>
-<div>
-<c:if test="${not empty param.add}">
-<p>
-<c:if test="${param.add == 'success'}"><c:out value="Adding Record Successful"></c:out></c:if>
-<c:if test="${param.add == 'failed'}"><c:out value="Adding Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-<c:if test="${not empty param.update}">
-<p>
-<c:if test="${param.update == 'success'}"><c:out value="Updating Record Successful"></c:out></c:if>
-<c:if test="${param.update == 'failed'}"><c:out value="Updating Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-</div>
+				<h3>View Book</h3>
+				<div>
+					<c:if test="${not empty param.add}">
+						<p>
+							<c:if test="${param.add == 'success'}">
+								<c:out value="Adding Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.add == 'failed'}">
+								<c:out value="Adding Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.update}">
+						<p>
+							<c:if test="${param.update == 'success'}">
+								<c:out value="Updating Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.update == 'failed'}">
+								<c:out value="Updating Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -326,7 +339,7 @@ div.transbox {
 								<c:url value="../../action/delete.jsp" var="delete">
 									<c:param name="id" value="${book.id}"></c:param>
 									<c:param name="type" value="B"></c:param>
-									
+
 								</c:url>
 
 								<c:if test="${book.status <= 0 }">

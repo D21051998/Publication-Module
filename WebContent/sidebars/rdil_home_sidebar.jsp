@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +9,8 @@
 <link href="../resources/styles_header/bootstrap.css" rel="stylesheet">
 
 <!-- IE10 view/viewport hack for Surface/desktop Windows 8 bug -->
-<link href="../resources/styles_header/ie10-view/viewport-bug-workaround.css"
+<link
+	href="../resources/styles_header/ie10-view/viewport-bug-workaround.css"
 	rel="stylesheet">
 
 <!-- Custom styles for this template -->
@@ -29,8 +30,8 @@
 <body>
 	<ul class="nav sidebar-nav">
 		<li><a href="view/view_book_chapter.jsp">View Book Chapter</a></li>
-		<li><a href="view/view_conference_presentation.jsp">View Conference
-				Presentation</a></li>
+		<li><a href="view/view_conference_presentation.jsp">View
+				Conference Presentation</a></li>
 		<li><a href="view/view_conference_proceeding.jsp">View
 				Conference Proceeding</a></li>
 		<li><a href="view/view_journal.jsp">View Journal</a></li>

@@ -15,7 +15,7 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-	<link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -192,8 +192,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../faculty_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -210,7 +210,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -227,18 +228,28 @@ div.transbox {
 			<div class="col-md-12 transbox">
 				<h3>View Technical Reports</h3>
 				<div>
-<c:if test="${not empty param.add}">
-<p>
-<c:if test="${param.add == 'success'}"><c:out value="Adding Record Successful"></c:out></c:if>
-<c:if test="${param.add == 'failed'}"><c:out value="Adding Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-<c:if test="${not empty param.update}">
-<p>
-<c:if test="${param.update == 'success'}"><c:out value="Updating Record Successful"></c:out></c:if>
-<c:if test="${param.update == 'failed'}"><c:out value="Updating Record Unsuccessful"></c:out></c:if></p>
-</c:if>
-</div>
-		<table class="table table-bordered">
+					<c:if test="${not empty param.add}">
+						<p>
+							<c:if test="${param.add == 'success'}">
+								<c:out value="Adding Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.add == 'failed'}">
+								<c:out value="Adding Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+					<c:if test="${not empty param.update}">
+						<p>
+							<c:if test="${param.update == 'success'}">
+								<c:out value="Updating Record Successful"></c:out>
+							</c:if>
+							<c:if test="${param.update == 'failed'}">
+								<c:out value="Updating Record Unsuccessful"></c:out>
+							</c:if>
+						</p>
+					</c:if>
+				</div>
+				<table class="table table-bordered">
 
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -292,7 +303,7 @@ div.transbox {
 								<td><a href="${download}&index=3" class="btn btn-info">
 										<span class="glyphicon glyphicon-download"></span>
 								</a></td>
-								
+
 								<c:choose>
 									<c:when test="${report.status==0}">
 										<td>Pending</td>

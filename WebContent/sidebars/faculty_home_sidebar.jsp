@@ -33,10 +33,9 @@
 			aria-expanded="false">Book Chapter<span class="caret"></span></a>
 			<ul id="dd-menu1" class="collapse">
 				<li><a href="../new/new_book_chapter.jsp">Add</a></li>
-				<li><a href="view/view_book_chapter.jsp">View</a></li>				
-			</ul>
-		</li>
-		
+				<li><a href="view/view_book_chapter.jsp">View</a></li>
+			</ul></li>
+
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu2"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Journal<span class="caret"></span></a>
@@ -44,55 +43,50 @@
 				<li><a href="../new/new_journal.jsp">Add</a></li>
 				<li><a href="view/view_journal.jsp">View</a></li>
 			</ul></li>
-		
+
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu3"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Conf. Presentation<span class="caret"></span></a>
 			<ul id="dd-menu3" class="collapse">
 				<li><a href="../new/new_conf_presentation.jsp">Add</a></li>
 				<li><a href="view/view_conference_presentation.jsp">View</a></li>
-			</ul>
-		</li>
+			</ul></li>
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu4"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Conf. Proceeding<span class="caret"></span></a>
 			<ul id="dd-menu4" class="collapse">
 				<li><a href="../new/new_conference_proceeding.jsp">Add</a></li>
 				<li><a href="view/view_conference_proceeding.jsp">View</a></li>
-			</ul>
-		</li>
+			</ul></li>
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu5"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Patents<span class="caret"></span></a>
 			<ul id="dd-menu5" class="collapse">
 				<li><a href="../new/new_patents.jsp">Add</a></li>
 				<li><a href="view/view_patent.jsp">View</a></li>
-				
-			</ul>
-		</li>
-		
+
+			</ul></li>
+
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu6"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Technical Reports<span class="caret"></span></a>
 			<ul id="dd-menu6" class="collapse">
 				<li><a href="../new/new_tech_rep.jsp">Add</a></li>
 				<li><a href="view/view_tech_rep.jsp">View</a></li>
-				
-			</ul>
-		</li>
-		
+
+			</ul></li>
+
 		<li><a href="#" data-toggle="collapse" data-target="#dd-menu7"
 			class="collapsed active" role="button" aria-haspopup="true"
 			aria-expanded="false">Books<span class="caret"></span></a>
 			<ul id="dd-menu7" class="collapse">
 				<li><a href="../new/new_book.jsp">Add</a></li>
 				<li><a href="view/view_book.jsp">View</a></li>
-				
-			</ul>
-		</li>
-		
-		
-		
+
+			</ul></li>
+
+
+
 	</ul>
 </body>
 </html>

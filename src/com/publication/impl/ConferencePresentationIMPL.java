@@ -326,7 +326,7 @@ public class ConferencePresentationIMPL implements ConferencePresentationDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			statement = connection.prepareStatement(
-					"select distinct count(*) as number from conf_pres where status>0 and writtenby=?");
+					"select distinct count(*) as number from conf_pres where status<0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {

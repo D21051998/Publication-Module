@@ -89,7 +89,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('../resources/images/DSCN7348.jpg');
+	background-image: url('../resources/images/background.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -109,10 +109,8 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: #ffffff;
+	background-color: rgba(255,255,255,0.6);
 	border: 1px solid;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
 	width: auto;
 	border-radius: 5px;
 	/* For IE8 and earlier */
@@ -203,21 +201,27 @@ ul {
 						<tr>
 							<td>Name of Authors in the seq. as mentioned in the Book
 								Chapter</td>
-							<td><input type="text" required="on" autocomplete="off" class="form-control"
-								name="nameOauthors" placeholder="Seperate all names with commas"></td>
+							<td><input type="text" required="on" autocomplete="off"
+								class="form-control" name="nameOauthors"
+								placeholder="Seperate all names with commas"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>Chapter No.</td>
-							<td><input class="form-control" type="text" name="chapterNo" pattern="[0-9]+" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="chapterNo"
+								pattern="[0-9]+" required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Chapter Title</td>
@@ -226,11 +230,13 @@ ul {
 						</tr>
 						<tr>
 							<td>Book Title</td>
-							<td><input class="form-control" type="text" name="bookTitle" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="bookTitle"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publisher</td>
-							<td><input class="form-control" type="text" name="publisher" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="publisher"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>International/National</td>
@@ -268,15 +274,18 @@ ul {
 						</tr>
 						<tr>
 							<td>Page No.</td>
-							<td><input class="form-control" type="text" name="pageNo" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="pageNo"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Book ISBN No.</td>
-							<td><input class="form-control" type="text" name="isbn" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="isbn"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Hyper Link</td>
-							<td><input class="form-control" type="text" name="hyperLink" required="on" autocomplete="off"></td>
+							<td><input class="form-control" type="text" name="hyperLink"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Mention if indexed in:</td>
@@ -295,11 +304,12 @@ ul {
 						</tr>
 						<tr>
 							<td>Link for Indexing</td>
-							<td><input type="text" class="form-control" name="indexLink" required="on" autocomplete="off"></td>
+							<td><input type="text" class="form-control" name="indexLink"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file required="on"  name=publication /></td>
+							<td><input type=file required="on" name=publication /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
@@ -307,11 +317,12 @@ ul {
 						</tr>
 						<tr>
 							<td>Plagiarism Copy</td>
-							<td><input type=file required="on"  name=plagCopy /></td>
+							<td><input type=file required="on" name=plagCopy /></td>
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td><input type=file required="on" autocomplete="off" name=certificate /></td>
+							<td><input type=file required="on" autocomplete="off"
+								name=certificate /></td>
 						</tr>
 
 

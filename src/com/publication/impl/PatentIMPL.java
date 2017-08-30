@@ -326,7 +326,7 @@ public class PatentIMPL implements PatentDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			statement = connection
-					.prepareStatement("select distinct count(*) as number from patent where status>0 and writtenby=?");
+					.prepareStatement("select distinct count(*) as number from patent where status<0 and writtenby=?");
 			statement.setString(1, id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {

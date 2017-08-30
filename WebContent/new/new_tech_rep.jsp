@@ -180,23 +180,27 @@ div.transbox {
 
 						<tr>
 							<td>Faculty</td>
-							<td><input type="text" class="form-control" required="on" autocomplete="off"
-								name="faculty"></td>
+							<td><input type="text" class="form-control" required="on"
+								autocomplete="off" name="faculty"></td>
 						</tr>
 						<tr>
 							<td>Deptt.</td>
 							<td><select class="form-control" name="deptt">
+									<option value="aps">APS</option>
 									<option value="cse">CSE</option>
 									<option value="ece">ECE</option>
-									<option value="me">ME</option>
-									<option value="cvu">CVU</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 
 						<tr>
 							<td>Title of Technical Report</td>
-							<td><input type="text" class="form-control" required="on" autocomplete="off"
-								name="title"></td>
+							<td><input type="text" class="form-control" required="on"
+								autocomplete="off" name="title"></td>
 						</tr>
 
 						<tr>
@@ -228,16 +232,18 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Date</td>
-							<td><input type='date' class="form-control" name="date" required="on" autocomplete="off"></td>
+							<td><input type='date' class="form-control" name="date"
+								required="on" autocomplete="off"></td>
 						</tr>
 
 						<tr>
 							<td>Remarks</td>
-							<td><input type="text" name="remarks" class="form-control" required="on" autocomplete="off"></td>
+							<td><input type="text" name="remarks" class="form-control"
+								required="on" autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>Publication</td>
-							<td><input type=file name=publication required="on"/></td>
+							<td><input type=file name=publication required="on" /></td>
 						</tr>
 						<tr>
 							<td>Plagiarism Report</td>
@@ -245,13 +251,13 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Plagiarism Copy</td>
-							<td><input type=file name=plagCopy  required="on" /></td>
+							<td><input type=file name=plagCopy required="on" /></td>
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td><input type=file name=certificate required="on"  /></td>
+							<td><input type=file name=certificate required="on" /></td>
 						</tr>
-						
+
 						<input type="hidden" name="writtenBy"
 							value="<%=lao.getUsernameBySessionID(sid)%>" />
 						<input type="hidden" name="status" value="0" />

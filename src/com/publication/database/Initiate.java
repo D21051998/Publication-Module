@@ -415,5 +415,8 @@ stmt.executeUpdate(rej_book);
 			stmt=null;
 		}	
 	}
+	public static void main(String[] args) {
+		Initiate.createTables();
+	}
 
 }

@@ -32,13 +32,16 @@
 
 body {
 	background-color: #ffa830;
-	background-image: url("../resources/images/DSCN7348.jpg");
+	background-image: url("../resources/images/background.jpg");
 }
 
 a {
 	color: #000000;
 }
-input{border-style:none;}
+
+input {
+	border-style: none;
+}
 </style>
 
 </style>
@@ -51,6 +54,7 @@ input{border-style:none;}
 		if (token.isEmpty()) {
 			return;
 		}
+		
 		Object[] data = dao.forgotResponse(token);
 		if(null==data){
 			out.println("<script type=\"text/javascript\">");
@@ -59,6 +63,7 @@ input{border-style:none;}
 			out.println("</script>");
 			return;
 		}
+		
 		Timestamp date =(Timestamp)data[1];
 		System.out.println("DATA"+data[0].toString()+" "+data[1].toString());
 		String TIME_SERVER = "time-a.nist.gov";
@@ -73,6 +78,7 @@ input{border-style:none;}
 	%>
 	<div class="container">
 		<div class="row">
+		<br><br><br><br><br><br><br><br><br>
 			<div class="col-md-6" align="center">
 				<h3>
 					<strong>The NorthCap University</strong>
@@ -86,19 +92,22 @@ input{border-style:none;}
 
 				<form method="POST" action="../ResetPassword">
 					<table>
-						
+
 						<tr>
 							<td><label for="password">Enter New Password</label></td>
-							<input type="hidden" name="id" value='<c:out value="<%=token%>"/>'>
+							<input type="hidden" name="id"
+								value='<c:out value="<%=token%>"/>'>
 						</tr>
 						<tr>
-							<td><input type="text" name="password" id="password"></td>
+							<td><input type="password" name="password" id="password"></td>
 						</tr>
 						<tr>
-							<td><label for="password_again">Enter New Password Again</label></td>
+							<td><label for="password_again">Enter New Password
+									Again</label></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="password_again" id="password_again"></td>
+							<td><input type="password" name="password_again"
+								id="password_again"></td>
 						</tr>
 						<tr>
 							<td><br></td>

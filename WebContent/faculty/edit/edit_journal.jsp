@@ -15,12 +15,13 @@
 	rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
-    <link href="../../resources/styles_header/navbar_addition.css"
+<link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
 body {
 	background-color: #fcfcfc;
 }
@@ -185,7 +186,7 @@ div.transbox {
 	%>
 
 
-<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -204,7 +205,7 @@ div.transbox {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 
-			
+
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -212,7 +213,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -251,10 +253,14 @@ div.transbox {
 							<td><select class="form-control" name="deptt">
 									<option value="${journal.deptt}" disabled>${journal.deptt}</option>
 
-									<option value="CSE">CSE</option>
-									<option value="ECE">ECE</option>
-									<option value="ME">ME</option>
-									<option value="CVU">CVU</option>
+									<option value="aps">APS</option>
+									<option value="cse">CSE</option>
+									<option value="ece">ECE</option>
+									<option value="med">MED</option>
+									<option value="cee">CEE</option>
+									<option value="som">SOM</option>
+									<option value="sol">SOL</option>
+									<option value="cll">CLL</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -407,8 +413,8 @@ div.transbox {
 						</tr>
 						<tr>
 							<td>Certificate</td>
-							<td>${journal.certificateName}<br> <input
-								type="file" name="certificate" /></td>
+							<td>${journal.certificateName}<br> <input type="file"
+								name="certificate" /></td>
 						</tr>
 						<tr>
 

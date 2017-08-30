@@ -19,7 +19,7 @@
 	rel="stylesheet" type="text/css">
 <link href="../../resources/styles_header/navbar_addition.css"
 	rel="stylesheet" type="text/css">
-    <script
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -116,9 +116,9 @@ ul {
 
 div.transbox {
 	margin: 30px;
-	background-color: rgba(255,255,255,0.6);
+	background-color: rgba(255, 255, 255, 0.6);
 	border: 0px solid;
-	border-radius:5px;
+	border-radius: 5px;
 	width: auto;
 	/* For IE8 and earlier */
 }
@@ -144,9 +144,9 @@ div.transbox {
 	}
 </script>
 <body>
-	
-	<jsp:useBean id="dao" class="com.publication.impl.ConferencePresentationIMPL"
-		scope="page"></jsp:useBean>
+
+	<jsp:useBean id="dao"
+		class="com.publication.impl.ConferencePresentationIMPL" scope="page"></jsp:useBean>
 	<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
 		scope="page"></jsp:useBean>
 	<%
@@ -196,8 +196,8 @@ div.transbox {
 					<ul class="dropdown-menu">
 						<li><a href="../rdil_home.jsp">Home</a></li>
 						<li><a href="view_book_chapter.jsp">View Book Chapter</a></li>
-						<li><a href="view_conference_presentation.jsp">View Conference
-								Presentation</a></li>
+						<li><a href="view_conference_presentation.jsp">View
+								Conference Presentation</a></li>
 						<li><a href="view_conference_proceeding.jsp">View
 								Conference Proceeding</a></li>
 						<li><a href="view_journal.jsp">View Journal</a></li>
@@ -213,7 +213,8 @@ div.transbox {
 						class="glyphicon glyphicon-user"></span>&nbsp;Profile<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" id="profile-menu">
-						<li><a href="../../account/change_password.jsp">Change Password</a></li>
+						<li><a href="../../account/change_password.jsp">Change
+								Password</a></li>
 						<li><a href="../../account/logout.jsp">Logout</a></li>
 					</ul></li>
 			</ul>
@@ -277,10 +278,11 @@ div.transbox {
 
 								<td><c:if test="${empty cpo.pcn}">
 										<c:out value="Not Generated" />
-									</c:if> 
-									<c:if test="${not empty cpo.pcn}">
-										<c:out value="${cpo.pcn}" /><br> <br> <c:out
-										value="${cpo.monthAssigned}" />
+									</c:if> <c:if test="${not empty cpo.pcn}">
+										<c:out value="${cpo.pcn}" />
+										<br>
+										<br>
+										<c:out value="${cpo.monthAssigned}" />
 									</c:if></td>
 								<td><c:out value="${cpo.faculty}" /></td>
 								<td><c:out value="${cpo.deptt}" /></td>
@@ -292,7 +294,7 @@ div.transbox {
 								<td><c:out value="${cpo.year}" /></td>
 								<td><c:out value="${cpo.dates}" /></td>
 								<td><c:out value="${cpo.hyperlink}" /></td>
-								
+
 								<td><c:out value="${cpo.monthPublished}" /></td>
 								<c:url value="../../DownloadResource" var="download">
 									<c:param name="id" value="${cpo.id}"></c:param>
@@ -309,18 +311,20 @@ div.transbox {
 									<c:param name="id" value="${cpo.id}" />
 									<c:param name="level" value="2"></c:param>
 									<c:param name="type" value="C"></c:param>
-									
+
 								</c:url>
 								<c:url value="../../action/reject.jsp" var="reject">
 								</c:url>
 								<c:choose>
 
 									<c:when test="${cpo.status==1}">
-										<td><a class="btn btn-info disabled">Approved by Deptt. Coordinator</a><br> <a
-											href="${action}&status=2" class="btn btn-success">Approve</a>
-											<button type="button" class="btn btn-danger" style="width:90px;"
-												data-name="${cpo.id}" data-toggle="modal"
-												data-target="#myModal" onclick="setModalValue(this)">Reject</button>
+										<td><a class="btn btn-info disabled">Approved by
+												Deptt. Coordinator</a><br> <a href="${action}&status=2"
+											class="btn btn-success">Approve</a>
+											<button type="button" class="btn btn-danger"
+												style="width: 90px;" data-name="${cpo.id}"
+												data-toggle="modal" data-target="#myModal"
+												onclick="setModalValue(this)">Reject</button>
 											<div class="modal fade" id="myModal" role="dialog">
 												<div class="modal-dialog">
 
@@ -328,21 +332,17 @@ div.transbox {
 													<div class="modal-content">
 														<div class="modal-header">
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">
-																Reason to Reject
-															</h4>
+															<h4 class="modal-title">Reason to Reject</h4>
 														</div>
 														<div class="modal-body">
 															<form action="${reject}" method="get">
 																<input type="text" class="form-control" name="reason">
 																<input type="hidden" class="form-control" name="id"
-																	id="reject_id">
-																<input type="hidden" class="form-control" name="level"
-																	value="2">
-																<input type="hidden" class="form-control" name="status"
-																	value="-2">	
-																<input type="hidden" class="form-control" name="type"
-																	value="C">	
+																	id="reject_id"> <input type="hidden"
+																	class="form-control" name="level" value="2"> <input
+																	type="hidden" class="form-control" name="status"
+																	value="-2"> <input type="hidden"
+																	class="form-control" name="type" value="C">
 																<button type="submit" class="btn btn-default"
 																	name="Submit">Submit</button>
 															</form>
@@ -365,7 +365,7 @@ div.transbox {
 										<td>Invalid</td>
 									</c:otherwise>
 								</c:choose>
-					
+
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -374,7 +374,7 @@ div.transbox {
 
 		</div>
 	</div>
-		<script>
+	<script>
 		<script type="text/javascript">
 		var $rows = $('#table tr');
 		$('#search').keyup(function() {
@@ -392,7 +392,7 @@ div.transbox {
 			document.getElementById('reject_id').value = att;
 		}
 	</script>
-	
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src=".https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
