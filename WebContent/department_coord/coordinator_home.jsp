@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -192,6 +193,11 @@ div.transbox {
 			response.sendRedirect("../account/access_denied.jsp");
 			return;
 		}
+		Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+		if (null == login) {
+			response.sendRedirect("../account/access_denied.jsp");
+			return;
+		}
 		if (!lao.getRoleBySessionID(sid).contains("ROLE_DC")) {
 			response.sendRedirect("../account/access_denied.jsp");
 			return;
@@ -240,7 +246,8 @@ div.transbox {
 				<jsp:include page="../sidebars/rdil_home_sidebar.jsp"></jsp:include>
 			</div>
 			<div class="col-md-10  transbox">
-				<h2>Department Home</h2>
+				<h3>Welcome, <c:out value="<%=login.getName()%>" /></h3>
+				<h4>Coordinator Home</h4>
 
 
 

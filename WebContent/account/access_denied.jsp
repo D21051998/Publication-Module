@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -126,6 +127,27 @@ div.transbox {
 </style>
 </head>
 <body>
+<jsp:useBean id="lao" class="com.publication.impl.LoginIMPL"
+		scope="page"></jsp:useBean>
+<%
+
+String sid = (String) request.getSession(false).getAttribute("sid");
+System.out.println(sid);
+if (null == sid) {
+	response.sendRedirect("../");
+	return;
+}
+Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+if (null == login) {
+	response.sendRedirect("../");
+	try{
+		request.getSession(false).removeAttribute("sid");
+	}catch(NullPointerException e){
+	}
+	return;
+}
+
+%>
 	<div class="content ">
 		<div class="transbox">
 			<h3>You are not authorised to view requested page.</h3>

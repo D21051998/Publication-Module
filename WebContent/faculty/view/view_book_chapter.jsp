@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -156,6 +157,11 @@ div.transbox {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
@@ -250,6 +256,8 @@ div.transbox {
 						</p>
 					</c:if>
 				</div>
+				<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>
@@ -361,5 +369,16 @@ div.transbox {
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		var $rows = $('#table tr');
+		$('#search').keyup(function() {
+			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+			$rows.show().filter(function() {
+				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+				return !~text.indexOf(val);
+			}).hide();
+		});
+	</script>
 </body>
 </html>

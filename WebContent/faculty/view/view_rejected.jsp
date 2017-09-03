@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@page import="java.util.Map"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
@@ -171,6 +172,11 @@ div.transbox {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
@@ -270,6 +276,7 @@ div.transbox {
 	border: none !important;
 }
 </style>
+
 						<table class="table table-borderless collapse" id="table-bc">
 							<tr>
 								<th style="background-color: black;">&nbsp;</th>
@@ -1115,7 +1122,17 @@ div.transbox {
 		</div>
 	</div>
 
+<script type="text/javascript">
+		var $rows = $('#table tr');
+		$('#search').keyup(function() {
+			var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
+			$rows.show().filter(function() {
+				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+				return !~text.indexOf(val);
+			}).hide();
+		});
+	</script>
 
 </body>
 </html>

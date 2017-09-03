@@ -1,4 +1,5 @@
 
+<%@page import="com.publication.model.Login"%>
 <%@page import="com.publication.model.ConferenceProceedings"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="java.util.List"%>
@@ -155,6 +156,11 @@ div.transbox {
 			response.sendRedirect("../../account/access_denied.jsp");
 			return;
 		}
+		Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+		if (null == login) {
+			response.sendRedirect("../../account/access_denied.jsp");
+			return;
+		}
 		if (!lao.getRoleBySessionID(sid).contains("ROLE_DC")) {
 			response.sendRedirect("../../account/access_denied.jsp");
 			return;
@@ -250,6 +256,8 @@ div.transbox {
 					<input type="text" class="form-control" id="search"
 						placeholder="Type to search">
 				</div>
+				<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
 				<table class="table table-bordered" id="table">
 					<thead>
 						<th>PCN</th>

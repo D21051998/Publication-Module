@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@page import="com.publication.model.Books"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -159,6 +160,11 @@ div.transbox {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 	System.out.println(lao.getRoleBySessionID(sid));
 	if (!lao.getRoleBySessionID(sid).equals("ROLE_RDIL")) {
 		response.sendRedirect("../../account/access_denied.jsp");
@@ -252,6 +258,8 @@ div.transbox {
 						</p>
 					</c:if>
 				</div>
+				<input type="text" class="form-control" id="search"
+						placeholder="Type to search">
 				<table class="table table-bordered">
 					<thead>
 						<th>PCN & Date Assigned</th>

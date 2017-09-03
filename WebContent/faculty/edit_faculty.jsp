@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
+<%@page import="com.publication.impl.LoginIMPL"%>
 <%@page import="com.publication.model.Login"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -20,7 +21,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<title>Faculty Home</title>
+<title>Edit Profile</title>
 <style>
 body {
 	background-color: #fcfcfc;
@@ -59,6 +60,11 @@ body {
 
 td {
 	text-align: left;
+	padding: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	vertical-align: middle;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-size: 15px;
@@ -66,7 +72,10 @@ td {
 	font-variant: normal;
 	font-weight: bold;
 	line-height: 23px;
-	padding: 10px;
+	vertical-align: middle;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	vertical-align: middle;
 }
 
 th {
@@ -213,6 +222,7 @@ div.transbox {
 		
 	%>
 
+
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid clearfix">
 		<div class="navbar-header">
@@ -248,14 +258,13 @@ div.transbox {
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown pull-left"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-haspopup="true" aria-expanded="false">
-						<%
-				if(	lao.checkRejectedSum(lao.getUsernameBySessionID(sid))>0){
-					out.print("&nbsp;Notifications&nbsp;("+lao.checkRejectedSum(lao.getUsernameBySessionID(sid))+")*");
-				}else{
-					out.print("&nbsp;Notifications&nbsp;(0)");
-				}
-					%><span class="caret"></span>
+					aria-haspopup="true" aria-expanded="false"> <%
+ 	if (lao.checkRejectedSum(lao.getUsernameBySessionID(sid)) > 0) {
+ 		out.print("&nbsp;Notifications&nbsp;(" + lao.checkRejectedSum(lao.getUsernameBySessionID(sid)) + ")*");
+ 	} else {
+ 		out.print("&nbsp;Notifications&nbsp;(0)");
+ 	}
+ %><span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" id="profile-menu" style="width: 270px;">
 						<%
@@ -371,14 +380,52 @@ div.transbox {
 		</div>
 	</div>
 	</nav>
+
 	<div class="container-fluid content2">
 		<div class="row">
 			<div style="width: 300px;" class="col-md-3 transbox">
 				<jsp:include page="../sidebars/faculty_home_sidebar.jsp"></jsp:include>
 			</div>
 			<div style="width: 400px;" class="col-md-9 transbox">
-			<h3>Welcome, <c:out value="<%=login.getName()%>"/>(<a href="edit_faculty.jsp">Edit</a>)</h3>
-				<h4>Faculty Home</h4>
+				<h2>Edit Profile</h2>
+				<c:if test="${not empty param.edit}">
+					<p>
+						<c:if test="${param.edit == 'success'}">
+							<c:out value="Adding Record Successful"></c:out>
+						</c:if>
+						<c:if test="${param.edit == 'failed'}">
+							<c:out value="Adding Record Unsuccessful"></c:out>
+						</c:if>
+						<c:if test="${param.edit == 'invalid'}">
+							<c:out value="Invalid Data Found"></c:out>
+						</c:if>
+					</p>
+				</c:if>
+				<form action="save_edited.jsp" method="post">
+				<input type="hidden" class="form-control"  name="id" id="id"
+							value="<%=login.getUsername()%>" >
+					<table>
+						<tr>
+							<td style="padding: 10px;"><label for="name">Faculty
+									Name</label></td>
+							<td style="padding: 10px;"><input type="text"
+								class="form-control" required="on" autocomplete="off"
+								name="name" id="name" value="<%=login.getName()%>"></td>
+						</tr>
+						<tr>
+							<td style="padding: 10px;"><label for="email">Email</label></td>
+							<td style="padding: 10px;"><input type="text"
+								class="form-control" required="on" autocomplete="off"
+								name="email" id="email" value="<%=login.getEmail()%>"></td>
+						</tr>
+						<tr>
+							<td style="padding: 10px;"><a href="faculty_home.jsp"class="btn btn-success">Go Back</a></td>
+							<td style="padding: 10px;"><button type="submit"
+									class="btn btn-success">Submit</button></td>
+						</tr>
+					</table>
+				</form>
+
 			</div>
 		</div>
 	</div>

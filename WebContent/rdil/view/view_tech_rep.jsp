@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 <%@page import="java.util.List"%>
@@ -151,6 +152,11 @@ div.transbox {
 	<%
 	String sid = (String) request.getSession(false).getAttribute("sid");
 	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}

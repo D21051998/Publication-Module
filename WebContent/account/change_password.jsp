@@ -100,7 +100,7 @@ ul {
 	bottom: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('../resources/images/background.jpg');
+	background-image: url('../resources/images/DSCN7348.jpg');
 	-webkit-filter: brightness(0.8);
 	filter: brightness(0.8);
 	background-size: cover;
@@ -257,7 +257,7 @@ body {
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<button class="form-control" type="submit"
+								<button class="form-control" type="submit" id="submit_button"
 									onclick="CheckPassword(document.form1.newPassword1)">Submit</button>
 							</td>
 						</tr>
@@ -279,13 +279,17 @@ body {
 			}
 		}
 		var check = function() {
-			if (document.getElementById('newPassword1').value == document
-					.getElementById('newPassword2').value) {
+			
+			if ( document.getElementById('newPassword1').value !='' &&document.getElementById('newPassword1').value == document
+					.getElementById('newPassword2').value ) {
 				document.getElementById('message').style.color = 'green';
 				document.getElementById('message').innerHTML = 'matching';
+				document.getElementById('submit_button').disabled=false;
+				
 			} else {
 				document.getElementById('message').style.color = 'red';
 				document.getElementById('message').innerHTML = 'not matching';
+				document.getElementById('submit_button').disabled=true;
 			}
 		}
 	</script>

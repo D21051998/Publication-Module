@@ -1,4 +1,5 @@
 
+<%@page import="com.publication.model.Login"%>
 <%@page import="com.publication.model.ConferenceProceedings"%>
 <%@page import="com.publication.constants.FetchDepptCode"%>
 <%@page import="com.publication.model.Journal"%>
@@ -152,6 +153,11 @@ div.transbox {
 	<%
 	String sid = (String) request.getSession(false).getAttribute("sid");
 	if (null == sid) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}

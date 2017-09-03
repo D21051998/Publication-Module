@@ -1,3 +1,4 @@
+<%@page import="com.publication.model.Login"%>
 <%@page import="com.publication.model.TechnicalReport"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
@@ -164,10 +165,16 @@ div.transbox {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}
+	Login login = lao.getLogin(lao.getUsernameBySessionID(sid));
+	if (null == login) {
+		response.sendRedirect("../../account/access_denied.jsp");
+		return;
+	}
 	if (!lao.getRoleBySessionID(sid).equals("ROLE_FACULTY")) {
 		response.sendRedirect("../../account/access_denied.jsp");
 		return;
 	}
+	
 	TechnicalReport report = dao.getTechnicalReportByID(request.getParameter("id"));
 	if(null==report){
 		return;

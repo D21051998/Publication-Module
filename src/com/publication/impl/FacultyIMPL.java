@@ -31,11 +31,27 @@ public class FacultyIMPL  implements FacultyDAO{
 		}
 		return list;
 	}
-
-	public static void main(String[] args) {
-		FacultyIMPL fao = new FacultyIMPL();
-		System.out.println(fao.getFaculties().size());
+	@Override
+	public boolean updateFaculty(String[] str) {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+			connection = ConnectionFactory.getConnection();
+			ps = connection.prepareStatement("update login set name=?, email=? where username=?");
+			ps.setString(1, str[1]);
+			ps.setString(2, str[2]);
+			ps.setString(3, str[0]);
+			if(ps.executeUpdate()>0){
+				return true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			ConnectionFactory.close(connection);
+		}
+		return false;
 	}
+
 	
 	
 }

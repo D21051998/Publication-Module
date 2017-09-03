@@ -55,7 +55,10 @@ public class ChangePassword extends HttpServlet {
 		String oldPassword = request.getParameter("oldPassword");
 		String newPassword1 = request.getParameter("newPassword1");
 		String newPassword2 = request.getParameter("newPassword2");
-
+		
+		boolean check1 = newPassword1.matches("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$");
+		boolean check2 = newPassword2.matches("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$");
+		
 		System.out.println(oldPassword+ " "+newPassword1 +" "+ newPassword2);
 		HttpSession sess = request.getSession(false);
 
@@ -75,6 +78,9 @@ public class ChangePassword extends HttpServlet {
 			}
 			if (newPassword1.length() > 15 || newPassword1.length() < 7) {
 				System.out.println("2");
+				throw new IllegalArgumentException();
+			}
+			if(!(check1 && check2)){
 				throw new IllegalArgumentException();
 			}
 			if (!newPassword1.equals(newPassword2)) {
